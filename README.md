@@ -2,6 +2,17 @@
 
 TaxSEA is an R package designed to enable rapid annotation of changes observed in a microbiome association study by testing for enrichment for producers of particular metabolites or associations with marker taxa for specific diseases. It focuses specifically on human gut microbiome associations and uses a Kolmogorov-Smirnov test to test if a particular set of taxa is changed relative to a control group.
 
+
+# Installation
+
+
+```{r example}
+library(devtools)
+install_github("feargalr/TaxSEA")
+library(TaxSEA)
+```
+
+
 ## Functions
 
 - `get_ncbi_taxon_ids(taxon_names)`: Retrieves NCBI Taxonomy IDs for a list of taxon names.
