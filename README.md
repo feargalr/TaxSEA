@@ -2,7 +2,7 @@
 
 TaxSEA is an R package designed to enable rapid annotation of changes observed in a microbiome association study by testing for enrichment for producers of particular metabolites or associations with marker taxa for specific diseases. It focuses specifically on human gut microbiome associations and uses a Kolmogorov-Smirnov test to test if a particular set of taxa is changed relative to a control group.
 
-**_Note - TaxSEA has not yet undergone extensive validation. Please treat results with appropriate caution_** In the example below TaxSEA takes as input fold changes of bacterial species between healthy and Inflamatory Bowel Disease (IBD) and finds a statistically significant enrichment or depletion for various disease associated signatures, and producers of various metabolites. Further testing is underway. 
+**_Note - TaxSEA has not yet undergone extensive validation. Please treat results with appropriate caution_** In the example below TaxSEA takes as input fold changes of bacterial species between healthy and Inflamatory Bowel Disease (IBD) and finds a statistically significant enrichment ovarious disease associated signatures from GMRepo v2 (including for IBD), and producers of various metabolites (including depletion of taxa associated with butyrate production). Further testing is underway to assess the accuracy of TaxSEA. However, in it's current form it may have utility for users to generate hypotheses based on differential abundance analyses. 
 
 ## Taxon set database
 TaxSEA utilizes taxon sets generated from three reference databases (**gutMGene**, **GMrepo v2**, **MiMeDB**). All of gutMgene is utilized, wheras only marker taxa from GMRepo v2 and a manually curated subset from MiMeDB are included. Please cite the appropriate database if using:
@@ -43,7 +43,7 @@ enriched_taxon_sets <- TaxSEA(taxon_ranks=TaxSEA_test_data)
 ```
 
 #### Input 
-All that is required for TaxSEA is a named vector of log2 fold changes between groups. See example below. TaxSEA will lookup and convert taxon names to NCBI taxonomic identifiers. TaxSEA stores a commonly used identifiers internally and so will only look up whatever is not covered to save time. 
+All that is required for TaxSEA is a named vector of log2 fold changes between groups. This should be for all taxa tested, and not limited to only a pre-defined set (e.g. do not use a threshold for significance or remove any taxa). See example below for format. TaxSEA will lookup and convert taxon names to NCBI taxonomic identifiers. TaxSEA stores a commonly used identifiers internally and so will only look up whatever is not covered to save time. 
 ```{r output}
 > head(sample(TaxSEA_test_data),4)
 Bacteroides_thetaiotaomicron           Blautia_sp_CAG_257          Ruminococcus bromii       Clostridium_disporicum 
