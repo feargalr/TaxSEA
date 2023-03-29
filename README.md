@@ -10,9 +10,10 @@ TaxSEA utilizes taxon sets generated from three reference databases (**gutMGene*
 - Dai et al. GMrepo v2: a curated human gut microbiome database with special focus on disease markers and cross-dataset comparison_ Nucleic Acids Res. 2022 Jan 7;50(D1):D777-D784.
 - Wishart et. al. MiMeDB: the Human Microbial Metabolome Database_ Nucleic Acids Res. 2023 Jan 6;51(D1):D611-D620. 
 
-The test data provided with TaxSEA consists of log2 fold changes comparing between healthy and inflammatory bowel disease which was downloaded from curatedMetagenomeSeq
+The test data provided with TaxSEA consists of log2 fold changes comparing between healthy and inflammatory bowel disease. The count data for this was downloaded from curatedMetagenomeSeq and fold changes generated with LinDA.
 - Hall et al. A novel Ruminococcus gnavus clade enriched in inflammatory bowel disease patients** Genome Med. 2017 Nov 28;9(1):103.
 - Pasolli et al. Accessible, curated metagenomic data through ExperimentHub. Nat Methods. 2017 Oct 31;14(11):1023-1024. doi: 10.1038/nmeth.4468.
+- Zhou et al. LinDA: linear models for differential abundance analysis of microbiome compositional data. Genome Biol. 2022 Apr 14;23(1):95. doi: 10.1186/s13059-022-02655-5. 
 # Installation
 
 
