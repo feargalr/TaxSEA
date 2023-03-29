@@ -37,7 +37,8 @@ library(TaxSEA)
 # Load required libraries
 library(TaxSEA)
 
-# Run TaxSEA
+# Run TaxSEA with test data provided
+head(TaxSEA_test_data)
 enriched_taxon_sets <- TaxSEA(taxon_ranks=TaxSEA_test_data)
 
 # Create a bar plot of the results
