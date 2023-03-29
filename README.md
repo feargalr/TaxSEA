@@ -32,7 +32,7 @@ library(TaxSEA)
 - `TaxSEA_barcode(taxsea_results, taxon_ranks, taxon_sets, axis_limits = c(-7,7), n_to_plot = 10, boxplot = FALSE)`: Creates a barcode plot of TaxSEA results.
 
 ## Usage
-
+#### Quick start
 ```{r example}
 # Load required libraries
 library(TaxSEA)
@@ -42,7 +42,7 @@ head(TaxSEA_test_data)
 enriched_taxon_sets <- TaxSEA(taxon_ranks=TaxSEA_test_data)
 ```
 
-### Input 
+#### Input 
 All that is required for TaxSEA is a named vector of log2 fold changes between groups. See example below. TaxSEA will lookup and convert taxon names to NCBI taxonomic identifiers. TaxSEA stores a commonly used identifiers internally and so will only look up whatever is not covered to save time. 
 ```{r output}
 > head(sample(TaxSEA_test_data),4)
@@ -50,16 +50,16 @@ Bacteroides_thetaiotaomicron           Blautia_sp_CAG_257          Ruminococcus 
                        1.908                        3.650                       -5.038                        0.300 
 ```
 
-### Output
+#### Output
 The output is a dataframe with 5 columns
-taxonSetName - The name of the taxon set tested
-NES - Normalized enrichment score. This is simply the median fold change across the entire set
-P value - Kolmogorov-Smirnov test P value.
-FDR - P value adjusted for multiple testing. 
-TaxonSet - Returns list of taxa in the set to show what is driving the signal
+- taxonSetName - The name of the taxon set tested
+- NES - Normalized enrichment score. This is simply the median fold change across the entire set
+- P value - Kolmogorov-Smirnov test P value.
+- FDR - P value adjusted for multiple testing. 
+- TaxonSet - Returns list of taxa in the set to show what is driving the signal
 
-## Visualisation 
-The test data is a comparison between healthy and IBD. Higher fold change values (labelled as upregulated) indicate sets of taxa increased in IBD relative to control. 
+#### Visualisation 
+TaxSEA contains two functions which uses ggplot2 to plot results. The test data is a comparison between healthy and IBD. Higher fold change values (labelled as upregulated) indicate sets of taxa increased in IBD relative to control. 
 
 ```{r example}
 # Create a bar plot of the results
