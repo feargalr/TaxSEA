@@ -43,6 +43,8 @@ enriched_taxon_sets <- TaxSEA(taxon_ranks=TaxSEA_test_data)
 ```
 
 ## Visualisation 
+The test data is a comparison between healthy and IBD. Higher fold change values (labelled as upregulated) indicate sets of taxa increased in IBD relative to control. 
+
 ```{r example}
 # Create a bar plot of the results
 TaxSEA_barplot(enriched_taxon_sets)
