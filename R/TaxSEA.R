@@ -238,7 +238,7 @@ TaxSEA_barplot <- function(taxsea_results, threshold = 0.2, custom_colors = NULL
 #' print(plot)
 #' @import ggplot2
 #' @export
-TaxSEA_barcode <- function(taxsea_results, taxon_ranks, taxon_sets,axis_limits = c(-7,7),n_to_plot = 10,boxplot=FALSE) {
+TaxSEA_barcode <- function(taxsea_results, taxon_ranks,axis_limits = c(-7,7),n_to_plot = 10,boxplot=FALSE) {
   if (!requireNamespace("ggplot2", quietly = TRUE)) cat("ggplot2 is not installed\n")
   require(ggplot2)
 
