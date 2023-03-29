@@ -44,10 +44,9 @@ enriched_taxon_sets <- TaxSEA(taxon_ranks=TaxSEA_test_data)
 
 ## Example input 
 ```{r output}
-
-> head(TaxSEA_test_data)
-Faecalibacterium_prausnitzii        Bacteroides_uniformis            Roseburia_hominis         Alistipes_putredinis            Bacteroides_dorei          Eubacterium_rectale 
-                      -4.040                       -3.859                       -4.260                       -9.212                       -5.111                       -2.893 
+> head(sample(TaxSEA_test_data),4)
+Bacteroides_thetaiotaomicron           Blautia_sp_CAG_257          Ruminococcus_bromii       Clostridium_disporicum 
+                       1.908                        3.650                       -5.038                        0.300 
 ```
 ## Visualisation 
 The test data is a comparison between healthy and IBD. Higher fold change values (labelled as upregulated) indicate sets of taxa increased in IBD relative to control. 
