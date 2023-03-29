@@ -4,10 +4,9 @@ TaxSEA is an R package designed to enable rapid annotation of changes observed i
 
 
 TaxSEA utilizes three reference databases and please cite if using.
-- Wishart et. al. _MiMeDB: the Human Microbial Metabolome Database_ Nucleic Acids Res. 2023 Jan 6;51(D1):D611-D620. doi: 10.1093/nar/gkac868. PMID: 36215042; PMCID: PMC9825614.
-- Cheng et al. _gutMGene: a comprehensive database for target genes of gut microbes and microbial metabolites_ Nucleic Acids Res. 2022 Jan 7;50(D1):D795-D800. doi: 10.1093/nar/gkab786. PMID: 34500458; PMCID: PMC8728193.
-
-
+- Cheng et al. **gutMGene**: a comprehensive database for target genes of gut microbes and microbial metabolites_ Nucleic Acids Res. 2022 Jan 7;50(D1):D795-D800.
+- Dai et al. **GMrepo v2**: a curated human gut microbiome database with special focus on disease markers and cross-dataset comparison_ Nucleic Acids Res. 2022 Jan 7;50(D1):D777-D784.
+- Wishart et. al. **MiMeDB**: the Human Microbial Metabolome Database_ Nucleic Acids Res. 2023 Jan 6;51(D1):D611-D620. 
 # Installation
 
 
