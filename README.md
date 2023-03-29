@@ -42,10 +42,11 @@ head(TaxSEA_test_data)
 enriched_taxon_sets <- TaxSEA(taxon_ranks=TaxSEA_test_data)
 ```
 
-## Example input 
+## input 
+All that is required for TaxSEA is a named vector of log2 fold changes between groups. See example below. TaxSEA will lookup and convert taxon names to NCBI taxonomic identifiers. TaxSEA stores a commonly used identifiers internally and so will only look up whatever is not covered to save time. 
 ```{r output}
 > head(sample(TaxSEA_test_data),4)
-Bacteroides_thetaiotaomicron           Blautia_sp_CAG_257          Ruminococcus_bromii       Clostridium_disporicum 
+Bacteroides_thetaiotaomicron           Blautia_sp_CAG_257          Ruminococcus bromii       Clostridium_disporicum 
                        1.908                        3.650                       -5.038                        0.300 
 ```
 ## Visualisation 
