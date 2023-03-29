@@ -2,11 +2,17 @@
 
 TaxSEA is an R package designed to enable rapid annotation of changes observed in a microbiome association study by testing for enrichment for producers of particular metabolites or associations with marker taxa for specific diseases. It focuses specifically on human gut microbiome associations and uses a Kolmogorov-Smirnov test to test if a particular set of taxa is changed relative to a control group.
 
+**_Note TaxSEA has not yet undergone extensive validation. Please treat results with appropriate caution_**
 
-TaxSEA utilizes three reference databases and please cite if using.
-- Cheng et al. **gutMGene**: a comprehensive database for target genes of gut microbes and microbial metabolites_ Nucleic Acids Res. 2022 Jan 7;50(D1):D795-D800.
-- Dai et al. **GMrepo v2**: a curated human gut microbiome database with special focus on disease markers and cross-dataset comparison_ Nucleic Acids Res. 2022 Jan 7;50(D1):D777-D784.
-- Wishart et. al. **MiMeDB**: the Human Microbial Metabolome Database_ Nucleic Acids Res. 2023 Jan 6;51(D1):D611-D620. 
+
+TaxSEA utilizes taxon sets generated from three reference databases (**gutMGene**, **GMrepo v2**, **MiMeDB**). All of gutMgene is utilized, wheras only marker taxa from GMRepo v2 and a manually curated subset from MiMeDB are included. Please cite the appropriate database if using:
+- Cheng et al. gutMGene: a comprehensive database for target genes of gut microbes and microbial metabolites_ Nucleic Acids Res. 2022 Jan 7;50(D1):D795-D800.
+- Dai et al. GMrepo v2: a curated human gut microbiome database with special focus on disease markers and cross-dataset comparison_ Nucleic Acids Res. 2022 Jan 7;50(D1):D777-D784.
+- Wishart et. al. MiMeDB: the Human Microbial Metabolome Database_ Nucleic Acids Res. 2023 Jan 6;51(D1):D611-D620. 
+
+The test data provided with TaxSEA consists of log2 fold changes comparing between healthy and inflammatory bowel disease which was downloaded from curatedMetagenomeSeq
+-Hall et al. A novel Ruminococcus gnavus clade enriched in inflammatory bowel disease patients** Genome Med. 2017 Nov 28;9(1):103.
+-Pasolli et al. Accessible, curated metagenomic data through ExperimentHub. Nat Methods. 2017 Oct 31;14(11):1023-1024. doi: 10.1038/nmeth.4468. PMID: 29088129; PMCID: PMC5862039.
 # Installation
 
 
