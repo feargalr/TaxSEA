@@ -51,6 +51,7 @@ TaxSEA_barplot(enriched_taxon_sets)
 ```
 ![TaxSEA Barplot 1](https://user-images.githubusercontent.com/7561275/228441264-f233b7ac-6030-4208-a48a-a43a92163b33.png)
 
+Barcode plots are routinely used for plotting enrichment signatures. Here all taxa are ordered by the their fold change along the X axis, and a single black line indicates where the taxa in that set are positioned along that order. 
 ```{r example}
 # Create a barcode plot of the results
 TaxSEA_barcode(enriched_taxon_sets[grepl("GutMGene",enriched_taxon_sets$taxonSetName),], taxon_ranks=TaxSEA_test_data)
