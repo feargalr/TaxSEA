@@ -12,7 +12,7 @@ TaxSEA utilizes taxon sets generated from three reference databases (**gutMGene*
 
 The test data provided with TaxSEA consists of log2 fold changes comparing between healthy and inflammatory bowel disease which was downloaded from curatedMetagenomeSeq
 - Hall et al. A novel Ruminococcus gnavus clade enriched in inflammatory bowel disease patients** Genome Med. 2017 Nov 28;9(1):103.
-- Pasolli et al. Accessible, curated metagenomic data through ExperimentHub. Nat Methods. 2017 Oct 31;14(11):1023-1024. doi: 10.1038/nmeth.4468. PMID: 29088129; PMCID: PMC5862039.
+- Pasolli et al. Accessible, curated metagenomic data through ExperimentHub. Nat Methods. 2017 Oct 31;14(11):1023-1024. doi: 10.1038/nmeth.4468.
 # Installation
 
 
