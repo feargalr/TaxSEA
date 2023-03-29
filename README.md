@@ -6,9 +6,9 @@ TaxSEA is an R package designed to enable rapid annotation of changes observed i
 
 ## Taxon set database
 TaxSEA utilizes taxon sets generated from three reference databases (**gutMGene**, **GMrepo v2**, **MiMeDB**). All of gutMgene is utilized, wheras only marker taxa from GMRepo v2 and a manually curated subset from MiMeDB are included. Please cite the appropriate database if using:
-- Cheng et al. gutMGene: a comprehensive database for target genes of gut microbes and microbial metabolites_ Nucleic Acids Res. 2022 Jan 7;50(D1):D795-D800.
-- Dai et al. GMrepo v2: a curated human gut microbiome database with special focus on disease markers and cross-dataset comparison_ Nucleic Acids Res. 2022 Jan 7;50(D1):D777-D784.
-- Wishart et. al. MiMeDB: the Human Microbial Metabolome Database_ Nucleic Acids Res. 2023 Jan 6;51(D1):D611-D620. 
+- Cheng et al. gutMGene: a comprehensive database for target genes of gut microbes and microbial metabolites Nucleic Acids Res. 2022 Jan 7;50(D1):D795-D800.
+- Dai et al. GMrepo v2: a curated human gut microbiome database with special focus on disease markers and cross-dataset comparison Nucleic Acids Res. 2022 Jan 7;50(D1):D777-D784.
+- Wishart et. al. MiMeDB: the Human Microbial Metabolome Database Nucleic Acids Res. 2023 Jan 6;51(D1):D611-D620. 
 
 ## Test data
 The test data provided with TaxSEA consists of log2 fold changes comparing between healthy and iIBD. The count data for this was downloaded from curatedMetagenomeData and fold changes generated with LinDA.
