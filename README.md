@@ -33,17 +33,27 @@ library(TaxSEA)
 
 ## Usage
 
-```R
+```{r example}
 # Load required libraries
 library(TaxSEA)
 
 # Run TaxSEA with test data provided
 head(TaxSEA_test_data)
 enriched_taxon_sets <- TaxSEA(taxon_ranks=TaxSEA_test_data)
+```
 
+## Visualisation 
+```{r example}
 # Create a bar plot of the results
 TaxSEA_barplot(enriched_taxon_sets)
+```
+![TaxSEA Barplot 1](https://user-images.githubusercontent.com/7561275/228441264-f233b7ac-6030-4208-a48a-a43a92163b33.png)
 
-
+```{r example}
 # Create a barcode plot of the results
-TaxSEA_barcode(enriched_taxon_sets, taxon_ranks, taxon_sets)
+TaxSEA_barcode(enriched_taxon_sets[grepl("GutMGene",enriched_taxon_sets$taxonSetName),], taxon_ranks=TaxSEA_test_data)
+![Barcode plot2](https://user-images.githubusercontent.com/7561275/228441385-cf9ffd3c-ab51-4e2b-beda-7398148447df.png)
+
+```
+
+
