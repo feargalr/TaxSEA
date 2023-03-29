@@ -2,7 +2,7 @@
 
 TaxSEA is an R package designed to enable rapid annotation of changes observed in a microbiome association study by testing for enrichment for producers of particular metabolites or associations with marker taxa for specific diseases. It focuses specifically on human gut microbiome associations and uses a Kolmogorov-Smirnov test to test if a particular set of taxa is changed relative to a control group.
 
-**_Note TaxSEA has not yet undergone extensive validation. Please treat results with appropriate caution_**
+**_Note - TaxSEA has not yet undergone extensive validation. Please treat results with appropriate caution_**
 
 
 TaxSEA utilizes taxon sets generated from three reference databases (**gutMGene**, **GMrepo v2**, **MiMeDB**). All of gutMgene is utilized, wheras only marker taxa from GMRepo v2 and a manually curated subset from MiMeDB are included. Please cite the appropriate database if using:
