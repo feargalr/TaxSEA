@@ -27,7 +27,7 @@ library(TaxSEA)
 library(TaxSEA)
 
 # Run TaxSEA
-enriched_taxon_sets <- TaxSEA(taxon_ranks)
+enriched_taxon_sets <- TaxSEA(taxon_ranks=TaxSEA_test_data)
 
 # Create a bar plot of the results
 TaxSEA_barplot(enriched_taxon_sets)
