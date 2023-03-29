@@ -242,13 +242,7 @@ TaxSEA_barcode <- function(taxsea_results, taxon_ranks, taxon_sets,axis_limits =
   if (!requireNamespace("ggplot2", quietly = TRUE)) cat("ggplot2 is not installed\n")
   require(ggplot2)
 
-  if (database == "All") {
     taxon_sets <- TaxSEA_db
-  } else if (!database %in% c("GutMGene", "MiMeDB", "GMRepoV2")) {
-    stop("INCORRECT DATABASE SPECIFIED")
-  } else {
-    taxon_sets <- TaxSEA_db[grep(database, names(TaxSEA_db))]
-  }
 
   #Relabel taxa with NCBI IDs
   ids2fetch = names(taxon_ranks[!(names(taxon_ranks) %in% names(NCBI_ids))])
