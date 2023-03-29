@@ -52,8 +52,8 @@ TaxSEA_barplot(enriched_taxon_sets)
 ```{r example}
 # Create a barcode plot of the results
 TaxSEA_barcode(enriched_taxon_sets[grepl("GutMGene",enriched_taxon_sets$taxonSetName),], taxon_ranks=TaxSEA_test_data)
-![Barcode plot2](https://user-images.githubusercontent.com/7561275/228441385-cf9ffd3c-ab51-4e2b-beda-7398148447df.png)
 
 ```
+![Barcode plot2](https://user-images.githubusercontent.com/7561275/228441385-cf9ffd3c-ab51-4e2b-beda-7398148447df.png)
 
 
