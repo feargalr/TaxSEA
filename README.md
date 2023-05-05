@@ -1,14 +1,19 @@
 # TaxSEA: Taxon Set Enrichment Analysis
 
-TaxSEA is an R package designed to enable rapid annotation of changes observed in a microbiome association study by testing for enrichment for producers of particular metabolites or associations with marker taxa for specific diseases. It focuses specifically on human gut microbiome associations and uses a Kolmogorov-Smirnov test to test if a particular set of taxa is changed relative to a control group.
-
-**_Note - TaxSEA has not yet undergone extensive validation. Please treat results with appropriate caution_** In the example below TaxSEA takes as input fold changes of bacterial species between healthy and Inflamatory Bowel Disease (IBD) and finds a statistically significant enrichment ovarious disease associated signatures from GMRepo v2 (including for IBD), and producers of various metabolites (including depletion of taxa associated with butyrate production). Further testing is underway to assess the accuracy of TaxSEA. However, in it's current form it may have utility for users to generate hypotheses based on differential abundance analyses. 
+TaxSEA is an R package designed to enable rapid annotation of changes observed in a microbiome association study by testing for enrichment for groups of species associated with either a particular phenotype, or known to producer a particular metabolite.It focuses specifically on human gut microbiome associations and uses a Kolmogorov-Smirnov test to test if a particular set of taxa is changed relative to a control group. A key goal of the TaxSEA project is to move researchers away from describing microbiome alterations simply as 'dysbiotic' and towards more specific descriptions that allow easier interpretation (e.g. depleted for taxa known to produce GABA and enriched for taxa asscociated with diabetes in other studies)
 
 ## Taxon set database
 TaxSEA utilizes taxon sets generated from three reference databases (**gutMGene**, **GMrepo v2**, **MiMeDB**). All of gutMgene is utilized, wheras only marker taxa from GMRepo v2 and a manually curated subset from MiMeDB are included. Please cite the appropriate database if using:
 - Cheng et al. gutMGene: a comprehensive database for target genes of gut microbes and microbial metabolites Nucleic Acids Res. 2022 Jan 7;50(D1):D795-D800.
 - Dai et al. GMrepo v2: a curated human gut microbiome database with special focus on disease markers and cross-dataset comparison Nucleic Acids Res. 2022 Jan 7;50(D1):D777-D784.
 - Wishart et. al. MiMeDB: the Human Microbial Metabolome Database Nucleic Acids Res. 2023 Jan 6;51(D1):D611-D620. 
+
+## Interpretation of results
+
+There is an enourmous amount we still do not know about the human microbiome. TaxSEA, or any similar analysis, will ultimately be limited by the quality of the databases available, which in turn are limited by our current knowledge. Thus, our reccomendation is the treat results as a starting point for further interpretation and hypothesis generation. 
+
+Validation of TaxSEA is ongoing. It has performed well (>90% true positive rate) simulated data where taxon sets are manually perturbed (ongoing work, watch this space). In the example below TaxSEA takes as input fold changes of bacterial species between healthy and Inflamatory Bowel Disease (IBD, dataset from Hall. et al. 2017) and finds a statistically significant enrichment for various disease associated signatures from GMRepo v2 (including for IBD), and producers of various metabolites known to be depleted in IBD.
+
 
 ## Test data
 The test data provided with TaxSEA consists of log2 fold changes comparing between healthy and IBD. The count data for this was downloaded from curatedMetagenomeData and fold changes generated with LinDA.
