@@ -12,7 +12,7 @@ TaxSEA utilizes taxon sets generated from three reference databases (**gutMGene*
 
 There is an enourmous amount we still do not know about the human microbiome. TaxSEA, or any similar analysis, will ultimately be limited by the quality of the databases available, which in turn are limited by our current knowledge. Thus, our reccomendation is the treat results as a starting point for further interpretation and hypothesis generation. 
 
-Validation of TaxSEA is ongoing. It has performed well (>90% true positive rate) simulated data where taxon sets are manually perturbed (ongoing work, watch this space). In the example below TaxSEA takes as input fold changes of bacterial species between healthy and Inflamatory Bowel Disease (IBD, dataset from Hall. et al. 2017) and finds a statistically significant enrichment for various disease associated signatures from GMRepo v2 (including for IBD), and producers of various metabolites known to be depleted in IBD.
+Validation of TaxSEA is ongoing. It has performed well (>90% true positive rate) with simulated data where taxon sets are manually perturbed (ongoing work, watch this space). In the example below TaxSEA takes as input fold changes of bacterial species between healthy and Inflamatory Bowel Disease (IBD, dataset from Hall. et al. 2017) and finds a statistically significant enrichment for various disease associated signatures from GMRepo v2 (including for IBD), and producers of various metabolites known to be depleted in IBD.
 
 
 ## Test data
