@@ -109,7 +109,7 @@ TaxSEA <- function(taxon_ranks, database = "All") {
   legible_names = names(NCBI_ids)
   names(legible_names) = NCBI_ids[legible_names]
 
-  if(length(taxon_ranks) < 5) {
+  if(length(taxon_ranks) < 3) {
     stop("Error: Very few taxa have had NCBI taxonomy IDs assigned. Stopping")
   }
 
@@ -117,7 +117,7 @@ TaxSEA <- function(taxon_ranks, database = "All") {
   taxon_ranks = taxon_ranks[names(taxon_ranks) %in% unique(unlist(taxon_sets))]
   taxon_sets <- lapply(taxon_sets, function(taxon_set) {return(unique(taxon_set[taxon_set %in% names(taxon_ranks)]))})
   set_sizes <- sapply(taxon_sets, function(taxon_set) { length(taxon_set) })
-  taxon_sets = taxon_sets[set_sizes>2]
+  taxon_sets = taxon_sets[set_sizes>1]
   taxon_ranks = taxon_ranks[names(taxon_ranks) %in% unique(unlist(taxon_sets))]
 
   if (!is.vector(taxon_ranks) || !is.list(taxon_sets)) {
