@@ -1,0 +1,4 @@
+#Defined based on
+Medina-Rodriguez EM, Watson J, Reyes J, Trivedi M, Beurel E. Th17 cells sense microbiome to promote depressive-like behaviors. Microbiome. 2023 Apr 28;11(1):92. doi: 10.1186/s40168-022-01428-3. PMID: 37106375; PMCID: PMC10142784.
+Tan TG, Sefik E, Geva-Zatorsky N, Kua L, Naskar D, Teng F, Pasman L, Ortiz-Lopez A, Jupp R, Wu HJ, Kasper DL, Benoist C, Mathis D. Identifying species of symbiont bacteria from the human gut that, alone, can induce intestinal Th17 cells in mice. Proc Natl Acad Sci U S A. 2016 Dec 13;113(50):E8141-E8150. doi: 10.1073/pnas.1617460113. Epub 2016 Nov 23. PMID: 27911839; PMCID: PMC5167147.
+López P, González-Rodríguez I, Gueimonde M, Margolles A, Suárez A. Immune response to Bifidobacterium bifidum strains support Treg/Th17 plasticity. PLoS One. 2011;6(9):e24776. doi: 10.1371/journal.pone.0024776. Epub 2011 Sep 22. PMID: 21966367; PMCID: PMC3178565.
