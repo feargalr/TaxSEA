@@ -51,13 +51,13 @@ get_ncbi_taxon_ids <- function(taxon_names) {
 #' by testing for enrichment for producers of particular metabolites, or associations with marker taxa
 #' for particular diseases. It focuses specifically on human gut microbiome associations and uses
 #' a Kolmogorov-Smirnov test to test if a particular set of taxa is changed relative to a control group.
-#' The input taxon_ranks are log2 fold changes between control and test group (e.g. healthy and IBD).
+#' The input taxon_ranks are log2 fold changes between control and test group (e.g., healthy and IBD).
 #'
-#' @param taxon_ranks A named vector of log2 fold changes between control and test group
-#' @param lookup_missing A characterc specifying the database to use for enrichment analysis.
+#' @param taxon_ranks A named vector of log2 fold changes between control and test group.
+#' @param lookup_missing Lookup missing values (TRUE/FALSE) Default is FALSE.
 #' @param database A character specifying the database to use for enrichment analysis.
 #'   Options are "All", "GutMGene", "MiMeDB", and "GMRepoV2". Default is "All".
-#' @return A data frame with taxon set enrichment results
+#' @return A data frame with taxon set enrichment results.
 #' @seealso
 #' \itemize{
 #'   \item \url{https://doi.org/10.1093/nar/gkac868} for MiMeDB
