@@ -7,7 +7,6 @@
 TaxSEA_barcode(
   taxsea_results,
   taxon_ranks,
-  taxon_sets,
   axis_limits = c(-7, 7),
   n_to_plot = 10,
   boxplot = FALSE
@@ -18,13 +17,13 @@ TaxSEA_barcode(
 
 \item{taxon_ranks}{A named numeric vector with taxon names as names and their corresponding ranks as values}
 
-\item{taxon_sets}{A named list of character vectors with taxon set names as names and taxon names as values}
-
 \item{axis_limits}{A numeric vector of length 2 specifying the x-axis limits (default: c(-7, 7))}
 
 \item{n_to_plot}{Integer value specifying the number of top taxon sets to display (default: 10)}
 
 \item{boxplot}{Boolean value specifying whether or not to include a boxplot (default: FALSE)}
+
+\item{taxon_sets}{A named list of character vectors with taxon set names as names and taxon names as values}
 }
 \value{
 A ggplot2 barcode plot of the TaxSEA results

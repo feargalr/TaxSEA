@@ -54,6 +54,9 @@ get_ncbi_taxon_ids <- function(taxon_names) {
 #' The input taxon_ranks are log2 fold changes between control and test group (e.g., healthy and IBD).
 #'
 #' @param taxon_ranks A named vector of log2 fold changes between control and test group.
+#' @param lookup_missing Logical value indicating whether to fetch missing NCBI IDs. Default is FALSE.
+#' @param min_set_size Minimum size of taxon sets to include in the analysis. Default is 5.
+#' @param max_set_size Maximum size of taxon sets to include in the analysis. Default is 100.
 #' @param database A character specifying the database to use for enrichment analysis.
 #'   Options are "All", "GutMGene", "MiMeDB", and "GMRepoV2". Default is "All".
 #' @return A data frame with taxon set enrichment results.
@@ -74,7 +77,15 @@ get_ncbi_taxon_ids <- function(taxon_names) {
 #' )
 #' # Run TaxSEA
 #' result_df <- TaxSEA(taxon_ranks)
+#' @import data/NCBI_ids.rds
 #' @export
+
+
+TaxSEA <- function(taxon_ranks, database = "All", lookup_missing = FALSE, min_set_size = 5, max_set_size = 100) {
+  # Function implementation
+}
+
+
 TaxSEA <- function(taxon_ranks, database = "All",lookup_missing = FALSE,min_set_size = 5, max_set_size = 100) {
   NCBI_ids <- readRDS(system.file("data/NCBI_ids.rds", package = "TaxSEA"))
   
