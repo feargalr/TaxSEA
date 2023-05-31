@@ -76,7 +76,8 @@ get_ncbi_taxon_ids <- function(taxon_names) {
 #' result_df <- TaxSEA(taxon_ranks)
 #' @export
 TaxSEA <- function(taxon_ranks, database = "All") {
-
+  NCBI_ids <- readRDS(system.file("data/NCBI_ids.rds", package = "TaxSEA"))
+  
   if(length(taxon_ranks) < 5) {
     stop("Error: Very few taxa provided. Unadvisable to continue. Stopping")
   }
