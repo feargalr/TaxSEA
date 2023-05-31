@@ -54,6 +54,7 @@ get_ncbi_taxon_ids <- function(taxon_names) {
 #' The input taxon_ranks are log2 fold changes between control and test group (e.g. healthy and IBD).
 #'
 #' @param taxon_ranks A named vector of log2 fold changes between control and test group
+#' @param lookup_missing TRUE/FALSE whether look up IDs at NCBI to ensure all taxa names correctly match. Default is FALSE.
 #' @param database A character specifying the database to use for enrichment analysis.
 #'   Options are "All", "GutMGene", "MiMeDB", and "GMRepoV2". Default is "All".
 #' @return A data frame with taxon set enrichment results
