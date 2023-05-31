@@ -54,6 +54,9 @@ get_ncbi_taxon_ids <- function(taxon_names) {
 #' The input taxon_ranks are log2 fold changes between control and test group (e.g. healthy and IBD).
 #'
 #' @param taxon_ranks A named vector of log2 fold changes between control and test group
+#' @param lookup_missing Look up missing values by querying NCBI. TRUE/FALSE. Default is FALSE. Requires internet connectivity. 
+#' @param min_set_size Minimum size of a taxon set to include for testing (Based on number of taxa detected in both the taxon set and your input data) Default = 5
+#' @param max_set_size Minimum size of a taxon set to include for testing (Based on number of taxa detected in both the taxon set and your input data). Consider setting this based on the total features in your input dataset as taxon sets detected universally across all samples are difficult to detect as altered. Default = 100
 #' @param database A character specifying the database to use for enrichment analysis.
 #'   Options are "All", "GutMGene", "MiMeDB", and "GMRepoV2". Default is "All".
 #' @return A data frame with taxon set enrichment results
@@ -75,7 +78,7 @@ get_ncbi_taxon_ids <- function(taxon_names) {
 #' # Run TaxSEA
 #' result_df <- TaxSEA(taxon_ranks)
 #' @export
-TaxSEA <- function(taxon_ranks, database = "All") {
+TaxSEA <- function(taxon_ranks, database = "All",lookup_missing = FALSE,min_set_size = 5, max_set_size = 100) {
   NCBI_ids <- readRDS(system.file("data/NCBI_ids.rds", package = "TaxSEA"))
   
   if(length(taxon_ranks) < 5) {
@@ -91,6 +94,8 @@ TaxSEA <- function(taxon_ranks, database = "All") {
     taxon_sets <- TaxSEA_db[grep(database, names(TaxSEA_db))]
   }
 
+  if (lookup_missing == TRUE) {
+    
   #Relabel taxa with NCBI IDs
   ids2fetch = names(taxon_ranks[!(names(taxon_ranks) %in% names(NCBI_ids))])
   if (length(ids2fetch) > 0){
@@ -100,7 +105,7 @@ TaxSEA <- function(taxon_ranks, database = "All") {
       NCBI_ids = c(NCBI_ids,unlist(fetched_ids))
     }
   }
-
+}
 
   taxon_ranks = taxon_ranks[names(taxon_ranks) %in% names(NCBI_ids)]
   original_ranks = taxon_ranks
@@ -111,14 +116,14 @@ TaxSEA <- function(taxon_ranks, database = "All") {
   names(legible_names) = NCBI_ids[legible_names]
 
   if(length(taxon_ranks) < 3) {
-    stop("Error: Very few taxa have had NCBI taxonomy IDs assigned. Stopping")
+    stop("Error: Very few taxa provided. Unadvisable to continue. Stopping")
   }
 
   # Filter taxon_ranks and taxon_sets
   taxon_ranks = taxon_ranks[names(taxon_ranks) %in% unique(unlist(taxon_sets))]
   taxon_sets <- lapply(taxon_sets, function(taxon_set) {return(unique(taxon_set[taxon_set %in% names(taxon_ranks)]))})
   set_sizes <- sapply(taxon_sets, function(taxon_set) { length(taxon_set) })
-  taxon_sets = taxon_sets[set_sizes>0]
+  taxon_sets = taxon_sets[set_sizes>= min_set_size & set_sizes <= max_set_size ]
   taxon_ranks = taxon_ranks[names(taxon_ranks) %in% unique(unlist(taxon_sets))]
 
   if (!is.vector(taxon_ranks) || !is.list(taxon_sets)) {
