@@ -10,6 +10,7 @@
 #' taxon_ids <- get_ncbi_taxon_ids(taxon_names)
 #' print(taxon_ids)
 #' @export
+#' @import data/NCBI_ids.rds
 get_ncbi_taxon_ids <- function(taxon_names) {
   get_ncbi_taxon_id <- function(taxon_name) {
     # Define the URL for the API call
