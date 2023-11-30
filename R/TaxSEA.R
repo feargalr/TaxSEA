@@ -35,8 +35,16 @@ get_ncbi_taxon_ids <- function(taxon_names) {
     }
   }
 
+
+  ids2fetch = taxon_names[!taxon_names %in% names(NCBI_ids)]
+  taxon_names = taxon_names[taxon_names %in% names(NCBI_ids)]
+  local_ids = unlist(NCBI_ids[taxon_names])
   # Retrieve the taxonomy IDs for each taxon name in the vector
-  taxon_ids <- sapply(taxon_names, get_ncbi_taxon_id)
+  if (length(ids2fetch) > 0){
+    print("Fetching some NCBI IDs for input taxa. Please wait")
+    taxon_ids <- sapply(ids2fetch, get_ncbi_taxon_id)
+    taxon_ids = c(local_ids,unlist(fetched_ids))
+  }
 
   return(taxon_ids)
   close(xml_data)
@@ -88,7 +96,7 @@ TaxSEA <- function(taxon_ranks, database = "All", lookup_missing = FALSE, min_se
 
 TaxSEA <- function(taxon_ranks, database = "All",lookup_missing = FALSE,min_set_size = 5, max_set_size = 100) {
   NCBI_ids <- readRDS(system.file("data/NCBI_ids.rds", package = "TaxSEA"))
-  
+
   if(length(taxon_ranks) < 5) {
     stop("Error: Very few taxa provided. Unadvisable to continue. Stopping")
   }
@@ -103,7 +111,7 @@ TaxSEA <- function(taxon_ranks, database = "All",lookup_missing = FALSE,min_set_
   }
 
   if (lookup_missing == TRUE) {
-    
+
   #Relabel taxa with NCBI IDs
   ids2fetch = names(taxon_ranks[!(names(taxon_ranks) %in% names(NCBI_ids))])
   if (length(ids2fetch) > 0){
