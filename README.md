@@ -63,6 +63,20 @@ The output is a dataframe with 5 columns
 - FDR - P value adjusted for multiple testing. 
 - TaxonSet - Returns list of taxa in the set to show what is driving the signal
 
+#### TaxSEA database with other enrichment tools
+The TaxSEA function by default uses the Kolmogorov Smirnov test. This was the original test used for gene set enrichment analysis, however subsequent methods have been developed based on alternative approaches. One particularly popular package is fast gene set enrichment analysis (fgsea) which is based upon a permutation type approach. The TaxSEA database is compatible with fgsea as long as the input identifiers are NCBI IDs. If they are not currently in that format we provide a function for converting. See example code below. 
+
+```{r output}
+library(fgsea) #This package is installable via Bioconductor
+
+#Convert input names to NCBI taxon ids
+names(TaxSEA_test_data) = get_ncbi_taxon_ids(names(TaxSEA_test_data))
+TaxSEA_test_data = TaxSEA_test_data[!is.na(names(TaxSEA_test_data))]
+
+#Run fgsea
+fgsea_results <- fgsea(TaxSEA_db, TaxSEA_test_data, minSize=5, maxSize=500)
+```
+
 #### Visualisation 
 TaxSEA contains two functions which uses ggplot2 to plot results. 
 ```{r example}
