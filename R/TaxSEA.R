@@ -36,7 +36,7 @@ get_ncbi_taxon_ids <- function(taxon_names) {
     }
   }
 
-
+  NCBI_ids <- readRDS(system.file("data/NCBI_ids.rds", package = "TaxSEA"))
   ids2fetch = taxon_names[!taxon_names %in% names(NCBI_ids)]
   taxon_names = taxon_names[taxon_names %in% names(NCBI_ids)]
   local_ids = unlist(NCBI_ids[taxon_names])
