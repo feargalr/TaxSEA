@@ -45,6 +45,8 @@ get_ncbi_taxon_ids <- function(taxon_names) {
     print("Fetching some NCBI IDs for input taxa. Please wait")
     taxon_ids <- sapply(ids2fetch, get_ncbi_taxon_id)
     taxon_ids = c(local_ids,unlist(fetched_ids))
+  } else {
+    taxon_ids = local_ids
   }
 
   return(taxon_ids)
