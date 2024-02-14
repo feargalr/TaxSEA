@@ -3,16 +3,18 @@
 TaxSEA is an R package designed to enable rapid annotation of changes observed in a microbiome association study by testing for enrichment for groups of species associated with either a particular phenotype, or known to producer a particular metabolite.It focuses specifically on human gut microbiome associations and uses a Kolmogorov-Smirnov test to test if a particular set of taxa is changed relative to a control group. A key goal of the TaxSEA project is to move researchers away from describing microbiome alterations simply as 'dysbiotic' and towards more specific descriptions that allow easier interpretation (e.g. depleted for taxa known to produce GABA and enriched for taxa asscociated with diabetes in other studies)
 
 ## Taxon set database
-TaxSEA utilizes taxon sets generated from three reference databases (**gutMGene**, **GMrepo v2**, **MiMeDB**) together with manually curated taxon sets based on the literature (Currently only 1, Th17 inducing bacteria, see Th17_producers.txt for details). All of gutMgene is utilized, wheras only marker taxa from GMRepo v2 and a manually curated subset from MiMeDB are included. Please cite the appropriate database if using:
-- Cheng et al. gutMGene: a comprehensive database for target genes of gut microbes and microbial metabolites Nucleic Acids Res. 2022 Jan 7;50(D1):D795-D800.
-- Dai et al. GMrepo v2: a curated human gut microbiome database with special focus on disease markers and cross-dataset comparison Nucleic Acids Res. 2022 Jan 7;50(D1):D777-D784.
-- Wishart et. al. MiMeDB: the Human Microbial Metabolome Database Nucleic Acids Res. 2023 Jan 6;51(D1):D611-D620. 
+TaxSEA utilizes taxon sets generated from four reference databases (**gutMGene**, **GMrepo v2**, **MiMeDB**, **mBodyMap**). Additionally, TaxSEA is compatible with **BugSigDB**, a community editable database of signatures curated from the literature. 
+
+Please cite the appropriate database if using:
+- Cheng et al. gutMGene: a comprehensive database for target genes of gut microbes and microbial metabolites Nucleic Acids Res. 2022.
+- Dai et al. GMrepo v2: a curated human gut microbiome database with special focus on disease markers and cross-dataset comparison Nucleic Acids Res. 2022.
+- Wishart et. al. MiMeDB: the Human Microbial Metabolome Database Nucleic Acids Res. 2023.
+- Jin et al. mBodyMap: a curated database for microbes across human body and their associations with health and diseases. Nucleic Acids Res. 2022.
+- Geistlinger et al. BugSigDB captures patterns of differential abundance across a broad range of host-associated microbial signatures. Nature Biotech. 2023. 
 
 ## Interpretation of results
 
 There is an enourmous amount we still do not know about the human microbiome. TaxSEA, or any similar analysis, will ultimately be limited by the quality of the databases available, which in turn are limited by our current knowledge. Thus, our reccomendation is the treat results as a starting point for further interpretation and hypothesis generation. 
-
-Validation of TaxSEA is ongoing. It has performed well (>90% true positive rate) with simulated data where taxon sets are manually perturbed (ongoing work, watch this space). In the example below TaxSEA takes as input fold changes of bacterial species between healthy and Inflamatory Bowel Disease (IBD, dataset from Hall. et al. 2017) and finds a statistically significant enrichment for various disease associated signatures from GMRepo v2 (including for IBD), and producers of various metabolites known to be depleted in IBD.
 
 
 ## Test data
@@ -62,6 +64,20 @@ The output is a dataframe with 5 columns
 - P value - Kolmogorov-Smirnov test P value.
 - FDR - P value adjusted for multiple testing. 
 - TaxonSet - Returns list of taxa in the set to show what is driving the signal
+
+
+#### TaxSEA with BugSigDB
+BugSigDB provides an alterative approach to the TaxSEA database used by default as BugSigDB reports signatures on a per study basis. As a result there a far larger number of signatures and this database comes at a cost with increased penalty for multiple testing adjustment. However, users may find it informative to identify specific studies which closely align with their findings.  
+
+```{r output}
+library(bugsigdbr) #Installable via Bioconductor
+bsdb <- importBugSigDB() #Import database
+mp.sigs <- getSignatures(bsdb, tax.id.type = "ncbi") #get a list of signatures with NCBI IDs
+TaxSEA_db = c(TaxSEA_db,mp.sigs)
+my_results =  TaxSEA(taxon_ranks = TaxSEA_test_data)
+
+```
+
 
 #### TaxSEA database with other enrichment tools
 The TaxSEA function by default uses the Kolmogorov Smirnov test. This was the original test used for gene set enrichment analysis, however subsequent methods have been developed based on alternative approaches. One particularly popular package is fast gene set enrichment analysis (fgsea) which is based upon a permutation type approach. The TaxSEA database is compatible with fgsea as long as the input identifiers are NCBI IDs. If they are not currently in that format we provide a function for converting. See example code below. 
