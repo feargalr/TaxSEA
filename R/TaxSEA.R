@@ -314,7 +314,8 @@ TaxSEA_barcode <- function(taxsea_results, taxon_ranks,
   if (!requireNamespace("ggplot2", quietly = TRUE)) 
     cat("ggplot2 is not installed\n")
   require(ggplot2)
-
+  NCBI_ids <- readRDS(system.file("data/NCBI_ids.rds", package = "TaxSEA"))
+  
     taxon_sets <- TaxSEA_db
 
   #Relabel taxa with NCBI IDs

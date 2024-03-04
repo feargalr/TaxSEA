@@ -3,7 +3,7 @@
 TaxSEA is an R package designed to enable rapid annotation of changes observed in a microbiome association study by testing for enrichment for groups of species associated with either a particular phenotype, or known to producer a particular metabolite.It focuses specifically on human gut microbiome associations and uses a Kolmogorov-Smirnov test to test if a particular set of taxa is changed relative to a control group. A key goal of the TaxSEA project is to move researchers away from describing microbiome alterations simply as 'dysbiotic' and towards more specific descriptions that allow easier interpretation (e.g. depleted for taxa known to produce GABA and enriched for taxa asscociated with diabetes in other studies)
 
 ## Taxon set database
-TaxSEA utilizes taxon sets generated from four reference databases (**gutMGene**, **GMrepo v2**, **MiMeDB**, **mBodyMap**). Additionally, TaxSEA is compatible with **BugSigDB**, a community editable database of signatures curated from the literature. 
+TaxSEA utilizes taxon sets generated from five reference databases (**gutMGene**, **GMrepo v2**, **MiMeDB**, **mBodyMap**, **BugSigDB**). 
 
 Please cite the appropriate database if using:
 - Cheng et al. gutMGene: a comprehensive database for target genes of gut microbes and microbial metabolites Nucleic Acids Res. 2022.
@@ -47,8 +47,16 @@ library(TaxSEA)
 # Run TaxSEA with test data provided
 head(TaxSEA_test_data)
 taxsea_results <- TaxSEA(taxon_ranks=TaxSEA_test_data)
+
+#Enrichments among metabolite producers from gutMgene and MiMeDB
 metabolites.df = taxsea_results$Metabolite_producers
+
+#Enrichments among health and disease signatures from GMRepoV2 and mBodyMap
 disease.df = taxsea_results$Health_associations
+
+#Enrichments amongh published associations from BugSigDB
+bsdb.df = taxsea_results$BugSigdB
+
 ```
 
 #### Input 
