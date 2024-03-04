@@ -68,25 +68,13 @@ Bacteroides_thetaiotaomicron           Blautia_sp_CAG_257          Ruminococcus 
 ```
 
 #### Output
-The output is a list of two dataframes - one focused on metabolite produers and another on disease associations. Each with 5 columns
+The output is a list of three dataframes providing enrichment results for metabolite produers, health/disease associations, and published signatures from BugSigDB.
+Each dataframe has 5 columns
 - taxonSetName - The name of the taxon set tested
 - NES - Normalized enrichment score. This is simply the median fold change across the entire set
 - P value - Kolmogorov-Smirnov test P value.
 - FDR - P value adjusted for multiple testing. 
 - TaxonSet - Returns list of taxa in the set to show what is driving the signal
-
-
-#### TaxSEA with BugSigDB
-BugSigDB provides an alterative approach to the TaxSEA database used by default as BugSigDB reports signatures on a per study basis. As a result there a far larger number of signatures and this database comes at a cost with increased penalty for multiple testing adjustment. However, users may find it informative to identify specific studies which closely align with their findings.  
-
-```{r output}
-library(bugsigdbr) #Installable via Bioconductor
-bsdb <- importBugSigDB() #Import database
-mp.sigs <- getSignatures(bsdb, tax.id.type = "ncbi") #get a list of signatures with NCBI IDs
-TaxSEA_db = c(TaxSEA_db,mp.sigs)
-my_results =  TaxSEA(taxon_ranks = TaxSEA_test_data)
-
-```
 
 
 #### TaxSEA database with other enrichment tools
