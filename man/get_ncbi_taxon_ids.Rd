@@ -10,14 +10,17 @@ get_ncbi_taxon_ids(taxon_names)
 \item{taxon_names}{A character vector of taxon names}
 }
 \value{
-A character vector of NCBI taxonomy IDs corresponding to the input taxon names
+A character vector of NCBI taxonomy IDs corresponding to the 
+input taxon names
 }
 \description{
-This function takes a vector of taxon names and returns a vector of NCBI taxonomy IDs
+This function takes a vector of taxon names and returns a vector of 
+NCBI taxonomy IDs
 by querying the NCBI Entrez API.
 }
 \examples{
-taxon_names <- c("Escherichia coli", "Staphylococcus aureus", "Bacillus subtilis")
+taxon_names <- c("Escherichia coli", "Staphylococcus aureus", 
+"Bacillus subtilis")
 taxon_ids <- get_ncbi_taxon_ids(taxon_names)
 print(taxon_ids)
 }

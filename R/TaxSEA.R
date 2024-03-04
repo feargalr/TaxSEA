@@ -1,12 +1,15 @@
 #' Retrieve NCBI Taxonomy IDs for a list of taxon names
 #'
-#' This function takes a vector of taxon names and returns a vector of NCBI taxonomy IDs
+#' This function takes a vector of taxon names and returns a vector of 
+#' NCBI taxonomy IDs
 #' by querying the NCBI Entrez API.
 #'
 #' @param taxon_names A character vector of taxon names
-#' @return A character vector of NCBI taxonomy IDs corresponding to the input taxon names
+#' @return A character vector of NCBI taxonomy IDs corresponding to the 
+#' input taxon names
 #' @examples
-#' taxon_names <- c("Escherichia coli", "Staphylococcus aureus", "Bacillus subtilis")
+#' taxon_names <- c("Escherichia coli", "Staphylococcus aureus", 
+#' "Bacillus subtilis")
 #' taxon_ids <- get_ncbi_taxon_ids(taxon_names)
 #' print(taxon_ids)
 #' @import data/NCBI_ids.rds
@@ -16,7 +19,8 @@ get_ncbi_taxon_ids <- function(taxon_names) {
     # Define the URL for the API call
     base_url <- "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/"
     esearch_url <- paste0(base_url, "esearch.fcgi?db=taxonomy&term=",
-                          URLencode(taxon_name, reserved = TRUE), "&retmode=xml")
+                          URLencode(taxon_name, reserved = TRUE), 
+                          "&retmode=xml")
 
     # Retrieve the XML data
     xml_data <- readLines(url(esearch_url, "r"))
@@ -58,17 +62,27 @@ get_ncbi_taxon_ids <- function(taxon_names) {
 
 #' TaxSEA: Taxon Set Enrichment Analysis
 #'
-#' TaxSEA is designed to enable rapid annotation of changes observed in a microbiome association study
-#' by testing for enrichment for producers of particular metabolites, or associations with marker taxa
-#' for particular diseases. It focuses specifically on human gut microbiome associations and uses
-#' a Kolmogorov-Smirnov test to test if a particular set of taxa is changed relative to a control group.
-#' The input taxon_ranks are log2 fold changes between control and test group (e.g., healthy and IBD).
+#' TaxSEA is designed to enable rapid annotation of changes observed in a 
+#' microbiome association study
+#' by testing for enrichment for producers of particular metabolites, or 
+#' associations with marker taxa
+#' for particular diseases. It focuses specifically on human gut microbiome 
+#' associations and uses
+#' a Kolmogorov-Smirnov test to test if a particular set of taxa is changed 
+#' relative to a control group.
+#' The input taxon_ranks are log2 fold changes between control and test group 
+#' (e.g., healthy and IBD).
 #'
-#' @param taxon_ranks A named vector of log2 fold changes between control and test group.
-#' @param lookup_missing Logical value indicating whether to fetch missing NCBI IDs. Default is FALSE.
-#' @param min_set_size Minimum size of taxon sets to include in the analysis. Default is 5.
-#' @param max_set_size Maximum size of taxon sets to include in the analysis. Default is 100.
-#' @param database A character specifying the database to use for enrichment analysis.
+#' @param taxon_ranks A named vector of log2 fold changes between control and 
+#' test group.
+#' @param lookup_missing Logical value indicating whether to fetch missing 
+#' NCBI IDs. Default is FALSE.
+#' @param min_set_size Minimum size of taxon sets to include in the analysis. 
+#' Default is 5.
+#' @param max_set_size Maximum size of taxon sets to include in the analysis. 
+#' Default is 100.
+#' @param database A character specifying the database to use for enrichment 
+#' analysis.
 #'   Options are "All", "GutMGene", "MiMeDB", and "GMRepoV2". Default is "All".
 #' @return A data frame with taxon set enrichment results.
 #' @seealso
@@ -92,12 +106,14 @@ get_ncbi_taxon_ids <- function(taxon_names) {
 #' @export
 
 
-TaxSEA <- function(taxon_ranks, database = "All", lookup_missing = FALSE, min_set_size = 5, max_set_size = 100) {
+TaxSEA <- function(taxon_ranks, database = "All", lookup_missing = FALSE,
+                   min_set_size = 5, max_set_size = 100) {
   # Function implementation
 }
 
 
-TaxSEA <- function(taxon_ranks, database = "All",lookup_missing = FALSE,min_set_size = 5, max_set_size = 100) {
+TaxSEA <- function(taxon_ranks, database = "All",lookup_missing = FALSE,
+                   min_set_size = 5, max_set_size = 100) {
   NCBI_ids <- readRDS(system.file("data/NCBI_ids.rds", package = "TaxSEA"))
 
   if(length(taxon_ranks) < 5) {
@@ -140,13 +156,14 @@ TaxSEA <- function(taxon_ranks, database = "All",lookup_missing = FALSE,min_set_
 
   # Filter taxon_ranks and taxon_sets
   taxon_ranks = taxon_ranks[names(taxon_ranks) %in% unique(unlist(taxon_sets))]
-  taxon_sets <- lapply(taxon_sets, function(taxon_set) {return(unique(taxon_set[taxon_set %in% names(taxon_ranks)]))})
+  taxon_sets <- lapply(taxon_sets, function(taxon_set) {
+    return(unique(taxon_set[taxon_set %in% names(taxon_ranks)]))})
   set_sizes <- sapply(taxon_sets, function(taxon_set) { length(taxon_set) })
-  taxon_sets = taxon_sets[set_sizes>= min_set_size & set_sizes <= max_set_size ]
+  taxon_sets = taxon_sets[set_sizes>= min_set_size & set_sizes <= max_set_size]
   taxon_ranks = taxon_ranks[names(taxon_ranks) %in% unique(unlist(taxon_sets))]
 
   if (!is.vector(taxon_ranks) || !is.list(taxon_sets)) {
-    stop("Input error: taxon_ranks must be a named vector, and taxon_sets must be a list.")
+    stop("Input error")
   }
 
   taxon_sets <- lapply(taxon_sets, function(taxon_set) {
@@ -169,11 +186,20 @@ TaxSEA <- function(taxon_ranks, database = "All",lookup_missing = FALSE,min_set_
     taxonSetName = names(taxon_sets),
     NES = sapply(ks_results, function(res) res$nes),
     PValue = sapply(ks_results, function(res) res$ks_result$p.value),
-    FDR = p.adjust(sapply(ks_results, function(res) res$ks_result$p.value), method = "fdr"),
-    TaxonSet = sapply(taxon_sets, function(taxon_set) paste(taxon_set, collapse = ", "))
+    FDR = p.adjust(sapply(ks_results, function(res) res$ks_result$p.value),
+                   method = "fdr"),
+    TaxonSet = sapply(taxon_sets, function(taxon_set) paste(taxon_set,
+                                                            collapse = ", "))
   )
   result_df = result_df[order(result_df$PValue,decreasing = FALSE),]
-  return(result_df)
+  metabolites_df = results_df[grepl("producers_of",results_df),]
+  disease_df = results_df[!grepl("producers_of",results_df),]
+  metabolites_df$FDR = p.adjust(metabolites_df$PValue,method = "fdr")
+  disease_df$FDR = p.adjust(disease_df$PValue,method = "fdr")
+  
+  res_list = list(Metabolite_producers = metabolites_df,
+                  Health_associations = disease_df)
+  return(res_list)
   rm(TaxSEA_db)
   rm(NCBI_ids)
 
@@ -181,36 +207,47 @@ TaxSEA <- function(taxon_ranks, database = "All",lookup_missing = FALSE,min_set_
 
 
 ########################################################################
-#############################################################################################################################
+###############################################################################
 #' Create a bar plot of TaxSEA results
 #'
-#' This function takes a TaxSEA result data frame and creates a bar plot of the results
-#' using ggplot2. It highlights upregulated and downregulated taxon sets based on their
-#' normalized enrichment scores (NES) and false discovery rate (FDR).
+#' This function takes a TaxSEA result data frame and creates a bar plot of 
+#' the results
+#' using ggplot2. It highlights upregulated and downregulated taxon sets 
+#' based on their #' normalized enrichment scores (NES) and false discovery 
+#' rate (FDR).
 #'
-#' @param taxsea_results A data frame containing the results of the TaxSEA function
-#' @param threshold Numeric value representing the FDR threshold for displaying taxon sets (default: 0.2)
-#' @param custom_colors A character vector of length 2 with colors for upregulated and downregulated taxon sets, respectively (default: NULL)
+#' @param taxsea_results A data frame containing the results of the TaxSEA 
+#' function
+#' @param threshold Numeric value representing the FDR threshold for displaying 
+#' taxon sets (default: 0.2)
+#' @param custom_colors A character vector of length 2 with colors for 
+#' upregulated and downregulated taxon sets, respectively (default: NULL)
 #' @return A ggplot2 bar plot of the TaxSEA results
 #' @examples
-#' # Assuming you have already run the TaxSEA function and have a result data frame named 'taxsea_results'
+#' # Assuming you have already run the TaxSEA function and have a result 
+#' data frame named 'taxsea_results'
 #' p <- TaxSEA_barplot(taxsea_results)
 #' print(p)
 #' @import ggplot2
 #' @export
-TaxSEA_barplot <- function(taxsea_results, threshold = 0.2, custom_colors = NULL) {
+TaxSEA_barplot <- function(taxsea_results, threshold = 0.2, 
+                           custom_colors = NULL) {
   # Check if ggplot2 is installed
-  if (!requireNamespace("ggplot2", quietly = TRUE)) cat("ggplot2 is not installed\n")
+  if (!requireNamespace("ggplot2", quietly = TRUE)) 
+    cat("ggplot2 is not installed\n")
   require(ggplot2)
 
   # Extract relevant columns and calculate log10FDR
-  taxsea_results$log10FDR <- -log10(taxsea_results$FDR) * ifelse(taxsea_results$NES < 0, -1, 1)
+  taxsea_results$log10FDR <- 
+    -log10(taxsea_results$FDR) * ifelse(taxsea_results$NES < 0, -1, 1)
 
   # Sort the dataframe by NES sign and PValue
-  taxsea_results <- taxsea_results[rev(order((taxsea_results$NES < 0), taxsea_results$PValue)), ]
+  taxsea_results <- taxsea_results[rev(order((taxsea_results$NES < 0), 
+                                             taxsea_results$PValue)), ]
 
   # Convert taxonSetName column to a factor with the current order
-  taxsea_results$taxonSetName <- factor(taxsea_results$taxonSetName, levels = taxsea_results$taxonSetName)
+  taxsea_results$taxonSetName <- factor(taxsea_results$taxonSetName, 
+                                        levels = taxsea_results$taxonSetName)
 
   # Set default colors if custom_colors is NULL
   if (is.null(custom_colors)) {
@@ -218,10 +255,12 @@ TaxSEA_barplot <- function(taxsea_results, threshold = 0.2, custom_colors = NULL
   }
 
   # Create a bar plot using ggplot2
-  p <- ggplot(taxsea_results[taxsea_results$FDR < threshold, ], aes(x = log10FDR, y = taxonSetName, fill = NES < 0)) +
+  p <- ggplot(taxsea_results[taxsea_results$FDR < threshold, ], 
+              aes(x = log10FDR, y = taxonSetName, fill = NES < 0)) +
     geom_col(colour="black") +
     geom_vline(xintercept = c(-log10(0.1), log10(0.1)), linetype = 3) +
-    scale_fill_manual(values = custom_colors, labels = c("Upregulated", "Downregulated")) +
+    scale_fill_manual(values = custom_colors, 
+                      labels = c("Upregulated", "Downregulated")) +
     theme_classic() +
     theme(
       legend.title = element_blank(),
@@ -243,28 +282,39 @@ TaxSEA_barplot <- function(taxsea_results, threshold = 0.2, custom_colors = NULL
 
   return(p)
 }
-##############################################################################################################################
+###############################################################################
 #' Create a barcode plot of TaxSEA results
 #'
-#' This function takes a TaxSEA result data frame, taxon ranks, and taxon sets to create a barcode plot
-#' using ggplot2. The barcode plot shows the taxon sets with the top significant P values.
+#' This function takes a TaxSEA result data frame, taxon ranks, and taxon 
+#' sets to create a barcode plot
+#' using ggplot2. The barcode plot shows the taxon sets with the top 
+#' significant P values.
 #'
-#' @param taxsea_results A data frame containing the results of the TaxSEA function
-#' @param taxon_ranks A named numeric vector with taxon names as names and their corresponding ranks as values
-#' @param taxon_sets A named list of character vectors with taxon set names as names and taxon names as values
-#' @param axis_limits A numeric vector of length 2 specifying the x-axis limits (default: c(-7, 7))
-#' @param n_to_plot Integer value specifying the number of top taxon sets to display (default: 10)
-#' @param boxplot Boolean value specifying whether or not to include a boxplot (default: FALSE)
+#' @param taxsea_results A data frame containing the results of the 
+#' TaxSEA function
+#' @param taxon_ranks A named numeric vector with taxon names as names 
+#' and their corresponding ranks as values
+#' @param taxon_sets A named list of character vectors with taxon set 
+#' names as names and taxon names as values
+#' @param axis_limits A numeric vector of length 2 specifying the x-axis
+#'  limits (default: c(-7, 7))
+#' @param n_to_plot Integer value specifying the number of top taxon
+#'  sets to display (default: 10)
+#' @param boxplot Boolean value specifying whether or not to include a 
+#' boxplot (default: FALSE)
 
 #' @return A ggplot2 barcode plot of the TaxSEA results
 #' @examples
-#' # Assuming you have already run the TaxSEA function and have a result data frame named 'taxsea_results', taxon ranks 'taxon_ranks', and taxon sets 'taxon_sets'
+#' # Assuming you have already run the TaxSEA function and have a result
+#'  data frame named 'taxsea_results', taxon ranks 'taxon_ranks', and taxon sets 'taxon_sets'
 #' plot <- barcode_plot(taxsea_results, taxon_ranks, taxon_sets)
 #' print(plot)
 #' @import ggplot2
 #' @export
-TaxSEA_barcode <- function(taxsea_results, taxon_ranks,axis_limits = c(-7,7),n_to_plot = 10,boxplot=FALSE) {
-  if (!requireNamespace("ggplot2", quietly = TRUE)) cat("ggplot2 is not installed\n")
+TaxSEA_barcode <- function(taxsea_results, taxon_ranks,
+                           axis_limits = c(-7,7),n_to_plot = 10,boxplot=FALSE) {
+  if (!requireNamespace("ggplot2", quietly = TRUE)) 
+    cat("ggplot2 is not installed\n")
   require(ggplot2)
 
     taxon_sets <- TaxSEA_db
@@ -293,14 +343,17 @@ TaxSEA_barcode <- function(taxsea_results, taxon_ranks,axis_limits = c(-7,7),n_t
 
 
   taxon_ranks = taxon_ranks[names(taxon_ranks) %in% unique(unlist(taxon_sets))]
-  taxon_sets <- lapply(taxon_sets, function(taxon_set) {return(unique(taxon_set[taxon_set %in% names(taxon_ranks)]))})
+  taxon_sets <- lapply(taxon_sets, function(taxon_set) {
+    return(unique(taxon_set[taxon_set %in% names(taxon_ranks)]))})
   set_sizes <- sapply(taxon_sets, function(taxon_set) { length(taxon_set) })
   taxon_sets = taxon_sets[set_sizes>5]
   # Select the top 5 taxon sets based on P value
-  top_taxon_sets <- taxsea_results[order(taxsea_results$PValue), "taxonSetName"][1:n_to_plot]
+  top_taxon_sets <- taxsea_results[order(taxsea_results$PValue), 
+                                   "taxonSetName"][1:n_to_plot]
 
   # Create a data frame for ggplot2
-  barcode_df <- data.frame(Rank = integer(), TaxonSet = character(), InSet = logical())
+  barcode_df <- data.frame(Rank = integer(), TaxonSet = character(), 
+                           InSet = logical())
 
   for (taxon_set_name in top_taxon_sets) {
     taxon_set <- taxon_sets[[taxon_set_name]]
@@ -313,8 +366,11 @@ TaxSEA_barcode <- function(taxsea_results, taxon_ranks,axis_limits = c(-7,7),n_t
   }
 
   # Generate the barcode plot
-  barcode_plot <- ggplot(barcode_df, aes(x = Rank, y = TaxonSet, col = InSet)) +
-    geom_point(data = barcode_df[barcode_df$InSet,],size = 4,shape="|",show.legend = TRUE,color="black",fill="grey44",alpha=1) +
+  barcode_plot <- ggplot(barcode_df, aes(x = Rank, y = TaxonSet, 
+                                         col = InSet)) +
+    geom_point(data = barcode_df[barcode_df$InSet,],size = 4,
+               shape="|",show.legend = TRUE,color="black",
+               fill="grey44",alpha=1) +
     labs(title = "Barcode plot",
          x = "log2 FC",
          y = "Taxon Set") +
@@ -327,9 +383,12 @@ TaxSEA_barcode <- function(taxsea_results, taxon_ranks,axis_limits = c(-7,7),n_t
 
 
   # Generate the barcode plot
-  boxcode_plot <- ggplot(barcode_df, aes(y = Rank, x = TaxonSet, col = InSet)) +
-    geom_point(data = barcode_df[barcode_df$InSet,],size = 2,shape=21,show.legend = TRUE,color="black",fill="grey44",alpha=1) +
-    geom_boxplot(data = barcode_df[barcode_df$InSet,],color="black",alpha=0)+
+  boxcode_plot <- ggplot(barcode_df, aes(y = Rank, x = TaxonSet, 
+                                         col = InSet)) +
+    geom_point(data = barcode_df[barcode_df$InSet,],size = 2,
+               shape=21,show.legend = TRUE,color="black",fill="grey44",alpha=1) +
+    geom_boxplot(data = barcode_df[barcode_df$InSet,],color="black",
+                 alpha=0)+
     labs(title = "Boxcode plot",
          y = "log2 FC",
          x = "Taxon Set") +
@@ -337,7 +396,8 @@ TaxSEA_barcode <- function(taxsea_results, taxon_ranks,axis_limits = c(-7,7),n_t
     ylim(-7,7)+
     theme_bw() +
     theme(
-      plot.title = element_text(size = 14, face = "bold", hjust = 0.5))+coord_flip()
+      plot.title = element_text(size = 14, face = "bold",
+                                hjust = 0.5))+coord_flip()
 
   if(boxplot==FALSE)
   {return(barcode_plot)}
