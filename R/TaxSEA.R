@@ -192,8 +192,8 @@ TaxSEA <- function(taxon_ranks, database = "All",lookup_missing = FALSE,
                                                             collapse = ", "))
   )
   result_df = result_df[order(result_df$PValue,decreasing = FALSE),]
-  metabolites_df = results_df[grepl("producers_of",results_df),]
-  disease_df = results_df[!grepl("producers_of",results_df),]
+  metabolites_df = result_df[grepl("producers_of",result_df),]
+  disease_df = result_df[!grepl("producers_of",result_df),]
   metabolites_df$FDR = p.adjust(metabolites_df$PValue,method = "fdr")
   disease_df$FDR = p.adjust(disease_df$PValue,method = "fdr")
   
