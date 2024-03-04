@@ -81,15 +81,14 @@ get_ncbi_taxon_ids <- function(taxon_names) {
 #' Default is 5.
 #' @param max_set_size Maximum size of taxon sets to include in the analysis. 
 #' Default is 100.
-#' @param database A character specifying the database to use for enrichment 
-#' analysis.
-#'   Options are "All", "GutMGene", "MiMeDB", and "GMRepoV2". Default is "All".
 #' @return A data frame with taxon set enrichment results.
 #' @seealso
 #' \itemize{
 #'   \item \url{https://doi.org/10.1093/nar/gkac868} for MiMeDB
 #'   \item \url{https://doi.org/10.1093/nar/gkab1019} for GMrepo
 #'   \item \url{https://doi.org/10.1093/nar/gkab786} for gutMGene
+#'   \item \url{https://doi.org/10.1038/s41587-023-01872-y} for BugSigDB
+
 #' }
 #' @examples
 #' # Example data
@@ -106,28 +105,21 @@ get_ncbi_taxon_ids <- function(taxon_names) {
 #' @export
 
 
-TaxSEA <- function(taxon_ranks, database = "All", lookup_missing = FALSE,
+TaxSEA <- function(taxon_ranks, lookup_missing = FALSE,
                    min_set_size = 5, max_set_size = 100) {
   # Function implementation
 }
 
 
-TaxSEA <- function(taxon_ranks, database = "All",lookup_missing = FALSE,
+TaxSEA <- function(taxon_ranks, lookup_missing = FALSE,
                    min_set_size = 5, max_set_size = 100) {
   NCBI_ids <- readRDS(system.file("data/NCBI_ids.rds", package = "TaxSEA"))
 
   if(length(taxon_ranks) < 5) {
     stop("Error: Very few taxa provided. Unadvisable to continue. Stopping")
   }
-  # Select database
 
-  if (database == "All") {
-    taxon_sets <- TaxSEA_db
-  } else if (!database %in% c("GutMGene", "MiMeDB", "GMRepoV2")) {
-    stop("INCORRECT DATABASE SPECIFIED")
-  } else {
-    taxon_sets <- TaxSEA_db[grep(database, names(TaxSEA_db))]
-  }
+  TaxSEA_db <- c(TaxSEA_db,mp.sigs)
 
   if (lookup_missing == TRUE) {
 
@@ -193,12 +185,18 @@ TaxSEA <- function(taxon_ranks, database = "All",lookup_missing = FALSE,
   )
   result_df = result_df[order(result_df$PValue,decreasing = FALSE),]
   metabolites_df = result_df[grepl("producers_of",result_df$taxonSetName),]
+  bsdb_df = result_df[grepl("bsdb",result_df$taxonSetName),]
+
   disease_df = result_df[!grepl("producers_of",result_df$taxonSetName),]
+  disease_df = disease_df[!grepl("bsdb",disease_df$taxonSetName),]
+  
   metabolites_df$FDR = p.adjust(metabolites_df$PValue,method = "fdr")
   disease_df$FDR = p.adjust(disease_df$PValue,method = "fdr")
+  bsdb_df$FDR = p.adjust(bsdb_df$PValue,method = "fdr")
   
   res_list = list(Metabolite_producers = metabolites_df,
-                  Health_associations = disease_df)
+                  Health_associations = disease_df,
+                  BugSigdB = bsdb_df)
   return(res_list)
   rm(TaxSEA_db)
   rm(NCBI_ids)

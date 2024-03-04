@@ -46,7 +46,9 @@ library(TaxSEA)
 
 # Run TaxSEA with test data provided
 head(TaxSEA_test_data)
-enriched_taxon_sets <- TaxSEA(taxon_ranks=TaxSEA_test_data)
+taxsea_results <- TaxSEA(taxon_ranks=TaxSEA_test_data)
+metabolites.df = taxsea_results$Metabolite_producers
+disease.df = taxsea_results$Health_associations
 ```
 
 #### Input 
@@ -58,7 +60,7 @@ Bacteroides_thetaiotaomicron           Blautia_sp_CAG_257          Ruminococcus 
 ```
 
 #### Output
-The output is a dataframe with 5 columns
+The output is a list of two dataframes - one focused on metabolite produers and another on disease associations. Each with 5 columns
 - taxonSetName - The name of the taxon set tested
 - NES - Normalized enrichment score. This is simply the median fold change across the entire set
 - P value - Kolmogorov-Smirnov test P value.

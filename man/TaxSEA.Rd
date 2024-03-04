@@ -6,7 +6,6 @@
 \usage{
 TaxSEA(
   taxon_ranks,
-  database = "All",
   lookup_missing = FALSE,
   min_set_size = 5,
   max_set_size = 100
@@ -15,10 +14,6 @@ TaxSEA(
 \arguments{
 \item{taxon_ranks}{A named vector of log2 fold changes between control and 
 test group.}
-
-\item{database}{A character specifying the database to use for enrichment 
-analysis.
-  Options are "All", "GutMGene", "MiMeDB", and "GMRepoV2". Default is "All".}
 
 \item{lookup_missing}{Logical value indicating whether to fetch missing 
 NCBI IDs. Default is FALSE.}
@@ -61,5 +56,6 @@ result_df <- TaxSEA(taxon_ranks)
   \item \url{https://doi.org/10.1093/nar/gkac868} for MiMeDB
   \item \url{https://doi.org/10.1093/nar/gkab1019} for GMrepo
   \item \url{https://doi.org/10.1093/nar/gkab786} for gutMGene
+  \item \url{https://doi.org/10.1038/s41587-023-01872-y} for BugSigDB
 }
 }
