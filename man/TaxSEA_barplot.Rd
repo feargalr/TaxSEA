@@ -26,9 +26,3 @@ using ggplot2. It highlights upregulated and downregulated taxon sets
 based on their #' normalized enrichment scores (NES) and false discovery 
 rate (FDR).
 }
-\examples{
-# Assuming you have already run the TaxSEA function and have a result 
-data frame named 'taxsea_results'
-p <- TaxSEA_barplot(taxsea_results)
-print(p)
-}

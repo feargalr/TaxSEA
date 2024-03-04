@@ -27,9 +27,6 @@ sets to display (default: 10)}
 
 \item{boxplot}{Boolean value specifying whether or not to include a 
 boxplot (default: FALSE)}
-
-\item{taxon_sets}{A named list of character vectors with taxon set 
-names as names and taxon names as values}
 }
 \value{
 A ggplot2 barcode plot of the TaxSEA results
@@ -39,10 +36,4 @@ This function takes a TaxSEA result data frame, taxon ranks, and taxon
 sets to create a barcode plot
 using ggplot2. The barcode plot shows the taxon sets with the top 
 significant P values.
-}
-\examples{
-# Assuming you have already run the TaxSEA function and have a result
- data frame named 'taxsea_results', taxon ranks 'taxon_ranks', and taxon sets 'taxon_sets'
-plot <- barcode_plot(taxsea_results, taxon_ranks, taxon_sets)
-print(plot)
 }

@@ -1,3 +1,36 @@
+#' NCBI IDs and Taxonomic Aliases
+#'
+#' A named vector that provides a mapping between NCBI taxonomic identifiers and their corresponding taxonomic aliases.
+#'
+#' @name NCBI_ids
+#' @usage data("NCBI_ids")
+#' @format A named vector where names are taxonomic aliases and values are NCBI taxonomic identifiers.
+
+NULL
+
+#' TaxSEA Database
+#'
+#' A named list of vectors, where each name corresponds to a taxon set, and the associated vector contains the members of that set.
+#'
+#' @name TaxSEA_db
+#' @usage data("TaxSEA_db")
+#' @format A list where each element is a vector. Element names are taxon set names, and vector elements are the members of those sets.
+#' @source Your source here (if applicable)
+
+NULL
+
+#' TaxSEA Example Input Data
+#'
+#' An example input vector for TaxSEA, consisting of numeric values representing IDs.
+#'
+#' @name TaxSEA_test_data
+#' @usage data("TaxSea_test_data")
+#' @format A numeric vector of IDs.
+#' @source Your source here (if applicable)
+
+NULL
+
+
 #' Retrieve NCBI Taxonomy IDs for a list of taxon names
 #'
 #' This function takes a vector of taxon names and returns a vector of 
@@ -8,11 +41,9 @@
 #' @return A character vector of NCBI taxonomy IDs corresponding to the 
 #' input taxon names
 #' @examples
-#' taxon_names <- c("Escherichia coli", "Staphylococcus aureus", 
-#' "Bacillus subtilis")
+#' taxon_names <- c("Escherichia coli", "Staphylococcus aureus") 
 #' taxon_ids <- get_ncbi_taxon_ids(taxon_names)
 #' print(taxon_ids)
-#' @import data/NCBI_ids.rds
 #' @export
 get_ncbi_taxon_ids <- function(taxon_names) {
   get_ncbi_taxon_id <- function(taxon_name) {
@@ -40,7 +71,6 @@ get_ncbi_taxon_ids <- function(taxon_names) {
     }
   }
 
-  NCBI_ids <- readRDS(system.file("data/NCBI_ids.rds", package = "TaxSEA"))
   ids2fetch = taxon_names[!taxon_names %in% names(NCBI_ids)]
   taxon_names = taxon_names[taxon_names %in% names(NCBI_ids)]
   local_ids = unlist(NCBI_ids[taxon_names])
@@ -91,17 +121,8 @@ get_ncbi_taxon_ids <- function(taxon_names) {
 
 #' }
 #' @examples
-#' # Example data
-#' taxon_ranks <- runif(10, -3, 3)
-#' names(taxon_ranks) <- paste("Taxon", 1:10)
-#' taxon_sets <- list(
-#'   set1 = c("Taxon 1", "Taxon 2", "Taxon 3"),
-#'   set2 = c("Taxon 4", "Taxon 5", "Taxon 6"),
-#'   set3 = c("Taxon 7", "Taxon 8", "Taxon 9")
-#' )
-#' # Run TaxSEA
-#' result_df <- TaxSEA(taxon_ranks)
-#' @import data/NCBI_ids.rds
+#' taxsea_results <- TaxSEA(TaxSEA_test_data)
+#' @import stats
 #' @export
 
 
@@ -109,16 +130,17 @@ TaxSEA <- function(taxon_ranks, lookup_missing = FALSE,
                    min_set_size = 5, max_set_size = 100) {
   # Function implementation
 }
+#Declaring global availabilability
+utils::globalVariables(c("TaxSEA_db","Rank", "TaxonSet", "InSet", "log10FDR",
+                         "taxonSetName","fetched_ids","URLencode","NES",
+                         "xml_data","NCBI_ids","TaxSEA_test_data"))
 
-
-TaxSEA <- function(taxon_ranks, lookup_missing = FALSE,
+TaxSEA <- function(taxon_ranks=TaxSEA_test_data, lookup_missing = FALSE,
                    min_set_size = 5, max_set_size = 100) {
-  NCBI_ids <- readRDS(system.file("data/NCBI_ids.rds", package = "TaxSEA"))
 
   if(length(taxon_ranks) < 5) {
     stop("Error: Very few taxa provided. Unadvisable to continue. Stopping")
   }
-
   taxon_sets <- TaxSEA_db
 
   if (lookup_missing == TRUE) {
@@ -213,7 +235,6 @@ TaxSEA <- function(taxon_ranks, lookup_missing = FALSE,
 #' using ggplot2. It highlights upregulated and downregulated taxon sets 
 #' based on their #' normalized enrichment scores (NES) and false discovery 
 #' rate (FDR).
-#'
 #' @param taxsea_results A data frame containing the results of the TaxSEA 
 #' function
 #' @param threshold Numeric value representing the FDR threshold for displaying 
@@ -221,11 +242,6 @@ TaxSEA <- function(taxon_ranks, lookup_missing = FALSE,
 #' @param custom_colors A character vector of length 2 with colors for 
 #' upregulated and downregulated taxon sets, respectively (default: NULL)
 #' @return A ggplot2 bar plot of the TaxSEA results
-#' @examples
-#' # Assuming you have already run the TaxSEA function and have a result 
-#' data frame named 'taxsea_results'
-#' p <- TaxSEA_barplot(taxsea_results)
-#' print(p)
 #' @import ggplot2
 #' @export
 TaxSEA_barplot <- function(taxsea_results, threshold = 0.2, 
@@ -233,7 +249,6 @@ TaxSEA_barplot <- function(taxsea_results, threshold = 0.2,
   # Check if ggplot2 is installed
   if (!requireNamespace("ggplot2", quietly = TRUE)) 
     cat("ggplot2 is not installed\n")
-  require(ggplot2)
 
   # Extract relevant columns and calculate log10FDR
   taxsea_results$log10FDR <- 
@@ -253,7 +268,7 @@ TaxSEA_barplot <- function(taxsea_results, threshold = 0.2,
   }
 
   # Create a bar plot using ggplot2
-  p <- ggplot(taxsea_results[taxsea_results$FDR < threshold, ], 
+  p <- ggplot2::ggplot(taxsea_results[taxsea_results$FDR < threshold, ], 
               aes(x = log10FDR, y = taxonSetName, fill = NES < 0)) +
     geom_col(colour="black") +
     geom_vline(xintercept = c(-log10(0.1), log10(0.1)), linetype = 3) +
@@ -292,8 +307,6 @@ TaxSEA_barplot <- function(taxsea_results, threshold = 0.2,
 #' TaxSEA function
 #' @param taxon_ranks A named numeric vector with taxon names as names 
 #' and their corresponding ranks as values
-#' @param taxon_sets A named list of character vectors with taxon set 
-#' names as names and taxon names as values
 #' @param axis_limits A numeric vector of length 2 specifying the x-axis
 #'  limits (default: c(-7, 7))
 #' @param n_to_plot Integer value specifying the number of top taxon
@@ -302,20 +315,13 @@ TaxSEA_barplot <- function(taxsea_results, threshold = 0.2,
 #' boxplot (default: FALSE)
 
 #' @return A ggplot2 barcode plot of the TaxSEA results
-#' @examples
-#' # Assuming you have already run the TaxSEA function and have a result
-#'  data frame named 'taxsea_results', taxon ranks 'taxon_ranks', and taxon sets 'taxon_sets'
-#' plot <- barcode_plot(taxsea_results, taxon_ranks, taxon_sets)
-#' print(plot)
 #' @import ggplot2
 #' @export
 TaxSEA_barcode <- function(taxsea_results, taxon_ranks,
                            axis_limits = c(-7,7),n_to_plot = 10,boxplot=FALSE) {
   if (!requireNamespace("ggplot2", quietly = TRUE)) 
     cat("ggplot2 is not installed\n")
-  require(ggplot2)
-  NCBI_ids <- readRDS(system.file("data/NCBI_ids.rds", package = "TaxSEA"))
-  
+
     taxon_sets <- TaxSEA_db
 
   #Relabel taxa with NCBI IDs
@@ -365,7 +371,7 @@ TaxSEA_barcode <- function(taxsea_results, taxon_ranks,
   }
 
   # Generate the barcode plot
-  barcode_plot <- ggplot(barcode_df, aes(x = Rank, y = TaxonSet, 
+  barcode_plot <- ggplot2::ggplot(barcode_df, aes(x = Rank, y = TaxonSet, 
                                          col = InSet)) +
     geom_point(data = barcode_df[barcode_df$InSet,],size = 4,
                shape="|",show.legend = TRUE,color="black",
@@ -382,7 +388,7 @@ TaxSEA_barcode <- function(taxsea_results, taxon_ranks,
 
 
   # Generate the barcode plot
-  boxcode_plot <- ggplot(barcode_df, aes(y = Rank, x = TaxonSet, 
+  boxcode_plot <- ggplot2::ggplot(barcode_df, aes(y = Rank, x = TaxonSet, 
                                          col = InSet)) +
     geom_point(data = barcode_df[barcode_df$InSet,],size = 2,
                shape=21,show.legend = TRUE,color="black",fill="grey44",alpha=1) +

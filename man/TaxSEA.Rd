@@ -5,7 +5,7 @@
 \title{TaxSEA: Taxon Set Enrichment Analysis}
 \usage{
 TaxSEA(
-  taxon_ranks,
+  taxon_ranks = TaxSEA_test_data,
   lookup_missing = FALSE,
   min_set_size = 5,
   max_set_size = 100
@@ -40,16 +40,7 @@ The input taxon_ranks are log2 fold changes between control and test group
 (e.g., healthy and IBD).
 }
 \examples{
-# Example data
-taxon_ranks <- runif(10, -3, 3)
-names(taxon_ranks) <- paste("Taxon", 1:10)
-taxon_sets <- list(
-  set1 = c("Taxon 1", "Taxon 2", "Taxon 3"),
-  set2 = c("Taxon 4", "Taxon 5", "Taxon 6"),
-  set3 = c("Taxon 7", "Taxon 8", "Taxon 9")
-)
-# Run TaxSEA
-result_df <- TaxSEA(taxon_ranks)
+taxsea_results <- TaxSEA(TaxSEA_test_data)
 }
 \seealso{
 \itemize{
