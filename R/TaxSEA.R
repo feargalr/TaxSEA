@@ -119,7 +119,7 @@ TaxSEA <- function(taxon_ranks, lookup_missing = FALSE,
     stop("Error: Very few taxa provided. Unadvisable to continue. Stopping")
   }
 
-  TaxSEA_db <- c(TaxSEA_db,mp.sigs)
+  taxon_sets <- TaxSEA_db
 
   if (lookup_missing == TRUE) {
 
