@@ -3,7 +3,7 @@
 TaxSEA is an R package designed to enable rapid annotation of changes 
 observed in a microbiome association study by testing for enrichment for 
 groups of species associated with either a particular phenotype, or known 
-to producer a particular metabolite.It focuses specifically on human gut microbiome associations and uses a Kolmogorov-Smirnov test to test if a particular set of taxa is changed relative to a control group. A key goal 
+to produce a particular metabolite.It focuses specifically on human gut microbiome associations and uses a Kolmogorov-Smirnov test to test if a particular set of taxa is changed relative to a control group. A key goal 
 of the TaxSEA project is to move researchers away from describing 
 microbiome alterations simply as 'dysbiotic' and towards more specific descriptions 
 that allow easier interpretation (e.g. depleted for taxa known to produce 
