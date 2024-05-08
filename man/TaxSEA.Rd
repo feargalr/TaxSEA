@@ -45,6 +45,7 @@ group
 }
 \examples{
 taxsea_results <- TaxSEA(TaxSEA_test_data)
+
 }
 \seealso{
 \itemize{
