@@ -21,5 +21,4 @@ by querying the NCBI Entrez API.
 \examples{
 taxon_names <- c("Escherichia coli", "Staphylococcus aureus")
 taxon_ids <- get_ncbi_taxon_ids(taxon_names)
-print(taxon_ids)
 }
