@@ -1,14 +1,33 @@
 Package: TaxSEA
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Taxon Set Enrichment Analysis
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Authors@R: c(person("Feargal", "Ryan", 
+    email = "feargalr@gmail.com", 
+    role = c("aut", "cre"),comment = c(ORCID = "0000-0002-1565-4598")))
+Description: TaxSEA is an R package for Taxon Set Enrichment Analysis, which 
+    utilises a Kolmogorov-Smirnov test analyses to 
+    investigate differential abundance analysis output for whether there
+    are alternations in a-priori defined sets of taxa from five previously 
+    published databases (BugSigDB, MiMeDB, GutMGene, mBodyMap and GMRepoV2). 
+    TaxSEA takes as input a list of taxonomic identifiers (e.g. species names, 
+    NCBI IDs etc.) and a rank (E.g. fold change, correlation coefficient). 
+    TaxSEA be applied to any microbiota taxonomic profiling technology 
+    (array-based, 16S rRNA gene sequencing, shotgun metagenomics & 
+    metatranscriptomics etc.) and enables researchers to rapidly contextualize 
+    their findings within the broader literature to accelerate interpretation 
+    of results.
 License: GPL-3
 Encoding: UTF-8
-LazyData: true
+LazyData: false
+VignetteBuilder: knitr
 RoxygenNote: 7.2.3
+biocViews: Microbiome, Metagenomics, Sequencing, GeneSetEnrichment, RNASeq
+URL: https://github.com/feargalr/taxsea
+BugReports: https://github.com/feargalr/taxsea/issues
+Suggests:
+    knitr,
+    rmarkdown
 Imports:
-    ggplot2
+    ggplot2,
+    stats

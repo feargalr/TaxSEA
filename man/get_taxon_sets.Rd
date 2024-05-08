@@ -10,10 +10,12 @@ get_taxon_sets(taxon_to_fetch = taxon)
 \item{taxon_to_fetch}{The taxon to search for in the TaxSEA database.}
 }
 \value{
-A character vector containing the names of taxonomic sets where the specified taxon is present.
+A character vector containing the names of taxonomic sets where
+the specified taxon is present.
 }
 \description{
-Retrieve from the TaxSEA database which taxon sets (metabolite producers and disease signatures) contain a taxon of interest.
+Retrieve from the TaxSEA database which taxon sets (metabolite producers
+and disease signatures) contain a taxon of interest.
 }
 \examples{
 # Retrieve sets for Bifidobacterium longum

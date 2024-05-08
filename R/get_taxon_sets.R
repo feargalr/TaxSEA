@@ -1,10 +1,12 @@
 #' Retrieve Taxon Sets from TaxSEA Library
 #'
-#' Retrieve from the TaxSEA database which taxon sets (metabolite producers and disease signatures) contain a taxon of interest.
+#' Retrieve from the TaxSEA database which taxon sets (metabolite producers
+#' and disease signatures) contain a taxon of interest.
 #'
 #' @param taxon_to_fetch The taxon to search for in the TaxSEA database.
 #'
-#' @return A character vector containing the names of taxonomic sets where the specified taxon is present.
+#' @return A character vector containing the names of taxonomic sets where
+#' the specified taxon is present.
 #'
 #' @examples
 #' # Retrieve sets for Bifidobacterium longum
@@ -13,8 +15,10 @@
 #' @export
 get_taxon_sets <- function(taxon_to_fetch=taxon) {
   taxon = get_ncbi_taxon_ids(taxon_to_fetch)
+  data(TaxSEA_db)
+  data(NCBI_ids)
   taxon_sets <- TaxSEA_db
-  
+
   # Using lapply to check for taxon presence
   taxon_presence <- lapply(taxon_sets, function(taxon_set) {
     taxon %in% taxon_set
