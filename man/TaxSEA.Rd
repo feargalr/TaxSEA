@@ -44,6 +44,7 @@ group
 (e.g., healthy and IBD).
 }
 \examples{
+data("TaxSEA_test_data")
 taxsea_results <- TaxSEA(TaxSEA_test_data)
 
 }

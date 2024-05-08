@@ -12,7 +12,13 @@ vignette: >
 
 # TaxSEA: Taxon Set Enrichment Analysis
 
-TaxSEA is an R package designed to enable rapid annotation of changes observed in a microbiome association study by testing for enrichment for groups of species associated with either a particular phenotype, or known to producer a particular metabolite.It focuses specifically on human gut microbiome associations and uses a Kolmogorov-Smirnov test to test if a particular set of taxa is changed relative to a control group. A key goal of the TaxSEA project is to move researchers away from describing microbiome alterations simply as 'dysbiotic' and towards more specific descriptions that allow easier interpretation (e.g. depleted for taxa known to produce GABA and enriched for taxa asscociated with diabetes in other studies)
+TaxSEA is an R package designed to enable rapid annotation of fold changes
+or correlation coefficients in microbiome data. TaxSEA takes as input a
+named vector of ranks (E.g. log2FC, Spearmans rho) and then uses a Kolmogorov-Smirnov test to identify if a particular taxa set is enriched
+or depleted at one end of the distribution. For example, if there is a
+depletion of butyrate producers, or enrichment of taxa previously found
+to be associated with diabetes. TaxSEA does this by drawing upong multiple
+published databases. 
 
 ## Taxon set database
 TaxSEA utilizes taxon sets generated from five reference databases (**gutMGene**, **GMrepo v2**, **MiMeDB**, **mBodyMap**, **BugSigDB**). 
@@ -29,26 +35,24 @@ Please cite the appropriate database if using:
 
 - Geistlinger et al. BugSigDB captures patterns of differential abundance across a broad range of host-associated microbial signatures. Nature Biotech. 2023. 
 
-
-## Interpretation of results
-
-There is an enourmous amount we still do not know about the human microbiome. TaxSEA, or any similar analysis, will ultimately be limited by the quality of the databases available, which in turn are limited by our current knowledge. Thus, our reccomendation is the treat results as a starting point for further interpretation and hypothesis generation. 
-
-
 ## Test data
 The test data provided with TaxSEA consists of log2 fold changes comparing between healthy and IBD. The count data for this was downloaded from curatedMetagenomeData and fold changes generated with LinDA.
-- Hall et al. A novel Ruminococcus gnavus clade enriched in inflammatory bowel disease patients** Genome Med. 2017 Nov 28;9(1):103.
-- Pasolli et al. Accessible, curated metagenomic data through ExperimentHub. Nat Methods. 2017 Oct 31;14(11):1023-1024. doi: 10.1038/nmeth.4468.
+- Hall et al. A novel Ruminococcus gnavus clade enriched in inflammatory 
+bowel disease patients** Genome Med. 2017 Nov 28;9(1):103.
+- Pasolli et al. Accessible, curated metagenomic data through 
+ExperimentHub. Nat Methods. 2017 Oct 31;14(11):1023-1024. doi: 10.1038/nmeth.4468.
 - Zhou et al. LinDA: linear models for differential abundance analysis of microbiome compositional data. Genome Biol. 2022 Apr 14;23(1):95.
 
 
 ## Functions
 - `get_taxon_sets(taxon)`: Retrieves taxon sets which contain a particular 
 taxon for a list of taxon names.
-- `get_ncbi_taxon_ids(taxon_names)`: Retrieves NCBI Taxonomy IDs for a list of taxon names.
+- `get_ncbi_taxon_ids(taxon_names)`: Retrieves NCBI Taxonomy IDs for a 
+list of taxon names.
 - `TaxSEA(taxon_ranks, database = "All")`: Performs taxon set enrichment analysis.1
 - `TaxSEA_barplot(taxsea_results, threshold = 0.2, custom_colors = NULL)`: Creates a bar plot of TaxSEA results.
-- `TaxSEA_barcode(taxsea_results, taxon_ranks, taxon_sets, axis_limits = c(-7,7), n_to_plot = 10, boxplot = FALSE)`: Creates a barcode plot of TaxSEA results.
+- `TaxSEA_barcode(taxsea_results, taxon_ranks, taxon_sets, axis_limits = c(-7,7), n_to_plot = 10, boxplot = FALSE)`: Creates a barcode plot of 
+TaxSEA results.
 
 ## Usage
 ```{r example}
@@ -58,7 +62,7 @@ library(TaxSEA)
 blong.sets <- get_taxon_sets(taxon="Bifidobacterium_longum")
 
 # Run TaxSEA with test data provided
-head(TaxSEA_test_data)
+data("TaxSEA_test_data")
 taxsea_results <- TaxSEA(taxon_ranks=TaxSEA_test_data)
 
 #Enrichments among metabolite producers from gutMgene and MiMeDB
@@ -87,6 +91,30 @@ Each dataframe has 5 columns
 - P value - Kolmogorov-Smirnov test P value.
 - FDR - P value adjusted for multiple testing. 
 - TaxonSet - Returns list of taxa in the set to show what is driving the signal
+
+
+#### BugSigDB
+The format of BugSigDB is that each publication is entered as a "Study", and within this there is different experiments and signatures. 
+Should users wish to find out more information about the signatures. For 
+example different signatures may be the taxa that are increased or 
+decreased. 
+from the BugSigDB, they can do so by querying that database.  
+
+```{r bugsigdb, eval=FALSE}
+library(bugsigdbr) #This package is installable via Bioconductor
+bsdb <- importBugSigDB() #Import database 
+
+#E.g. if the BugSigDB identifier you found enriched was #bsdb:74/1/2_obesity:obese_vs_non-obese_DOWN
+#This is Study 74, Experiment 1, Signature 2
+bsdb[bsdb$Study=="Study 74" & 
+     bsdb$Experiment=="Experiment 1" & 
+     bsdb$Signature=="Signature 2",]
+
+
+
+```
+
+
 
 
 #### TaxSEA database with other enrichment tools

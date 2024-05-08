@@ -33,6 +33,7 @@
 
 #' }
 #' @examples
+#' data("TaxSEA_test_data")
 #' taxsea_results <- TaxSEA(TaxSEA_test_data)
 #'
 #' @import stats

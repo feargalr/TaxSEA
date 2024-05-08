@@ -16,6 +16,7 @@
 #' upregulated and downregulated taxon sets, respectively (default: NULL)
 #' @return A ggplot2 bar plot of the TaxSEA results
 #' @examples
+#' data("TaxSEA_test_data")
 #' taxsea_results <- TaxSEA(TaxSEA_test_data)
 #' metabolite_plot <- TaxSEA_barplot(taxsea_results$Metabolite_producers)
 #'

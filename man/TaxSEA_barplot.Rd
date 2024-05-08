@@ -27,6 +27,7 @@ based on their #' normalized enrichment scores (NES) and false discovery
 rate (FDR).
 }
 \examples{
+data("TaxSEA_test_data")
 taxsea_results <- TaxSEA(TaxSEA_test_data)
 metabolite_plot <- TaxSEA_barplot(taxsea_results$Metabolite_producers)
 
