@@ -45,7 +45,7 @@ library(TaxSEA)
 blong.sets <- get_taxon_sets(taxon="Bifidobacterium_longum")
 
 # Run TaxSEA with test data provided
-head(TaxSEA_test_data)
+data(TaxSEA_test_data)
 taxsea_results <- TaxSEA(taxon_ranks=TaxSEA_test_data)
 
 #Enrichments among metabolite producers from gutMgene and MiMeDB
