@@ -17,8 +17,7 @@ Please cite the appropriate database if using:
 microbial metabolites Nucleic Acids Res. 2022.
 - Dai et al. GMrepo v2: a curated human gut microbiome database with special focus on
 disease markers and cross-dataset comparison Nucleic Acids Res. 2022.
-- Wishart et. al. MiMeDB: the Human Microbial Metabolome Database Nucleic Acids Res.
-2023.
+- Wishart et. al. MiMeDB: the Human Microbial Metabolome Database Nucleic Acids Res. 2023.
 - Jin et al. mBodyMap: a curated database for microbes across human body and their
 associations with health and diseases. Nucleic Acids Res. 2022.
 - Geistlinger et al. BugSigDB captures patterns of differential abundance across a broad
