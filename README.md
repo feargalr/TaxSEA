@@ -13,6 +13,11 @@ Simply put, TaxSEA allows users to rapidly go from a list of species to
 which metabolite producers are altered, and if the findings are similar to
 a previously published study. 
 
+Note: Although TaxSEA in principle can be applied to microbiome data from
+any source, the databases utilized largely cover human associated microbiomes
+and the human gut microbiome in particular. As such TaxSEA will likely perform
+best on human gut microbiome data. 
+
 ## Taxon set database
 TaxSEA utilizes taxon sets generated from five reference databases 
 (**gutMGene**, **GMrepo v2**, **MiMeDB**, **mBodyMap**, **BugSigDB**). 
