@@ -9,9 +9,11 @@ a Kolmogorov-Smirnov test to identify if a particular group of species
 or genera (i.e. a set of taxa such as butyrate producers) are skewed to 
 one end of the distribution . 
 
-Simply put, TaxSEA allows users to rapidly go from a list of species to 
-which metabolite producers are altered, and if the findings are similar to
-a previously published study. 
+Simply put, TaxSEA allows users to rapidly convert species/genus level 
+changes to changes in 
+- Metabolite producers
+- Disease signatures
+- Previously published associations
 
 Note: Although TaxSEA in principle can be applied to microbiome data from
 any source, the databases utilized largely cover human associated microbiomes
