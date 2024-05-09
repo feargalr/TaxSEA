@@ -1,16 +1,14 @@
-
-########################################################################
-###############################################################################
 #' Create a bar plot of TaxSEA results
 #'
-#' This function takes a TaxSEA result data frame and creates a bar plot of
-#' the results
+#' This function takes a TaxSEA result data frame and creates a bar plot
+#' of the results
 #' using ggplot2. It highlights upregulated and downregulated taxon sets
 #' based on their #' normalized enrichment scores (NES) and false discovery
 #' rate (FDR).
 #' @param taxsea_results A data frame containing the results of the TaxSEA
 #' function
-#' @param threshold Numeric value representing the FDR threshold for displaying
+#' @param threshold Numeric value representing the FDR threshold for
+#' displaying
 #' taxon sets (default: 0.2)
 #' @param custom_colors A character vector of length 2 with colors for
 #' upregulated and downregulated taxon sets, respectively (default: NULL)
@@ -37,8 +35,10 @@ TaxSEA_barplot <- function(taxsea_results, threshold = 0.2,
                                              taxsea_results$PValue)), ]
 
   # Convert taxonSetName column to a factor with the current order
-  taxsea_results$taxonSetName <- factor(taxsea_results$taxonSetName,
-                                        levels = taxsea_results$taxonSetName)
+  taxsea_results$taxonSetName <-
+    factor(taxsea_results$taxonSetName,
+                                        levels =
+             taxsea_results$taxonSetName)
 
   # Set default colors if custom_colors is NULL
   if (is.null(custom_colors)) {
@@ -47,7 +47,8 @@ TaxSEA_barplot <- function(taxsea_results, threshold = 0.2,
 
   # Create a bar plot using ggplot2
   p <- ggplot2::ggplot(taxsea_results[taxsea_results$FDR < threshold, ],
-                       aes(x = log10FDR, y = taxonSetName, fill = NES < 0)) +
+                       aes(x = log10FDR,
+                           y = taxonSetName, fill = NES < 0)) +
     geom_col(colour="black") +
     geom_vline(xintercept = c(-log10(0.1), log10(0.1)), linetype = 3) +
     scale_fill_manual(values = custom_colors,

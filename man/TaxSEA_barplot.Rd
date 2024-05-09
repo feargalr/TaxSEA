@@ -10,7 +10,8 @@ TaxSEA_barplot(taxsea_results, threshold = 0.2, custom_colors = NULL)
 \item{taxsea_results}{A data frame containing the results of the TaxSEA
 function}
 
-\item{threshold}{Numeric value representing the FDR threshold for displaying
+\item{threshold}{Numeric value representing the FDR threshold for
+displaying
 taxon sets (default: 0.2)}
 
 \item{custom_colors}{A character vector of length 2 with colors for
@@ -20,8 +21,8 @@ upregulated and downregulated taxon sets, respectively (default: NULL)}
 A ggplot2 bar plot of the TaxSEA results
 }
 \description{
-This function takes a TaxSEA result data frame and creates a bar plot of
-the results
+This function takes a TaxSEA result data frame and creates a bar plot
+of the results
 using ggplot2. It highlights upregulated and downregulated taxon sets
 based on their #' normalized enrichment scores (NES) and false discovery
 rate (FDR).

@@ -27,7 +27,7 @@ analysis.
 Default is 100.}
 }
 \value{
-A data frame with taxon set enrichment results.
+A list of data frames with taxon set enrichment results.
 }
 \description{
 TaxSEA is designed to enable rapid annotation of changes observed in a

@@ -1,9 +1,8 @@
-#' #' Retrieve NCBI Taxonomy IDs for a list of taxon names
+#' Retrieve NCBI Taxonomy IDs for a list of taxon names
 #'
 #' This function takes a vector of taxon names and returns a vector of
 #' NCBI taxonomy IDs
 #' by querying the NCBI Entrez API.
-#'
 #' @param taxon_names A character vector of taxon names
 #' @return A character vector of NCBI taxonomy IDs corresponding to the
 #' input taxon names
@@ -44,7 +43,7 @@ get_ncbi_taxon_ids <- function(taxon_names) {
   # Retrieve the taxonomy IDs for each taxon name in the vector
   if (length(ids2fetch) > 0){
     message("Fetching some NCBI IDs for input taxa. Please wait")
-    taxon_ids <- sapply(ids2fetch, get_ncbi_taxon_id)
+    taxon_ids <- vapply(ids2fetch, get_ncbi_taxon_id,character(1))
     taxon_ids<-c(local_ids,unlist(fetched_ids))
   } else {
     taxon_ids<-local_ids

@@ -23,7 +23,7 @@
 #' @param max_set_size Maximum size of taxon sets to include in the
 #' analysis.
 #' Default is 100.
-#' @return A data frame with taxon set enrichment results.
+#' @return A list of data frames with taxon set enrichment results.
 #' @seealso
 #' \itemize{
 #'   \item \url{https://doi.org/10.1093/nar/gkac868} for MiMeDB
@@ -37,6 +37,7 @@
 #' taxsea_results <- TaxSEA(TaxSEA_test_data)
 #'
 #' @import stats
+#' @importFrom utils data
 #' @export
 
 

@@ -30,4 +30,5 @@ Suggests:
     rmarkdown
 Imports:
     ggplot2,
-    stats
+    stats,
+    utils

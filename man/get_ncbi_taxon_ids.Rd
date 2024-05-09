@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_NCBI_sets.R
 \name{get_ncbi_taxon_ids}
 \alias{get_ncbi_taxon_ids}
-\title{#' Retrieve NCBI Taxonomy IDs for a list of taxon names}
+\title{Retrieve NCBI Taxonomy IDs for a list of taxon names}
 \usage{
 get_ncbi_taxon_ids(taxon_names)
 }

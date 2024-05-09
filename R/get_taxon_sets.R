@@ -26,4 +26,7 @@ get_taxon_sets <- function(taxon_to_fetch=taxon) {
   # Filter the original list based on presence of the taxon
   filtered_taxon_sets <- taxon_sets[unlist(taxon_presence)]
   return(names(filtered_taxon_sets))
+  rm(NCBI_ids)
+  rm(TaxSEA_db)
+
 }
