@@ -61,12 +61,53 @@ bsdb.df = taxsea_results$BugSigdB
 
 #### Input 
 All that is required for TaxSEA is a named vector of log2 fold changes 
-between groups. This should be for all taxa tested, and not limited to 
-only a pre-defined set (e.g. do not use a threshold for significance or 
-remove any taxa). See example below for format. TaxSEA will lookup and 
-convert taxon names to NCBI taxonomic identifiers. TaxSEA stores a 
-commonly observed identifiers internally and so will only look up whatever 
+between groups for species or genera. TaxSEA will not work for ranks higher
+than species or genus. The input should be for all taxa tested, and not 
+limited to only a pre-defined set (e.g. do not use a threshold for 
+significance or remove any taxa). See example below for format. TaxSEA will
+lookup and convert taxon names to NCBI taxonomic identifiers. TaxSEA stores
+a commonly observed identifiers internally and so will only look up whatever 
 is not covered to save time. 
+
+Input IDs should be in the format of like one of the following
+- Species name. E.g. "Bifidobacterium longum", "Bifidobacterium_longum"
+- Genus name. E.g. "Bifidobacterium"
+- NCBI ID E.g. 216816
+
+
+```{r input_data}
+#Input IDs with the full taxonomic lineage should be split up. E.g.
+x = "d__Bacteria.p__Actinobacteriota.c__Actinomycetes.o__Bifidobacteriales.f__Bifidobacteriaceae.g__Bifidobacterium"
+x = strsplit(x,split="\\.")[[1]][6]
+x = gsub("g__","",x)
+
+## Running this through a vector of IDs may look something like the following
+#new_ids = sapply(as.character(old_ids),function(y) {strsplit(x = y,split="\\.")[[1]][6]})
+#new_ids = gsub("g__","",new_ids)
+
+## Example test data
+
+head(sample(TaxSEA_test_data),4)
+
+```
+
+
+
+### Run TaxSEA with test data
+```{r example2}
+data("TaxSEA_test_data")
+taxsea_results <- TaxSEA(taxon_ranks=TaxSEA_test_data)
+
+#Enrichments among metabolite producers from gutMgene and MiMeDB
+metabolites.df = taxsea_results$Metabolite_producers
+
+#Enrichments among health and disease signatures from GMRepoV2 and mBodyMap
+disease.df = taxsea_results$Health_associations
+
+#Enrichments amongh published associations from BugSigDB
+bsdb.df = taxsea_results$BugSigdB
+
+```
 
 #### Test data
 The test data provided with TaxSEA consists of log2 fold changes comparing between healthy 
