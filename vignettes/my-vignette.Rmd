@@ -12,14 +12,24 @@ vignette: >
 
 # TaxSEA: Taxon Set Enrichment Analysis
 
-TaxSEA is an R package designed to enable rapid annotation of fold changes
-or correlation coefficients in microbiome data. TaxSEA takes as input a
-named vector of ranks (E.g. log2FC, Spearmans rho) and then uses a 
-Kolmogorov-Smirnov test to identify if a particular taxa set is enriched
-or depleted at one end of the distribution. For example, if there is a
-depletion of butyrate producers, or enrichment of taxa previously found
-to be associated with diabetes. TaxSEA does this by drawing upong multiple
-published databases. 
+TaxSEA is an R package designed to enable rapid interpretation of 
+differential abundance analysis  or correlation analysis output for 
+microbiota data. 
+TaxSEA takes as input a vector of genus or species names and a rank. 
+For example log2 fold changes, or Spearman's rho. TaxSEA then uses
+a Kolmogorov-Smirnov test to identify if a particular group of species
+or genera (i.e. a set of taxa such as butyrate producers) are skewed to 
+one end of the distribution . 
+
+Simply put, TaxSEA allows users to rapidly go from a list of species to 
+which metabolite producers are altered, and if the findings are similar to
+a previously published study. 
+
+Note: Although TaxSEA in principle can be applied to microbiome data from
+any source, the databases utilized largely cover human associated microbiomes
+and the human gut microbiome in particular. As such TaxSEA will likely perform
+best on human gut microbiome data. 
+
 
 ## Taxon set database
 TaxSEA utilizes taxon sets generated from five reference databases 
