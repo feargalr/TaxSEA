@@ -14,15 +14,15 @@ TaxSEA utilizes taxon sets generated from five reference databases
 
 Please cite the appropriate database if using:
 - Cheng et al. gutMGene: a comprehensive database for target genes of gut microbes and
-- microbial metabolites Nucleic Acids Res. 2022.
+microbial metabolites Nucleic Acids Res. 2022.
 - Dai et al. GMrepo v2: a curated human gut microbiome database with special focus on
-- disease markers and cross-dataset comparison Nucleic Acids Res. 2022.
+disease markers and cross-dataset comparison Nucleic Acids Res. 2022.
 - Wishart et. al. MiMeDB: the Human Microbial Metabolome Database Nucleic Acids Res.
-- 2023.
+2023.
 - Jin et al. mBodyMap: a curated database for microbes across human body and their
-- associations with health and diseases. Nucleic Acids Res. 2022.
+associations with health and diseases. Nucleic Acids Res. 2022.
 - Geistlinger et al. BugSigDB captures patterns of differential abundance across a broad
-- range of host-associated microbial signatures. Nature Biotech. 2023. 
+range of host-associated microbial signatures. Nature Biotech. 2023. 
 
 ## Installation
 ```{r example}
