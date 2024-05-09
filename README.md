@@ -1,31 +1,28 @@
 # TaxSEA: Taxon Set Enrichment Analysis
 
-TaxSEA is an R package designed to enable rapid annotation of fold changes
-or correlation coefficients in microbiome data. TaxSEA takes as input a
-named vector of ranks (E.g. log2FC, Spearmans rho) and then uses a Kolmogorov-Smirnov test to identify if a particular taxa set is enriched
-or depleted at one end of the distribution. For example, if there is a
-depletion of butyrate producers, or enrichment of taxa previously found
-to be associated with diabetes. TaxSEA does this by drawing upong multiple
-published databases. 
+TaxSEA is an R package designed to enable rapid interpretation of 
+differential analysis output or correlation analysis output. 
+TaxSEA takes as input a vector of genus or species names and a rank. 
+For example log2 fold changes, or Spearman's rho. TaxSEA then uses
+a Kolmogorov-Smirnov test to identify if a particular group of species
+or genera (i.e. a taxon set such as producers of butyrate) skewed to 
+one end of the distribution of fold changes or correlation coefficients. 
 
 ## Taxon set database
-TaxSEA utilizes taxon sets generated from five reference databases (**gutMGene**, **GMrepo v2**, **MiMeDB**, **mBodyMap**, **BugSigDB**). 
+TaxSEA utilizes taxon sets generated from five reference databases 
+(**gutMGene**, **GMrepo v2**, **MiMeDB**, **mBodyMap**, **BugSigDB**). 
 
 Please cite the appropriate database if using:
-- Cheng et al. gutMGene: a comprehensive database for target genes of gut microbes and microbial metabolites Nucleic Acids Res. 2022.
-- Dai et al. GMrepo v2: a curated human gut microbiome database with special focus on disease markers and cross-dataset comparison Nucleic Acids Res. 2022.
-- Wishart et. al. MiMeDB: the Human Microbial Metabolome Database Nucleic Acids Res. 2023.
-- Jin et al. mBodyMap: a curated database for microbes across human body and their associations with health and diseases. Nucleic Acids Res. 2022.
-- Geistlinger et al. BugSigDB captures patterns of differential abundance across a broad range of host-associated microbial signatures. Nature Biotech. 2023. 
-
-
-## Test data
-The test data provided with TaxSEA consists of log2 fold changes comparing between healthy and IBD. The count data for this was downloaded from curatedMetagenomeData and fold changes generated with LinDA.
-- Hall et al. A novel Ruminococcus gnavus clade enriched in inflammatory 
-bowel disease patients** Genome Med. 2017 Nov 28;9(1):103.
-- Pasolli et al. Accessible, curated metagenomic data through 
-ExperimentHub. Nat Methods. 2017 Oct 31;14(11):1023-1024. doi: 10.1038/nmeth.4468.
-- Zhou et al. LinDA: linear models for differential abundance analysis of microbiome compositional data. Genome Biol. 2022 Apr 14;23(1):95.
+- Cheng et al. gutMGene: a comprehensive database for target genes of gut microbes and
+- microbial metabolites Nucleic Acids Res. 2022.
+- Dai et al. GMrepo v2: a curated human gut microbiome database with special focus on
+- disease markers and cross-dataset comparison Nucleic Acids Res. 2022.
+- Wishart et. al. MiMeDB: the Human Microbial Metabolome Database Nucleic Acids Res.
+- 2023.
+- Jin et al. mBodyMap: a curated database for microbes across human body and their
+- associations with health and diseases. Nucleic Acids Res. 2022.
+- Geistlinger et al. BugSigDB captures patterns of differential abundance across a broad
+- range of host-associated microbial signatures. Nature Biotech. 2023. 
 
 ## Installation
 ```{r example}
@@ -75,6 +72,17 @@ remove any taxa). See example below for format. TaxSEA will lookup and
 convert taxon names to NCBI taxonomic identifiers. TaxSEA stores a 
 commonly observed identifiers internally and so will only look up whatever 
 is not covered to save time. 
+
+#### Test data
+The test data provided with TaxSEA consists of log2 fold changes comparing between healthy 
+and IBD. The count data for this was downloaded from curatedMetagenomeData and fold changes generated with LinDA.
+- Hall et al. A novel Ruminococcus gnavus clade enriched in inflammatory 
+bowel disease patients** Genome Med. 2017 Nov 28;9(1):103.
+- Pasolli et al. Accessible, curated metagenomic data through 
+ExperimentHub. Nat Methods. 2017 Oct 31;14(11):1023-1024. doi: 10.1038/nmeth.4468.
+- Zhou et al. LinDA: linear models for differential abundance analysis of microbiome compositional data.
+- Genome Biol. 2022 Apr 14;23(1):95.
+
 ```{r output}
 > head(sample(TaxSEA_test_data),4)
 Bacteroides_thetaiotaomicron           Blautia_sp_CAG_257          Ruminococcus bromii       Clostridium_disporicum 
@@ -82,7 +90,8 @@ Bacteroides_thetaiotaomicron           Blautia_sp_CAG_257          Ruminococcus 
 ```
 
 #### Output
-The output is a list of three data frames providing enrichment results for metabolite produers, health/disease associations, and published signatures from BugSigDB.
+The output is a list of three data frames providing enrichment results for metabolite produers, 
+health/disease associations, and published signatures from BugSigDB.
 Each dataframe has 5 columns
 - taxonSetName - The name of the taxon set tested
 - NES - Normalized enrichment score. This is simply the median rank across 
@@ -93,7 +102,8 @@ all detected members in the set.
 
 
 #### BugSigDB
-The format of BugSigDB is that each publication is entered as a "Study", and within this there is different experiments and signatures. 
+The format of BugSigDB is that each publication is entered as a "Study", and within this there is different 
+experiments and signatures. 
 Should users wish to find out more information about the signatures. For 
 example different signatures may be the taxa that are increased or 
 decreased. 
