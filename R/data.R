@@ -5,11 +5,8 @@
 #' @format A list of vectors. Each vector contains character strings
 #' representing taxa.
 #' @source See READ ME.
-#' @value A named list where each element is a vector of character strings
-#'  representing taxa.
 #' @name TaxSEA_db
 #' @examples
-#'
 #' data(TaxSEA_db)
 #' all_sets = names(TaxSEA_db)
 #' GABA_producers = TaxSEA_db[["MiMeDB_producers_of_GABA"]]
@@ -29,7 +26,6 @@
 #' ranks and taxon IDs, respectively.
 #' @name TaxSEA_test_data
 #' @examples
-#'
 #' data(TaxSEA_test_data)
 #' test_results <- TaxSEA(TaxSEA_test_data)
 "TaxSEA_test_data"
@@ -48,7 +44,6 @@
 #' @value A named vector mapping NCBI IDs to species or genus names.
 #' @name NCBI_ids
 #' @examples
-#'
 #' data(NCBI_ids)
 #' # Can look up either with or without spaces
 #' NCBI_ids["Bifidobacterium_breve"]
