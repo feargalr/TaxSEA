@@ -132,7 +132,7 @@ fgsea_results <- fgsea(TaxSEA_db, TaxSEA_test_data, minSize=5, maxSize=500)
 ```
 
 #### Visualisation 
-TaxSEA contains a functions which uses ggplot2 to create a barplot results. 
+TaxSEA contains a function which uses ggplot2 to create a barplot results. 
 ```{r example}
 # Create a bar plot of the results
 TaxSEA_barplot(enriched_taxon_sets)
