@@ -4,7 +4,7 @@ TaxSEA is an R package designed to enable rapid interpretation of
 differential abundance analysis  or correlation analysis output for 
 microbiota data. 
 TaxSEA takes as input a vector of genus or species names and a rank. 
-For example log2 fold changes, or Spearman's rho. TaxSEA then uses
+For example log2 fold changes or Spearman's rho. TaxSEA then uses
 a Kolmogorov-Smirnov test to identify if a particular group of species
 or genera (i.e. a set of taxa such as butyrate producers) are skewed to 
 one end of the distribution . 
