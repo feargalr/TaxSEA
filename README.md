@@ -118,8 +118,7 @@ fold changes generated with LinDA.
 bowel disease patients** Genome Med. 2017 Nov 28;9(1):103.
 - Pasolli et al. Accessible, curated metagenomic data through 
 ExperimentHub. Nat Methods. 2017 Oct 31;14(11):1023-1024. doi: 10.1038/nmeth.4468.
-- Zhou et al. LinDA: linear models for differential abundance analysis of microbiome compositional data.
-- Genome Biol. 2022 Apr 14;23(1):95.
+- Zhou et al. LinDA: linear models for differential abundance analysis of microbiome compositional data. Genome Biol. 2022 Apr 14;23(1):95.
 
 ```{r output}
 > head(sample(TaxSEA_test_data),4)
