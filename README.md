@@ -6,7 +6,7 @@ microbiota data.
 TaxSEA takes as input a vector of genus or species names and a rank. 
 For example log2 fold changes, or Spearman's rho. TaxSEA then uses
 a Kolmogorov-Smirnov test to identify if a particular group of species
-or genera (i.e. a taxon set such as producers of butyrate) are skewed to 
+or genera (i.e. a set of taxa such as butyrate producers) are skewed to 
 one end of the distribution . 
 
 Simply put, TaxSEA allows users to rapidly go from a list of species to 
