@@ -86,7 +86,8 @@ x = gsub("g__","",x)
 #new_ids = gsub("g__","",new_ids)
 
 ## Example test data
-
+library(TaxSEA)
+data("TaxSEA_test_data")
 head(sample(TaxSEA_test_data),4)
 
 ```
