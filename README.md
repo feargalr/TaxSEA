@@ -10,8 +10,8 @@ or genera (i.e. a set of taxa such as butyrate producers) are skewed to
 one end of the distribution . 
 
 Simply put, TaxSEA allows users to rapidly go from a list of species to 
-which metabolite producers are altered, and if the findings matches a 
-previously published study. 
+which metabolite producers are altered, and if the findings are similar to
+a previously published study. 
 
 ## Taxon set database
 TaxSEA utilizes taxon sets generated from five reference databases 
