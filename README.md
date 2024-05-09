@@ -95,11 +95,8 @@ all detected members in the set.
 
 #### BugSigDB
 The format of BugSigDB is that each publication is entered as a "Study", and within this there is different 
-experiments and signatures. 
-Should users wish to find out more information about the signatures. For 
-example different signatures may be the taxa that are increased or 
-decreased. 
-from the BugSigDB, they can do so by querying that database.  
+experiments and signatures. For example signature 1 may be taxa increased in an experiment, and signature 2
+taxa that are decreased. Users can find out more by querying the BugSigDB. See below for an example. 
 
 ```{r output}
 library(bugsigdbr) #This package is installable via Bioconductor
@@ -135,7 +132,7 @@ fgsea_results <- fgsea(TaxSEA_db, TaxSEA_test_data, minSize=5, maxSize=500)
 ```
 
 #### Visualisation 
-TaxSEA contains two functions which uses ggplot2 to plot results. 
+TaxSEA contains a functions which uses ggplot2 to create a barplot results. 
 ```{r example}
 # Create a bar plot of the results
 TaxSEA_barplot(enriched_taxon_sets)
