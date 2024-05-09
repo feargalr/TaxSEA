@@ -31,15 +31,6 @@ library(TaxSEA)
 ```
 
 
-## Functions
-
-- `get_ncbi_taxon_ids(taxon_names)`: Retrieves NCBI Taxonomy IDs for a 
-list of taxon names.
-- `TaxSEA(taxon_ranks, database = "All")`: Performs taxon set enrichment analysis.
-- `TaxSEA_barplot(taxsea_results, threshold = 0.2, custom_colors = NULL)`: Creates a bar plot of TaxSEA results.
-- `TaxSEA_barcode(taxsea_results, taxon_ranks, taxon_sets, axis_limits = c(-7,7), n_to_plot = 10, boxplot = FALSE)`: Creates a barcode plot of 
-TaxSEA results.
-
 ## Usage
 #### Quick start
 ```{r example}
@@ -74,7 +65,8 @@ is not covered to save time.
 
 #### Test data
 The test data provided with TaxSEA consists of log2 fold changes comparing between healthy 
-and IBD. The count data for this was downloaded from curatedMetagenomeData and fold changes generated with LinDA.
+and IBD. The count data for this was downloaded from curatedMetagenomeData and 
+fold changes generated with LinDA.
 - Hall et al. A novel Ruminococcus gnavus clade enriched in inflammatory 
 bowel disease patients** Genome Med. 2017 Nov 28;9(1):103.
 - Pasolli et al. Accessible, curated metagenomic data through 
