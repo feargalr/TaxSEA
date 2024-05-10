@@ -10,7 +10,7 @@ or genera (i.e. a set of taxa such as butyrate producers) are skewed to
 one end of the distribution . 
 
 Simply put, TaxSEA allows users to rapidly convert species/genus level 
-changes to changes in 
+changes to alterations in 
 - Metabolite producers
 - Disease signatures
 - Previously published associations
