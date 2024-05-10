@@ -27,4 +27,4 @@ all_sets = names(TaxSEA_db)
 GABA_producers = TaxSEA_db[["MiMeDB_producers_of_GABA"]]
 }
 \keyword{datasets}
-\value{A named list of taxon sets}
+\value{A list of vectors. Each item is a taxon set}

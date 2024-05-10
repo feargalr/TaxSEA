@@ -145,6 +145,28 @@ all detected members in the set.
 - TaxonSet - Returns list of taxa in the set to show what is driving the signal
 
 
+#### Visualisation of TaxSEA output. 
+In other contexts, enrichment scores are visualised by barplots of the
+-log10 transformed adjusted P value. TaxSEA contains a function which 
+uses ggplot2 to create a barplot results. This splits the enriched and
+depleted signatures to plot them going in opposite directions. The Y axis
+is ordered by the -log10 FDR also. 
+
+```{r example}
+library(TaxSEA)
+
+data("TaxSEA_test_data")
+taxsea_results <- TaxSEA(taxon_ranks=TaxSEA_test_data)
+
+#Enrichments among health and disease signatures from GMRepoV2 and mBodyMap
+disease.df <- taxsea_results$Health_associations
+
+# Create a bar plot of the results
+TaxSEA_barplot(disease.df,threshold=0.05)
+```
+
+
+
 #### BugSigDB
 The format of BugSigDB is that each publication is entered as a "Study", and within this there is different 
 experiments and signatures. For example signature 1 may be taxa increased in an experiment, and signature 2
@@ -183,17 +205,3 @@ TaxSEA_test_data = TaxSEA_test_data[!is.na(names(TaxSEA_test_data))]
 fgsea_results <- fgsea(TaxSEA_db, TaxSEA_test_data, minSize=5, maxSize=500)
 ```
 
-#### Visualisation 
-TaxSEA contains a function which uses ggplot2 to create a barplot results. 
-```{r example}
-# Create a bar plot of the results
-
-data("TaxSEA_test_data")
-taxsea_results <- TaxSEA(taxon_ranks=TaxSEA_test_data)
-
-#Enrichments among health and disease signatures from GMRepoV2 and mBodyMap
-disease.df <- taxsea_results$Health_associations
-
-TaxSEA_barplot(disease.df)
-```
-![TaxSEA Barplot 1](https://user-images.githubusercontent.com/7561275/228441264-f233b7ac-6030-4208-a48a-a43a92163b33.png)

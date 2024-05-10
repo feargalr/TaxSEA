@@ -197,7 +197,18 @@ TaxSEA_test_data = TaxSEA_test_data[!is.na(names(TaxSEA_test_data))]
 fgsea_results <- fgsea(TaxSEA_db, TaxSEA_test_data, minSize=5, maxSize=500)
 ```
 
+```{r plot_results,fig.width=7}
+library(TaxSEA)
 
+data("TaxSEA_test_data")
+taxsea_results <- TaxSEA(taxon_ranks=TaxSEA_test_data)
+
+#Enrichments among health and disease signatures from GMRepoV2 and mBodyMap
+disease.df <- taxsea_results$Health_associations
+
+# Create a bar plot of the results
+TaxSEA_barplot(disease.df,threshold=0.05)
+```
 
 ```{r sessioninfo}
 sessionInfo()

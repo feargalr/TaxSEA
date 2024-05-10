@@ -15,7 +15,7 @@ displaying
 taxon sets (default: 0.2)}
 
 \item{custom_colors}{A character vector of length 2 with colors for
-upregulated and downregulated taxon sets, respectively (default: NULL)}
+Enriched and Depleted taxon sets, respectively (default: NULL)}
 }
 \value{
 A ggplot2 bar plot of the TaxSEA results
@@ -23,7 +23,7 @@ A ggplot2 bar plot of the TaxSEA results
 \description{
 This function takes a TaxSEA result data frame and creates a bar plot
 of the results
-using ggplot2. It highlights upregulated and downregulated taxon sets
+using ggplot2. It highlights Enriched and Depleted taxon sets
 based on their #' normalized enrichment scores (NES) and false discovery
 rate (FDR).
 }

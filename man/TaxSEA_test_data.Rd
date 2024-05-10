@@ -25,4 +25,4 @@ data(TaxSEA_test_data)
 test_results <- TaxSEA(TaxSEA_test_data)
 }
 \keyword{datasets}
-\value{A vector of taxa IDs and ranks}
+\value{A test dataset}

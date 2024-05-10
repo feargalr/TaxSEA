@@ -28,4 +28,4 @@ NCBI_ids["Bifidobacterium_breve"]
 NCBI_ids["Bifidobacterium breve"]
 }
 \keyword{datasets}
-\value{A vector of NCBI IDs with species or genus names}
+\value{A vector converting species/genus names to NCBI IDs}

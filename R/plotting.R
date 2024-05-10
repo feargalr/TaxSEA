@@ -2,7 +2,7 @@
 #'
 #' This function takes a TaxSEA result data frame and creates a bar plot
 #' of the results
-#' using ggplot2. It highlights upregulated and downregulated taxon sets
+#' using ggplot2. It highlights Enriched and Depleted taxon sets
 #' based on their #' normalized enrichment scores (NES) and false discovery
 #' rate (FDR).
 #' @param taxsea_results A data frame containing the results of the TaxSEA
@@ -11,7 +11,7 @@
 #' displaying
 #' taxon sets (default: 0.2)
 #' @param custom_colors A character vector of length 2 with colors for
-#' upregulated and downregulated taxon sets, respectively (default: NULL)
+#' Enriched and Depleted taxon sets, respectively (default: NULL)
 #' @return A ggplot2 bar plot of the TaxSEA results
 #' @examples
 #' data("TaxSEA_test_data")
@@ -52,7 +52,7 @@ TaxSEA_barplot <- function(taxsea_results, threshold = 0.2,
     geom_col(colour="black") +
     geom_vline(xintercept = c(-log10(0.1), log10(0.1)), linetype = 3) +
     scale_fill_manual(values = custom_colors,
-                      labels = c("Upregulated", "Downregulated")) +
+                      labels = c("Enriched", "Depleted")) +
     theme_classic() +
     theme(
       legend.title = element_blank(),
@@ -72,5 +72,8 @@ TaxSEA_barplot <- function(taxsea_results, threshold = 0.2,
     p <- p + theme(legend.position = "none")
   }
 
-  return(p)
+  return(p+ scale_x_continuous(labels = function(x) ifelse(x < 0, -x, x)))
 }
+
+
+
