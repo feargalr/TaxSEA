@@ -67,9 +67,9 @@ bsdb.df = taxsea_results$BugSigdB
 ```
 
 #### Input 
-All that is required for TaxSEA is a named vector of log2 fold changes 
-between groups for species or genera. TaxSEA will not work for ranks higher
-than species or genus. The input should be for all taxa tested, and not 
+All that is required for TaxSEA is a vector in R containing ranks (e.g.
+log2 fold changes) and names (E.g. species/genus). TaxSEA will not work for 
+ranks higher than species or genus. The input should be for all taxa tested, and not 
 limited to only a pre-defined set (e.g. do not use a threshold for 
 significance or remove any taxa). See example below for format. TaxSEA will
 lookup and convert taxon names to NCBI taxonomic identifiers. TaxSEA stores
