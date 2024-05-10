@@ -165,6 +165,14 @@ disease.df <- taxsea_results$Health_associations
 TaxSEA_barplot(disease.df,threshold=0.05)
 ```
 
+#### Interpretation of TaxSEA output. 
+Taking the example plot above, the input was fold changes between taxa in
+disease and control. TaxSEA found that the increasing species in disease
+are enriched for oral and skin taxa based on signatures from the
+mBodyMap database. Furthermore, TaxSEA identified that the alterations in
+this disease are similar to GMRepoV2 signatures for IBD, Scerloderma and
+cirrhosis.  
+
 
 
 #### BugSigDB

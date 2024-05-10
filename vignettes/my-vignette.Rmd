@@ -197,6 +197,8 @@ TaxSEA_test_data = TaxSEA_test_data[!is.na(names(TaxSEA_test_data))]
 fgsea_results <- fgsea(TaxSEA_db, TaxSEA_test_data, minSize=5, maxSize=500)
 ```
 
+#### Visualisation of TaxSEA results
+
 ```{r plot_results,fig.width=7}
 library(TaxSEA)
 
@@ -209,6 +211,15 @@ disease.df <- taxsea_results$Health_associations
 # Create a bar plot of the results
 TaxSEA_barplot(disease.df,threshold=0.05)
 ```
+
+#### Interpretation of TaxSEA output. 
+Taking the example plot above, the input was fold changes between taxa in
+disease and control. TaxSEA found that the increasing species in disease
+are enriched for oral and skin taxa based on signatures from the
+mBodyMap database. Furthermore, TaxSEA identified that the alterations in
+this disease are similar to GMRepoV2 signatures for IBD, Scerloderma and
+cirrhosis.  
+
 
 ```{r sessioninfo}
 sessionInfo()
