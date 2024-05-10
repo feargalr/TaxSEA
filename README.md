@@ -112,7 +112,7 @@ metabolites.df = taxsea_results$Metabolite_producers
 #Enrichments among health and disease signatures from GMRepoV2 and mBodyMap
 disease.df = taxsea_results$Health_associations
 
-#Enrichments amongh published associations from BugSigDB
+#Enrichments among published associations from BugSigDB
 bsdb.df = taxsea_results$BugSigdB
 
 ```
