@@ -162,7 +162,8 @@ taxsea_results <- TaxSEA(taxon_ranks=TaxSEA_test_data)
 disease.df <- taxsea_results$Health_associations
 
 # Create a bar plot of the results
-TaxSEA_barplot(disease.df,threshold=0.05)
+TaxSEA_barplot(disease.df,threshold=0.05)![TaxSEA plot](https://github.com/feargalr/TaxSEA/assets/7561275/e9705b41-534c-48f0-9e3a-429b716b38d8)
+
 ```
 
 #### Interpretation of TaxSEA output. 
