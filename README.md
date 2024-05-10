@@ -56,13 +56,13 @@ data(TaxSEA_test_data)
 taxsea_results <- TaxSEA(taxon_ranks=TaxSEA_test_data)
 
 #Enrichments among metabolite producers from gutMgene and MiMeDB
-metabolites.df = taxsea_results$Metabolite_producers
+metabolites.df <- taxsea_results$Metabolite_producers
 
 #Enrichments among health and disease signatures from GMRepoV2 and mBodyMap
-disease.df = taxsea_results$Health_associations
+disease.df <- taxsea_results$Health_associations
 
 #Enrichments amongh published associations from BugSigDB
-bsdb.df = taxsea_results$BugSigdB
+bsdb.df <- taxsea_results$BugSigdB
 
 ```
 
@@ -84,13 +84,13 @@ Input IDs should be in the format of like one of the following
 
 ```{r input_data}
 #Input IDs with the full taxonomic lineage should be split up. E.g.
-x = "d__Bacteria.p__Actinobacteriota.c__Actinomycetes.o__Bifidobacteriales.f__Bifidobacteriaceae.g__Bifidobacterium"
-x = strsplit(x,split="\\.")[[1]][6]
-x = gsub("g__","",x)
+x <- "d__Bacteria.p__Actinobacteriota.c__Actinomycetes.o__Bifidobacteriales.f__Bifidobacteriaceae.g__Bifidobacterium"
+x <- strsplit(x,split="\\.")[[1]][6]
+x <- gsub("g__","",x)
 
 ## Running this through a vector of IDs may look something like the following
-#new_ids = sapply(as.character(old_ids),function(y) {strsplit(x = y,split="\\.")[[1]][6]})
-#new_ids = gsub("g__","",new_ids)
+#new_ids <- sapply(as.character(old_ids),function(y) {strsplit(x = y,split="\\.")[[1]][6]})
+#new_ids <- gsub("g__","",new_ids)
 
 ## Example test data
 library(TaxSEA)
@@ -107,13 +107,13 @@ data("TaxSEA_test_data")
 taxsea_results <- TaxSEA(taxon_ranks=TaxSEA_test_data)
 
 #Enrichments among metabolite producers from gutMgene and MiMeDB
-metabolites.df = taxsea_results$Metabolite_producers
+metabolites.df <- taxsea_results$Metabolite_producers
 
 #Enrichments among health and disease signatures from GMRepoV2 and mBodyMap
-disease.df = taxsea_results$Health_associations
+disease.df <- taxsea_results$Health_associations
 
 #Enrichments among published associations from BugSigDB
-bsdb.df = taxsea_results$BugSigdB
+bsdb.df <- taxsea_results$BugSigdB
 
 ```
 
@@ -187,6 +187,13 @@ fgsea_results <- fgsea(TaxSEA_db, TaxSEA_test_data, minSize=5, maxSize=500)
 TaxSEA contains a function which uses ggplot2 to create a barplot results. 
 ```{r example}
 # Create a bar plot of the results
-TaxSEA_barplot(enriched_taxon_sets)
+
+data("TaxSEA_test_data")
+taxsea_results <- TaxSEA(taxon_ranks=TaxSEA_test_data)
+
+#Enrichments among health and disease signatures from GMRepoV2 and mBodyMap
+disease.df <- taxsea_results$Health_associations
+
+TaxSEA_barplot(disease.df)
 ```
 ![TaxSEA Barplot 1](https://user-images.githubusercontent.com/7561275/228441264-f233b7ac-6030-4208-a48a-a43a92163b33.png)
