@@ -4,7 +4,8 @@
 #' of the results
 #' using ggplot2. It highlights Enriched and Depleted taxon sets
 #' based on their #' normalized enrichment scores (NES) and false discovery
-#' rate (FDR).
+#' rate (FDR).Note this function assumes there are both enriched and
+#' depleted sets.
 #' @param taxsea_results A data frame containing the results of the TaxSEA
 #' function
 #' @param threshold Numeric value representing the FDR threshold for
@@ -25,6 +26,16 @@ TaxSEA_barplot <- function(taxsea_results, threshold = 0.2,
   # Check if ggplot2 is installed
   if (!requireNamespace("ggplot2", quietly = TRUE))
     cat("ggplot2 is not installed\n")
+
+  # Check that there are more than four rows with FDR < 0.2
+  if (sum(taxsea_results$FDR < threshold) <= 5)
+    stop("There are very few taxon sets meeting the plotting threshold.
+         I suggest viusalising using an alternative approach.")
+
+  # Check that NES column contains both positive and negative values
+  if (!(any(taxsea_results$NES < 0) && any(taxsea_results$NES > 0)))
+    stop("There are only changes in one direction. This function assumes
+         there are both enriched and depleted taxon sets.")
 
   # Extract relevant columns and calculate log10FDR
   taxsea_results$log10FDR <-
