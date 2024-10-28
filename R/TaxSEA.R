@@ -46,7 +46,8 @@ TaxSEA <- function(taxon_ranks, lookup_missing = FALSE,
 #Declaring global availabilability
 utils::globalVariables(c("TaxSEA_db","Rank", "TaxonSet", "InSet",
                          "log10FDR",
-                         "taxonSetName","fetched_ids","URLencode","median_rank",
+                         "taxonSetName","fetched_ids","URLencode",
+                         "median_rank",
                          "xml_data","NCBI_ids","TaxSEA_test_data"))
 
 TaxSEA <- function(taxon_ranks, lookup_missing = FALSE,
