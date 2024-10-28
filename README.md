@@ -148,35 +148,14 @@ the direction of change
 
 #### Visualisation of TaxSEA output. 
 In other contexts, enrichment scores are visualised by barplots of the
--log10 transformed adjusted P value. TaxSEA contains a function which 
-uses ggplot2 to create a barplot results. This splits the enriched and
-depleted signatures to plot them going in opposite directions. The Y axis
-is ordered by the -log10 FDR also. 
+-log10 transformed adjusted P value. Two simple ways of visualising differences
+identified by TaxSEA is either by barplot of altered taxon sets, or overlaying
+this information on volcano plots. For example. 
+<img width="956" alt="Screenshot 2024-10-28 at 12 51 40" src="https://github.com/user-attachments/assets/07054b1b-a930-44b8-822d-616d95f4bc51">
 
-```{r example}
-library(TaxSEA)
-
-data("TaxSEA_test_data")
-taxsea_results <- TaxSEA(taxon_ranks=TaxSEA_test_data)
-
-#Enrichments among health and disease signatures from GMRepoV2 and mBodyMap
-disease.df <- taxsea_results$Health_associations
-
-# Create a bar plot of the results
-TaxSEA_barplot(disease.df,threshold=0.05)
-
-```
-![TaxSEA plot](https://github.com/feargalr/TaxSEA/assets/7561275/e9705b41-534c-48f0-9e3a-429b716b38d8)
-
-
-#### Interpretation of TaxSEA output. 
 Taking the example plot above, the input was fold changes between taxa in
-disease and control. TaxSEA found that the increasing species in disease
-are enriched for oral and skin taxa based on signatures from the
-mBodyMap database. Furthermore, TaxSEA identified that the alterations in
-this disease are similar to GMRepoV2 signatures for IBD, Scerloderma and
-cirrhosis.  
-
+Inflammatory Bowel disease and control. TaxSEA found a significant depletion
+in the producers of certain short chain fatty acids. 
 
 
 #### BugSigDB
@@ -216,4 +195,9 @@ TaxSEA_test_data = TaxSEA_test_data[!is.na(names(TaxSEA_test_data))]
 #Run fgsea
 fgsea_results <- fgsea(TaxSEA_db, TaxSEA_test_data, minSize=5, maxSize=500)
 ```
+
+#### TaxSEA benchmarking
+The TaxSEA function by default uses the Kolmogorov Smirnov test and the 
+original idea was inspired by gene set enrichment analyses from R
+
 
