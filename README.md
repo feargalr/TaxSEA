@@ -138,8 +138,9 @@ The output is a list of three data frames providing enrichment results for metab
 health/disease associations, and published signatures from BugSigDB.
 Each dataframe has 5 columns
 - taxonSetName - The name of the taxon set tested
-- NES - Normalized enrichment score. This is simply the median rank across 
-all detected members in the set. 
+- median_rank - This is simply the median rank across 
+all detected members in the set. This allows you to see
+the direction of change
 - P value - Kolmogorov-Smirnov test P value.
 - FDR - P value adjusted for multiple testing. 
 - TaxonSet - Returns list of taxa in the set to show what is driving the signal
