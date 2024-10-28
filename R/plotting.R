@@ -3,7 +3,7 @@
 #' This function takes a TaxSEA result data frame and creates a bar plot
 #' of the results
 #' using ggplot2. It highlights Enriched and Depleted taxon sets
-#' based on their #' normalized enrichment scores (NES) and false discovery
+#' based on their median_rank and false discovery
 #' rate (FDR).Note this function assumes there are both enriched and
 #' depleted sets.
 #' @param taxsea_results A data frame containing the results of the TaxSEA
@@ -21,6 +21,10 @@
 #'
 #' @import ggplot2
 #' @export
+#'
+data("TaxSEA_db", package = "TaxSEA",envir = environment())
+data("NCBI_ids", package = "TaxSEA",envir = environment())
+data("TaxSEA_test_data", package = "TaxSEA",envir = environment())
 TaxSEA_barplot <- function(taxsea_results, threshold = 0.2,
                            custom_colors = NULL) {
   # Check if ggplot2 is installed
@@ -32,19 +36,21 @@ TaxSEA_barplot <- function(taxsea_results, threshold = 0.2,
     stop("There are very few taxon sets meeting the plotting threshold.
          I suggest viusalising using an alternative approach.")
 
-  # Check that NES column contains both positive and negative values
-  if (!(any(taxsea_results$NES < 0) && any(taxsea_results$NES > 0)))
+  # Check that median_rank column contains both positive and negative values
+  if (!(any(taxsea_results$median_rank < 0) && any(taxsea_results$median_rank > 0)))
     stop("There are only changes in one direction. This function assumes
          there are both enriched and depleted taxon sets.")
 
   # Extract relevant columns and calculate log10FDR
   taxsea_results$log10FDR <-
-    -log10(taxsea_results$FDR) * ifelse(taxsea_results$NES < 0, -1, 1)
+    -log10(taxsea_results$FDR) * ifelse(taxsea_results$median_rank < 0, -1, 1)
 
-  # Sort the dataframe by NES sign and PValue
-  taxsea_results <- taxsea_results[rev(order((taxsea_results$NES < 0),
+  # Sort the dataframe by median_rank sign and PValue
+  taxsea_results <- taxsea_results[rev(order((taxsea_results$median_rank < 0),
                                              taxsea_results$PValue)), ]
-
+  data("TaxSEA_db", package = "TaxSEA",envir = environment())
+  data("NCBI_ids", package = "TaxSEA",envir = environment())
+  data("TaxSEA_test_data", package = "TaxSEA",envir = environment())
   # Convert taxonSetName column to a factor with the current order
   taxsea_results$taxonSetName <-
     factor(taxsea_results$taxonSetName,
@@ -59,7 +65,7 @@ TaxSEA_barplot <- function(taxsea_results, threshold = 0.2,
   # Create a bar plot using ggplot2
   p <- ggplot2::ggplot(taxsea_results[taxsea_results$FDR < threshold, ],
                        aes(x = log10FDR,
-                           y = taxonSetName, fill = NES < 0)) +
+                           y = taxonSetName, fill = median_rank < 0)) +
     geom_col(colour="black") +
     geom_vline(xintercept = c(-log10(0.1), log10(0.1)), linetype = 3) +
     scale_fill_manual(values = custom_colors,
@@ -78,8 +84,8 @@ TaxSEA_barplot <- function(taxsea_results, threshold = 0.2,
     xlab("-log10 FDR") +
     ggtitle("TaxSEA results")
 
-  # Remove fill legend if there are no items with NES < 0
-  if (all(taxsea_results$NES >= 0)) {
+  # Remove fill legend if there are no items with median_rank < 0
+  if (all(taxsea_results$median_rank >= 0)) {
     p <- p + theme(legend.position = "none")
   }
 

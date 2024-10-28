@@ -39,8 +39,6 @@
 #' @import stats
 #' @importFrom utils data
 #' @export
-
-
 TaxSEA <- function(taxon_ranks, lookup_missing = FALSE,
                    min_set_size = 5, max_set_size = 100) {
   # Function implementation
@@ -54,8 +52,8 @@ utils::globalVariables(c("TaxSEA_db","Rank", "TaxonSet", "InSet",
 TaxSEA <- function(taxon_ranks, lookup_missing = FALSE,
                    min_set_size = 5, max_set_size = 100) {
 
-  data(TaxSEA_db)
-  data(NCBI_ids)
+data("TaxSEA_db", package = "TaxSEA", envir = environment())
+data("NCBI_ids", package = "TaxSEA", envir = environment())
 
   taxon_sets <- TaxSEA_db
 

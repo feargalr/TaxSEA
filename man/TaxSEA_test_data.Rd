@@ -25,4 +25,3 @@ data(TaxSEA_test_data)
 test_results <- TaxSEA(TaxSEA_test_data)
 }
 \keyword{datasets}
-\value{A test dataset}
