@@ -196,9 +196,3 @@ TaxSEA_test_data = TaxSEA_test_data[!is.na(names(TaxSEA_test_data))]
 #Run fgsea
 fgsea_results <- fgsea(TaxSEA_db, TaxSEA_test_data, minSize=5, maxSize=500)
 ```
-
-#### TaxSEA benchmarking
-The TaxSEA function by default uses the Kolmogorov Smirnov test and the 
-original idea was inspired by gene set enrichment analyses from R
-
-
