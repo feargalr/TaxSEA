@@ -27,20 +27,6 @@ data("NCBI_ids", package = "TaxSEA",envir = environment())
 data("TaxSEA_test_data", package = "TaxSEA",envir = environment())
 TaxSEA_barplot <- function(taxsea_results, threshold = 0.2,
                            custom_colors = NULL) {
-  # Check if ggplot2 is installed
-  if (!requireNamespace("ggplot2", quietly = TRUE))
-    cat("ggplot2 is not installed\n")
-
-  # Check that there are more than four rows with FDR < 0.2
-  if (sum(taxsea_results$FDR < threshold) <= 5)
-    stop("There are very few taxon sets meeting the plotting threshold.
-         I suggest viusalising using an alternative approach.")
-
-  # Check that median_rank column contains both positive and negative values
-  if (!(any(taxsea_results$median_rank < 0) && any(taxsea_results$median_rank > 0)))
-    stop("There are only changes in one direction. This function assumes
-         there are both enriched and depleted taxon sets.")
-
   # Extract relevant columns and calculate log10FDR
   taxsea_results$log10FDR <-
     -log10(taxsea_results$FDR) * ifelse(taxsea_results$median_rank < 0, -1, 1)

@@ -23,7 +23,7 @@ and each member within a taxon set is a taxon.
 }
 \examples{
 data(TaxSEA_db)
-all_sets = names(TaxSEA_db)
-GABA_producers = TaxSEA_db[["MiMeDB_producers_of_GABA"]]
+all_sets <- names(TaxSEA_db)
+GABA_producers<-TaxSEA_db[["MiMeDB_producers_of_GABA"]]
 }
 \keyword{datasets}

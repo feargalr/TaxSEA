@@ -8,8 +8,8 @@
 #' @name TaxSEA_db
 #' @examples
 #' data(TaxSEA_db)
-#' all_sets = names(TaxSEA_db)
-#' GABA_producers = TaxSEA_db[["MiMeDB_producers_of_GABA"]]
+#' all_sets <- names(TaxSEA_db)
+#' GABA_producers<-TaxSEA_db[["MiMeDB_producers_of_GABA"]]
 "TaxSEA_db"
 #'
 #' TaxSEA Test Data

@@ -115,16 +115,16 @@ data("NCBI_ids", package = "TaxSEA", envir = environment())
 
     return(list(nes = nes, ks_result = ks_result))
   })
-  taxon_sets = lapply(taxon_sets,function(X){legible_names[X]})
+  taxon_sets <- lapply(taxon_sets,function(X){legible_names[X]})
   result_df <- data.frame(
-    taxonSetName = names(taxon_sets),
-    median_rank = vapply(ks_results, function(res) res$nes, numeric(1)),
-    PValue = vapply(ks_results, function(res) res$ks_result$p.value,
+    taxonSetName <- names(taxon_sets),
+    median_rank<-vapply(ks_results, function(res) res$nes, numeric(1)),
+    PValue<-vapply(ks_results, function(res) res$ks_result$p.value,
                     numeric(1) ),
-    FDR = p.adjust(vapply(ks_results, function(res) res$ks_result$p.value,
+    FDR<-p.adjust(vapply(ks_results, function(res) res$ks_result$p.value,
                           numeric(1)),
                    method = "fdr"),
-    TaxonSet = vapply(taxon_sets, function(taxon_set)
+    TaxonSet<-vapply(taxon_sets, function(taxon_set)
       paste(taxon_set,collapse = ", "),
                       character(1))
   )
