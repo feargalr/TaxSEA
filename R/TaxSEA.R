@@ -48,7 +48,7 @@ TaxSEA <- function(taxon_ranks, lookup_missing = FALSE,
 #Declaring global availabilability
 utils::globalVariables(c("TaxSEA_db","Rank", "TaxonSet", "InSet",
                          "log10FDR",
-                         "taxonSetName","fetched_ids","URLencode","NES",
+                         "taxonSetName","fetched_ids","URLencode","median_rank",
                          "xml_data","NCBI_ids","TaxSEA_test_data"))
 
 TaxSEA <- function(taxon_ranks, lookup_missing = FALSE,
@@ -119,7 +119,7 @@ TaxSEA <- function(taxon_ranks, lookup_missing = FALSE,
   taxon_sets = lapply(taxon_sets,function(X){legible_names[X]})
   result_df <- data.frame(
     taxonSetName = names(taxon_sets),
-    NES = vapply(ks_results, function(res) res$nes, numeric(1)),
+    median_rank = vapply(ks_results, function(res) res$nes, numeric(1)),
     PValue = vapply(ks_results, function(res) res$ks_result$p.value,
                     numeric(1) ),
     FDR = p.adjust(vapply(ks_results, function(res) res$ks_result$p.value,
