@@ -188,7 +188,7 @@ for an example with fast gene set enrichment analysis (fgsea).
 
 ```{r output}
 library(fgsea) #This package is installable via Bioconductor
-
+data(TaxSEA_DB)
 #Convert input names to NCBI taxon ids
 names(TaxSEA_test_data) = get_ncbi_taxon_ids(names(TaxSEA_test_data))
 TaxSEA_test_data = TaxSEA_test_data[!is.na(names(TaxSEA_test_data))]
