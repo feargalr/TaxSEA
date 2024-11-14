@@ -129,6 +129,8 @@ data("NCBI_ids", package = "TaxSEA", envir = environment())
                       character(1))
   )
   result_df <- result_df[order(result_df$PValue,decreasing = FALSE),]
+  colnames(result_df) = c("taxonSetName","median_rank_of_set_members",
+                          "PValue","FDR","TaxonSet")
   metabolites_df <-
     result_df[grepl("producers_of",result_df$taxonSetName),]
   bsdb_df <- result_df[grepl("bsdb",result_df$taxonSetName),]
