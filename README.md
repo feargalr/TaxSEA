@@ -1,5 +1,7 @@
 # TaxSEA: Taxon Set Enrichment Analysis
 
+[Check out the preprint by clicking here](https://www.biorxiv.org/content/10.1101/2024.11.20.624438v1) 
+
 TaxSEA is an R package designed to enable rapid interpretation of 
 differential abundance analysis  or correlation analysis output for 
 microbiota data. 
