@@ -1,7 +1,7 @@
 Package: TaxSEA
 Type: Package
 Title: Taxon Set Enrichment Analysis
-Version: 0.99.0
+Version: 0.99.1
 Authors@R: c(person("Feargal", "Ryan", 
     email = "feargalr@gmail.com", 
     role = c("aut", "cre"),comment = c(ORCID = "0000-0002-1565-4598")))
@@ -25,6 +25,7 @@ RoxygenNote: 7.2.3
 biocViews: Microbiome, Metagenomics, Sequencing, GeneSetEnrichment, RNASeq
 URL: https://github.com/feargalr/taxsea
 BugReports: https://github.com/feargalr/taxsea/issues
+Depends: R (>= 4.5.0)
 Suggests:
     knitr,
     rmarkdown
