@@ -1,5 +1,4 @@
 # TaxSEA News
 
-## Version 1.0.0 (2024-05-06)
-- Initial release of the package.
-
+## Version 0.99.1 (2025-02-11)
+- Bringing into line with requirements for BioConductor submission
