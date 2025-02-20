@@ -3,6 +3,5 @@
 export(TaxSEA)
 export(get_ncbi_taxon_ids)
 export(get_taxon_sets)
-import(ggplot2)
 import(stats)
 importFrom(utils,data)

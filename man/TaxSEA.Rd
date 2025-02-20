@@ -8,40 +8,30 @@ TaxSEA(
   taxon_ranks,
   lookup_missing = FALSE,
   min_set_size = 5,
-  max_set_size = 100
+  max_set_size = 100,
+  custom_db = NULL
 )
 }
 \arguments{
-\item{taxon_ranks}{A named vector of log2 fold changes between control
-and test group.}
+\item{taxon_ranks}{A named vector of log2 fold changes between control and test groups.}
 
-\item{lookup_missing}{Logical value indicating whether to fetch missing
-NCBI IDs. Default is FALSE.}
+\item{lookup_missing}{Logical indicating whether to fetch missing NCBI IDs. Default is FALSE.}
 
-\item{min_set_size}{Minimum size of taxon sets to include in the
-analysis.
-Default is 5.}
+\item{min_set_size}{Minimum size of taxon sets to include in the analysis. Default is 5.}
 
-\item{max_set_size}{Maximum size of taxon sets to include in the
-analysis.
-Default is 100.}
+\item{max_set_size}{Maximum size of taxon sets to include in the analysis. Default is 100.}
+
+\item{custom_db}{A user-provided list of taxon sets. If NULL (default), the built-in database is used.}
 }
 \value{
 A list of data frames with taxon set enrichment results.
 }
 \description{
-TaxSEA is designed to enable rapid annotation of changes observed in a
-microbiome association study
-by testing for enrichment for producers of particular metabolites, or
-associations with marker taxa
-for particular diseases. It focuses specifically on human gut
-microbiome #' associations and uses
-a Kolmogorov-Smirnov test to test if a particular set of taxa is
-changed
+TaxSEA enables rapid annotation of changes observed in a microbiome association study
+by testing for enrichment of producers of particular metabolites or associations with marker taxa
+for specific diseases. It focuses on human gut microbiome associations and uses
+a Kolmogorov-Smirnov test to determine if a particular set of taxa is enriched or depleted
 relative to a control group.
-The input taxon_ranks are log2 fold changes between control and test
-group
-(e.g., healthy and IBD).
 }
 \examples{
 data("TaxSEA_test_data")
