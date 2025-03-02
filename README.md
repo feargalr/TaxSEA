@@ -32,8 +32,9 @@ and the human gut microbiome in particular. As such TaxSEA will likely perform
 best on human gut microbiome data. 
 
 ## Taxon set database
-TaxSEA utilizes taxon sets generated from five reference databases 
-(**gutMGene**, **GMrepo v2**, **MiMeDB**, **mBodyMap**, **BugSigDB**). 
+By default TaxSEA utilizes taxon sets generated from five reference databases 
+(**gutMGene**, **GMrepo v2**, **MiMeDB**, **mBodyMap**, **BugSigDB**). See below for 
+examples of using custom databases or taxonomically defined taxon sets. 
 
 Please cite the appropriate database if using:
 - Cheng et al. gutMGene: a comprehensive database for target genes of gut microbes and
@@ -155,6 +156,114 @@ the direction of change
 - P value - Kolmogorov-Smirnov test P value.
 - FDR - P value adjusted for multiple testing. 
 - TaxonSet - Returns list of taxa in the set to show what is driving the signal
+
+
+#### Custom databases
+Many users may want to utilise TaxSEA with a custom database. For example for testing
+if there is a flag in the TaxSEA function "custom_db" which expects as input a named
+list of vectors. This is the same format as the default TaxSEA database. Note: using
+the custom_db flag disables the automatic ID conversion and NCBI API lookup. However we have 
+functionality available via other functions
+
+```{r example_custom}
+# Perform enrichment analysis using TaxSEA
+custom_taxsea_results <- TaxSEA(taxon_ranks = log2_fold_changes, custom_db = custom_taxon_sets)
+custom_taxsea_results <- custom_taxsea_results$custom_sets
+```
+
+#### Testing for differences in taxonomically defined sets
+In addition to taxon sets defined by function or phenotype, users can define sets based on 
+taxonomy. Current methods to test at higher taxonomic levels (e.g., genus or family), involve
+aggregating counts but with this approach opposing shifts in individual species may cancel 
+each other out, obscuring meaningful biological patterns. For instance, antibiotic treatment 
+may suppress certain species while allowing resistant species within the same genus to expand 
+and occupy the vacant niche, creating an ecological shift that appears as no net change at 
+broader taxonomic levels. Here we utilise data from Chng et al. demonstrating this in a 
+comparsion between Atopic dermatitis and controls. 
+
+```{r example_taxonomy}
+#### Applying TaxSEA functionality to taxonomic ranks  
+# This script applies TaxSEA to identify taxonomic enrichment at different taxonomic levels.
+# Specifically, we analyze enrichment at the family level using metagenomic data
+
+# Load required libraries
+library(TaxSEA)
+library(curatedMetagenomicData)
+library(tidyverse)
+library(phyloseq)
+library(MicrobiomeStat)
+library(dplyr)
+
+# Load sample metadata
+metadata_all <- sampleMetadata
+
+# Filter metadata for the specific study (ChngKR_2016)
+metadata <- metadata_all %>% 
+  filter(study_name == "ChngKR_2016") %>% 
+  column_to_rownames('sample_id')
+
+# Extract count data using curatedMetagenomicData
+cmd_data <- curatedMetagenomicData(
+  pattern = "ChngKR_2016.relative_abundance",
+  counts = TRUE,
+  dryrun = FALSE
+)
+
+# Convert the extracted data to a count matrix
+counts_data <- assay(cmd_data[[1]])
+counts_data <- counts_data[, rownames(metadata)]  # Subset to relevant samples
+
+# Filter taxa with at least one sample having counts > 100
+counts_data <- counts_data[apply(counts_data > 100, 1, sum) > 0, ]
+
+# Extract species names from taxonomic strings
+species_names <- gsub("s__", "", sapply(rownames(counts_data), function(y) strsplit(y, "\\|")[[1]][7]))
+rownames(counts_data) <- species_names
+
+# Create a taxonomic lineage dataframe
+# Remove taxonomic prefixes (k__, p__, c__, etc.) and separate into taxonomic ranks
+
+# make data frame of taxon lineages
+taxon_lineages <- data.frame(Name = species_names,
+                             Lineage = names(species_names)) %>%
+  mutate(Lineage = str_remove_all(Lineage, '[kpcofgs]__')) %>%
+  separate(col = Lineage, into = c('kingdom', 'phylum', 'class', 
+                                   'order', 'family', 'genus', 'species'), 
+           sep = '\\|') %>%
+  mutate(name = Name) %>%
+  remove_rownames() %>%
+  column_to_rownames('name')
+
+# Perform differential abundance testing using LinDA
+metadata$study_condition <- factor(metadata$study_condition, levels = c("control", "AD"))
+
+linda_results <- linda(
+  feature.dat = counts_data,
+  meta.dat = metadata,
+  formula = '~study_condition',
+  feature.dat.type = 'count',
+  prev.filter = 0.05
+)
+
+# Extract log2 fold change values for differential taxa
+linda_results <- linda_results$output$study_conditionAD
+log2_fold_changes <- linda_results$log2FoldChange
+names(log2_fold_changes) <- rownames(linda_results)
+
+# Define the taxonomic rank for enrichment analysis
+selected_taxon_level <- 'genus'  # Modify as needed (e.g., genus, phylum)
+
+# Create a named list of species grouped by taxonomic rank
+custom_taxon_sets <- taxon_lineages %>%
+  group_by(.data[[selected_taxon_level]]) %>% 
+  summarise(species = list(species), .groups = "drop") %>%
+  deframe()
+
+# Perform enrichment analysis using TaxSEA
+custom_taxsea_results <- TaxSEA(taxon_ranks = log2_fold_changes, custom_db = custom_taxon_sets)
+custom_taxsea_results <- custom_taxsea_results$custom_sets
+
+```
 
 
 #### Visualisation of TaxSEA output. 
