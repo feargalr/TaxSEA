@@ -125,7 +125,7 @@ metabolites.df <- taxsea_results$Metabolite_producers
 disease.df <- taxsea_results$Health_associations
 
 #Enrichments among published associations from BugSigDB
-bsdb.df <- taxsea_results$BugSigdB
+bsdb.df <- taxsea_results$BugSigDB
 
 ```
 
