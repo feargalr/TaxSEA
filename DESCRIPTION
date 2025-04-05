@@ -27,7 +27,9 @@ URL: https://github.com/feargalr/taxsea
 BugReports: https://github.com/feargalr/taxsea/issues
 Depends: R (>= 4.5.0)
 Suggests:
-    BioStyle,
+    BiocStyle,
+    bugsigdbr,
+    fgsea,
     knitr,
     rmarkdown
 Imports:
