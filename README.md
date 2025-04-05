@@ -47,16 +47,17 @@ associations with health and diseases. Nucleic Acids Res. 2022.
 range of host-associated microbial signatures. Nature Biotech. 2023. 
 
 ## Installation
-```{r example}
-library(devtools)
-install_github("feargalr/TaxSEA")
-library(TaxSEA)
+```r
+if (!requireNamespace("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+
+BiocManager::install("TaxSEA")
 ```
 
 
 ## Usage
 #### Quick start
-```{r example}
+```r
 library(TaxSEA)
 
 # Retrieve taxon sets containing Bifidobacterium longum.
@@ -93,7 +94,7 @@ Input IDs should be in the format of like one of the following
 - NCBI ID E.g. 216816
 
 
-```{r input_data}
+```r
 #Input IDs with the full taxonomic lineage should be split up. E.g.
 x <- "d__Bacteria.p__Actinobacteriota.c__Actinomycetes.o__Bifidobacteriales.f__Bifidobacteriaceae.g__Bifidobacterium"
 x <- strsplit(x,split="\\.")[[1]][6]
@@ -113,7 +114,7 @@ head(sample(TaxSEA_test_data),4)
 
 
 ### Run TaxSEA with test data
-```{r example2}
+```r
 data("TaxSEA_test_data")
 taxsea_results <- TaxSEA(taxon_ranks=TaxSEA_test_data)
 
@@ -138,7 +139,7 @@ bowel disease patients** Genome Med. 2017 Nov 28;9(1):103.
 ExperimentHub. Nat Methods. 2017 Oct 31;14(11):1023-1024. doi: 10.1038/nmeth.4468.
 - Zhou et al. LinDA: linear models for differential abundance analysis of microbiome compositional data. Genome Biol. 2022 Apr 14;23(1):95.
 
-```{r output}
+```r
 > head(sample(TaxSEA_test_data),4)
 Bacteroides_thetaiotaomicron           Blautia_sp_CAG_257          Ruminococcus bromii       Clostridium_disporicum 
                        1.908                        3.650                       -5.038                        0.300 
@@ -155,6 +156,114 @@ the direction of change
 - P value - Kolmogorov-Smirnov test P value.
 - FDR - P value adjusted for multiple testing. 
 - TaxonSet - Returns list of taxa in the set to show what is driving the signal
+
+
+#### Custom databases
+Many users may want to utilise TaxSEA with a custom database. For example for testing
+if there is a flag in the TaxSEA function "custom_db" which expects as input a named
+list of vectors. This is the same format as the default TaxSEA database. Note: using
+the custom_db flag disables the automatic ID conversion and NCBI API lookup. However we have 
+functionality available via other functions
+
+```{r example_custom}
+# Perform enrichment analysis using TaxSEA
+custom_taxsea_results <- TaxSEA(taxon_ranks = log2_fold_changes, custom_db = custom_taxon_sets)
+custom_taxsea_results <- custom_taxsea_results$custom_sets
+```
+
+#### Testing for differences in taxonomically defined sets
+In addition to taxon sets defined by function or phenotype, users can define sets based on 
+taxonomy. Current methods to test at higher taxonomic levels (e.g., genus or family), involve
+aggregating counts but with this approach opposing shifts in individual species may cancel 
+each other out, obscuring meaningful biological patterns. For instance, antibiotic treatment 
+may suppress certain species while allowing resistant species within the same genus to expand 
+and occupy the vacant niche, creating an ecological shift that appears as no net change at 
+broader taxonomic levels. Here we utilise data from Chng et al. demonstrating this in a 
+comparsion between Atopic dermatitis and controls. 
+
+```r
+#### Applying TaxSEA functionality to taxonomic ranks  
+# This script applies TaxSEA to identify taxonomic enrichment at different taxonomic levels.
+# Specifically, we analyze enrichment at the family level using metagenomic data
+
+# Load required libraries
+library(TaxSEA)
+library(curatedMetagenomicData)
+library(tidyverse)
+library(phyloseq)
+library(MicrobiomeStat)
+library(dplyr)
+
+# Load sample metadata
+metadata_all <- sampleMetadata
+
+# Filter metadata for the specific study (ChngKR_2016)
+metadata <- metadata_all %>% 
+  filter(study_name == "ChngKR_2016") %>% 
+  column_to_rownames('sample_id')
+
+# Extract count data using curatedMetagenomicData
+cmd_data <- curatedMetagenomicData(
+  pattern = "ChngKR_2016.relative_abundance",
+  counts = TRUE,
+  dryrun = FALSE
+)
+
+# Convert the extracted data to a count matrix
+counts_data <- assay(cmd_data[[1]])
+counts_data <- counts_data[, rownames(metadata)]  # Subset to relevant samples
+
+# Filter taxa with at least one sample having counts > 100
+counts_data <- counts_data[apply(counts_data > 100, 1, sum) > 0, ]
+
+# Extract species names from taxonomic strings
+species_names <- gsub("s__", "", sapply(rownames(counts_data), function(y) strsplit(y, "\\|")[[1]][7]))
+rownames(counts_data) <- species_names
+
+# Create a taxonomic lineage dataframe
+# Remove taxonomic prefixes (k__, p__, c__, etc.) and separate into taxonomic ranks
+
+# make data frame of taxon lineages
+taxon_lineages <- data.frame(Name = species_names,
+                             Lineage = names(species_names)) %>%
+  mutate(Lineage = str_remove_all(Lineage, '[kpcofgs]__')) %>%
+  separate(col = Lineage, into = c('kingdom', 'phylum', 'class', 
+                                   'order', 'family', 'genus', 'species'), 
+           sep = '\\|') %>%
+  mutate(name = Name) %>%
+  remove_rownames() %>%
+  column_to_rownames('name')
+
+# Perform differential abundance testing using LinDA
+metadata$study_condition <- factor(metadata$study_condition, levels = c("control", "AD"))
+
+linda_results <- linda(
+  feature.dat = counts_data,
+  meta.dat = metadata,
+  formula = '~study_condition',
+  feature.dat.type = 'count',
+  prev.filter = 0.05
+)
+
+# Extract log2 fold change values for differential taxa
+linda_results <- linda_results$output$study_conditionAD
+log2_fold_changes <- linda_results$log2FoldChange
+names(log2_fold_changes) <- rownames(linda_results)
+
+# Define the taxonomic rank for enrichment analysis
+selected_taxon_level <- 'genus'  # Modify as needed (e.g., genus, phylum)
+
+# Create a named list of species grouped by taxonomic rank
+custom_taxon_sets <- taxon_lineages %>%
+  group_by(.data[[selected_taxon_level]]) %>% 
+  summarise(species = list(species), .groups = "drop") %>%
+  deframe()
+
+# Perform enrichment analysis using TaxSEA
+custom_taxsea_results <- TaxSEA(taxon_ranks = log2_fold_changes, custom_db = custom_taxon_sets)
+custom_taxsea_results <- custom_taxsea_results$custom_sets
+
+```
 
 
 #### Visualisation of TaxSEA output. 
@@ -175,7 +284,7 @@ The format of BugSigDB is that each publication is entered as a "Study", and wit
 experiments and signatures. For example signature 1 may be taxa increased in an experiment, and signature 2
 taxa that are decreased. Users can find out more by querying the BugSigDB. See below for an example. 
 
-```{r output}
+```r
 library(bugsigdbr) #This package is installable via Bioconductor
 bsdb <- importBugSigDB() #Import database 
 
@@ -184,9 +293,6 @@ bsdb <- importBugSigDB() #Import database
 bsdb[bsdb$Study=="Study 74" & 
      bsdb$Experiment=="Experiment 1" & 
      bsdb$Signature=="Signature 2",]
-
-
-
 ```
 
 
@@ -197,7 +303,7 @@ Should users wish to use an alternative gene set enrichment analysis tool
 the database is formatted in such a way that should be possible. See below
 for an example with fast gene set enrichment analysis (fgsea). 
 
-```{r output}
+```r
 library(fgsea) #This package is installable via Bioconductor
 data(TaxSEA_DB)
 #Convert input names to NCBI taxon ids
