@@ -69,8 +69,9 @@ Nature Biotech. 2023.
 The test data provided with TaxSEA consists of log2 fold changes comparing 
 between healthy and IBD. The count data for this was downloaded from 
 curatedMetagenomeData and fold changes generated with LinDA.
+
 - Hall et al. A novel Ruminococcus gnavus clade enriched in inflammatory 
-bowel disease patients** Genome Med. 2017 Nov 28;9(1):103.
+bowel disease patients Genome Med. 2017 Nov 28;9(1):103.
 - Pasolli et al. Accessible, curated metagenomic data through 
 ExperimentHub. Nat Methods. 2017 Oct 31;14(11):1023-1024. 
 doi: 10.1038/nmeth.4468.
@@ -104,6 +105,11 @@ significance or remove any taxa). See example below for format. TaxSEA will
 lookup and convert taxon names to NCBI taxonomic identifiers. TaxSEA stores
 commonly observed identifiers internally to save time. 
 
+TaxSEA can also utilise custom databases which should be a named list
+of taxon sets. In this case the ID conversion is disabled and it is
+expected that the input names and database names will be in the same
+format
+
 Input IDs should be in the format of like one of the following
 - Species name. E.g. "Bifidobacterium longum", "Bifidobacterium_longum"
 - Genus name. E.g. "Bifidobacterium"
@@ -117,6 +123,7 @@ x <- paste0(
   "o__Bifidobacteriales.f__Bifidobacteriaceae.g__Bifidobacterium")
 x = strsplit(x,split="\\.")[[1]][6]
 x = gsub("g__","",x)
+print(x)
 
 ## Example test data
 library(TaxSEA)
@@ -160,10 +167,9 @@ signal
 #### BugSigDB
 The format of BugSigDB is that each publication is entered as a "Study",
 and within this there is different experiments and signatures. 
-Should users wish to find out more information about the signatures. For 
-example different signatures may be the taxa that are increased or 
-decreased. 
-from the BugSigDB, they can do so by querying that database.  
+Should users wish to find out more information about the signatures,
+they can do so by querying that database. 
+
 
 ```{r bugsigdb}
 library(bugsigdbr) #This package is installable via Bioconductor
