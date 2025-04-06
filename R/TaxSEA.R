@@ -1,16 +1,18 @@
 #' TaxSEA: Taxon Set Enrichment Analysis
 #'
-#' TaxSEA enables rapid annotation of changes observed in a microbiome association study
-#' by testing for enrichment of producers of particular metabolites or associations with marker taxa
-#' for specific diseases. It focuses on human gut microbiome associations and uses
-#' a Kolmogorov-Smirnov test to determine if a particular set of taxa is enriched or depleted
-#' relative to a control group.
+#' TaxSEA enables rapid annotation of changes by testing for enrichment 
+#' of pre-defined taxon sets. 
 #'
-#' @param taxon_ranks A named vector of log2 fold changes between control and test groups.
-#' @param lookup_missing Logical indicating whether to fetch missing NCBI IDs. Default is FALSE.
-#' @param min_set_size Minimum size of taxon sets to include in the analysis. Default is 5.
-#' @param max_set_size Maximum size of taxon sets to include in the analysis. Default is 100.
-#' @param custom_db A user-provided list of taxon sets. If NULL (default), the built-in database is used.
+#' @param taxon_ranks A named vector of log2 fold changes between control 
+#' and test groups.
+#' @param lookup_missing Logical indicating whether to fetch missing 
+#' NCBI IDs. Default is FALSE.
+#' @param min_set_size Minimum size of taxon sets to include in the 
+#' analysis. Default is 5.
+#' @param max_set_size Maximum size of taxon sets to include in the 
+#' analysis. Default is 100.
+#' @param custom_db A user-provided list of taxon sets. 
+#' If NULL (default), the built-in database is used.
 #' @return A list of data frames with taxon set enrichment results.
 #' @seealso
 #' \itemize{
@@ -46,7 +48,8 @@ TaxSEA <- function(taxon_ranks, lookup_missing = FALSE,
     data("NCBI_ids", package = "TaxSEA", envir = environment())
     
     if (lookup_missing) {
-      ids2fetch <- names(taxon_ranks[!(names(taxon_ranks) %in% names(NCBI_ids))])
+      ids2fetch <- names(taxon_ranks[!(names(taxon_ranks) 
+                                       %in% names(NCBI_ids))])
       if (length(ids2fetch) > 0) {
         message("Fetching some NCBI IDs for input taxa. Please wait")
         fetched_ids <- get_ncbi_taxon_ids(ids2fetch)
@@ -75,13 +78,19 @@ TaxSEA <- function(taxon_ranks, lookup_missing = FALSE,
   }
   
   # Filter taxon_ranks and taxon_sets
-  taxon_ranks <- taxon_ranks[names(taxon_ranks) %in% unique(unlist(taxon_sets))]
-  taxon_sets <- lapply(taxon_sets, function(set) unique(set[set %in% names(taxon_ranks)]))
+  taxon_ranks <- 
+    taxon_ranks[names(taxon_ranks) %in% unique(unlist(taxon_sets))]
+  taxon_sets <- 
+    lapply(taxon_sets, function(set) 
+      unique(set[set %in% names(taxon_ranks)]))
   set_sizes <- vapply(taxon_sets, length, numeric(1))
-  taxon_sets <- taxon_sets[set_sizes >= min_set_size & set_sizes <= max_set_size]
-  taxon_ranks <- taxon_ranks[names(taxon_ranks) %in% unique(unlist(taxon_sets))]
+  taxon_sets <- 
+    taxon_sets[set_sizes >= min_set_size & set_sizes <= max_set_size]
+  taxon_ranks <- 
+    taxon_ranks[names(taxon_ranks) %in% unique(unlist(taxon_sets))]
   
-  taxon_sets <- lapply(taxon_sets, function(set) intersect(names(taxon_ranks), set))
+  taxon_sets <- 
+    lapply(taxon_sets, function(set) intersect(names(taxon_ranks), set))
   
   # Perform KS tests
   ks_results <- lapply(taxon_sets, function(set) {
@@ -94,22 +103,38 @@ TaxSEA <- function(taxon_ranks, lookup_missing = FALSE,
   taxon_sets <- lapply(taxon_sets, function(X) legible_names[X])
   
   result_df <- data.frame(
-    taxonSetName = names(taxon_sets),
-    median_rank = vapply(ks_results, function(res) res$nes, numeric(1)),
-    PValue = vapply(ks_results, function(res) res$ks_result$p.value, numeric(1)),
-    Test_statistic = vapply(ks_results, function(res) res$ks_result$statistic, numeric(1)),
-    FDR = p.adjust(vapply(ks_results, function(res) res$ks_result$p.value, numeric(1)), method = "fdr"),
-    TaxonSet = vapply(taxon_sets, function(set) paste(set, collapse = ", "), character(1))
+    taxonSetName = 
+      names(taxon_sets),
+    median_rank = 
+      vapply(ks_results, function(res) 
+        res$nes, numeric(1)),
+    PValue = 
+      vapply(ks_results, function(res) 
+        res$ks_result$p.value, numeric(1)),
+    Test_statistic = 
+      vapply(ks_results, function(res) 
+        res$ks_result$statistic, numeric(1)),
+    FDR = 
+      p.adjust(vapply(ks_results, function(res) 
+        res$ks_result$p.value, numeric(1)), method = "fdr"),
+    TaxonSet = vapply(taxon_sets, function(set) 
+      paste(set, collapse = ", "), character(1))
   )
   result_df <- result_df[order(result_df$PValue), ]
-  colnames(result_df) <- c("taxonSetName", "median_rank_of_set_members", "PValue","Test_statistic", "FDR", "TaxonSet")
+  colnames(result_df) <- c("taxonSetName", 
+                           "median_rank_of_set_members", 
+                           "PValue","Test_statistic", 
+                           "FDR", "TaxonSet")
   
   if (is.null(custom_db)) {
     
   # Subset results into categories
-  metabolites_df <- result_df[grepl("producers_of", result_df$taxonSetName), ]
-  bsdb_df <- result_df[grepl("bsdb", result_df$taxonSetName), ]
-  disease_df <- result_df[!grepl("producers_of|bsdb", result_df$taxonSetName), ]
+  metabolites_df <- 
+    result_df[grepl("producers_of", result_df$taxonSetName), ]
+  bsdb_df <- 
+    result_df[grepl("bsdb", result_df$taxonSetName), ]
+  disease_df <- 
+    result_df[!grepl("producers_of|bsdb", result_df$taxonSetName), ]
   
   # Adjust FDR separately for each subset
   
