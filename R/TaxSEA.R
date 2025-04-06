@@ -71,7 +71,7 @@ TaxSEA <- function(taxon_ranks, lookup_missing = FALSE,
   
   # Ensure sufficient data for testing
   if (length(taxon_ranks) < 3) {
-    warning("Error: Very few taxa provided")
+    warning("Error: Very few taxa provided; results may be unreliable.")
   }
   
   # Filter taxon_ranks and taxon_sets
@@ -80,10 +80,6 @@ TaxSEA <- function(taxon_ranks, lookup_missing = FALSE,
   set_sizes <- vapply(taxon_sets, length, numeric(1))
   taxon_sets <- taxon_sets[set_sizes >= min_set_size & set_sizes <= max_set_size]
   taxon_ranks <- taxon_ranks[names(taxon_ranks) %in% unique(unlist(taxon_sets))]
-  
-  if (!is.vector(taxon_ranks) || !is.list(taxon_sets)) {
-    warning("Input doesn't look correct")
-  }
   
   taxon_sets <- lapply(taxon_sets, function(set) intersect(names(taxon_ranks), set))
   
