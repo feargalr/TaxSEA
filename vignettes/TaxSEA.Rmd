@@ -2,7 +2,11 @@
 title: "TaxSEA"
 author: "Feargal Ryan"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
+output:
+  BiocStyle::html_document:
+    toc: true
+    toc_depth: 2
+    number_sections: true
 vignette: >
   %\VignetteIndexEntry{TaxSEA}
   %\VignetteEngine{knitr::rmarkdown}
@@ -29,6 +33,17 @@ Note: Although TaxSEA in principle can be applied to microbiome data from
 any source, the databases utilized largely cover human associated microbiomes
 and the human gut microbiome in particular. As such TaxSEA will likely perform
 best on human gut microbiome data. 
+
+## Installation
+
+To install the latest version of TaxSEA from Bioconductor:
+
+```{r install, eval=FALSE}
+if (!requireNamespace("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+
+BiocManager::install("TaxSEA")
+```
 
 
 ## Taxon set database
@@ -157,7 +172,7 @@ example different signatures may be the taxa that are increased or
 decreased. 
 from the BugSigDB, they can do so by querying that database.  
 
-```{r bugsigdb, eval=FALSE}
+```{r bugsigdb}
 library(bugsigdbr) #This package is installable via Bioconductor
 bsdb <- importBugSigDB() #Import database 
 
@@ -167,12 +182,7 @@ bsdb[bsdb$Study=="Study 74" &
      bsdb$Experiment=="Experiment 1" & 
      bsdb$Signature=="Signature 2",]
 
-
-
 ```
-
-
-
 
 #### TaxSEA database with other enrichment tools
 The TaxSEA function by default uses the Kolmogorov Smirnov test and the 
@@ -181,7 +191,7 @@ Should users wish to use an alternative gene set enrichment analysis tool
 the database is formatted in such a way that should be possible. See below
 for an example with fast gene set enrichment analysis (fgsea). 
 
-```{r fgsea,eval=FALSE}
+```{r fgsea}
 library(fgsea) #This package is installable via Bioconductor
 
 #Convert input names to NCBI taxon ids
