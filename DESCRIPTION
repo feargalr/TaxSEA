@@ -31,7 +31,9 @@ Suggests:
     bugsigdbr,
     fgsea,
     knitr,
-    rmarkdown
+    rmarkdown,
+    testthat
 Imports:
     stats,
     utils
+Config/testthat/edition: 3
