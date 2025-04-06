@@ -149,7 +149,7 @@ TaxSEA <- function(taxon_ranks, lookup_missing = FALSE,
   )
   
   return(res_list)}
-  res_list <- list(custom_sets = result_df[,1:5])
+  res_list <- list(custom_sets = result_df[,seq_len(5)])
   return(res_list)
 }
 

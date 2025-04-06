@@ -29,10 +29,6 @@ Simply put, TaxSEA allows users to rapidly go from a list of species to
 which metabolite producers are altered, and if the findings are similar to
 a previously published study. 
 
-Note: Although TaxSEA in principle can be applied to microbiome data from
-any source, the databases utilized largely cover human associated microbiomes
-and the human gut microbiome in particular. As such TaxSEA will likely perform
-best on human gut microbiome data. 
 
 ## Installation
 
@@ -106,8 +102,7 @@ than species or genus. The input should be for all taxa tested, and not
 limited to only a pre-defined set (e.g. do not use a threshold for 
 significance or remove any taxa). See example below for format. TaxSEA will
 lookup and convert taxon names to NCBI taxonomic identifiers. TaxSEA stores
-a commonly observed identifiers internally and so will only look up whatever 
-is not covered to save time. 
+commonly observed identifiers internally to save time. 
 
 Input IDs should be in the format of like one of the following
 - Species name. E.g. "Bifidobacterium longum", "Bifidobacterium_longum"
@@ -117,13 +112,11 @@ Input IDs should be in the format of like one of the following
 
 ```{r input_data}
 #Input IDs with the full taxonomic lineage should be split up. E.g.
-x = "d__Bacteria.p__Actinobacteriota.c__Actinomycetes.o__Bifidobacteriales.f__Bifidobacteriaceae.g__Bifidobacterium"
+x <- paste0(
+  "d__Bacteria.p__Actinobacteriota.c__Actinomycetes.",
+  "o__Bifidobacteriales.f__Bifidobacteriaceae.g__Bifidobacterium")
 x = strsplit(x,split="\\.")[[1]][6]
 x = gsub("g__","",x)
-
-## Running this through a vector of IDs may look something like the following
-#new_ids = sapply(as.character(old_ids),function(y) {strsplit(x = y,split="\\.")[[1]][6]})
-#new_ids = gsub("g__","",new_ids)
 
 ## Example test data
 library(TaxSEA)
@@ -176,7 +169,8 @@ from the BugSigDB, they can do so by querying that database.
 library(bugsigdbr) #This package is installable via Bioconductor
 bsdb <- importBugSigDB() #Import database 
 
-#E.g. if the BugSigDB identifier you found enriched was #bsdb:74/1/2_obesity:obese_vs_non-obese_DOWN
+#E.g. if the BugSigDB identifier you found enriched was 
+#bsdb:74/1/2_obesity:obese_vs_non-obese_DOWN
 #This is Study 74, Experiment 1, Signature 2
 bsdb[bsdb$Study=="Study 74" & 
      bsdb$Experiment=="Experiment 1" & 
@@ -193,7 +187,8 @@ for an example with fast gene set enrichment analysis (fgsea).
 
 ```{r fgsea}
 library(fgsea) #This package is installable via Bioconductor
-
+data("TaxSEA_test_data")
+data("TaxSEA_db")
 #Convert input names to NCBI taxon ids
 names(TaxSEA_test_data) = get_ncbi_taxon_ids(names(TaxSEA_test_data))
 TaxSEA_test_data = TaxSEA_test_data[!is.na(names(TaxSEA_test_data))]
