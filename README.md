@@ -1,18 +1,14 @@
 # TaxSEA: Taxon Set Enrichment Analysis
 
-[Check out the preprint by clicking here](https://www.biorxiv.org/content/10.1101/2024.11.20.624438v1) 
+[![Bioconductor](https://www.bioconductor.org/shields/years-in-bioc/TaxSEA.svg)](https://bioconductor.org/packages/TaxSEA)  
+📦 Available on [**Bioconductor**](https://bioconductor.org/packages/TaxSEA)  
+📝 [Read the preprint](https://www.biorxiv.org/content/10.1101/2024.11.20.624438v1)
 
-TaxSEA is designed for microbiome researchers seeking deeper functional
-insights into their datasets.A common question in human microbiome 
-research is whether a detected pattern of microbial changes has been 
-previously reported in other diseases or contexts. However, current 
-methods to answer this question are highly limited, often requiring 
-researchers to manually search literature, cross-reference multiple 
-databases, or repurpose tools not originally designed for microbiome 
-data. TaxSEA directly addresses this gap by integrating multiple public
-microbiome databases, allowing researchers to systematically test for 
-enrichment of known disease signatures, metabolite producers, or other
-biologically relevant taxon sets. TaxSEA is available as R package.
+TaxSEA helps microbiome researchers test for enrichment in known microbial signatures, including:
+
+- Metabolite producers  
+- Disease associations  
+- Previously published microbiome signatures
 
 TaxSEA takes as input a vector of genus or species names and a rank. 
 For example log2 fold changes or Spearman's rho. TaxSEA then uses
@@ -20,23 +16,18 @@ a Kolmogorov-Smirnov test to identify if a particular group of species
 or genera (i.e. a set of taxa such as butyrate producers) are skewed to 
 one end of the distribution . 
 
-Simply put, TaxSEA allows users to rapidly convert species/genus level 
-changes to alterations in 
-- Metabolite producers
-- Disease signatures
-- Previously published associations
-
 Note: Although TaxSEA in principle can be applied to microbiome data from
 any source, the databases utilized largely cover human associated microbiomes
 and the human gut microbiome in particular. As such TaxSEA will likely perform
 best on human gut microbiome data. 
 
-## Taxon set database
+### Taxon set database
 By default TaxSEA utilizes taxon sets generated from five reference databases 
 (**gutMGene**, **GMrepo v2**, **MiMeDB**, **mBodyMap**, **BugSigDB**). See below for 
 examples of using custom databases or taxonomically defined taxon sets. 
 
 Please cite the appropriate database if using:
+
 - Cheng et al. gutMGene: a comprehensive database for target genes of gut microbes and
 microbial metabolites Nucleic Acids Res. 2022.
 - Dai et al. GMrepo v2: a curated human gut microbiome database with special focus on
@@ -47,17 +38,18 @@ associations with health and diseases. Nucleic Acids Res. 2022.
 - Geistlinger et al. BugSigDB captures patterns of differential abundance across a broad
 range of host-associated microbial signatures. Nature Biotech. 2023. 
 
-## Installation
-```{r example}
-library(devtools)
-install_github("feargalr/TaxSEA")
-library(TaxSEA)
+### Installation
+```r
+if (!requireNamespace("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+BiocManager::install("TaxSEA")
+
 ```
 
 
-## Usage
+### Usage
 #### Quick start
-```{r example}
+```r
 library(TaxSEA)
 
 # Retrieve taxon sets containing Bifidobacterium longum.
@@ -89,12 +81,13 @@ a commonly observed identifiers internally and so will only look up whatever
 is not covered to save time. 
 
 Input IDs should be in the format of like one of the following
+
 - Species name. E.g. "Bifidobacterium longum", "Bifidobacterium_longum"
 - Genus name. E.g. "Bifidobacterium"
 - NCBI ID E.g. 216816
 
 
-```{r input_data}
+```r
 #Input IDs with the full taxonomic lineage should be split up. E.g.
 x <- "d__Bacteria.p__Actinobacteriota.c__Actinomycetes.o__Bifidobacteriales.f__Bifidobacteriaceae.g__Bifidobacterium"
 x <- strsplit(x,split="\\.")[[1]][6]
@@ -113,8 +106,10 @@ head(sample(TaxSEA_test_data),4)
 
 
 
+
+
 ### Run TaxSEA with test data
-```{r example2}
+```r
 data("TaxSEA_test_data")
 taxsea_results <- TaxSEA(taxon_ranks=TaxSEA_test_data)
 
@@ -129,26 +124,32 @@ bsdb.df <- taxsea_results$BugSigDB
 
 ```
 
+
+
 #### Test data
 The test data provided with TaxSEA consists of log2 fold changes comparing between healthy 
 and IBD. The count data for this was downloaded from curatedMetagenomeData and 
 fold changes generated with LinDA.
+
 - Hall et al. A novel Ruminococcus gnavus clade enriched in inflammatory 
 bowel disease patients** Genome Med. 2017 Nov 28;9(1):103.
 - Pasolli et al. Accessible, curated metagenomic data through 
 ExperimentHub. Nat Methods. 2017 Oct 31;14(11):1023-1024. doi: 10.1038/nmeth.4468.
 - Zhou et al. LinDA: linear models for differential abundance analysis of microbiome compositional data. Genome Biol. 2022 Apr 14;23(1):95.
 
-```{r output}
-> head(sample(TaxSEA_test_data),4)
-Bacteroides_thetaiotaomicron           Blautia_sp_CAG_257          Ruminococcus bromii       Clostridium_disporicum 
-                       1.908                        3.650                       -5.038                        0.300 
+```r
+> head(sample(TaxSEA_test_data),3)
+Bacteroides_thetaiotaomicron           Blautia_sp_CAG_257          Ruminococcus bromii
+                       1.908                        3.650                       -5.038 
 ```
+
+
 
 #### Output
 The output is a list of three data frames providing enrichment results for metabolite produers, 
 health/disease associations, and published signatures from BugSigDB.
 Each dataframe has 5 columns
+
 - taxonSetName - The name of the taxon set tested
 - median_rank - This is simply the median rank across 
 all detected members in the set. This allows you to see
@@ -158,6 +159,8 @@ the direction of change
 - TaxonSet - Returns list of taxa in the set to show what is driving the signal
 
 
+
+
 #### Custom databases
 Many users may want to utilise TaxSEA with a custom database. For example for testing
 if there is a flag in the TaxSEA function "custom_db" which expects as input a named
@@ -165,11 +168,13 @@ list of vectors. This is the same format as the default TaxSEA database. Note: u
 the custom_db flag disables the automatic ID conversion and NCBI API lookup. However we have 
 functionality available via other functions
 
-```{r example_custom}
+```r
 # Perform enrichment analysis using TaxSEA
 custom_taxsea_results <- TaxSEA(taxon_ranks = log2_fold_changes, custom_db = custom_taxon_sets)
 custom_taxsea_results <- custom_taxsea_results$custom_sets
 ```
+
+
 
 #### Testing for differences in taxonomically defined sets
 In addition to taxon sets defined by function or phenotype, users can define sets based on 
@@ -181,7 +186,8 @@ and occupy the vacant niche, creating an ecological shift that appears as no net
 broader taxonomic levels. Here we utilise data from Chng et al. demonstrating this in a 
 comparsion between Atopic dermatitis and controls. 
 
-```{r example_taxonomy}
+```r
+
 #### Applying TaxSEA functionality to taxonomic ranks  
 # This script applies TaxSEA to identify taxonomic enrichment at different taxonomic levels.
 # Specifically, we analyze enrichment at the family level using metagenomic data
@@ -266,9 +272,14 @@ custom_taxsea_results <- custom_taxsea_results$custom_sets
 ```
 
 
+
+
+
 #### Visualisation of TaxSEA output. 
 
+
 <img width="956" alt="Screenshot 2024-10-28 at 12 51 40" src="https://github.com/user-attachments/assets/07054b1b-a930-44b8-822d-616d95f4bc51">
+
 
 The results above were generated by using TaxSEA on the output of 
 a differential abundance analysis comparing between disease and
@@ -284,7 +295,7 @@ The format of BugSigDB is that each publication is entered as a "Study", and wit
 experiments and signatures. For example signature 1 may be taxa increased in an experiment, and signature 2
 taxa that are decreased. Users can find out more by querying the BugSigDB. See below for an example. 
 
-```{r output}
+```r
 library(bugsigdbr) #This package is installable via Bioconductor
 bsdb <- importBugSigDB() #Import database 
 
@@ -306,7 +317,7 @@ Should users wish to use an alternative gene set enrichment analysis tool
 the database is formatted in such a way that should be possible. See below
 for an example with fast gene set enrichment analysis (fgsea). 
 
-```{r output}
+```r
 library(fgsea) #This package is installable via Bioconductor
 data(TaxSEA_DB)
 #Convert input names to NCBI taxon ids
