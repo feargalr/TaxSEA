@@ -44,7 +44,7 @@ data("NCBI_ids", package = "TaxSEA", envir = environment())
   if (length(ids2fetch) > 0){
     message("Fetching some NCBI IDs for input taxa. Please wait")
     taxon_ids <- vapply(ids2fetch, get_ncbi_taxon_id,character(1))
-    taxon_ids<-c(local_ids,unlist(fetched_ids))
+    taxon_ids<-c(local_ids,unlist(taxon_ids))
   } else {
     taxon_ids<-local_ids
   }
