@@ -2,7 +2,7 @@
 
 [![Bioconductor](https://www.bioconductor.org/shields/years-in-bioc/TaxSEA.svg)](https://bioconductor.org/packages/TaxSEA)  
 📦 Available on [**Bioconductor**](https://bioconductor.org/packages/TaxSEA)  
-📝 [Read the preprint](https://www.biorxiv.org/content/10.1101/2024.11.20.624438v1)
+📝 [Read the paper in Briefings in Bioinformatics](https://academic.oup.com/bib/article/26/2/bbaf173/8116684)
 
 TaxSEA helps microbiome researchers test for enrichment in known microbial signatures, including:
 
