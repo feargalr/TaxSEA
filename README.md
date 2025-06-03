@@ -4,7 +4,7 @@
 📦 Available on [**Bioconductor**](https://bioconductor.org/packages/TaxSEA)  
 📝 [Read the paper in Briefings in Bioinformatics](https://academic.oup.com/bib/article/26/2/bbaf173/8116684)
 
-Note: We are currently addressing a few minor bugs ahead. These have been fixed in the development version of TaxSEA from Bioconductor (requires R-devel). To install this version you can run:
+Note: We found a few minor bugs in the current release. These have been fixed in the development version of TaxSEA. To install this version you can run:
 ```r
 if (!requireNamespace("BiocManager", quietly = TRUE))
     install.packages("BiocManager")
