@@ -31,11 +31,28 @@
 TaxSEA <- function(taxon_ranks, lookup_missing = FALSE,
                    min_set_size = 5, max_set_size = 100,
                    custom_db = NULL) {
+  if (any(grepl("\\[|\\]", names(taxon_ranks)))) {
+    stop("Taxon names contain square brackets [ ]. Please remove or rename these entries before running TaxSEA.")
+  }
+  
   
   # Load built-in database unless a custom one is provided
   if (is.null(custom_db)) {
     data("TaxSEA_db", package = "TaxSEA", envir = environment())
     taxon_sets <- TaxSEA_db
+    
+    # Append BugSigDB dynamically
+    if (requireNamespace("bugsigdbr", quietly = TRUE)) {
+      bsdb <- bugsigdbr::importBugSigDB()
+      mp.sigs <- bugsigdbr::getSignatures(bsdb, tax.id.type = "ncbi")
+      bugsigdb_list <- stack(mp.sigs)
+      names(bugsigdb_list) <- c("Species", "MSID")
+      bugsigdb_list <- split(bugsigdb_list$Species, bugsigdb_list$MSID)
+      names(bugsigdb_list) <- paste0("bsdb_", names(bugsigdb_list))
+      taxon_sets <- c(taxon_sets, bugsigdb_list)
+    } else {
+      warning("bugsigdbr not installed; skipping BugSigDB integration.")
+    }
   } else {
     taxon_sets <- custom_db
     if (!is.list(taxon_sets)) {
@@ -51,7 +68,6 @@ TaxSEA <- function(taxon_ranks, lookup_missing = FALSE,
       ids2fetch <- names(taxon_ranks[!(names(taxon_ranks) 
                                        %in% names(NCBI_ids))])
       if (length(ids2fetch) > 0) {
-        message("Fetching some NCBI IDs for input taxa. Please wait")
         fetched_ids <- get_ncbi_taxon_ids(ids2fetch)
         if (length(unlist(fetched_ids)) > 0) {
           NCBI_ids <- c(NCBI_ids, unlist(fetched_ids))
