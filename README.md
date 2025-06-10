@@ -4,7 +4,7 @@
 📦 Available on [**Bioconductor**](https://bioconductor.org/packages/TaxSEA)  
 📝 [Read the paper in Briefings in Bioinformatics](https://academic.oup.com/bib/article/26/2/bbaf173/8116684)
 
-Note: We found a few minor bugs in the current release. These have been fixed in the development version of TaxSEA. To install this version you can run:
+Note: We found a few minor bugs in the current release. These mostly relate to how the NCBI ID API is contacted. These have been fixed in the development version of TaxSEA. In this latest version there is also a more dynamic integration with BugSigDB. To install this version you will need to have R 4.5 installed and the most recent Bioconductor release. Then run:
 ```r
 if (!requireNamespace("BiocManager", quietly = TRUE))
     install.packages("BiocManager")
