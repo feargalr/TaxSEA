@@ -299,18 +299,18 @@ the individual species contributing to this signature on a volcano plot.
 
 #### BugSigDB
 The format of BugSigDB is that each publication is entered as a "Study", and within this there is different 
-experiments and signatures. For example signature 1 may be taxa increased in an experiment, and signature 2
-taxa that are decreased. Users can find out more by querying the BugSigDB. See below for an example. 
+experiments and signatures. For example one of the signatures  may be taxa increased in an experiment, and another signature is
+taxa that are decreased. Users can find out more by querying the BugSigDB. In recent updates BugSigDB has moved to using the PubMed ID as the study ID (Although not all studies have these yet).  See below for an example. 
 
 ```r
 library(bugsigdbr) #This package is installable via Bioconductor
 bsdb <- importBugSigDB() #Import database 
 
-#E.g. if the BugSigDB identifier you found enriched was #bsdb:74/1/2_obesity:obese_vs_non-obese_DOWN
-#This is Study 74, Experiment 1, Signature 2
-bsdb[bsdb$Study=="Study 74" & 
+#E.g. if the BugSigDB identifier you found enriched was bsdb:11/1/1
+#This is Study 11, Experiment 1, Signature 1
+bsdb[bsdb$Study=="Study 11" & 
      bsdb$Experiment=="Experiment 1" & 
-     bsdb$Signature=="Signature 2",]
+     bsdb$Signature=="Signature 1",]
 
 
 
