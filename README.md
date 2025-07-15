@@ -1,4 +1,5 @@
 # TaxSEA: Taxon Set Enrichment Analysis
+<img src="https://github.com/user-attachments/assets/1bd12eef-1e94-4c25-bd80-15193341442f" align="right" height="139" />
 
 [![Bioconductor](https://www.bioconductor.org/shields/years-in-bioc/TaxSEA.svg)](https://bioconductor.org/packages/TaxSEA)  
 📦 Available on [**Bioconductor**](https://bioconductor.org/packages/TaxSEA)  
