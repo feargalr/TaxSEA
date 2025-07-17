@@ -158,6 +158,18 @@ TaxSEA <- function(taxon_ranks, lookup_missing = FALSE,
   disease_df$FDR <- p.adjust(disease_df$PValue, method = "fdr")
   bsdb_df$FDR <- p.adjust(bsdb_df$PValue, method = "fdr")
   
+  # Reformat output
+  pubmed_ids <- (bsdb_df$taxonSetName)
+  pubmed_ids <- sub(".*bsdb:([0-9]+)/.*", "\\1", pubmed_ids)
+  pubmed_ids <- ifelse(nchar(pubmed_ids) < 6, NA, pubmed_ids)
+  bsdb_df$PubMedID <- pubmed_ids
+  bsdb_df <- bsdb_df[,c(7,1:6)]
+  colnames(bsdb_df)[2] <- "BugSigDB_ID"
+  rownames(bsdb_df) <- NULL
+  rownames(metabolites_df) <- NULL
+  rownames(disease_df) <- NULL
+	  
+  
   res_list <- list(
     Metabolite_producers = metabolites_df,
     Health_associations = disease_df,
