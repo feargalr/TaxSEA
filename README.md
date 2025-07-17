@@ -2,6 +2,7 @@
 [![Bioconductor](https://www.bioconductor.org/shields/years-in-bioc/TaxSEA.svg)](https://bioconductor.org/packages/TaxSEA)  
 📦 Available on [**Bioconductor**](https://bioconductor.org/packages/TaxSEA)  
 📝 [Read the paper in Briefings in Bioinformatics](https://academic.oup.com/bib/article/26/2/bbaf173/8116684)
+<img align="right" src="https://github.com/user-attachments/assets/a5472544-e34a-4bc4-92ba-887fb254e2b0" alt="TaxSEA" height="200">
 
 Note: We found a few minor bugs in the current release. These mostly relate to how the NCBI ID API is contacted. These have been fixed in the development version of TaxSEA. In this latest version there is also a more dynamic integration with BugSigDB. To install this version you will need to have R 4.5 installed and the most recent Bioconductor release. Then run:
 ```r
