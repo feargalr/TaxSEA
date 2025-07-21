@@ -2,13 +2,19 @@ citHeader("To cite the TaxSEA package in publications, please use:")
 
 bibentry(
   bibtype = "Article",
-  title = "TaxSEA: an R package for rapid interpretation of differential abundance analysis output",
-  author = person("Feargal", "Ryan"),
-  journal = "bioRxiv",
-  year = 2024,
-  volume = "2024-11",
-  doi = "10.1101/2024.11.20.624438",
-  url = "https://doi.org/10.1101/2024.11.20.624438"
+  title = "TaxSEA: rapid interpretation of microbiome alterations using taxon set enrichment analysis and public databases",
+  author = c(
+    person("Cong M", "Pham"),
+    person("Timothy J", "Rankin"),
+    person("Timothy P", "Stinear"),
+    person("Calum J", "Walsh"),
+    person("Feargal J", "Ryan")
+  ),
+  journal = "Briefings in Bioinformatics",
+  year = 2025,
+  volume = "Volume 26, Issue 2",
+  doi = "10.1093/bib/bbaf173",
+  url = "https://doi.org/10.1093/bib/bbaf173"
 )
 
 citFooter("We also encourage citing any relevant datasets or databases (e.g. BugSigDB, MiMeDB, GutMGene, mBodyMap, GMRepoV2) used in your analysis with TaxSEA.")
