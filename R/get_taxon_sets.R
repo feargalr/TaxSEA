@@ -14,7 +14,7 @@
 #'
 #' @export
 get_taxon_sets <- function(taxon_to_fetch=taxon) {
-  taxon = get_ncbi_taxon_ids(taxon_to_fetch)
+  taxon <- get_ncbi_taxon_ids(taxon_to_fetch)
   data("TaxSEA_db", package = "TaxSEA", envir = environment())
 data("NCBI_ids", package = "TaxSEA", envir = environment())
 

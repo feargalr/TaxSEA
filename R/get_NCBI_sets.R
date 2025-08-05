@@ -15,7 +15,8 @@ get_ncbi_taxon_ids <- function (taxon_names)
   get_ncbi_taxon_id <- function(taxon_name) {
     base_url <- "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/"
     esearch_url <- paste0(base_url, "esearch.fcgi?db=taxonomy&term=", 
-                          URLencode(taxon_name, reserved = TRUE), "&retmode=xml")
+                          URLencode(taxon_name, reserved = TRUE),
+                          "&retmode=xml")
     con <- url(esearch_url, "r")
     on.exit(close(con))
     xml_data <- readLines(con)

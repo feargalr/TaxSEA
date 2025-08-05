@@ -32,7 +32,8 @@ TaxSEA <- function(taxon_ranks, lookup_missing = FALSE,
                    min_set_size = 5, max_set_size = 100,
                    custom_db = NULL) {
   if (any(grepl("\\[|\\]", names(taxon_ranks)))) {
-    stop("Taxon names contain square brackets [ ]. Please remove or rename these entries before running TaxSEA.")
+    stop("Taxon names contain square brackets [ ]. 
+         Please remove or rename these entries before running TaxSEA.")
   }
   
   
@@ -150,7 +151,9 @@ TaxSEA <- function(taxon_ranks, lookup_missing = FALSE,
   bsdb_df <- 
     result_df[grepl("bsdb", result_df$taxonSetName), ]
   disease_df <- 
-    result_df[!grepl("producers_of|bsdb", result_df$taxonSetName), ]
+    result_df[!grepl("producers_of|bsdb|BacDive", result_df$taxonSetName), ]
+  bacdive_df <- 
+    result_df[grepl("BacDive", result_df$taxonSetName), ]
   
   # Adjust FDR separately for each subset
   
@@ -168,11 +171,11 @@ TaxSEA <- function(taxon_ranks, lookup_missing = FALSE,
   rownames(bsdb_df) <- NULL
   rownames(metabolites_df) <- NULL
   rownames(disease_df) <- NULL
-	  
   
   res_list <- list(
     Metabolite_producers = metabolites_df,
     Health_associations = disease_df,
+    BacDive_bacterial_physiology = bacdive_df,
     BugSigDB = bsdb_df
   )
   
