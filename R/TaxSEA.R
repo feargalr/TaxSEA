@@ -173,6 +173,7 @@ TaxSEA <- function(taxon_ranks, lookup_missing = FALSE,
   rownames(disease_df) <- NULL
   
   res_list <- list(
+    All_databases = result_df,
     Metabolite_producers = metabolites_df,
     Health_associations = disease_df,
     BacDive_bacterial_physiology = bacdive_df,

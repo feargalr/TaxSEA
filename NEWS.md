@@ -1,5 +1,8 @@
 # TaxSEA News
 
+## Version 1.1.5 (2025-08-06)
+- Fixed bug in BacDive Database
+
 ## Version 1.1.4 (2025-08-05)
 - Added BacDive Database
 - Added Blossum and VANISH taxon sets in disease associations category
