@@ -1,5 +1,12 @@
 # TaxSEA News
 
+## Version 1.1.7 (2025-08-11)  
+- Added Gut-Brain modules database from Valles-Colomer et al.
+Nature Microbiology. 2019. 
+
+## Version 1.1.6 (2025-08-08)  
+- Bug fixes
+
 ## Version 1.1.5 (2025-08-06)
 - Fixed bug in BacDive Database
 

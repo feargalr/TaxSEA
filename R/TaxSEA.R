@@ -154,12 +154,16 @@ TaxSEA <- function(taxon_ranks, lookup_missing = FALSE,
     result_df[!grepl("producers_of|bsdb|BacDive", result_df$taxonSetName), ]
   bacdive_df <- 
     result_df[grepl("BacDive", result_df$taxonSetName), ]
+  GBM_df <- 
+    result_df[grepl("Colomer2019_MGB", result_df$taxonSetName), ]
   
   # Adjust FDR separately for each subset
   
   metabolites_df$FDR <- p.adjust(metabolites_df$PValue, method = "fdr")
   disease_df$FDR <- p.adjust(disease_df$PValue, method = "fdr")
   bsdb_df$FDR <- p.adjust(bsdb_df$PValue, method = "fdr")
+  bacdive_df$FDR <- p.adjust(bacdive_df$PValue, method = "fdr")
+  GBM_df$FDR <- p.adjust(GBM_df$PValue, method = "fdr")
   
   # Reformat output
   pubmed_ids <- (bsdb_df$taxonSetName)
@@ -177,7 +181,9 @@ TaxSEA <- function(taxon_ranks, lookup_missing = FALSE,
     Metabolite_producers = metabolites_df,
     Health_associations = disease_df,
     BacDive_bacterial_physiology = bacdive_df,
-    BugSigDB = bsdb_df
+    BugSigDB = bsdb_df,
+    Gut_Brain_Modules_VallesColomer2019 = GBM_df
+    
   )
   
   return(res_list)}
