@@ -1,5 +1,9 @@
 # TaxSEA News
 
+## Version 1.1.8 (2025-08-12)
+- Added output for all taxon sets 
+- Fixed spelling in GutMGene_producers_of_Phenyalanine
+
 ## Version 1.1.7 (2025-08-11)  
 - Added Gut-Brain modules database from Valles-Colomer et al.
 Nature Microbiology. 2019. 
