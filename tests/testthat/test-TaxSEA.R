@@ -3,7 +3,7 @@ test_that("TaxSEA returns valid output with test data", {
   res <- TaxSEA(TaxSEA_test_data)
 
   expect_type(res, "list")
-  expect_named(res, c("All_databases","Metabolite_producers", "Health_associations","BacDive_bacterial_physiology","Gut_Brain_Modules_VallesColomer2019","BugSigDB"))
+  expect_named(res, c("All_databases","Metabolite_producers", "Health_associations","BacDive_bacterial_physiology","BugSigDB","Gut_Brain_Modules_VallesColomer2019"))
 
   for (df in res) {
     expect_s3_class(df, "data.frame")

@@ -1,16 +1,16 @@
 Package: TaxSEA
 Type: Package
 Title: Taxon Set Enrichment Analysis
-Version: 1.1.8
+Version: 1.1.9
 Authors@R: c(person("Feargal", "Ryan", 
     email = "feargalr@gmail.com", 
     role = c("aut", "cre"),comment = c(ORCID = "0000-0002-1565-4598")))
 Description: TaxSEA is an R package for Taxon Set Enrichment Analysis, which 
     utilises a Kolmogorov-Smirnov test analyses to 
     investigate differential abundance analysis output for whether there
-    are alternations in a-priori defined sets of taxa from five previously 
-    published databases (BugSigDB, MiMeDB, GutMGene, mBodyMap and GMRepoV2)
-    and collated from the literature.  
+    are alternations in a-priori defined sets of taxa from  
+    public databases (BugSigDB, MiMeDB, GutMGene, mBodyMap, BacDive and
+    GMRepoV2) and collated from the literature.  
     TaxSEA takes as input a list of taxonomic identifiers (e.g. species names, 
     NCBI IDs etc.) and a rank (E.g. fold change, correlation coefficient). 
     TaxSEA be applied to any microbiota taxonomic profiling technology 
