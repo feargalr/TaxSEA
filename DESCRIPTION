@@ -1,7 +1,7 @@
 Package: TaxSEA
 Type: Package
 Title: Taxon Set Enrichment Analysis
-Version: 1.1.9
+Version: 1.2.0
 Authors@R: c(person("Feargal", "Ryan", 
     email = "feargalr@gmail.com", 
     role = c("aut", "cre"),comment = c(ORCID = "0000-0002-1565-4598")))
