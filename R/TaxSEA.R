@@ -151,7 +151,8 @@ TaxSEA <- function(taxon_ranks, lookup_missing = FALSE,
   bsdb_df <- 
     result_df[grepl("bsdb", result_df$taxonSetName), ]
   disease_df <- 
-    result_df[!grepl("producers_of|bsdb|BacDive|Colomer2019_MGB", result_df$taxonSetName), ]
+    result_df[!grepl("producers_of|bsdb|BacDive|Colomer2019_MGB", 
+                     result_df$taxonSetName), ]
   bacdive_df <- 
     result_df[grepl("BacDive", result_df$taxonSetName), ]
   GBM_df <- 

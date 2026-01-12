@@ -4,7 +4,8 @@ Title: Taxon Set Enrichment Analysis
 Version: 1.3.0
 Authors@R: c(person("Feargal", "Ryan", 
     email = "feargalr@gmail.com", 
-    role = c("aut", "cre"),comment = c(ORCID = "0000-0002-1565-4598")))
+    role = c("aut", "cre","fnd"),comment = c(ORCID = "0000-0002-1565-4598",
+                      funding = "Supported by NHMRC Investigator Grant")))
 Description: TaxSEA is an R package for Taxon Set Enrichment Analysis, which 
     utilises a Kolmogorov-Smirnov test analyses to 
     investigate differential abundance analysis output for whether there
