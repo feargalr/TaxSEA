@@ -1,4 +1,8 @@
+/* pkgdown bootstrap navbar logo */
+
+.navbar .navbar-brand img,
 .navbar-brand img {
-  height: 50px;  
-  width: auto;
+  height: 50px !important;
+  max-height: 50px !important;
+  width: auto !important;
 }
