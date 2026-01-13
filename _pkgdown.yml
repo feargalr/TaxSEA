@@ -3,13 +3,15 @@ template:
   bootstrap: 5
 
 navbar:
+  logo:
+    image: man/figures/hex.png
   structure:
     left: [reference, guides, news]
   components:
     guides:
       text: "Guides"
       menu:
-        - text: "Why taxon set enrichment?"
+        - text: "Why use taxon set enrichment?"
           href: articles/why-taxon-set-enrichment.html
         - text: "FAQs"
           href: articles/FAQs.html
@@ -21,7 +23,3 @@ navbar:
 home:
   title: TaxSEA
   description: Taxon Set Enrichment Analysis
-
-logo:
-  image: man/figures/hex.png
-  height: 1
