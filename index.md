@@ -5,7 +5,6 @@ Available on
 [**Bioconductor**](https://bioconductor.org/packages/TaxSEA)  
 [Read the paper in Briefings in
 Bioinformatics](https://academic.oup.com/bib/article/26/2/bbaf173/8116684)
-![TaxSEA](reference/figures/hex.png)
 
 ### What is TaxSEA?
 
