@@ -29,7 +29,7 @@ See READ ME.
 ``` r
 data(TaxSEA_test_data)
 test_results <- TaxSEA(TaxSEA_test_data)
-#> Using cached version from 2026-01-13 00:10:49
+#> Using cached version from 2026-01-13 00:22:21
 #> Warning: p-value will be approximate in the presence of ties
 #> Warning: p-value will be approximate in the presence of ties
 #> Warning: p-value will be approximate in the presence of ties

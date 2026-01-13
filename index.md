@@ -7,12 +7,27 @@ Available on
 Bioinformatics](https://academic.oup.com/bib/article/26/2/bbaf173/8116684)
 ![TaxSEA](reference/figures/hex.png)
 
-TaxSEA helps microbiome researchers test for enrichment in known
-microbial signatures, including:
+### What is TaxSEA?
 
-- Metabolite producers  
-- Disease associations  
-- Previously published microbiome signatures
+Traditional differential abundance (DA) analysis looks at individual
+microbes going up or down. This sounds sensible but in human microbiome
+studies it often falls apart because everyone’s microbiome is unique,
+with few species shared across people. TaxSEA doesn’t seem to test for
+individual species are different but rather is there a group of species
+with a shared characteristic that is different. For example are we
+seeing a shift in bugs with increased oxygen tolerance, or an increase
+in bugs which produce a certain metabolite or enzyme, or even are we
+seeing a change in bugs which have a known disease association in
+humans. If you want to know more check out our paper, but we find this
+approach to be far more reproducible than standard DA analysis as well
+as capable of extracting biologically meaningful patterns.
+
+TaxSEA can also test for differences at a particular taxonomic rank. For
+example instead of just summing up all the species in a genus. We see if
+the distribution of species within a genus is different between groups.
+
+In short, TaxSEA makes it easy to intepret changes in your microbiome
+data.
 
 TaxSEA takes as input a vector of genus or species names and a rank. For
 example log2 fold changes or Spearman’s rho. TaxSEA then uses a
@@ -32,18 +47,23 @@ databases (**BacDive**,**gutMGene**, **GMrepo v2**, **MiMeDB**,
 **mBodyMap**, **BugSigDB**). See below for examples of using custom
 databases or taxonomically defined taxon sets.
 
-Please cite the appropriate database if using: - Schober et al. BacDive
-in 2025: the core database for prokaryotic strain data. Nucleic Acids
-Res. 2025. - Cheng et al. gutMGene: a comprehensive database for target
-genes of gut microbes and microbial metabolites. Nucleic Acids Res.
-2022. - Dai et al. GMrepo v2: a curated human gut microbiome database
-with special focus on disease markers and cross-dataset comparison
-Nucleic Acids Res. 2022. - Wishart et. al. MiMeDB: the Human Microbial
-Metabolome Database Nucleic Acids Res. 2023. - Jin et al. mBodyMap: a
-curated database for microbes across human body and their associations
-with health and diseases. Nucleic Acids Res. 2022. - Geistlinger et
-al. BugSigDB captures patterns of differential abundance across a broad
-range of host-associated microbial signatures. Nature Biotech. 2023.
+Please cite the appropriate database if using:
+
+- Schober et al. BacDive in 2025: the core database for prokaryotic
+  strain data. Nucleic Acids Res. 2025.
+- Cheng et al. gutMGene: a comprehensive database for target genes of
+  gut microbes and microbial metabolites. Nucleic Acids Res. 2022.
+- Dai et al. GMrepo v2: a curated human gut microbiome database with
+  special focus on disease markers and cross-dataset comparison Nucleic
+  Acids Res. 2022.
+- Wishart et. al. MiMeDB: the Human Microbial Metabolome Database
+  Nucleic Acids Res. 2023.
+- Jin et al. mBodyMap: a curated database for microbes across human body
+  and their associations with health and diseases. Nucleic Acids Res.
+  2022.
+- Geistlinger et al. BugSigDB captures patterns of differential
+  abundance across a broad range of host-associated microbial
+  signatures. Nature Biotech. 2023.
 
 ### Installation
 
