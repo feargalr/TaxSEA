@@ -4,8 +4,19 @@ template:
 
 navbar:
   structure:
-    left:  [home, reference, articles, news]
-    right: [github]
+    left: [reference, guides, news]
+  components:
+    guides:
+      text: "Guides"
+      menu:
+        - text: "Why taxon set enrichment?"
+          href: articles/why-taxon-set-enrichment.html
+        - text: "FAQs"
+          href: articles/FAQs.html
+        - text: "Taxonomic aggregation"
+          href: articles/Taxonomic-aggregation.html
+        - text: "Using TaxSEA"
+          href: articles/TaxSEA.html
 
 home:
   title: TaxSEA
@@ -13,4 +24,4 @@ home:
 
 logo:
   image: man/figures/hex.png
-  height: 10
+  height: 1
