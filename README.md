@@ -4,11 +4,20 @@ Available on [**Bioconductor**](https://bioconductor.org/packages/TaxSEA)
 [Read the paper in Briefings in Bioinformatics](https://academic.oup.com/bib/article/26/2/bbaf173/8116684)
 <img align="right" src="man/figures/hex.png" alt="TaxSEA" height="200">
 
-TaxSEA helps microbiome researchers test for enrichment in known microbial signatures, including:
+### What is TaxSEA? ###
+Traditional differential abundance (DA) analysis looks at individual microbes going up or down. This sounds sensible
+but in human microbiome studies it often falls apart because everyone's microbiome is unique, with
+few species shared across people. TaxSEA doesn't seem to test for individual species are different but rather
+is there a group of species with a shared characteristic that is different. For example are we seeing a 
+shift in bugs with increased oxygen tolerance, or an increase in bugs which produce a certain metabolite or enzyme, 
+or even are we seeing a change in bugs which have a known disease association in humans. If you want to
+know more check out our paper, but we find this approach to be far more reproducible than standard DA analysis as 
+well as capable of extracting biologically meaningful patterns. 
 
-- Metabolite producers  
-- Disease associations  
-- Previously published microbiome signatures
+TaxSEA can also test for differences at a particular taxonomic rank. For example instead of just summing up all 
+the species in a genus. We see if the distribution of species within a genus is different between groups. 
+
+In short, TaxSEA makes it easy to intepret changes in your microbiome data.
 
 TaxSEA takes as input a vector of genus or species names and a rank. 
 For example log2 fold changes or Spearman's rho. TaxSEA then uses
