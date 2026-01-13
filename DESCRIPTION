@@ -25,7 +25,7 @@ LazyData: false
 VignetteBuilder: knitr
 RoxygenNote: 7.3.2
 biocViews: Microbiome, Metagenomics, Sequencing, GeneSetEnrichment, RNASeq
-URL: https://github.com/feargalr/taxsea
+URL: https://github.com/feargalr/taxsea, https://feargalr.github.io/TaxSEA/
 BugReports: https://github.com/feargalr/taxsea/issues
 Depends: R (>= 4.5.0)
 Suggests:
