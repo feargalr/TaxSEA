@@ -1,0 +1,116 @@
+---
+title: "Testing higher taxonomic levels without collapsing your data"
+author: "Feargal Ryan"
+date: "`r Sys.Date()`"
+output: html_document
+---
+A common way to test for differences at higher taxonomic levels (e.g. genus, family, order) is to aggregate counts and then run differential abundance on the collapsed table. That approach is simple, but it has a big flaw:
+opposing shifts cancel each other out. If one species in a genus goes up and another goes down, aggregation can make it look like nothing changed, even though the biology clearly did.
+
+**TaxSEA offers an alternative.**
+
+Instead of collapsing your data, you:
+- Run your usual analysis at the species level
+- Keep the full ranked list (e.g. log2FC, correlations, model coefficients)
+- Define taxonomic sets (e.g. all species belonging to the same family)
+- Test whether those sets are coordinately shifted using enrichment
+
+In other words, you test higher-level taxonomy without throwing away species-level resolution.
+
+This lets you ask questions like:
+- Are members of this family consistently depleted, even if no single species is significant?
+- Is this genus showing a directional shift driven by many small effects?
+- Are higher-level patterns being masked by species-level heterogeneity?
+
+This is particularly powerful in:
+- antibiotic or perturbation experiments
+- situations where ecological turnover happens within taxonomic groups
+
+Below is an example performing this in R.  In the future we will incorporate
+this as a core function in TaxSEA
+
+
+```r
+
+#### Applying TaxSEA functionality to taxonomic ranks  
+# This script applies TaxSEA to identify taxonomic enrichment at different taxonomic levels.
+# Specifically, we analyze enrichment at the family level using metagenomic data
+
+# Load required libraries
+library(TaxSEA)
+library(curatedMetagenomicData)
+library(tidyverse)
+library(phyloseq)
+library(MicrobiomeStat)
+library(dplyr)
+
+# Load sample metadata
+metadata_all <- sampleMetadata
+
+# Filter metadata for the specific study (ChngKR_2016)
+metadata <- metadata_all %>% 
+  filter(study_name == "ChngKR_2016") %>% 
+  column_to_rownames('sample_id')
+
+# Extract count data using curatedMetagenomicData
+cmd_data <- curatedMetagenomicData(
+  pattern = "ChngKR_2016.relative_abundance",
+  counts = TRUE,
+  dryrun = FALSE
+)
+
+# Convert the extracted data to a count matrix
+counts_data <- assay(cmd_data[[1]])
+counts_data <- counts_data[, rownames(metadata)]  # Subset to relevant samples
+
+# Filter taxa with at least one sample having counts > 100
+counts_data <- counts_data[apply(counts_data > 100, 1, sum) > 0, ]
+
+# Extract species names from taxonomic strings
+species_names <- gsub("s__", "", sapply(rownames(counts_data), function(y) strsplit(y, "\\|")[[1]][7]))
+rownames(counts_data) <- species_names
+
+# Create a taxonomic lineage dataframe
+# Remove taxonomic prefixes (k__, p__, c__, etc.) and separate into taxonomic ranks
+
+# make data frame of taxon lineages
+taxon_lineages <- data.frame(Name = species_names,
+                             Lineage = names(species_names)) %>%
+  mutate(Lineage = str_remove_all(Lineage, '[kpcofgs]__')) %>%
+  separate(col = Lineage, into = c('kingdom', 'phylum', 'class', 
+                                   'order', 'family', 'genus', 'species'), 
+           sep = '\\|') %>%
+  mutate(name = Name) %>%
+  remove_rownames() %>%
+  column_to_rownames('name')
+
+# Perform differential abundance testing using LinDA
+metadata$study_condition <- factor(metadata$study_condition, levels = c("control", "AD"))
+
+linda_results <- linda(
+  feature.dat = counts_data,
+  meta.dat = metadata,
+  formula = '~study_condition',
+  feature.dat.type = 'count',
+  prev.filter = 0.05
+)
+
+# Extract log2 fold change values for differential taxa
+linda_results <- linda_results$output$study_conditionAD
+log2_fold_changes <- linda_results$log2FoldChange
+names(log2_fold_changes) <- rownames(linda_results)
+
+# Define the taxonomic rank for enrichment analysis
+selected_taxon_level <- 'genus'  # Modify as needed (e.g., genus, phylum)
+
+# Create a named list of species grouped by taxonomic rank
+custom_taxon_sets <- taxon_lineages %>%
+  group_by(.data[[selected_taxon_level]]) %>% 
+  summarise(species = list(species), .groups = "drop") %>%
+  deframe()
+
+# Perform enrichment analysis using TaxSEA
+custom_taxsea_results <- TaxSEA(taxon_ranks = log2_fold_changes, custom_db = custom_taxon_sets)
+custom_taxsea_results <- custom_taxsea_results$custom_sets
+
+```
