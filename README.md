@@ -36,6 +36,7 @@ By default TaxSEA utilizes taxon sets generated from six reference databases
 examples of using custom databases or taxonomically defined taxon sets. 
 
 Please cite the appropriate database if using:
+
 - Schober et al. BacDive in 2025: the core database for prokaryotic strain data.
 Nucleic Acids Res. 2025.
 - Cheng et al. gutMGene: a comprehensive database for target genes of gut microbes and
