@@ -2,7 +2,6 @@
 [![Bioconductor](https://www.bioconductor.org/shields/years-in-bioc/TaxSEA.svg)](https://bioconductor.org/packages/TaxSEA)  
 Available on [**Bioconductor**](https://bioconductor.org/packages/TaxSEA)  
 [Read the paper in Briefings in Bioinformatics](https://academic.oup.com/bib/article/26/2/bbaf173/8116684)
-<img align="right" src="man/figures/hex.png" alt="TaxSEA" height="200">
 
 ### What is TaxSEA? ###
 Traditional differential abundance (DA) analysis looks at individual microbes going up or down. This sounds sensible

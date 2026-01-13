@@ -28,5 +28,5 @@ home:
         title: ""
         text: |
           <div style="text-align:center; margin-bottom: 1rem;">
-            <img src="man/figures/hex.png" width="160" alt="TaxSEA logo">
+            <img src="man/figures/hex.png" width="200" alt="TaxSEA logo">
           </div>
