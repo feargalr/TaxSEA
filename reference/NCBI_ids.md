@@ -21,6 +21,8 @@ A named vector where:
 
   Species or genus names
 
+A named vector mapping NCBI IDs to species or genus names.
+
 ## Source
 
 NCBI

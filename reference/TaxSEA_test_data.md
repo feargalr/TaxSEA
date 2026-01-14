@@ -20,6 +20,9 @@ A data frame with two columns:
 
   Character vector representing taxon IDs
 
+A data frame with columns 'rank' and 'id' representing taxon ranks and
+taxon IDs, respectively.
+
 ## Source
 
 See READ ME.
@@ -29,7 +32,11 @@ See READ ME.
 ``` r
 data(TaxSEA_test_data)
 test_results <- TaxSEA(TaxSEA_test_data)
-#> Using cached version from 2026-01-13 06:36:23
+#> Using cached version from 2026-01-14 05:22:21
+#> Warning: p-value will be approximate in the presence of ties
+#> Warning: p-value will be approximate in the presence of ties
+#> Warning: p-value will be approximate in the presence of ties
+#> Warning: p-value will be approximate in the presence of ties
 #> Warning: p-value will be approximate in the presence of ties
 #> Warning: p-value will be approximate in the presence of ties
 #> Warning: p-value will be approximate in the presence of ties

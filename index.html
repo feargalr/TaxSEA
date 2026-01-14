@@ -23,7 +23,7 @@
 
     <a class="navbar-brand me-2" href="index.html">TaxSEA</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.3.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.3.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -64,8 +64,14 @@ Available on <a href="https://bioconductor.org/packages/TaxSEA" class="external-
 <div class="section level3">
 <h3 id="what-is-taxsea">What is TaxSEA?<a class="anchor" aria-label="anchor" href="#what-is-taxsea"></a>
 </h3>
-<p>Traditional differential abundance (DA) analysis looks at individual microbes going up or down. This sounds sensible but in human microbiome studies it often falls apart because everyone’s microbiome is unique, with few species shared across people.</p>
-<p>TaxSEA doesn’t test for individual species but rather is there a group of species with a shared characteristic that is different. For example are we seeing a shift in bugs with increased oxygen tolerance, or an increase in bugs which produce a certain metabolite or enzyme, or even are we seeing a change in bugs which have a known disease association in humans. If you want to know more check out our paper, but we find this approach to be far more reproducible than standard DA analysis as well as capable of extracting biologically meaningful patterns. TaxSEA usually can run within seconds with standard hardware.</p>
+<p>Traditional microbiome analysis tools often look at individual microbes going up or down. This sounds sensible but in human microbiome studies it often falls apart because everyone’s microbiome is unique, with few species shared across people.</p>
+<p>TaxSEA doesn’t test for individual species but rather asks if there a group of species with a shared characteristic that is altered between groups of people. For example are we seeing a shift in bugs with increased oxygen tolerance, or an increase in bugs which produce a certain metabolite or enzyme, or even are we seeing a change in bugs which have a known disease association in humans. If you want to know more check out our paper, but we find this approach to be far more reproducible than standard Differential Abundance (DA) analysis as well as capable of extracting biologically meaningful patterns. TaxSEA usually can run within seconds with standard hardware.</p>
+<p>TaxSEA supports <strong>two complementary analysis modes</strong>:</p>
+<ol style="list-style-type: decimal">
+<li><strong>Enrichment (rank-based, recommended)</strong></li>
+<li><strong>ORA – Over-Representation Analysis (set-based)</strong></li>
+</ol>
+<p>Both use the same taxon-set databases but answer slightly different questions.</p>
 <p>TaxSEA can also test for differences at a particular taxonomic rank. For example instead of just summing up all the species in a genus. We see if the distribution of species within a genus is different between groups. This is a more powerful approach as simply summing/aggregating to a rank can risk missing when you can get shifts within a genus/family.</p>
 <p>In short, TaxSEA makes it easy to intepret changes in your microbiome data.</p>
 <p>TaxSEA takes as input a vector of genus or species names and a rank. For example log2 fold changes or Spearman’s rho. TaxSEA then uses a Kolmogorov-Smirnov test to identify if a particular group of species or genera (i.e. a set of taxa such as butyrate producers) are skewed to one end of the distribution.</p>
@@ -97,7 +103,7 @@ Available on <a href="https://bioconductor.org/packages/TaxSEA" class="external-
 <h3 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
 </h3>
 <div class="section level4">
-<h4 id="quick-start">Quick start<a class="anchor" aria-label="anchor" href="#quick-start"></a>
+<h4 id="quick-start-rank-based">Quick start (rank based)<a class="anchor" aria-label="anchor" href="#quick-start-rank-based"></a>
 </h4>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/feargalr/taxsea" class="external-link">TaxSEA</a></span><span class="op">)</span></span>
@@ -119,16 +125,63 @@ Available on <a href="https://bioconductor.org/packages/TaxSEA" class="external-
 <span><span class="va">bsdb.df</span> <span class="op">&lt;-</span> <span class="va">taxsea_results</span><span class="op">$</span><span class="va">BugSigdB</span></span></code></pre></div>
 </div>
 <div class="section level4">
+<h4 id="quick-start-ora">Quick start (ORA)<a class="anchor" aria-label="anchor" href="#quick-start-ora"></a>
+</h4>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/feargalr/taxsea" class="external-link">TaxSEA</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># A list of oral taxa</span></span>
+<span><span class="va">test_ORA_input</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>  <span class="st">"Streptococcus_mitis"</span>,</span>
+<span>  <span class="st">"Haemophilus_parainfluenzae"</span>,</span>
+<span>  <span class="st">"Fusobacterium_periodonticum"</span>,</span>
+<span>  <span class="st">"Fusobacterium_nucleatum"</span>,</span>
+<span>  <span class="st">"Neisseria_elongata"</span>,</span>
+<span>  <span class="st">"Neisseria_flavescens"</span>,</span>
+<span>  <span class="st">"Streptococcus_sanguinis"</span>,</span>
+<span>  <span class="st">"Streptococcus_parasanguinis"</span>,</span>
+<span>  <span class="st">"Streptococcus_salivarius"</span>,</span>
+<span>  <span class="st">"Capnocytophaga_sputigena"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span></span>
+<span><span class="va">taxsea_results</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/TaxSEA.html">TaxSEA</a></span><span class="op">(</span>input_taxa<span class="op">=</span><span class="va">test_ORA_input</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#Enrichments among health and disease signatures from GMRepoV2 and mBodyMap</span></span>
+<span><span class="va">disease.df</span> <span class="op">&lt;-</span> <span class="va">taxsea_results</span><span class="op">$</span><span class="va">Health_associations</span></span></code></pre></div>
+</div>
+<div class="section level4">
 <h4 id="input">Input<a class="anchor" aria-label="anchor" href="#input"></a>
 </h4>
-<p>All that is required for TaxSEA is a vector in R containing ranks (e.g. log2 fold changes) and names (E.g. species/genus). TaxSEA will not work for ranks higher than species or genus. The input should be for all taxa tested, and not limited to only a pre-defined set (e.g. do not use a threshold for significance or remove any taxa). See example below for format. TaxSEA will lookup and convert taxon names to NCBI taxonomic identifiers. TaxSEA stores a commonly observed identifiers internally and so will only look up whatever is not covered to save time.</p>
-<p>Input IDs should be in the format of like one of the following</p>
+<p>TaxSEA supports <strong>two input types</strong>, depending on the analysis mode you choose:</p>
+<div class="section level5">
+<h5 id="enrichment-mode-rank-based-recommended">Enrichment mode (rank-based; recommended)<a class="anchor" aria-label="anchor" href="#enrichment-mode-rank-based-recommended"></a>
+</h5>
+<p>You provide a <strong>named numeric vector</strong> where:</p>
+<ul>
+<li>The <strong>names</strong> are taxa (species or genus)</li>
+<li>The <strong>values</strong> are ranks or signed statistics (e.g. log2 fold changes, correlation coefficients)</li>
+</ul>
+<p>In enrichment mode, the input <strong>must include all taxa that were tested</strong> in your analysis.<br>
+Do <strong>not</strong> apply a significance threshold or pre-filter taxa before running TaxSEA.<br>
+The method relies on the <strong>full distribution</strong> of values to detect coordinated shifts across taxon sets.</p>
+</div>
+<div class="section level5">
+<h5 id="ora-mode-set-based">ORA mode (set-based)<a class="anchor" aria-label="anchor" href="#ora-mode-set-based"></a>
+</h5>
+<p>You provide a <strong>character vector of taxa names</strong> representing taxa of interest (i.e. a “hit list”).</p>
+<ul>
+<li>No ranking or numeric values are required</li>
+<li>TaxSEA tests whether these taxa are over-represented in predefined taxon sets</li>
+<li>This mode is most appropriate for presence/absence or binary data</li>
+</ul>
+<p>Input taxa names should be in the format of like one of the following</p>
 <ul>
 <li>Species name. E.g. “Bifidobacterium longum”, “Bifidobacterium_longum”</li>
 <li>Genus name. E.g. “Bifidobacterium”</li>
 <li>NCBI ID E.g. 216816</li>
 </ul>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#Input IDs with the full taxonomic lineage should be split up. E.g.</span></span>
 <span><span class="va">x</span> <span class="op">&lt;-</span> <span class="st">"d__Bacteria.p__Actinobacteriota.c__Actinomycetes.o__Bifidobacteriales.f__Bifidobacteriaceae.g__Bifidobacterium"</span></span>
 <span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/strsplit.html" class="external-link">strsplit</a></span><span class="op">(</span><span class="va">x</span>,split<span class="op">=</span><span class="st">"\\."</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fl">6</span><span class="op">]</span></span>
@@ -144,10 +197,11 @@ Available on <a href="https://bioconductor.org/packages/TaxSEA" class="external-
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="va">TaxSEA_test_data</span><span class="op">)</span>,<span class="fl">4</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
+</div>
 <div class="section level3">
 <h3 id="run-taxsea-with-test-data">Run TaxSEA with test data<a class="anchor" aria-label="anchor" href="#run-taxsea-with-test-data"></a>
 </h3>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"TaxSEA_test_data"</span><span class="op">)</span></span>
 <span><span class="va">taxsea_results</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/TaxSEA.html">TaxSEA</a></span><span class="op">(</span>taxon_ranks<span class="op">=</span><span class="va">TaxSEA_test_data</span><span class="op">)</span></span>
 <span></span>
@@ -168,9 +222,9 @@ Available on <a href="https://bioconductor.org/packages/TaxSEA" class="external-
 <li>Pasolli et al. Accessible, curated metagenomic data through ExperimentHub. Nat Methods. 2017 Oct 31;14(11):1023-1024. doi: 10.1038/nmeth.4468.</li>
 <li>Zhou et al. LinDA: linear models for differential abundance analysis of microbiome compositional data. Genome Biol. 2022 Apr 14;23(1):95.</li>
 </ul>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">head</span>(<span class="fu">sample</span>(TaxSEA_test_data),<span class="dv">3</span>)</span>
-<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>Bacteroides_thetaiotaomicron           Blautia_sp_CAG_257          Ruminococcus bromii</span>
-<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>                       <span class="fl">1.908</span>                        <span class="fl">3.650</span>                       <span class="sc">-</span><span class="fl">5.038</span> </span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">head</span>(<span class="fu">sample</span>(TaxSEA_test_data),<span class="dv">3</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>Bacteroides_thetaiotaomicron           Blautia_sp_CAG_257          Ruminococcus bromii</span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>                       <span class="fl">1.908</span>                        <span class="fl">3.650</span>                       <span class="sc">-</span><span class="fl">5.038</span> </span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="output">Output<a class="anchor" aria-label="anchor" href="#output"></a>
@@ -188,7 +242,7 @@ Available on <a href="https://bioconductor.org/packages/TaxSEA" class="external-
 <h4 id="custom-databases">Custom databases<a class="anchor" aria-label="anchor" href="#custom-databases"></a>
 </h4>
 <p>Many users may want to utilise TaxSEA with a custom database. For example for testing if there is a flag in the TaxSEA function “custom_db” which expects as input a named list of vectors. This is the same format as the default TaxSEA database. Note: using the custom_db flag disables the automatic ID conversion and NCBI API lookup. However we have functionality available via other functions</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Perform enrichment analysis using TaxSEA</span></span>
 <span><span class="va">custom_taxsea_results</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/TaxSEA.html">TaxSEA</a></span><span class="op">(</span>taxon_ranks <span class="op">=</span> <span class="va">log2_fold_changes</span>, custom_db <span class="op">=</span> <span class="va">custom_taxon_sets</span><span class="op">)</span></span>
 <span><span class="va">custom_taxsea_results</span> <span class="op">&lt;-</span> <span class="va">custom_taxsea_results</span><span class="op">$</span><span class="va">custom_sets</span></span></code></pre></div>
@@ -197,7 +251,7 @@ Available on <a href="https://bioconductor.org/packages/TaxSEA" class="external-
 <h4 id="testing-for-differences-in-taxonomically-defined-sets">Testing for differences in taxonomically defined sets<a class="anchor" aria-label="anchor" href="#testing-for-differences-in-taxonomically-defined-sets"></a>
 </h4>
 <p>In addition to taxon sets defined by function or phenotype, users can define sets based on taxonomy. Current methods to test at higher taxonomic levels (e.g., genus or family), involve aggregating counts but with this approach opposing shifts in individual species may cancel each other out, obscuring meaningful biological patterns. For instance, antibiotic treatment may suppress certain species while allowing resistant species within the same genus to expand and occupy the vacant niche, creating an ecological shift that appears as no net change at broader taxonomic levels. Here we utilise data from Chng et al. demonstrating this in a comparison between Atopic dermatitis and controls.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co">#### Applying TaxSEA functionality to taxonomic ranks  </span></span>
 <span><span class="co"># This script applies TaxSEA to identify taxonomic enrichment at different taxonomic levels.</span></span>
@@ -290,7 +344,7 @@ Available on <a href="https://bioconductor.org/packages/TaxSEA" class="external-
 <h4 id="bugsigdb">BugSigDB<a class="anchor" aria-label="anchor" href="#bugsigdb"></a>
 </h4>
 <p>The format of BugSigDB is that each publication is entered as a “Study”, and within this there is different experiments and signatures. For example one of the signatures may be taxa increased in an experiment, and another signature is taxa that are decreased. Users can find out more by querying the BugSigDB. In recent updates BugSigDB has moved to using the PubMed ID as the study ID (Although not all studies have these yet). See below for an example.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/waldronlab/bugsigdbr" class="external-link">bugsigdbr</a></span><span class="op">)</span> <span class="co">#This package is installable via Bioconductor</span></span>
 <span><span class="va">bsdb</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/bugsigdbr/man/importBugSigDB.html" class="external-link">importBugSigDB</a></span><span class="op">(</span><span class="op">)</span> <span class="co">#Import database </span></span>
 <span></span>
@@ -305,7 +359,7 @@ Available on <a href="https://bioconductor.org/packages/TaxSEA" class="external-
 <h4 id="taxsea-database-with-other-enrichment-tools">TaxSEA database with other enrichment tools<a class="anchor" aria-label="anchor" href="#taxsea-database-with-other-enrichment-tools"></a>
 </h4>
 <p>The TaxSEA function by default uses the Kolmogorov Smirnov test and the original idea was inspired by gene set enrichment analyses from RNASeq. Should users wish to use an alternative gene set enrichment analysis tool the database is formatted in such a way that should be possible. See below for an example with fast gene set enrichment analysis (fgsea).</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ctlab/fgsea/" class="external-link">fgsea</a></span><span class="op">)</span> <span class="co">#This package is installable via Bioconductor</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">TaxSEA_DB</span><span class="op">)</span></span>
 <span><span class="co">#Convert input names to NCBI taxon ids</span></span>

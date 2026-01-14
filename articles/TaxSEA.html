@@ -21,7 +21,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">TaxSEA</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.3.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.3.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -64,7 +64,7 @@
                         <h4 data-toc-skip class="author">Feargal
 Ryan</h4>
             
-            <h4 data-toc-skip class="date">2026-01-13</h4>
+            <h4 data-toc-skip class="date">2026-01-14</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/feargalr/taxsea/blob/main/vignettes/TaxSEA.Rmd" class="external-link"><code>vignettes/TaxSEA.Rmd</code></a></small>
       <div class="d-none name"><code>TaxSEA.Rmd</code></div>
@@ -209,8 +209,16 @@ Genus name. E.g. “Bifidobacterium” - NCBI ID E.g. 216816</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"TaxSEA_test_data"</span><span class="op">)</span></span>
 <span><span class="va">taxsea_results</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/TaxSEA.html">TaxSEA</a></span><span class="op">(</span>taxon_ranks<span class="op">=</span><span class="va">TaxSEA_test_data</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Using cached version from 2026-01-13 06:36:23</span></span></code></pre>
+<pre><code><span><span class="co">## Using cached version from 2026-01-14 05:22:21</span></span></code></pre>
 <pre><code><span><span class="co">## Warning in ks.test.default(taxon_set_ranks, taxon_ranks): p-value will be</span></span>
+<span><span class="co">## approximate in the presence of ties</span></span>
+<span><span class="co">## Warning in ks.test.default(taxon_set_ranks, taxon_ranks): p-value will be</span></span>
+<span><span class="co">## approximate in the presence of ties</span></span>
+<span><span class="co">## Warning in ks.test.default(taxon_set_ranks, taxon_ranks): p-value will be</span></span>
+<span><span class="co">## approximate in the presence of ties</span></span>
+<span><span class="co">## Warning in ks.test.default(taxon_set_ranks, taxon_ranks): p-value will be</span></span>
+<span><span class="co">## approximate in the presence of ties</span></span>
+<span><span class="co">## Warning in ks.test.default(taxon_set_ranks, taxon_ranks): p-value will be</span></span>
 <span><span class="co">## approximate in the presence of ties</span></span>
 <span><span class="co">## Warning in ks.test.default(taxon_set_ranks, taxon_ranks): p-value will be</span></span>
 <span><span class="co">## approximate in the presence of ties</span></span>
@@ -260,7 +268,7 @@ they can do so by querying that database.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/waldronlab/bugsigdbr" class="external-link">bugsigdbr</a></span><span class="op">)</span> <span class="co">#This package is installable via Bioconductor</span></span>
 <span><span class="va">bsdb</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/bugsigdbr/man/importBugSigDB.html" class="external-link">importBugSigDB</a></span><span class="op">(</span><span class="op">)</span> <span class="co">#Import database </span></span></code></pre></div>
-<pre><code><span><span class="co">## Using cached version from 2026-01-13 06:36:23</span></span></code></pre>
+<pre><code><span><span class="co">## Using cached version from 2026-01-14 05:22:21</span></span></code></pre>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#E.g. if the BugSigDB identifier you found enriched was </span></span>
 <span><span class="co">#bsdb:74/1/2_obesity:obese_vs_non-obese_DOWN</span></span>
@@ -339,7 +347,7 @@ analysis (fgsea).</p>
 <span><span class="co">## [1] stats     graphics  grDevices utils     datasets  methods   base     </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## other attached packages:</span></span>
-<span><span class="co">## [1] fgsea_1.36.2     bugsigdbr_1.16.2 TaxSEA_1.3.0     BiocStyle_2.38.0</span></span>
+<span><span class="co">## [1] fgsea_1.36.2     bugsigdbr_1.16.2 TaxSEA_1.3.1     BiocStyle_2.38.0</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## loaded via a namespace (and not attached):</span></span>
 <span><span class="co">##  [1] fastmatch_1.1-6     gtable_0.3.6        xfun_0.55          </span></span>

@@ -8,20 +8,29 @@ Bioinformatics](https://academic.oup.com/bib/article/26/2/bbaf173/8116684)
 
 ### What is TaxSEA?
 
-Traditional differential abundance (DA) analysis looks at individual
-microbes going up or down. This sounds sensible but in human microbiome
-studies it often falls apart because everyone’s microbiome is unique,
-with few species shared across people.
+Traditional microbiome analysis tools often look at individual microbes
+going up or down. This sounds sensible but in human microbiome studies
+it often falls apart because everyone’s microbiome is unique, with few
+species shared across people.
 
-TaxSEA doesn’t test for individual species but rather is there a group
-of species with a shared characteristic that is different. For example
-are we seeing a shift in bugs with increased oxygen tolerance, or an
-increase in bugs which produce a certain metabolite or enzyme, or even
-are we seeing a change in bugs which have a known disease association in
-humans. If you want to know more check out our paper, but we find this
-approach to be far more reproducible than standard DA analysis as well
+TaxSEA doesn’t test for individual species but rather asks if there a
+group of species with a shared characteristic that is altered between
+groups of people. For example are we seeing a shift in bugs with
+increased oxygen tolerance, or an increase in bugs which produce a
+certain metabolite or enzyme, or even are we seeing a change in bugs
+which have a known disease association in humans. If you want to know
+more check out our paper, but we find this approach to be far more
+reproducible than standard Differential Abundance (DA) analysis as well
 as capable of extracting biologically meaningful patterns. TaxSEA
 usually can run within seconds with standard hardware.
+
+TaxSEA supports **two complementary analysis modes**:
+
+1.  **Enrichment (rank-based, recommended)**
+2.  **ORA – Over-Representation Analysis (set-based)**
+
+Both use the same taxon-set databases but answer slightly different
+questions.
 
 TaxSEA can also test for differences at a particular taxonomic rank. For
 example instead of just summing up all the species in a genus. We see if
@@ -78,7 +87,7 @@ BiocManager::install("TaxSEA")
 
 ### Usage
 
-#### Quick start
+#### Quick start (rank based)
 
 ``` r
 library(TaxSEA)
@@ -100,18 +109,63 @@ disease.df <- taxsea_results$Health_associations
 bsdb.df <- taxsea_results$BugSigdB
 ```
 
+#### Quick start (ORA)
+
+``` r
+library(TaxSEA)
+
+# A list of oral taxa
+test_ORA_input <- c(
+  "Streptococcus_mitis",
+  "Haemophilus_parainfluenzae",
+  "Fusobacterium_periodonticum",
+  "Fusobacterium_nucleatum",
+  "Neisseria_elongata",
+  "Neisseria_flavescens",
+  "Streptococcus_sanguinis",
+  "Streptococcus_parasanguinis",
+  "Streptococcus_salivarius",
+  "Capnocytophaga_sputigena"
+)
+
+
+taxsea_results <- TaxSEA(input_taxa=test_ORA_input)
+
+#Enrichments among health and disease signatures from GMRepoV2 and mBodyMap
+disease.df <- taxsea_results$Health_associations
+```
+
 #### Input
 
-All that is required for TaxSEA is a vector in R containing ranks (e.g.
-log2 fold changes) and names (E.g. species/genus). TaxSEA will not work
-for ranks higher than species or genus. The input should be for all taxa
-tested, and not limited to only a pre-defined set (e.g. do not use a
-threshold for significance or remove any taxa). See example below for
-format. TaxSEA will lookup and convert taxon names to NCBI taxonomic
-identifiers. TaxSEA stores a commonly observed identifiers internally
-and so will only look up whatever is not covered to save time.
+TaxSEA supports **two input types**, depending on the analysis mode you
+choose:
 
-Input IDs should be in the format of like one of the following
+##### Enrichment mode (rank-based; recommended)
+
+You provide a **named numeric vector** where:
+
+- The **names** are taxa (species or genus)
+- The **values** are ranks or signed statistics (e.g. log2 fold changes,
+  correlation coefficients)
+
+In enrichment mode, the input **must include all taxa that were tested**
+in your analysis.  
+Do **not** apply a significance threshold or pre-filter taxa before
+running TaxSEA.  
+The method relies on the **full distribution** of values to detect
+coordinated shifts across taxon sets.
+
+##### ORA mode (set-based)
+
+You provide a **character vector of taxa names** representing taxa of
+interest (i.e. a “hit list”).
+
+- No ranking or numeric values are required
+- TaxSEA tests whether these taxa are over-represented in predefined
+  taxon sets
+- This mode is most appropriate for presence/absence or binary data
+
+Input taxa names should be in the format of like one of the following
 
 - Species name. E.g. “Bifidobacterium longum”, “Bifidobacterium_longum”
 - Genus name. E.g. “Bifidobacterium”
