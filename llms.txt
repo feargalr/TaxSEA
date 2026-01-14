@@ -8,9 +8,12 @@ Bioinformatics](https://academic.oup.com/bib/article/26/2/bbaf173/8116684)
 
 ### What is TaxSEA?
 
+TaxSEA is technique to move from analysisng individual microbes to
+looking at groups of microbes with a shared functional characteristic.
+
 Traditional microbiome analysis tools often look at individual microbes
 going up or down. This sounds sensible but in human microbiome studies
-it often falls apart because everyone’s microbiome is unique, with few
+it can fail apart because everyone’s microbiome is unique, with few
 species shared across people.
 
 TaxSEA doesn’t test for individual species but rather asks if there a
