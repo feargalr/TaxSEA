@@ -1,9 +1,13 @@
 ---
 title: "Testing higher taxonomic levels without collapsing your data"
-author: "Feargal Ryan"
-date: "`r Sys.Date()`"
-output: html_document
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{taxonomic_aggregation}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
+
+
 A common way to test for differences at higher taxonomic levels (e.g. genus, family, order) is to aggregate counts and then run differential abundance on the collapsed table. That approach is simple, but it has a big flaw:
 opposing shifts cancel each other out. If one species in a genus goes up and another goes down, aggregation can make it look like nothing changed, even though the biology clearly did.
 
