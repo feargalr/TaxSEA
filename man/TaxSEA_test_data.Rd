@@ -10,6 +10,9 @@ A data frame with two columns:
   \item{rank}{Character vector representing taxon ranks}
   \item{id}{Character vector representing taxon IDs}
 }
+
+A data frame with columns 'rank' and 'id' representing taxon
+ranks and taxon IDs, respectively.
 }
 \source{
 See READ ME.

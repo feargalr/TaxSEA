@@ -22,7 +22,7 @@
 #'   \item{id}{Character vector representing taxon IDs}
 #' }
 #' @source See READ ME.
-#' @value A data frame with columns 'rank' and 'id' representing taxon
+#' @format A data frame with columns 'rank' and 'id' representing taxon
 #' ranks and taxon IDs, respectively.
 #' @name TaxSEA_test_data
 #' @examples
@@ -41,7 +41,7 @@
 #'   \item{values}{Species or genus names}
 #' }
 #' @source NCBI
-#' @value A named vector mapping NCBI IDs to species or genus names.
+#' @format A named vector mapping NCBI IDs to species or genus names.
 #' @name NCBI_ids
 #' @examples
 #' data(NCBI_ids)

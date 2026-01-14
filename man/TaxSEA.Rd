@@ -5,46 +5,60 @@
 \title{TaxSEA: Taxon Set Enrichment Analysis}
 \usage{
 TaxSEA(
-  taxon_ranks,
+  taxon_ranks = NULL,
+  input_taxa = NULL,
+  mode = NULL,
   lookup_missing = FALSE,
   min_set_size = 5,
-  max_set_size = 100,
+  max_set_size = 300,
   custom_db = NULL
 )
 }
 \arguments{
-\item{taxon_ranks}{A named vector of log2 fold changes between control 
-and test groups.}
+\item{taxon_ranks}{Named numeric vector of statistics 
+(e.g., log2 fold changes).
+  Required for enrichment.}
 
-\item{lookup_missing}{Logical indicating whether to fetch missing 
-NCBI IDs. Default is FALSE.}
+\item{input_taxa}{Character vector of taxa to treat as 
+"hits"/selected taxa.
+  Required for ORA.}
 
-\item{min_set_size}{Minimum size of taxon sets to include in the 
-analysis. Default is 5.}
+\item{mode}{Character. One of \code{"enrichment"} or \code{"ora"}.
+If NULL, inferred from which input is provided.}
 
-\item{max_set_size}{Maximum size of taxon sets to include in the 
-analysis. Default is 100.}
+\item{lookup_missing}{Logical indicating whether to fetch
+missing NCBI IDs.
+ Default is FALSE.}
+
+\item{min_set_size}{Minimum size of taxon sets to include
+in the analysis.
+ Default is 5.}
+
+\item{max_set_size}{Maximum size of taxon sets to include
+in the analysis.
+ Default is 100.}
 
 \item{custom_db}{A user-provided list of taxon sets. 
-If NULL (default), the built-in database is used.}
+If NULL (default),
+  the built-in database is used.}
 }
 \value{
-A list of data frames with taxon set enrichment results.
+A list of data frames with taxon set results.
 }
 \description{
-TaxSEA enables rapid annotation of changes by testing for enrichment 
-of pre-defined taxon sets.
+Modular TaxSEA implementation supporting enrichment (KS) and 
+ORA (Fisher).
+Provide either \code{taxon_ranks} for enrichment or 
+\code{input_taxa} for ORA.
 }
 \examples{
 data("TaxSEA_test_data")
-taxsea_results <- TaxSEA(TaxSEA_test_data)
+res <- TaxSEA(taxon_ranks = TaxSEA_test_data)
+head(res$All_databases)
 
-}
-\seealso{
-\itemize{
-  \item \url{https://doi.org/10.1093/nar/gkac868} for MiMeDB
-  \item \url{https://doi.org/10.1093/nar/gkab1019} for GMrepo
-  \item \url{https://doi.org/10.1093/nar/gkab786} for gutMGene
-  \item \url{https://doi.org/10.1038/s41587-023-01872-y} for BugSigDB
-}
+# ORA example (toy): treat taxa with positive values as "hits"
+hits <- names(TaxSEA_test_data)
+res_ora <- TaxSEA(input_taxa = hits, mode = "ora")
+head(res_ora$All_databases)
+
 }

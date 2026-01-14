@@ -1,5 +1,11 @@
 # TaxSEA News
 
+## TaxSEA 1.3.1
+
+- Internal refactor to modular analysis pipeline 
+- Added infrastructure for over-representation analysis (ORA).
+- Improved internal input preparation and validation.
+
 ## Version 1.1.8 (2025-08-12)
 - Added output for all taxon sets 
 - Fixed spelling in GutMGene_producers_of_Phenyalanine

@@ -10,6 +10,8 @@ A named vector where:
   \item{names}{NCBI IDs}
   \item{values}{Species or genus names}
 }
+
+A named vector mapping NCBI IDs to species or genus names.
 }
 \source{
 NCBI
