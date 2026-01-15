@@ -17,6 +17,10 @@ navbar:
           href: articles/Taxonomic-aggregation.html
         - text: "Using TaxSEA"
           href: articles/TaxSEA.html
+        - text: "Analysis types"
+          href: articles/ORA_vs_ES.html
+
+
 
 home:
   title: TaxSEA
