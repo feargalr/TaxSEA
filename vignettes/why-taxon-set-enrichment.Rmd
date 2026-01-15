@@ -28,8 +28,8 @@ Much of the field has therefore focused on finding the optimal DA method. But th
 
 Of course, it is possible that a single microbe drives a phenotype. But if one bacterium were responsible for complex diseases such as inflammatory bowel disease, it would likely have been identified long ago. Instead, what we observe in the overwhelming majority of human microbiome studies is not the dominance of a single species, but coordinated shifts across whole communities, patterns often described in terms of diversity or dysbiosis. 
 
-The problem is that these concepts are usually not very actionable. They are relative descriptions: there is no single “dysbiotic” or “healthy” microbiome, and even diversity itself is a contextual measure rather than a biological mechanism [O’Toole et al., 2023](https://www.gastrojournal.org/article/S0016-5085(23)00622-4/fulltext) Recent large-scale meta-analyses reinforce this view, showing that many so-called dysbiotic signatures reflect a shared, non-specific response to disease with limited diagnostic or mechanistic value [Duvallet et al., 2017](https://www.nature.com/articles/s41467-017-01973-8)
-(Duvallet et al., 2017; O’Toole et al., 2023).
+The problem is that these concepts are usually not very actionable. They are relative descriptions: there is no single “dysbiotic” or “healthy” microbiome, and even diversity itself is a contextual measure rather than a biological mechanism [O’Toole et al., 2023](https://www.gastrojournal.org/article/S0016-5085(23)00622-4/fulltext). Recent large-scale meta-analyses reinforce this view, showing that many so-called dysbiotic signatures reflect a shared, non-specific response to disease with limited diagnostic or mechanistic value [Duvallet et al., 2017](https://www.nature.com/articles/s41467-017-01973-8).
+
 
 In other ’omics fields, single-feature testing makes far more sense. When comparing gene expression, epigenomes, or proteomes, samples broadly share the same set of features, they differ in levels, not in whether the features exist at all. In microbiome data, this assumption breaks down completely: there are no universally shared species.
 
