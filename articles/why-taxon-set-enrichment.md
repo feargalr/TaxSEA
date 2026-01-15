@@ -53,12 +53,11 @@ The problem is that these concepts are usually not very actionable. They
 are relative descriptions: there is no single “dysbiotic” or “healthy”
 microbiome, and even diversity itself is a contextual measure rather
 than a biological mechanism [O’Toole et al.,
-2023](https://www.gastrojournal.org/article/S0016-5085(23)00622-4/fulltext)
+2023](https://www.gastrojournal.org/article/S0016-5085(23)00622-4/fulltext).
 Recent large-scale meta-analyses reinforce this view, showing that many
 so-called dysbiotic signatures reflect a shared, non-specific response
 to disease with limited diagnostic or mechanistic value [Duvallet et
-al., 2017](https://www.nature.com/articles/s41467-017-01973-8) (Duvallet
-et al., 2017; O’Toole et al., 2023).
+al., 2017](https://www.nature.com/articles/s41467-017-01973-8).
 
 In other ’omics fields, single-feature testing makes far more sense.
 When comparing gene expression, epigenomes, or proteomes, samples
