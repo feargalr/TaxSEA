@@ -136,7 +136,7 @@ data("TaxSEA_test_data")
 taxsea_results <- TaxSEA(taxon_ranks=TaxSEA_test_data)
 ```
 
-    ## Using cached version from 2026-01-15 00:22:00
+    ## Using cached version from 2026-02-09 07:16:39
 
     ## Warning in ks.test.default(taxon_set_ranks, taxon_ranks): p-value will be
     ## approximate in the presence of ties
@@ -200,7 +200,7 @@ library(bugsigdbr) #This package is installable via Bioconductor
 bsdb <- importBugSigDB() #Import database 
 ```
 
-    ## Using cached version from 2026-01-15 00:22:00
+    ## Using cached version from 2026-02-09 07:16:39
 
 ``` r
 #E.g. if the BugSigDB identifier you found enriched was 
@@ -289,23 +289,23 @@ sessionInfo()
     ## [1] fgsea_1.36.2     bugsigdbr_1.16.2 TaxSEA_1.3.1     BiocStyle_2.38.0
     ## 
     ## loaded via a namespace (and not attached):
-    ##  [1] fastmatch_1.1-6     gtable_0.3.6        xfun_0.55          
-    ##  [4] bslib_0.9.0         ggplot2_4.0.1       httr2_1.2.2        
-    ##  [7] lattice_0.22-7      vctrs_0.6.5         tools_4.5.2        
+    ##  [1] fastmatch_1.1-8     gtable_0.3.6        xfun_0.56          
+    ##  [4] bslib_0.10.0        ggplot2_4.0.2       httr2_1.2.2        
+    ##  [7] lattice_0.22-7      vctrs_0.7.1         tools_4.5.2        
     ## [10] generics_0.1.4      curl_7.0.0          parallel_4.5.2     
-    ## [13] tibble_3.3.1        RSQLite_2.4.5       blob_1.2.4         
-    ## [16] pkgconfig_2.0.3     Matrix_1.7-4        data.table_1.18.0  
+    ## [13] tibble_3.3.1        RSQLite_2.4.6       blob_1.3.0         
+    ## [16] pkgconfig_2.0.3     Matrix_1.7-4        data.table_1.18.2.1
     ## [19] dbplyr_2.5.1        RColorBrewer_1.1-3  S7_0.2.1           
     ## [22] desc_1.4.3          lifecycle_1.0.5     compiler_4.5.2     
     ## [25] farver_2.1.2        textshaping_1.0.4   codetools_0.2-20   
     ## [28] htmltools_0.5.9     sass_0.4.10         yaml_2.3.12        
     ## [31] pillar_1.11.1       pkgdown_2.2.0       jquerylib_0.1.4    
     ## [34] BiocParallel_1.44.0 cachem_1.1.0        tidyselect_1.2.1   
-    ## [37] digest_0.6.39       dplyr_1.1.4         purrr_1.2.1        
+    ## [37] digest_0.6.39       dplyr_1.2.0         purrr_1.2.1        
     ## [40] bookdown_0.46       cowplot_1.2.0       fastmap_1.2.0      
     ## [43] grid_4.5.2          cli_3.6.5           magrittr_2.0.4     
     ## [46] withr_3.0.2         filelock_1.0.3      scales_1.4.0       
-    ## [49] rappdirs_0.3.3      bit64_4.6.0-1       rmarkdown_2.30     
+    ## [49] rappdirs_0.3.4      bit64_4.6.0-1       rmarkdown_2.30     
     ## [52] bit_4.6.0           ragg_1.5.0          memoise_2.0.1      
     ## [55] evaluate_1.0.5      knitr_1.51          BiocFileCache_3.0.0
     ## [58] rlang_1.1.7         Rcpp_1.1.1          glue_1.8.0         

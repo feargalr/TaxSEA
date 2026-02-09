@@ -124,7 +124,7 @@ incorporate this as a core function in TaxSEA</p>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Convert the extracted data to a count matrix</span></span>
-<span><span class="va">counts_data</span> <span class="op">&lt;-</span> <span class="fu">assay</span><span class="op">(</span><span class="va">cmd_data</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="va">counts_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html" class="external-link">assay</a></span><span class="op">(</span><span class="va">cmd_data</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="va">counts_data</span> <span class="op">&lt;-</span> <span class="va">counts_data</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">metadata</span><span class="op">)</span><span class="op">]</span>  <span class="co"># Subset to relevant samples</span></span>
 <span></span>
 <span><span class="co"># Filter taxa with at least one sample having counts &gt; 100</span></span>
