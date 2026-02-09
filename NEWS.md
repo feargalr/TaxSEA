@@ -1,5 +1,10 @@
 # TaxSEA News
 
+# TaxSEA 1.3.2
+
+- Add `taxon_rank_sets()` helper with documentation and tests
+- Add functionality to interact with tse objects
+
 ## TaxSEA 1.3.1
 
 - Internal refactor to modular analysis pipeline 
