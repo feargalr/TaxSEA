@@ -33,7 +33,9 @@ Suggests:
     bugsigdbr,
     fgsea,
     knitr,
+    mia,
     rmarkdown,
+    SummarizedExperiment,
     testthat
 Imports:
     stats,
