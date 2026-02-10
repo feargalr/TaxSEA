@@ -68,16 +68,19 @@ Available on <a href="https://bioconductor.org/packages/TaxSEA" class="external-
 <p>TaxSEA is technique to move from analysisng individual microbes to looking at groups of microbes with a shared functional characteristic.</p>
 <p>Traditional microbiome analysis tools often look at individual microbes going up or down. This sounds sensible but in human microbiome studies it can fail apart because everyone’s microbiome is unique, with few species shared across people.</p>
 <p>TaxSEA doesn’t test for individual species but rather asks if there a group of species with a shared characteristic that is altered between groups of people. For example are we seeing a shift in bugs with increased oxygen tolerance, or an increase in bugs which produce a certain metabolite or enzyme, or even are we seeing a change in bugs which have a known disease association in humans. If you want to know more check out our paper, but we find this approach to be far more reproducible than standard Differential Abundance (DA) analysis as well as capable of extracting biologically meaningful patterns. TaxSEA usually can run within seconds with standard hardware.</p>
-<p>TaxSEA supports <strong>two complementary analysis modes</strong>:</p>
+<p>TaxSEA supports <strong>three complementary analysis modes</strong>:</p>
 <ol style="list-style-type: decimal">
-<li><strong>Enrichment (rank-based, recommended)</strong></li>
-<li><strong>ORA – Over-Representation Analysis (set-based)</strong></li>
+<li><strong>Enrichment using public reference databases</strong></li>
+<li>
+<strong>ORA – Over-Representation Analysis</strong><br>
+</li>
+<li><strong>Enrichment using taxonomic sets</strong></li>
 </ol>
-<p>Both use the same taxon-set databases but answer slightly different questions.</p>
-<p>TaxSEA can also test for differences at a particular taxonomic rank. For example instead of just summing up all the species in a genus. We see if the distribution of species within a genus is different between groups. This is a more powerful approach as simply summing/aggregating to a rank can risk missing when you can get shifts within a genus/family.</p>
-<p>In short, TaxSEA makes it easy to intepret changes in your microbiome data.</p>
-<p>TaxSEA takes as input a vector of genus or species names and a rank. For example log2 fold changes or Spearman’s rho. TaxSEA then uses a Kolmogorov-Smirnov test to identify if a particular group of species or genera (i.e. a set of taxa such as butyrate producers) are skewed to one end of the distribution.</p>
-<p>Note: Although TaxSEA in principle can be applied to microbiome data from any source, the databases utilized largely cover human associated microbiomes and the human gut microbiome in particular. As such TaxSEA will likely perform best on human gut microbiome data.</p>
+<p>Options 1 and 2 Both use the same taxon-set databases but answer slightly different questions. Mode 1 which is the default we reccomend in most cases takes as input a list of bacteria a rank (E.g. fold change). It then tests whether any of the taxon sets in the database are skewed to one end of the distribution or another. Mode 2 uses the same database but only takes as input a list of bacterial names. While answering a similar question this approach is often less powerful as it requires a hard cut-off to select bacteria of interest.</p>
+<p>Mode 3 allows users to test for differences at a particular taxonomic rank. For example instead of just summing up or aggregating all the species in a genus. We see if the distribution of species within a genus is different between groups. This is a more powerful approach as simply summing/aggregating to a rank can risk missing when you can get shifts within a taxon.</p>
+<p>In short, TaxSEA aims to make it easy to intepret changes in your microbiome data.</p>
+<p>TaxSEA takes as input a vector of species names and a rank. For example log2 fold changes or Spearman’s rho.</p>
+<p>Note: Although TaxSEA in principle can be applied to microbiome data from any source, the databases utilized largely cover human associated microbiomes and the human gut microbiome in particular. As such the database testing in TaxSEA will likely perform best on human gut microbiome data.</p>
 </div>
 <div class="section level3">
 <h3 id="taxon-set-database">Taxon set database<a class="anchor" aria-label="anchor" href="#taxon-set-database"></a>
@@ -105,7 +108,7 @@ Available on <a href="https://bioconductor.org/packages/TaxSEA" class="external-
 <h3 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
 </h3>
 <div class="section level4">
-<h4 id="quick-start-rank-based">Quick start (rank based)<a class="anchor" aria-label="anchor" href="#quick-start-rank-based"></a>
+<h4 id="quick-start-mode-1-enrichment-rank-based">Quick start (mode 1, enrichment rank based)<a class="anchor" aria-label="anchor" href="#quick-start-mode-1-enrichment-rank-based"></a>
 </h4>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/feargalr/taxsea" class="external-link">TaxSEA</a></span><span class="op">)</span></span>
@@ -127,7 +130,7 @@ Available on <a href="https://bioconductor.org/packages/TaxSEA" class="external-
 <span><span class="va">bsdb.df</span> <span class="op">&lt;-</span> <span class="va">taxsea_results</span><span class="op">$</span><span class="va">BugSigdB</span></span></code></pre></div>
 </div>
 <div class="section level4">
-<h4 id="quick-start-ora">Quick start (ORA)<a class="anchor" aria-label="anchor" href="#quick-start-ora"></a>
+<h4 id="quick-start-mode-2-ora">Quick start (mode 2, ORA)<a class="anchor" aria-label="anchor" href="#quick-start-mode-2-ora"></a>
 </h4>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/feargalr/taxsea" class="external-link">TaxSEA</a></span><span class="op">)</span></span>
@@ -155,7 +158,7 @@ Available on <a href="https://bioconductor.org/packages/TaxSEA" class="external-
 <div class="section level4">
 <h4 id="input">Input<a class="anchor" aria-label="anchor" href="#input"></a>
 </h4>
-<p>TaxSEA supports <strong>two input types</strong>, depending on the analysis mode you choose:</p>
+<p>TaxSEA supports multiple input types, depending on the analysis mode you choose:</p>
 <div class="section level5">
 <h5 id="enrichment-mode-rank-based-recommended">Enrichment mode (rank-based; recommended)<a class="anchor" aria-label="anchor" href="#enrichment-mode-rank-based-recommended"></a>
 </h5>
@@ -252,89 +255,112 @@ The method relies on the <strong>full distribution</strong> of values to detect 
 <div class="section level4">
 <h4 id="testing-for-differences-in-taxonomically-defined-sets">Testing for differences in taxonomically defined sets<a class="anchor" aria-label="anchor" href="#testing-for-differences-in-taxonomically-defined-sets"></a>
 </h4>
-<p>In addition to taxon sets defined by function or phenotype, users can define sets based on taxonomy. Current methods to test at higher taxonomic levels (e.g., genus or family), involve aggregating counts but with this approach opposing shifts in individual species may cancel each other out, obscuring meaningful biological patterns. For instance, antibiotic treatment may suppress certain species while allowing resistant species within the same genus to expand and occupy the vacant niche, creating an ecological shift that appears as no net change at broader taxonomic levels. Here we utilise data from Chng et al. demonstrating this in a comparison between Atopic dermatitis and controls.</p>
+<p>In addition to taxon sets defined from public databases by, users can define sets based on taxonomy from their own data. We have implemtned this in the taxon_rank_sets() function which takes as input an set of taxa and ranks (similar to enrichment testing above) and then either a table of taxonomic lineage or a TreeSummarizedExperiment object. See below for examples with both approaches.</p>
+<p>Current methods to test at higher taxonomic levels (e.g., phylum or family), involve aggregating counts. However, this approach may miss opposing shifts in individual species which cancel each other out, obscuring meaningful biological patterns. For instance, antibiotic treatment may suppress certain species while allowing resistant species within the same genus to expand and occupy the vacant niche, creating an ecological shift that appears as no net change at broader taxonomic levels. Whereas the database testing works best with shotgun metagenomic data in order to have sufficient resolution. This approach is much more widely applicable including to testing with amplicon data such as from 16S rRNA gene sequencing.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
-<span><span class="co">#### Applying TaxSEA functionality to taxonomic ranks  </span></span>
-<span><span class="co"># This script applies TaxSEA to identify taxonomic enrichment at different taxonomic levels.</span></span>
-<span><span class="co"># Specifically, we analyze enrichment at the family level using metagenomic data</span></span>
+<span><span class="co">#### Enrichment testing with taxonomically defined ranks  </span></span>
+<span><span class="co"># --- Example 1: Data frame input ---</span></span>
+<span><span class="co"># Create a lineage data frame (e.g., parsed from curatedMetagenomicData)</span></span>
+<span><span class="co"># The 'species' column must match the names in taxon_ranks.</span></span>
 <span></span>
-<span><span class="co"># Load required libraries</span></span>
+<span><span class="va">lineage_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
+<span>  species <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Cutibacterium_acnes"</span>, <span class="st">"Klebsiella_pneumoniae"</span>,</span>
+<span>              <span class="st">"Propionibacterium_humerusii"</span>, <span class="st">"Moraxella_osloensis"</span>,</span>
+<span>              <span class="st">"Enhydrobacter_aerosaccus"</span>, <span class="st">"Staphylococcus_capitis"</span>,</span>
+<span>              <span class="st">"Staphylococcus_epidermidis"</span>, <span class="st">"Staphylococcus_aureus"</span>,</span>
+<span>              <span class="st">"Escherichia_coli"</span>, <span class="st">"Enterobacter_cloacae"</span>,</span>
+<span>              <span class="st">"Pseudomonas_aeruginosa"</span>, <span class="st">"Acinetobacter_baumannii"</span>,</span>
+<span>              <span class="st">"Lactobacillus_rhamnosus"</span>, <span class="st">"Lactobacillus_acidophilus"</span>,</span>
+<span>              <span class="st">"Bifidobacterium_longum"</span>, <span class="st">"Bifidobacterium_breve"</span><span class="op">)</span>,</span>
+<span>  kingdom <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"Bacteria"</span>, <span class="fl">16</span><span class="op">)</span>,</span>
+<span>  phylum <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Actinobacteria"</span>, <span class="st">"Proteobacteria"</span>,</span>
+<span>             <span class="st">"Actinobacteria"</span>, <span class="st">"Proteobacteria"</span>,</span>
+<span>             <span class="st">"Proteobacteria"</span>, <span class="st">"Firmicutes"</span>,</span>
+<span>             <span class="st">"Firmicutes"</span>, <span class="st">"Firmicutes"</span>,</span>
+<span>             <span class="st">"Proteobacteria"</span>, <span class="st">"Proteobacteria"</span>,</span>
+<span>             <span class="st">"Proteobacteria"</span>, <span class="st">"Proteobacteria"</span>,</span>
+<span>             <span class="st">"Firmicutes"</span>, <span class="st">"Firmicutes"</span>,</span>
+<span>             <span class="st">"Actinobacteria"</span>, <span class="st">"Actinobacteria"</span><span class="op">)</span>,</span>
+<span>  class <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Actinobacteria"</span>, <span class="st">"Gammaproteobacteria"</span>,</span>
+<span>            <span class="st">"Actinobacteria"</span>, <span class="st">"Gammaproteobacteria"</span>,</span>
+<span>            <span class="st">"Alphaproteobacteria"</span>, <span class="st">"Bacilli"</span>,</span>
+<span>            <span class="st">"Bacilli"</span>, <span class="st">"Bacilli"</span>,</span>
+<span>            <span class="st">"Gammaproteobacteria"</span>, <span class="st">"Gammaproteobacteria"</span>,</span>
+<span>            <span class="st">"Gammaproteobacteria"</span>, <span class="st">"Gammaproteobacteria"</span>,</span>
+<span>            <span class="st">"Bacilli"</span>, <span class="st">"Bacilli"</span>,</span>
+<span>            <span class="st">"Actinobacteria"</span>, <span class="st">"Actinobacteria"</span><span class="op">)</span>,</span>
+<span>  order <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Propionibacteriales"</span>, <span class="st">"Enterobacterales"</span>,</span>
+<span>            <span class="st">"Propionibacteriales"</span>, <span class="st">"Pseudomonadales"</span>,</span>
+<span>            <span class="st">"Rhodospirillales"</span>, <span class="st">"Bacillales"</span>,</span>
+<span>            <span class="st">"Bacillales"</span>, <span class="st">"Bacillales"</span>,</span>
+<span>            <span class="st">"Enterobacterales"</span>, <span class="st">"Enterobacterales"</span>,</span>
+<span>            <span class="st">"Pseudomonadales"</span>, <span class="st">"Pseudomonadales"</span>,</span>
+<span>            <span class="st">"Lactobacillales"</span>, <span class="st">"Lactobacillales"</span>,</span>
+<span>            <span class="st">"Bifidobacteriales"</span>, <span class="st">"Bifidobacteriales"</span><span class="op">)</span>,</span>
+<span>  family <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Propionibacteriaceae"</span>, <span class="st">"Enterobacteriaceae"</span>,</span>
+<span>             <span class="st">"Propionibacteriaceae"</span>, <span class="st">"Moraxellaceae"</span>,</span>
+<span>             <span class="st">"Rhodospirillaceae"</span>, <span class="st">"Staphylococcaceae"</span>,</span>
+<span>             <span class="st">"Staphylococcaceae"</span>, <span class="st">"Staphylococcaceae"</span>,</span>
+<span>             <span class="st">"Enterobacteriaceae"</span>, <span class="st">"Enterobacteriaceae"</span>,</span>
+<span>             <span class="st">"Pseudomonadaceae"</span>, <span class="st">"Moraxellaceae"</span>,</span>
+<span>             <span class="st">"Lactobacillaceae"</span>, <span class="st">"Lactobacillaceae"</span>,</span>
+<span>             <span class="st">"Bifidobacteriaceae"</span>, <span class="st">"Bifidobacteriaceae"</span><span class="op">)</span>,</span>
+<span>  genus <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Cutibacterium"</span>, <span class="st">"Klebsiella"</span>,</span>
+<span>            <span class="st">"Cutibacterium"</span>, <span class="st">"Moraxella"</span>,</span>
+<span>            <span class="st">"Enhydrobacter"</span>, <span class="st">"Staphylococcus"</span>,</span>
+<span>            <span class="st">"Staphylococcus"</span>, <span class="st">"Staphylococcus"</span>,</span>
+<span>            <span class="st">"Escherichia"</span>, <span class="st">"Enterobacter"</span>,</span>
+<span>            <span class="st">"Pseudomonas"</span>, <span class="st">"Acinetobacter"</span>,</span>
+<span>            <span class="st">"Lactobacillus"</span>, <span class="st">"Lactobacillus"</span>,</span>
+<span>            <span class="st">"Bifidobacterium"</span>, <span class="st">"Bifidobacterium"</span><span class="op">)</span>,</span>
+<span>  stringsAsFactors <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">42</span><span class="op">)</span></span>
+<span><span class="va">fc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/setNames.html" class="external-link">setNames</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">16</span><span class="op">)</span>, <span class="va">lineage_df</span><span class="op">$</span><span class="va">species</span><span class="op">)</span></span>
+<span><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/taxon_rank_sets.html">taxon_rank_sets</a></span><span class="op">(</span><span class="va">fc</span>, <span class="va">lineage_df</span>, min_set_size <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">results</span><span class="op">)</span></span>
+<span><span class="va">results</span><span class="op">$</span><span class="va">family</span></span>
+<span></span>
+<span></span>
+<span><span class="co"># --- Example 2: SummarizedExperiment / TreeSummarizedExperiment input ---</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://microbiome.github.io/mia/" class="external-link">mia</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/feargalr/taxsea" class="external-link">TaxSEA</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">curatedMetagenomicData</span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">phyloseq</span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">MicrobiomeStat</span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">ALDEx2</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Load sample metadata</span></span>
-<span><span class="va">metadata_all</span> <span class="op">&lt;-</span> <span class="va">sampleMetadata</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">GlobalPatterns</span>, package <span class="op">=</span> <span class="st">"mia"</span><span class="op">)</span></span>
+<span><span class="va">tse</span> <span class="op">&lt;-</span> <span class="va">GlobalPatterns</span></span>
 <span></span>
-<span><span class="co"># Filter metadata for the specific study (ChngKR_2016)</span></span>
-<span><span class="va">metadata</span> <span class="op">&lt;-</span> <span class="va">metadata_all</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">study_name</span> <span class="op">==</span> <span class="st">"ChngKR_2016"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
-<span>  <span class="fu">column_to_rownames</span><span class="op">(</span><span class="st">'sample_id'</span><span class="op">)</span></span>
+<span><span class="co"># Subset to two sample types for a two-group comparison</span></span>
+<span><span class="va">tse</span> <span class="op">&lt;-</span> <span class="va">tse</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html" class="external-link">colData</a></span><span class="op">(</span><span class="va">tse</span><span class="op">)</span><span class="op">$</span><span class="va">SampleType</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Feces"</span>, <span class="st">"Soil"</span><span class="op">)</span><span class="op">]</span></span>
 <span></span>
-<span><span class="co"># Extract count data using curatedMetagenomicData</span></span>
-<span><span class="va">cmd_data</span> <span class="op">&lt;-</span> <span class="fu">curatedMetagenomicData</span><span class="op">(</span></span>
-<span>  pattern <span class="op">=</span> <span class="st">"ChngKR_2016.relative_abundance"</span>,</span>
-<span>  counts <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  dryrun <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="co"># Filter low-prevalence features (present in at least 2 samples)</span></span>
+<span><span class="va">tse</span> <span class="op">&lt;-</span> <span class="va">tse</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">rowSums</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html" class="external-link">assay</a></span><span class="op">(</span><span class="va">tse</span>, <span class="st">"counts"</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span> <span class="op">&gt;=</span> <span class="fl">2</span>, <span class="op">]</span></span>
+<span></span>
+<span><span class="co"># Run ALDEx2</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">aldex.clr</span><span class="op">(</span></span>
+<span>  reads <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html" class="external-link">assay</a></span><span class="op">(</span><span class="va">tse</span>, <span class="st">"counts"</span><span class="op">)</span>,</span>
+<span>  conds <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html" class="external-link">colData</a></span><span class="op">(</span><span class="va">tse</span><span class="op">)</span><span class="op">$</span><span class="va">SampleType</span><span class="op">)</span>,</span>
+<span>  mc.samples <span class="op">=</span> <span class="fl">128</span>,</span>
+<span>  denom <span class="op">=</span> <span class="st">"all"</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span>
+<span><span class="va">x_tt</span> <span class="op">&lt;-</span> <span class="fu">aldex.ttest</span><span class="op">(</span><span class="va">x</span>, paired.test <span class="op">=</span> <span class="cn">FALSE</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">x_effect</span> <span class="op">&lt;-</span> <span class="fu">aldex.effect</span><span class="op">(</span><span class="va">x</span>, CI <span class="op">=</span> <span class="cn">TRUE</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">aldex_out</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="va">x_tt</span>, <span class="va">x_effect</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Convert the extracted data to a count matrix</span></span>
-<span><span class="va">counts_data</span> <span class="op">&lt;-</span> <span class="fu">assay</span><span class="op">(</span><span class="va">cmd_data</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
-<span><span class="va">counts_data</span> <span class="op">&lt;-</span> <span class="va">counts_data</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">metadata</span><span class="op">)</span><span class="op">]</span>  <span class="co"># Subset to relevant samples</span></span>
+<span><span class="co"># Use ALDEx2 effect size as ranking metric</span></span>
+<span><span class="va">fc</span> <span class="op">&lt;-</span> <span class="va">aldex_out</span><span class="op">$</span><span class="va">effect</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">fc</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">aldex_out</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Filter taxa with at least one sample having counts &gt; 100</span></span>
-<span><span class="va">counts_data</span> <span class="op">&lt;-</span> <span class="va">counts_data</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/apply.html" class="external-link">apply</a></span><span class="op">(</span><span class="va">counts_data</span> <span class="op">&gt;</span> <span class="fl">100</span>, <span class="fl">1</span>, <span class="va">sum</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">0</span>, <span class="op">]</span></span>
+<span><span class="co"># Run taxon rank set enrichment directly from the TSE</span></span>
+<span><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/taxon_rank_sets.html">taxon_rank_sets</a></span><span class="op">(</span><span class="va">fc</span>, <span class="va">tse</span>, min_set_size <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Extract species names from taxonomic strings</span></span>
-<span><span class="va">species_names</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">gsub</a></span><span class="op">(</span><span class="st">"s__"</span>, <span class="st">""</span>, <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">counts_data</span><span class="op">)</span>, <span class="kw">function</span><span class="op">(</span><span class="va">y</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/strsplit.html" class="external-link">strsplit</a></span><span class="op">(</span><span class="va">y</span>, <span class="st">"\\|"</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fl">7</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">counts_data</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">species_names</span></span>
-<span></span>
-<span><span class="co"># Create a taxonomic lineage dataframe</span></span>
-<span><span class="co"># Remove taxonomic prefixes (k__, p__, c__, etc.) and separate into taxonomic ranks</span></span>
-<span></span>
-<span><span class="co"># make data frame of taxon lineages</span></span>
-<span><span class="va">taxon_lineages</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>Name <span class="op">=</span> <span class="va">species_names</span>,</span>
-<span>                             Lineage <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">species_names</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>Lineage <span class="op">=</span> <span class="fu">str_remove_all</span><span class="op">(</span><span class="va">Lineage</span>, <span class="st">'[kpcofgs]__'</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu">separate</span><span class="op">(</span>col <span class="op">=</span> <span class="va">Lineage</span>, into <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'kingdom'</span>, <span class="st">'phylum'</span>, <span class="st">'class'</span>, </span>
-<span>                                   <span class="st">'order'</span>, <span class="st">'family'</span>, <span class="st">'genus'</span>, <span class="st">'species'</span><span class="op">)</span>, </span>
-<span>           sep <span class="op">=</span> <span class="st">'\\|'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>name <span class="op">=</span> <span class="va">Name</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu">remove_rownames</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu">column_to_rownames</span><span class="op">(</span><span class="st">'name'</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Perform differential abundance testing using LinDA</span></span>
-<span><span class="va">metadata</span><span class="op">$</span><span class="va">study_condition</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">metadata</span><span class="op">$</span><span class="va">study_condition</span>, levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"control"</span>, <span class="st">"AD"</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">linda_results</span> <span class="op">&lt;-</span> <span class="fu">linda</span><span class="op">(</span></span>
-<span>  feature.dat <span class="op">=</span> <span class="va">counts_data</span>,</span>
-<span>  meta.dat <span class="op">=</span> <span class="va">metadata</span>,</span>
-<span>  formula <span class="op">=</span> <span class="st">'~study_condition'</span>,</span>
-<span>  feature.dat.type <span class="op">=</span> <span class="st">'count'</span>,</span>
-<span>  prev.filter <span class="op">=</span> <span class="fl">0.05</span></span>
-<span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Extract log2 fold change values for differential taxa</span></span>
-<span><span class="va">linda_results</span> <span class="op">&lt;-</span> <span class="va">linda_results</span><span class="op">$</span><span class="va">output</span><span class="op">$</span><span class="va">study_conditionAD</span></span>
-<span><span class="va">log2_fold_changes</span> <span class="op">&lt;-</span> <span class="va">linda_results</span><span class="op">$</span><span class="va">log2FoldChange</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">log2_fold_changes</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">linda_results</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Define the taxonomic rank for enrichment analysis</span></span>
-<span><span class="va">selected_taxon_level</span> <span class="op">&lt;-</span> <span class="st">'genus'</span>  <span class="co"># Modify as needed (e.g., genus, phylum)</span></span>
-<span></span>
-<span><span class="co"># Create a named list of species grouped by taxonomic rank</span></span>
-<span><span class="va">custom_taxon_sets</span> <span class="op">&lt;-</span> <span class="va">taxon_lineages</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">.data</span><span class="op">[[</span><span class="va">selected_taxon_level</span><span class="op">]</span><span class="op">]</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span>species <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">species</span><span class="op">)</span>, .groups <span class="op">=</span> <span class="st">"drop"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu">deframe</span><span class="op">(</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Perform enrichment analysis using TaxSEA</span></span>
-<span><span class="va">custom_taxsea_results</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/TaxSEA.html">TaxSEA</a></span><span class="op">(</span>taxon_ranks <span class="op">=</span> <span class="va">log2_fold_changes</span>, custom_db <span class="op">=</span> <span class="va">custom_taxon_sets</span><span class="op">)</span></span>
-<span><span class="va">custom_taxsea_results</span> <span class="op">&lt;-</span> <span class="va">custom_taxsea_results</span><span class="op">$</span><span class="va">custom_sets</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">results</span><span class="op">)</span>    <span class="co"># Kingdom, Phylum, Class, Order, Family, Genus</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">results</span><span class="op">$</span><span class="va">Family</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">results</span><span class="op">$</span><span class="va">Genus</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="visualisation-of-taxsea-output">Visualisation of TaxSEA output.<a class="anchor" aria-label="anchor" href="#visualisation-of-taxsea-output"></a>
