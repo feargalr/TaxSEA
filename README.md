@@ -17,29 +17,32 @@ which have a known disease association in humans. If you want to know more check
 this approach to be far more reproducible than standard Differential Abundance (DA) analysis as well as capable of extracting biologically 
 meaningful patterns. TaxSEA usually can run within seconds with standard hardware.  
 
-TaxSEA supports **two complementary analysis modes**:
+TaxSEA supports **three complementary analysis modes**:
 
-1. **Enrichment (rank-based, recommended)**
-2. **ORA – Over-Representation Analysis (set-based)**
+1. **Enrichment using public reference databases**
+2. **ORA – Over-Representation Analysis**            
+3. **Enrichment using taxonomic sets**
 
-Both use the same taxon-set databases but answer slightly different questions.
+Options 1 and 2 Both use the same taxon-set databases but answer slightly different questions. Mode 1 which is
+the default we reccomend in most cases takes as input a list of bacteria a rank (E.g. fold change). It then tests
+whether any of the taxon sets in the database are skewed to one end of the distribution or another. Mode 2 uses
+the same database but only takes as input a list of bacterial names. While answering a similar question this 
+approach is often less powerful as it requires a hard cut-off to select bacteria of interest. 
 
-TaxSEA can also test for differences at a particular taxonomic rank. For example instead of just summing up all 
-the species in a genus. We see if the distribution of species within a genus is different between groups. This
+
+Mode 3 allows users to test for differences at a particular taxonomic rank. For example instead of just summing up
+or aggregating all the species in a genus. We see if the distribution of species within a genus is different between groups. This
 is a more powerful approach as simply summing/aggregating to a rank can risk missing when you can get shifts 
-within a genus/family. 
+within a taxon. 
 
-In short, TaxSEA makes it easy to intepret changes in your microbiome data.
+In short, TaxSEA aims to make it easy to intepret changes in your microbiome data.
 
-TaxSEA takes as input a vector of genus or species names and a rank. 
-For example log2 fold changes or Spearman's rho. TaxSEA then uses
-a Kolmogorov-Smirnov test to identify if a particular group of species
-or genera (i.e. a set of taxa such as butyrate producers) are skewed to 
-one end of the distribution. 
+TaxSEA takes as input a vector of species names and a rank. 
+For example log2 fold changes or Spearman's rho.
 
 Note: Although TaxSEA in principle can be applied to microbiome data from
 any source, the databases utilized largely cover human associated microbiomes
-and the human gut microbiome in particular. As such TaxSEA will likely perform
+and the human gut microbiome in particular. As such the database testing in TaxSEA will likely perform
 best on human gut microbiome data. 
 
 ### Taxon set database
@@ -71,7 +74,7 @@ BiocManager::install("TaxSEA")
 
 
 ### Usage
-#### Quick start (rank based)
+#### Quick start (mode 1, enrichment rank based)
 ```r
 library(TaxSEA)
 
@@ -94,7 +97,7 @@ bsdb.df <- taxsea_results$BugSigdB
 ```
 
 
-#### Quick start (ORA)
+#### Quick start (mode 2, ORA)
 ```r
 library(TaxSEA)
 
@@ -120,11 +123,9 @@ disease.df <- taxsea_results$Health_associations
 
 ```
 
-
-
 #### Input
 
-TaxSEA supports **two input types**, depending on the analysis mode you choose:
+TaxSEA supports multiple input types, depending on the analysis mode you choose:
 
 ##### Enrichment mode (rank-based; recommended)
 You provide a **named numeric vector** where:
@@ -242,97 +243,125 @@ custom_taxsea_results <- custom_taxsea_results$custom_sets
 
 
 #### Testing for differences in taxonomically defined sets
-In addition to taxon sets defined by function or phenotype, users can define sets based on 
-taxonomy. Current methods to test at higher taxonomic levels (e.g., genus or family), involve
-aggregating counts but with this approach opposing shifts in individual species may cancel 
+In addition to taxon sets defined from public databases by, users can define sets based on 
+taxonomy from their own data. We have implemtned this in the taxon_rank_sets() function which
+takes as input an set of taxa and ranks (similar to enrichment testing above) and then either
+a table of taxonomic lineage or a TreeSummarizedExperiment object. See below for examples
+with both approaches. 
+
+Current methods to test at higher taxonomic levels (e.g., phylum or family), involve
+aggregating counts. However, this approach may miss opposing shifts in individual species which cancel 
 each other out, obscuring meaningful biological patterns. For instance, antibiotic treatment 
 may suppress certain species while allowing resistant species within the same genus to expand 
 and occupy the vacant niche, creating an ecological shift that appears as no net change at 
-broader taxonomic levels. Here we utilise data from Chng et al. demonstrating this in a 
-comparison between Atopic dermatitis and controls. 
+broader taxonomic levels. Whereas the database testing works best with shotgun metagenomic 
+data in order to have sufficient resolution. This approach is much more widely applicable
+including to testing with amplicon data such as from 16S rRNA gene sequencing. 
 
 ```r
 
-#### Applying TaxSEA functionality to taxonomic ranks  
-# This script applies TaxSEA to identify taxonomic enrichment at different taxonomic levels.
-# Specifically, we analyze enrichment at the family level using metagenomic data
+#### Enrichment testing with taxonomically defined ranks  
+# --- Example 1: Data frame input ---
+# Create a lineage data frame (e.g., parsed from curatedMetagenomicData)
+# The 'species' column must match the names in taxon_ranks.
 
-# Load required libraries
+lineage_df <- data.frame(
+  species = c("Cutibacterium_acnes", "Klebsiella_pneumoniae",
+              "Propionibacterium_humerusii", "Moraxella_osloensis",
+              "Enhydrobacter_aerosaccus", "Staphylococcus_capitis",
+              "Staphylococcus_epidermidis", "Staphylococcus_aureus",
+              "Escherichia_coli", "Enterobacter_cloacae",
+              "Pseudomonas_aeruginosa", "Acinetobacter_baumannii",
+              "Lactobacillus_rhamnosus", "Lactobacillus_acidophilus",
+              "Bifidobacterium_longum", "Bifidobacterium_breve"),
+  kingdom = rep("Bacteria", 16),
+  phylum = c("Actinobacteria", "Proteobacteria",
+             "Actinobacteria", "Proteobacteria",
+             "Proteobacteria", "Firmicutes",
+             "Firmicutes", "Firmicutes",
+             "Proteobacteria", "Proteobacteria",
+             "Proteobacteria", "Proteobacteria",
+             "Firmicutes", "Firmicutes",
+             "Actinobacteria", "Actinobacteria"),
+  class = c("Actinobacteria", "Gammaproteobacteria",
+            "Actinobacteria", "Gammaproteobacteria",
+            "Alphaproteobacteria", "Bacilli",
+            "Bacilli", "Bacilli",
+            "Gammaproteobacteria", "Gammaproteobacteria",
+            "Gammaproteobacteria", "Gammaproteobacteria",
+            "Bacilli", "Bacilli",
+            "Actinobacteria", "Actinobacteria"),
+  order = c("Propionibacteriales", "Enterobacterales",
+            "Propionibacteriales", "Pseudomonadales",
+            "Rhodospirillales", "Bacillales",
+            "Bacillales", "Bacillales",
+            "Enterobacterales", "Enterobacterales",
+            "Pseudomonadales", "Pseudomonadales",
+            "Lactobacillales", "Lactobacillales",
+            "Bifidobacteriales", "Bifidobacteriales"),
+  family = c("Propionibacteriaceae", "Enterobacteriaceae",
+             "Propionibacteriaceae", "Moraxellaceae",
+             "Rhodospirillaceae", "Staphylococcaceae",
+             "Staphylococcaceae", "Staphylococcaceae",
+             "Enterobacteriaceae", "Enterobacteriaceae",
+             "Pseudomonadaceae", "Moraxellaceae",
+             "Lactobacillaceae", "Lactobacillaceae",
+             "Bifidobacteriaceae", "Bifidobacteriaceae"),
+  genus = c("Cutibacterium", "Klebsiella",
+            "Cutibacterium", "Moraxella",
+            "Enhydrobacter", "Staphylococcus",
+            "Staphylococcus", "Staphylococcus",
+            "Escherichia", "Enterobacter",
+            "Pseudomonas", "Acinetobacter",
+            "Lactobacillus", "Lactobacillus",
+            "Bifidobacterium", "Bifidobacterium"),
+  stringsAsFactors = FALSE
+)
+
+set.seed(42)
+fc <- setNames(rnorm(16), lineage_df$species)
+results <- taxon_rank_sets(fc, lineage_df, min_set_size = 2)
+names(results)
+results$family
+
+
+# --- Example 2: SummarizedExperiment / TreeSummarizedExperiment input ---
+library(mia)
 library(TaxSEA)
-library(curatedMetagenomicData)
-library(tidyverse)
-library(phyloseq)
-library(MicrobiomeStat)
-library(dplyr)
+library(ALDEx2)
 
-# Load sample metadata
-metadata_all <- sampleMetadata
+data(GlobalPatterns, package = "mia")
+tse <- GlobalPatterns
 
-# Filter metadata for the specific study (ChngKR_2016)
-metadata <- metadata_all %>% 
-  filter(study_name == "ChngKR_2016") %>% 
-  column_to_rownames('sample_id')
+# Subset to two sample types for a two-group comparison
+tse <- tse[, colData(tse)$SampleType %in% c("Feces", "Soil")]
 
-# Extract count data using curatedMetagenomicData
-cmd_data <- curatedMetagenomicData(
-  pattern = "ChngKR_2016.relative_abundance",
-  counts = TRUE,
-  dryrun = FALSE
+# Filter low-prevalence features (present in at least 2 samples)
+tse <- tse[rowSums(assay(tse, "counts") > 0) >= 2, ]
+
+# Run ALDEx2
+set.seed(1)
+x <- aldex.clr(
+  reads = assay(tse, "counts"),
+  conds = as.character(colData(tse)$SampleType),
+  mc.samples = 128,
+  denom = "all",
+  verbose = FALSE
 )
+x_tt <- aldex.ttest(x, paired.test = FALSE, verbose = FALSE)
+x_effect <- aldex.effect(x, CI = TRUE, verbose = FALSE)
+aldex_out <- data.frame(x_tt, x_effect)
 
-# Convert the extracted data to a count matrix
-counts_data <- assay(cmd_data[[1]])
-counts_data <- counts_data[, rownames(metadata)]  # Subset to relevant samples
+# Use ALDEx2 effect size as ranking metric
+fc <- aldex_out$effect
+names(fc) <- rownames(aldex_out)
 
-# Filter taxa with at least one sample having counts > 100
-counts_data <- counts_data[apply(counts_data > 100, 1, sum) > 0, ]
+# Run taxon rank set enrichment directly from the TSE
+results <- taxon_rank_sets(fc, tse, min_set_size = 5)
 
-# Extract species names from taxonomic strings
-species_names <- gsub("s__", "", sapply(rownames(counts_data), function(y) strsplit(y, "\\|")[[1]][7]))
-rownames(counts_data) <- species_names
-
-# Create a taxonomic lineage dataframe
-# Remove taxonomic prefixes (k__, p__, c__, etc.) and separate into taxonomic ranks
-
-# make data frame of taxon lineages
-taxon_lineages <- data.frame(Name = species_names,
-                             Lineage = names(species_names)) %>%
-  mutate(Lineage = str_remove_all(Lineage, '[kpcofgs]__')) %>%
-  separate(col = Lineage, into = c('kingdom', 'phylum', 'class', 
-                                   'order', 'family', 'genus', 'species'), 
-           sep = '\\|') %>%
-  mutate(name = Name) %>%
-  remove_rownames() %>%
-  column_to_rownames('name')
-
-# Perform differential abundance testing using LinDA
-metadata$study_condition <- factor(metadata$study_condition, levels = c("control", "AD"))
-
-linda_results <- linda(
-  feature.dat = counts_data,
-  meta.dat = metadata,
-  formula = '~study_condition',
-  feature.dat.type = 'count',
-  prev.filter = 0.05
-)
-
-# Extract log2 fold change values for differential taxa
-linda_results <- linda_results$output$study_conditionAD
-log2_fold_changes <- linda_results$log2FoldChange
-names(log2_fold_changes) <- rownames(linda_results)
-
-# Define the taxonomic rank for enrichment analysis
-selected_taxon_level <- 'genus'  # Modify as needed (e.g., genus, phylum)
-
-# Create a named list of species grouped by taxonomic rank
-custom_taxon_sets <- taxon_lineages %>%
-  group_by(.data[[selected_taxon_level]]) %>% 
-  summarise(species = list(species), .groups = "drop") %>%
-  deframe()
-
-# Perform enrichment analysis using TaxSEA
-custom_taxsea_results <- TaxSEA(taxon_ranks = log2_fold_changes, custom_db = custom_taxon_sets)
-custom_taxsea_results <- custom_taxsea_results$custom_sets
+names(results)    # Kingdom, Phylum, Class, Order, Family, Genus
+head(results$Family)
+head(results$Genus)
 
 ```
 
