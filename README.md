@@ -23,7 +23,7 @@ TaxSEA supports **three complementary analysis modes**:
 2. **ORA – Over-Representation Analysis**            
 3. **Enrichment using taxonomic sets**
 
-Options 1 and 2 Both use the same taxon-set databases but answer slightly different questions. Mode 1 which is
+Modes 1 and 2 Both use the same taxon-set databases but answer slightly different questions. Mode 1 which is
 the default we reccomend in most cases takes as input a list of bacteria a rank (E.g. fold change). It then tests
 whether any of the taxon sets in the database are skewed to one end of the distribution or another. Mode 2 uses
 the same database but only takes as input a list of bacterial names. While answering a similar question this 
@@ -33,7 +33,7 @@ approach is often less powerful as it requires a hard cut-off to select bacteria
 Mode 3 allows users to test for differences at a particular taxonomic rank. For example instead of just summing up
 or aggregating all the species in a genus. We see if the distribution of species within a genus is different between groups. This
 is a more powerful approach as simply summing/aggregating to a rank can risk missing when you can get shifts 
-within a taxon. 
+within a taxon. This approach is implemented in the taxon_set_ranks() function. 
 
 In short, TaxSEA aims to make it easy to intepret changes in your microbiome data.
 
