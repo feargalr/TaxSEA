@@ -27,89 +27,72 @@ This is particularly powerful in: - antibiotic or perturbation
 experiments - situations where ecological turnover happens within
 taxonomic groups
 
-Below is an example performing this in R. In the future we will
-incorporate this as a core function in TaxSEA
+This functionality is available in TaxSEA in the taxon_rank_sets()
+function.
 
 ``` r
 
-#### Applying TaxSEA functionality to taxonomic ranks  
-# This script applies TaxSEA to identify taxonomic enrichment at different taxonomic levels.
-# Specifically, we analyze enrichment at the family level using metagenomic data
+#### Enrichment testing with taxonomically defined ranks  
+# --- Example 1: Data frame input ---
+# Create a lineage data frame (e.g., parsed from curatedMetagenomicData)
+# The 'species' column must match the names in taxon_ranks.
 
-# Load required libraries
-library(TaxSEA)
-library(curatedMetagenomicData)
-library(tidyverse)
-library(phyloseq)
-library(MicrobiomeStat)
-library(dplyr)
-
-# Load sample metadata
-metadata_all <- sampleMetadata
-
-# Filter metadata for the specific study (ChngKR_2016)
-metadata <- metadata_all %>% 
-  filter(study_name == "ChngKR_2016") %>% 
-  column_to_rownames('sample_id')
-
-# Extract count data using curatedMetagenomicData
-cmd_data <- curatedMetagenomicData(
-  pattern = "ChngKR_2016.relative_abundance",
-  counts = TRUE,
-  dryrun = FALSE
+lineage_df <- data.frame(
+  species = c("Cutibacterium_acnes", "Klebsiella_pneumoniae",
+              "Propionibacterium_humerusii", "Moraxella_osloensis",
+              "Enhydrobacter_aerosaccus", "Staphylococcus_capitis",
+              "Staphylococcus_epidermidis", "Staphylococcus_aureus",
+              "Escherichia_coli", "Enterobacter_cloacae",
+              "Pseudomonas_aeruginosa", "Acinetobacter_baumannii",
+              "Lactobacillus_rhamnosus", "Lactobacillus_acidophilus",
+              "Bifidobacterium_longum", "Bifidobacterium_breve"),
+  kingdom = rep("Bacteria", 16),
+  phylum = c("Actinobacteria", "Proteobacteria",
+             "Actinobacteria", "Proteobacteria",
+             "Proteobacteria", "Firmicutes",
+             "Firmicutes", "Firmicutes",
+             "Proteobacteria", "Proteobacteria",
+             "Proteobacteria", "Proteobacteria",
+             "Firmicutes", "Firmicutes",
+             "Actinobacteria", "Actinobacteria"),
+  class = c("Actinobacteria", "Gammaproteobacteria",
+            "Actinobacteria", "Gammaproteobacteria",
+            "Alphaproteobacteria", "Bacilli",
+            "Bacilli", "Bacilli",
+            "Gammaproteobacteria", "Gammaproteobacteria",
+            "Gammaproteobacteria", "Gammaproteobacteria",
+            "Bacilli", "Bacilli",
+            "Actinobacteria", "Actinobacteria"),
+  order = c("Propionibacteriales", "Enterobacterales",
+            "Propionibacteriales", "Pseudomonadales",
+            "Rhodospirillales", "Bacillales",
+            "Bacillales", "Bacillales",
+            "Enterobacterales", "Enterobacterales",
+            "Pseudomonadales", "Pseudomonadales",
+            "Lactobacillales", "Lactobacillales",
+            "Bifidobacteriales", "Bifidobacteriales"),
+  family = c("Propionibacteriaceae", "Enterobacteriaceae",
+             "Propionibacteriaceae", "Moraxellaceae",
+             "Rhodospirillaceae", "Staphylococcaceae",
+             "Staphylococcaceae", "Staphylococcaceae",
+             "Enterobacteriaceae", "Enterobacteriaceae",
+             "Pseudomonadaceae", "Moraxellaceae",
+             "Lactobacillaceae", "Lactobacillaceae",
+             "Bifidobacteriaceae", "Bifidobacteriaceae"),
+  genus = c("Cutibacterium", "Klebsiella",
+            "Cutibacterium", "Moraxella",
+            "Enhydrobacter", "Staphylococcus",
+            "Staphylococcus", "Staphylococcus",
+            "Escherichia", "Enterobacter",
+            "Pseudomonas", "Acinetobacter",
+            "Lactobacillus", "Lactobacillus",
+            "Bifidobacterium", "Bifidobacterium"),
+  stringsAsFactors = FALSE
 )
 
-# Convert the extracted data to a count matrix
-counts_data <- assay(cmd_data[[1]])
-counts_data <- counts_data[, rownames(metadata)]  # Subset to relevant samples
-
-# Filter taxa with at least one sample having counts > 100
-counts_data <- counts_data[apply(counts_data > 100, 1, sum) > 0, ]
-
-# Extract species names from taxonomic strings
-species_names <- gsub("s__", "", sapply(rownames(counts_data), function(y) strsplit(y, "\\|")[[1]][7]))
-rownames(counts_data) <- species_names
-
-# Create a taxonomic lineage dataframe
-# Remove taxonomic prefixes (k__, p__, c__, etc.) and separate into taxonomic ranks
-
-# make data frame of taxon lineages
-taxon_lineages <- data.frame(Name = species_names,
-                             Lineage = names(species_names)) %>%
-  mutate(Lineage = str_remove_all(Lineage, '[kpcofgs]__')) %>%
-  separate(col = Lineage, into = c('kingdom', 'phylum', 'class', 
-                                   'order', 'family', 'genus', 'species'), 
-           sep = '\\|') %>%
-  mutate(name = Name) %>%
-  remove_rownames() %>%
-  column_to_rownames('name')
-
-# Perform differential abundance testing using LinDA
-metadata$study_condition <- factor(metadata$study_condition, levels = c("control", "AD"))
-
-linda_results <- linda(
-  feature.dat = counts_data,
-  meta.dat = metadata,
-  formula = '~study_condition',
-  feature.dat.type = 'count',
-  prev.filter = 0.05
-)
-
-# Extract log2 fold change values for differential taxa
-linda_results <- linda_results$output$study_conditionAD
-log2_fold_changes <- linda_results$log2FoldChange
-names(log2_fold_changes) <- rownames(linda_results)
-
-# Define the taxonomic rank for enrichment analysis
-selected_taxon_level <- 'genus'  # Modify as needed (e.g., genus, phylum)
-
-# Create a named list of species grouped by taxonomic rank
-custom_taxon_sets <- taxon_lineages %>%
-  group_by(.data[[selected_taxon_level]]) %>% 
-  summarise(species = list(species), .groups = "drop") %>%
-  deframe()
-
-# Perform enrichment analysis using TaxSEA
-custom_taxsea_results <- TaxSEA(taxon_ranks = log2_fold_changes, custom_db = custom_taxon_sets)
-custom_taxsea_results <- custom_taxsea_results$custom_sets
+set.seed(42)
+fc <- setNames(rnorm(16), lineage_df$species)
+results <- taxon_rank_sets(fc, lineage_df, min_set_size = 2)
+names(results)
+results$family
 ```
