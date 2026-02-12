@@ -1,5 +1,9 @@
 # TaxSEA News
 
+# TaxSEA 1.3.3
+
+- Add `ssTaxSEA()` function for single sample enrichment testing and documentation
+
 # TaxSEA 1.3.2
 
 - Add `taxon_rank_sets()` helper with documentation and tests

@@ -3,7 +3,5 @@
 export(TaxSEA)
 export(get_ncbi_taxon_ids)
 export(get_taxon_sets)
+export(ssTaxSEA)
 export(taxon_rank_sets)
-
-import(stats)
-importFrom(utils, data)
