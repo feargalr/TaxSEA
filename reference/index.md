@@ -15,5 +15,7 @@
   : Retrieve NCBI Taxonomy IDs for a list of taxon names
 - [`get_taxon_sets()`](https://feargalr.github.io/TaxSEA/reference/get_taxon_sets.md)
   : Retrieve Taxon Sets from TaxSEA Library
+- [`ssTaxSEA()`](https://feargalr.github.io/TaxSEA/reference/ssTaxSEA.md)
+  : Single-Sample Taxon Set Enrichment Analysis
 - [`taxon_rank_sets()`](https://feargalr.github.io/TaxSEA/reference/taxon_rank_sets.md)
   : Taxon Rank Set Enrichment Analysis

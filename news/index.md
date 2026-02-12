@@ -1,5 +1,11 @@
 # Changelog
 
+## TaxSEA 1.3.3
+
+- Add
+  [`ssTaxSEA()`](https://feargalr.github.io/TaxSEA/reference/ssTaxSEA.md)
+  function for single sample enrichment testing and documentation
+
 ## TaxSEA 1.3.2
 
 - Add
