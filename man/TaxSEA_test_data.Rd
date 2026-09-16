@@ -18,7 +18,7 @@ ranks and taxon IDs, respectively.
 See READ ME.
 }
 \usage{
-TaxSEA_test_data
+data(TaxSEA_test_data)
 }
 \description{
 A dataset containing taxon ranks and taxon IDs.

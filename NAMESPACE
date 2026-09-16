@@ -5,3 +5,17 @@ export(get_ncbi_taxon_ids)
 export(get_taxon_sets)
 export(ssTaxSEA)
 export(taxon_rank_sets)
+importFrom(methods,is)
+importFrom(stats,
+  fisher.test,
+  ks.test,
+  median,
+  p.adjust,
+  sd,
+  setNames
+)
+importFrom(utils,
+  URLencode,
+  data,
+  stack
+)

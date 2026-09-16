@@ -4,3 +4,7 @@
 ^docs$
 ^pkgdown$
 ^\.github$
+^\.claude$
+^\.Rhistory$
+\.Rhistory$
+\.DS_Store$

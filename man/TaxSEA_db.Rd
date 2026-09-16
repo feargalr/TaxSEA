@@ -14,7 +14,7 @@ representing taxa.
 See READ ME.
 }
 \usage{
-TaxSEA_db
+data(TaxSEA_db)
 }
 \description{
 TaxSEA Database

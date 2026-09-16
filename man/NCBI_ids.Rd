@@ -17,7 +17,7 @@ A named vector mapping NCBI IDs to species or genus names.
 NCBI
 }
 \usage{
-NCBI_ids
+data(NCBI_ids)
 }
 \description{
 A dataset for mapping NCBI IDs to species/genus names. This named vector
