@@ -1,0 +1,87 @@
+# R CMD check + BiocCheck against the Bioconductor devel container.
+#
+# This mirrors what the Bioconductor build servers run, so problems surface in
+# minutes here rather than in the next day's devel build report.
+on:
+  push:
+    branches: [main, master, devel]
+  pull_request:
+  workflow_dispatch:
+
+name: check-bioc
+
+permissions: read-all
+
+jobs:
+  check-bioc:
+    runs-on: ubuntu-latest
+    # bioconductor/bioconductor_docker:devel ships the correct R and the full
+    # Bioconductor dependency stack for the current devel cycle.
+    container:
+      image: bioconductor/bioconductor_docker:devel
+
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      # Vignettes call bugsigdbr::importBugSigDB(), which downloads and caches.
+      # Give it a stable cache location inside the container.
+      BiocFileCache_CACHE: /tmp/BiocFileCache
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Query dependencies
+        run: |
+          BiocManager::install("remotes", ask = FALSE, update = FALSE)
+          saveRDS(remotes::dev_package_deps(dependencies = TRUE), "deps.rds")
+        shell: Rscript {0}
+
+      - name: Cache R packages
+        uses: actions/cache@v4
+        with:
+          path: /usr/local/lib/R/site-library
+          key: ${{ runner.os }}-bioc-devel-${{ hashFiles('deps.rds') }}
+          restore-keys: ${{ runner.os }}-bioc-devel-
+
+      - name: Install dependencies
+        run: |
+          remotes::install_deps(dependencies = TRUE, upgrade = "never")
+          BiocManager::install("BiocCheck", ask = FALSE, update = FALSE)
+        shell: Rscript {0}
+
+      - name: Session info
+        run: |
+          options(width = 100)
+          cat("Bioconductor version:", as.character(BiocManager::version()), "\n")
+          pkgs <- installed.packages()[, "Package"]
+          sessioninfo::session_info(pkgs, include_base = TRUE)
+        shell: Rscript {0}
+
+      - name: Build
+        run: R CMD build .
+
+      - name: R CMD check
+        run: |
+          R CMD check --no-manual TaxSEA_*.tar.gz
+        continue-on-error: false
+
+      - name: Show check log on failure
+        if: failure()
+        run: |
+          find . -name "00check.log" -exec cat {} \;
+          find . -name "00install.out" -exec cat {} \;
+
+      - name: BiocCheck
+        run: |
+          BiocCheck::BiocCheck(
+            dir(pattern = "^TaxSEA.*\\.tar\\.gz$", full.names = TRUE)[1],
+            `quit-with-status` = TRUE,
+            `no-check-bioc-help` = TRUE
+          )
+        shell: Rscript {0}
+
+      - name: Upload check results
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: check-results
+          path: TaxSEA.Rcheck
