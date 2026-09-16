@@ -1,5 +1,35 @@
 # TaxSEA News
 
+# TaxSEA 1.5.2
+
+## Breaking changes
+
+- `ssTaxSEA()` now scores each taxon set as the **mean centered log-ratio
+  (CLR) of the set's members within a sample**, replacing the previous
+  ranked, cohort z-scored, ssGSEA-style running-sum statistic.
+- `ssTaxSEA()` returns a **numeric matrix with taxon sets as rows and samples
+  as columns**, instead of a list of two matrices oriented samples x sets.
+  Code written as `res$scores[sample, set]` becomes `res[set, sample]`.
+- `ssTaxSEA()` no longer returns p-values. The score is a descriptive
+  statistic; test it across samples with a test appropriate to your design.
+
+## New
+
+- `ssTaxSEA()` gains a `pseudocount` argument (default 0.5), added to every
+  value before the log transform rather than only to zeros.
+- `ssTaxSEA()` now works on a **single sample**, because the score no longer
+  references the rest of the cohort.
+- `ssTaxSEA()` rejects proportion-like input (columns summing to 1), negative
+  values, non-finite values and empty samples, instead of silently producing
+  meaningless scores.
+
+## Bug fixes
+
+- The CLR is now computed across all supplied taxa before subsetting to set
+  members. Previously the matrix was filtered to set members first, which made
+  the geometric mean the CLR divides by depend on which sets were being
+  tested and could manufacture apparent signal in sets that had none.
+
 # TaxSEA 1.3.3
 
 - Add `ssTaxSEA()` function for single sample enrichment testing and documentation

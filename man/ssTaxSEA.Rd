@@ -9,7 +9,8 @@ ssTaxSEA(
   lookup_missing = FALSE,
   min_set_size = 5,
   max_set_size = 300,
-  custom_db = NULL
+  custom_db = NULL,
+  pseudocount = 0.5
 )
 }
 \arguments{
@@ -32,57 +33,80 @@ Default is 300.}
 \item{custom_db}{A user-provided list of taxon sets. If NULL
 (default), the built-in TaxSEA database is used (excluding
 BugSigDB).}
+
+\item{pseudocount}{Numeric value added to every count before the
+log transform, to handle zeros. Default is 0.5. This choice
+affects the scores, so report it alongside your results.}
 }
 \value{
-A list with two elements:
-  \describe{
-    \item{scores}{A matrix (samples x taxon sets) of enrichment
-      scores. Positive scores indicate the set taxa tend to have
-      higher abundance in that sample relative to the cohort.}
-    \item{pvalues}{A matrix (samples x taxon sets) of KS test
-      p-values for each sample-set combination.}
-  }
+A numeric matrix of scores with taxon sets as rows and
+  samples as columns. Higher values indicate that the set's members
+  are more abundant in that sample, relative to the average taxon
+  in that same sample.
 }
 \description{
-Computes per-sample enrichment scores for taxon sets using an
-ssGSEA-style approach. Counts are CLR-transformed, then each
-taxon is z-scored across samples to capture between-sample
-variation. Per-sample enrichment is then computed by ranking
-each sample's z-scores and applying a weighted running-sum
-statistic against taxon sets from the TaxSEA database.
+Computes a per-sample score for each taxon set as the mean
+centered log-ratio (CLR) of the set's members within that sample.
 }
 \details{
-The approach works as follows:
-\enumerate{
-  \item Raw counts are CLR-transformed (centered log-ratio with
-    pseudocount of 0.5 for zeros).
-  \item Each taxon is then z-scored across all samples, so that
-    values represent how much higher or lower a taxon is in a
-    given sample relative to the cohort mean.
-  \item For each sample, the z-scores are ranked and an
-    ssGSEA-style weighted running-sum enrichment score is
-    computed for each taxon set.
-  \item A KS test p-value is also computed per sample per set.
+For each sample the counts are centered log-ratio transformed, and
+the score for a taxon set is the mean of the CLR values of the set's
+members:
+
+\deqn{score_{S,j} = \frac{1}{|S|} \sum_{i \in S} clr_{ij}}
+
+The CLR is computed across \emph{all} taxa supplied in \code{counts},
+before any subsetting to set members. This matters: restricting the
+matrix to set members first would make the geometric mean that the
+CLR divides by depend on the sets being tested, which manufactures
+apparent signal in sets that have none.
+
+Because the score is a within-sample quantity, \code{ssTaxSEA} does
+not need a cohort and is well defined for a single sample.
+}
+\section{Interpreting the scores}{
+
+Scores are comparable \strong{across samples within a taxon set}:
+a higher score in sample A than sample B means the set's members
+make up more of sample A's community.
+
+Scores are \strong{not} comparable across taxon sets. A set of
+abundant taxa will score higher than a set of rare taxa in every
+sample, regardless of biology, simply because its members are more
+abundant. When visualising the matrix, center or scale the rows
+first (for example \code{t(scale(t(scores)))}), and when comparing
+groups, compare a single set's scores between groups rather than
+comparing different sets to each other.
+
+No p-values are returned. The score is a descriptive statistic;
+to test a hypothesis, compare scores across samples using a test
+appropriate to your design (for example \code{\link[stats]{wilcox.test}}
+or a linear model on one row of the returned matrix).
 }
 
-This cohort-relative approach ensures that taxon sets which are
-consistently elevated in a subset of samples (e.g. disease
-samples) will produce high enrichment scores in those samples,
-even if the taxa are not the most abundant within any single
-sample.
-}
 \examples{
-\dontrun{
-# From a count matrix (taxa x samples)
-counts <- matrix(rpois(500, lambda = 10), nrow = 50, ncol = 10)
-rownames(counts) <- paste0("Taxon_", seq_len(50))
-colnames(counts) <- paste0("Sample_", seq_len(10))
-res <- ssTaxSEA(counts, custom_db = list(
-  set1 = paste0("Taxon_", 1:10),
-  set2 = paste0("Taxon_", 20:30)
-), min_set_size = 2)
-head(res$scores)
-head(res$pvalues)
-}
+# Toy count matrix: 30 taxa x 8 samples
+set.seed(42)
+counts <- matrix(rpois(240, lambda = 10), nrow = 30, ncol = 8)
+rownames(counts) <- paste0("Taxon_", seq_len(30))
+colnames(counts) <- paste0("Sample_", seq_len(8))
 
+# Raise one set's members in the last four samples
+counts[1:6, 5:8] <- counts[1:6, 5:8] * 5
+
+sets <- list(
+  elevated_set = paste0("Taxon_", 1:6),
+  control_set  = paste0("Taxon_", 20:27)
+)
+
+scores <- ssTaxSEA(counts, custom_db = sets, min_set_size = 3)
+dim(scores)        # sets x samples
+round(scores, 2)
+
+# The planted signal shows up as higher scores in samples 5-8
+rowMeans(scores[, 1:4]) - rowMeans(scores[, 5:8])
+
+}
+\seealso{
+\code{\link{TaxSEA}} for group-level enrichment.
 }

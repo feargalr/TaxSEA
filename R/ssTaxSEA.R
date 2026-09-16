@@ -1,11 +1,7 @@
 #' Single-Sample Taxon Set Enrichment Analysis
 #'
-#' Computes per-sample enrichment scores for taxon sets using an
-#' ssGSEA-style approach. Counts are CLR-transformed, then each
-#' taxon is z-scored across samples to capture between-sample
-#' variation. Per-sample enrichment is then computed by ranking
-#' each sample's z-scores and applying a weighted running-sum
-#' statistic against taxon sets from the TaxSEA database.
+#' Computes a per-sample score for each taxon set as the mean
+#' centered log-ratio (CLR) of the set's members within that sample.
 #'
 #' @param counts A numeric matrix, data.frame, or
 #'   \code{SummarizedExperiment}/\code{TreeSummarizedExperiment} object.
@@ -22,56 +18,79 @@
 #' @param custom_db A user-provided list of taxon sets. If NULL
 #'   (default), the built-in TaxSEA database is used (excluding
 #'   BugSigDB).
+#' @param pseudocount Numeric value added to every count before the
+#'   log transform, to handle zeros. Default is 0.5. This choice
+#'   affects the scores, so report it alongside your results.
 #'
-#' @return A list with two elements:
-#'   \describe{
-#'     \item{scores}{A matrix (samples x taxon sets) of enrichment
-#'       scores. Positive scores indicate the set taxa tend to have
-#'       higher abundance in that sample relative to the cohort.}
-#'     \item{pvalues}{A matrix (samples x taxon sets) of KS test
-#'       p-values for each sample-set combination.}
-#'   }
+#' @return A numeric matrix of scores with taxon sets as rows and
+#'   samples as columns. Higher values indicate that the set's members
+#'   are more abundant in that sample, relative to the average taxon
+#'   in that same sample.
 #'
 #' @details
-#' The approach works as follows:
-#' \enumerate{
-#'   \item Raw counts are CLR-transformed (centered log-ratio with
-#'     pseudocount of 0.5 for zeros).
-#'   \item Each taxon is then z-scored across all samples, so that
-#'     values represent how much higher or lower a taxon is in a
-#'     given sample relative to the cohort mean.
-#'   \item For each sample, the z-scores are ranked and an
-#'     ssGSEA-style weighted running-sum enrichment score is
-#'     computed for each taxon set.
-#'   \item A KS test p-value is also computed per sample per set.
-#' }
+#' For each sample the counts are centered log-ratio transformed, and
+#' the score for a taxon set is the mean of the CLR values of the set's
+#' members:
 #'
-#' This cohort-relative approach ensures that taxon sets which are
-#' consistently elevated in a subset of samples (e.g. disease
-#' samples) will produce high enrichment scores in those samples,
-#' even if the taxa are not the most abundant within any single
-#' sample.
+#' \deqn{score_{S,j} = \frac{1}{|S|} \sum_{i \in S} clr_{ij}}
+#'
+#' The CLR is computed across \emph{all} taxa supplied in \code{counts},
+#' before any subsetting to set members. This matters: restricting the
+#' matrix to set members first would make the geometric mean that the
+#' CLR divides by depend on the sets being tested, which manufactures
+#' apparent signal in sets that have none.
+#'
+#' Because the score is a within-sample quantity, \code{ssTaxSEA} does
+#' not need a cohort and is well defined for a single sample.
+#'
+#' @section Interpreting the scores:
+#' Scores are comparable \strong{across samples within a taxon set}:
+#' a higher score in sample A than sample B means the set's members
+#' make up more of sample A's community.
+#'
+#' Scores are \strong{not} comparable across taxon sets. A set of
+#' abundant taxa will score higher than a set of rare taxa in every
+#' sample, regardless of biology, simply because its members are more
+#' abundant. When visualising the matrix, center or scale the rows
+#' first (for example \code{t(scale(t(scores)))}), and when comparing
+#' groups, compare a single set's scores between groups rather than
+#' comparing different sets to each other.
+#'
+#' No p-values are returned. The score is a descriptive statistic;
+#' to test a hypothesis, compare scores across samples using a test
+#' appropriate to your design (for example \code{\link[stats]{wilcox.test}}
+#' or a linear model on one row of the returned matrix).
 #'
 #' @examples
-#' \dontrun{
-#' # From a count matrix (taxa x samples)
-#' counts <- matrix(rpois(500, lambda = 10), nrow = 50, ncol = 10)
-#' rownames(counts) <- paste0("Taxon_", seq_len(50))
-#' colnames(counts) <- paste0("Sample_", seq_len(10))
-#' res <- ssTaxSEA(counts, custom_db = list(
-#'   set1 = paste0("Taxon_", 1:10),
-#'   set2 = paste0("Taxon_", 20:30)
-#' ), min_set_size = 2)
-#' head(res$scores)
-#' head(res$pvalues)
-#' }
+#' # Toy count matrix: 30 taxa x 8 samples
+#' set.seed(42)
+#' counts <- matrix(rpois(240, lambda = 10), nrow = 30, ncol = 8)
+#' rownames(counts) <- paste0("Taxon_", seq_len(30))
+#' colnames(counts) <- paste0("Sample_", seq_len(8))
 #'
+#' # Raise one set's members in the last four samples
+#' counts[1:6, 5:8] <- counts[1:6, 5:8] * 5
+#'
+#' sets <- list(
+#'   elevated_set = paste0("Taxon_", 1:6),
+#'   control_set  = paste0("Taxon_", 20:27)
+#' )
+#'
+#' scores <- ssTaxSEA(counts, custom_db = sets, min_set_size = 3)
+#' dim(scores)        # sets x samples
+#' round(scores, 2)
+#'
+#' # The planted signal shows up as higher scores in samples 5-8
+#' rowMeans(scores[, 1:4]) - rowMeans(scores[, 5:8])
+#'
+#' @seealso \code{\link{TaxSEA}} for group-level enrichment.
 #' @export
 ssTaxSEA <- function(counts,
                      lookup_missing = FALSE,
                      min_set_size = 5,
                      max_set_size = 300,
-                     custom_db = NULL) {
+                     custom_db = NULL,
+                     pseudocount = 0.5) {
 
   # --- Handle SummarizedExperiment / TreeSummarizedExperiment ---
   if (methods::is(counts, "SummarizedExperiment")) {
@@ -95,11 +114,46 @@ ssTaxSEA <- function(counts,
     stop("'counts' must have row names (taxon names).")
   }
   if (ncol(counts) < 1) stop("'counts' must have at least one sample.")
+  if (nrow(counts) < 1) stop("'counts' must have at least one taxon.")
+
+  if (!is.numeric(pseudocount) || length(pseudocount) != 1 ||
+      is.na(pseudocount) || pseudocount <= 0) {
+    stop("'pseudocount' must be a single positive number.")
+  }
+
+  if (any(!is.finite(counts))) {
+    stop("'counts' contains missing or non-finite values. ",
+         "Replace or remove them before running ssTaxSEA.")
+  }
+  if (any(counts < 0)) {
+    stop("'counts' contains negative values. ssTaxSEA expects counts ",
+         "or another non-negative abundance measure.")
+  }
+
+  # Proportions are not safe here: adding a pseudocount of 0.5 to values
+  # that sum to 1 would overwhelm the data entirely.
+  col_totals <- colSums(counts)
+  if (all(abs(col_totals - 1) < 1e-6)) {
+    stop("'counts' appears to contain proportions (columns sum to 1). ",
+         "Supply counts instead, or rescale to a count-like scale: ",
+         "adding a pseudocount to proportions would dominate the ",
+         "transform.")
+  }
+  if (any(col_totals == 0)) {
+    stop("One or more samples have zero total abundance. ",
+         "Remove empty samples before running ssTaxSEA.")
+  }
 
   if (any(grepl("\\[|\\]", rownames(counts)))) {
     stop("Taxon names contain square brackets [ ]. ",
          "Please remove or rename these entries before running ssTaxSEA.")
   }
+
+  # --- CLR transform on the FULL table ---
+  # This must happen before any subsetting to set members, so that the
+  # geometric mean each value is divided by reflects the whole community
+  # rather than whichever taxa happen to be in the tested sets.
+  clr_mat <- ss_clr(counts, pseudocount = pseudocount)
 
   # --- Prepare taxon sets and ID mapping ---
   prep <- ss_prepare(
@@ -116,81 +170,38 @@ ssTaxSEA <- function(counts,
   if (length(taxon_sets) == 0) {
     warning("No taxon sets remain after filtering. ",
             "Returning empty result.")
-    return(list(
-      scores = matrix(nrow = ncol(counts), ncol = 0,
-                      dimnames = list(colnames(counts), character(0))),
-      pvalues = matrix(nrow = ncol(counts), ncol = 0,
-                       dimnames = list(colnames(counts), character(0)))
-    ))
+    return(matrix(numeric(0), nrow = 0, ncol = ncol(counts),
+                  dimnames = list(character(0), colnames(counts))))
   }
 
   # --- Map row names to NCBI IDs (if using default DB) ---
   if (is.null(custom_db)) {
-    mapped_rows <- rownames(counts) %in% names(id_map)
-    counts <- counts[mapped_rows, , drop = FALSE]
-    rownames(counts) <- id_map[rownames(counts)]
+    mapped_rows <- rownames(clr_mat) %in% names(id_map)
+    clr_mat <- clr_mat[mapped_rows, , drop = FALSE]
+    rownames(clr_mat) <- id_map[rownames(clr_mat)]
   }
 
-  # Keep only taxa that appear in at least one set
-  all_set_taxa <- unique(unlist(taxon_sets))
-  counts <- counts[rownames(counts) %in% all_set_taxa, , drop = FALSE]
-
-  if (nrow(counts) < 3) {
-    warning("Very few taxa overlap with taxon sets (", nrow(counts),
+  taxa_ids <- rownames(clr_mat)
+  if (length(taxa_ids) < 3) {
+    warning("Very few taxa overlap with taxon sets (", length(taxa_ids),
             "). Results may be unreliable.")
   }
 
-  # --- CLR transform ---
-  clr_mat <- ss_clr(counts)
-
-  # --- Z-score each taxon across samples (cohort-relative) ---
-  if (ncol(clr_mat) < 3) {
-    warning("Fewer than 3 samples: z-scoring across samples may ",
-            "be unreliable.")
-  }
-  row_means <- rowMeans(clr_mat)
-  row_sds <- apply(clr_mat, 1, stats::sd)
-
-  # Handle zero-variance taxa (constant across all samples)
-  zero_sd <- row_sds == 0
-  if (any(zero_sd)) {
-    message(sum(zero_sd), " taxa have zero variance across samples ",
-            "and will be assigned a z-score of 0.")
-  }
-  row_sds[zero_sd] <- 1  # avoid division by zero; result will be 0
-
-  z_mat <- (clr_mat - row_means) / row_sds
-
-  # --- Compute enrichment scores and p-values per sample ---
-  n_samples <- ncol(z_mat)
-  n_sets <- length(taxon_sets)
-  set_names <- names(taxon_sets)
-
-  score_mat <- matrix(NA_real_, nrow = n_samples, ncol = n_sets,
-                      dimnames = list(colnames(z_mat), set_names))
-  pval_mat <- matrix(NA_real_, nrow = n_samples, ncol = n_sets,
-                     dimnames = list(colnames(z_mat), set_names))
-
-  taxa_ids <- rownames(z_mat)
-
-  for (j in seq_len(n_samples)) {
-    sample_vals <- z_mat[, j]
-    ranked_vals <- rank(sample_vals, ties.method = "average")
-    names(ranked_vals) <- taxa_ids
-
-    for (k in seq_len(n_sets)) {
-      set_members <- intersect(taxon_sets[[k]], taxa_ids)
-      if (length(set_members) < 2) next
-
-      score_mat[j, k] <- ss_enrichment_score(ranked_vals, set_members)
-
-      set_vals <- sample_vals[set_members]
-      ks <- suppressWarnings(stats::ks.test(set_vals, sample_vals))
-      pval_mat[j, k] <- ks$p.value
+  # --- Score: mean CLR of each set's members, per sample ---
+  # rbind over a named list keeps the sets-as-rows orientation for any
+  # number of samples, including one. vapply would simplify to a vector
+  # in the single-sample case and silently transpose the result.
+  score_mat <- do.call(rbind, lapply(taxon_sets, function(set) {
+    members <- intersect(set, taxa_ids)
+    if (length(members) == 0) {
+      return(stats::setNames(rep(NA_real_, ncol(clr_mat)),
+                             colnames(clr_mat)))
     }
-  }
+    colMeans(clr_mat[members, , drop = FALSE])
+  }))
 
-  list(scores = score_mat, pvalues = pval_mat)
+  dimnames(score_mat) <- list(names(taxon_sets), colnames(clr_mat))
+  score_mat
 }
 
 
@@ -264,60 +275,16 @@ ss_prepare <- function(taxon_names,
 
 #' CLR transform a count matrix
 #'
-#' Applies centered log-ratio transformation per sample (column).
-#' Zeros are replaced with a pseudocount of 0.5 before transformation.
+#' Applies the centered log-ratio transformation per sample (column).
+#' The pseudocount is added to every value, not only to zeros, so that
+#' the transform stays monotonic in the counts.
 #'
 #' @param mat Numeric matrix (taxa x samples).
+#' @param pseudocount Value added to every count before the log.
 #' @return CLR-transformed matrix of the same dimensions.
 #' @keywords internal
 #' @noRd
-ss_clr <- function(mat) {
-  mat[mat == 0] <- 0.5
-  log_mat <- log(mat)
-  geom_means <- colMeans(log_mat)
-  sweep(log_mat, 2, geom_means, FUN = "-")
-}
-
-
-#' Compute ssGSEA enrichment score
-#'
-#' Calculates a single-sample enrichment score using the weighted
-#' running-sum statistic (Barbie et al., 2009).
-#'
-#' @param ranked_vals Named numeric vector of ranks for one sample.
-#' @param set_members Character vector of taxon IDs in the set.
-#' @param alpha Weighting exponent. Default 0.25.
-#' @return Numeric enrichment score.
-#' @keywords internal
-#' @noRd
-ss_enrichment_score <- function(ranked_vals, set_members, alpha = 0.25) {
-  N <- length(ranked_vals)
-  n_set <- length(set_members)
-
-  sorted_idx <- order(ranked_vals, decreasing = TRUE)
-  sorted_names <- names(ranked_vals)[sorted_idx]
-  sorted_ranks <- ranked_vals[sorted_idx]
-
-  is_in_set <- sorted_names %in% set_members
-
-  # Weighted step-up for hits
-  hit_weights <- abs(sorted_ranks[is_in_set])^alpha
-  norm_hit <- sum(hit_weights)
-
-  # Step-down for misses
-  miss_penalty <- 1 / (N - n_set)
-
-  # Running sum
-  running_sum <- numeric(N)
-  cumulative <- 0
-  for (i in seq_len(N)) {
-    if (is_in_set[i]) {
-      cumulative <- cumulative + abs(sorted_ranks[i])^alpha / norm_hit
-    } else {
-      cumulative <- cumulative - miss_penalty
-    }
-    running_sum[i] <- cumulative
-  }
-
-  sum(running_sum)
+ss_clr <- function(mat, pseudocount = 0.5) {
+  log_mat <- log(mat + pseudocount)
+  sweep(log_mat, 2, colMeans(log_mat), FUN = "-")
 }

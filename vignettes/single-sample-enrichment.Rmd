@@ -7,135 +7,206 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
+library(TaxSEA)
+```
+
 ## Why per-person enrichment?
 
-Standard TaxSEA works at the group level. You run a differential abundance analysis, get a fold change for each taxon, and ask whether biologically related taxa shift together. That's powerful for characterising what differs between groups.
+Standard TaxSEA works at the group level. You run a differential abundance
+analysis, get a fold change for each taxon, and ask whether biologically
+related taxa shift together. That is powerful for characterising what differs
+between groups.
 
 But sometimes the more interesting question is about individuals:
 
 - Which patients in my IBD cohort show an oral bacteria signature?
-- Does this person's microbiome look more "disease-like" or "health-like" for a particular trait?
+- Does this person's microbiome look more "disease-like" for a particular trait?
 - Can I stratify my cohort by enrichment patterns rather than by diagnosis alone?
 
-Group-level enrichment can't answer these questions because it collapses all individuals into a single summary statistic. `ssTaxSEA` extends TaxSEA to produce an enrichment score for every sample, for every taxon set.
-
+Group-level enrichment cannot answer these questions because it collapses all
+individuals into a single summary statistic. `ssTaxSEA()` produces a score for
+every sample, for every taxon set.
 
 ## How it works
 
-The core idea is borrowed from single-sample Gene Set Enrichment Analysis (ssGSEA), adapted for microbiome count data.
+For each sample, the counts are centered log-ratio (CLR) transformed, and the
+score for a taxon set is simply the **mean of the CLR values of the set's
+members**:
 
-The approach has four steps:
+$$score_{S,j} = \frac{1}{|S|} \sum_{i \in S} clr_{ij}$$
 
-1. **CLR transform.** Raw counts are transformed using the centered log-ratio, which accounts for the compositional nature of microbiome data. Zeros are replaced with a small pseudocount (0.5) before transformation.
+That is the whole method. There is no ranking, no running-sum statistic and no
+cohort-relative standardisation.
 
-2. **Z-score each taxon across the cohort.** After CLR transformation, each taxon is z-scored across all samples. This is the critical step. It means that values no longer reflect within-sample abundance, but instead reflect how much higher or lower a taxon is in a given sample *relative to the cohort mean*. Without this step, you would only be asking "are these taxa the most abundant in this person?" rather than "does this person have unusually high levels of these taxa compared to everyone else?".
+Two details are worth stating explicitly.
 
-3. **Rank and score.** For each sample, the z-scores are ranked and an ssGSEA-style weighted running-sum enrichment score is computed for each taxon set.
+**The CLR is computed across all taxa you supply, before any subsetting to set
+members.** The CLR divides each taxon by the geometric mean of the sample, so
+that denominator has to represent the whole community. If you were to subset the
+matrix to set members first and transform afterwards, the denominator would
+depend on which sets you happened to be testing — and sets with no real signal
+would pick up an apparent one. `ssTaxSEA()` does this in the right order; the
+point matters if you are ever tempted to hand-roll the calculation.
 
-4. **KS test.** A Kolmogorov-Smirnov p-value is computed per sample per set, testing whether the set members are shifted relative to all taxa in that sample.
+**The score is a within-sample quantity.** It does not reference the rest of the
+cohort at all, which means `ssTaxSEA()` is well defined for a single sample.
 
-The output is a matrix of enrichment scores (samples x taxon sets) and a corresponding matrix of p-values.
+## Usage
 
+### From a count matrix
 
-## Why z-scoring matters
+Rows are taxa, columns are samples, and row names are taxon names in the same
+format standard TaxSEA expects.
 
-This is worth emphasising because it's the key difference between a naive per-sample approach and one that actually works.
+```{r matrix-example}
+set.seed(42)
+counts <- matrix(rpois(30 * 8, lambda = 10), nrow = 30, ncol = 8)
+rownames(counts) <- paste0("Taxon_", seq_len(30))
+colnames(counts) <- paste0("Sample_", seq_len(8))
 
-Consider oral bacteria in an IBD cohort. At the group level, these taxa are consistently elevated in IBD relative to healthy controls, and TaxSEA picks this up easily from fold changes. But in any individual sample, oral bacteria are unlikely to be the *most abundant* taxa. They might sit at moderate abundance in IBD samples and low abundance in controls.
+# Plant a signal: raise one set's members in the last four samples
+counts[1:6, 5:8] <- counts[1:6, 5:8] * 5
 
-If you simply rank each sample's taxa by their own abundance and run enrichment, oral bacteria won't stand out in either group because both groups have the same dominant gut commensals. The within-sample ranking buries the between-group signal.
+my_sets <- list(
+  elevated_set = paste0("Taxon_", 1:6),
+  control_set  = paste0("Taxon_", 20:27)
+)
 
-Z-scoring across the cohort solves this. A taxon gets a high z-score in a sample only if that sample has more of it than average. So in IBD samples, oral bacteria will have positive z-scores (elevated relative to the cohort), and in healthy samples, they will have negative z-scores. The enrichment test then picks up exactly the pattern you expect.
+scores <- ssTaxSEA(counts, custom_db = my_sets, min_set_size = 3)
+dim(scores)
+round(scores, 2)
+```
 
+The returned object is a plain numeric matrix with **taxon sets as rows and
+samples as columns**. The planted signal is visible as higher scores in the last
+four samples of `elevated_set`:
+
+```{r matrix-signal}
+rowMeans(scores[, 5:8]) - rowMeans(scores[, 1:4])
+```
+
+### A single sample
+
+Because the score never references the cohort, one sample is enough:
+
+```{r single-sample}
+ssTaxSEA(counts[, 1, drop = FALSE], custom_db = my_sets, min_set_size = 3)
+```
+
+### With the built-in database
+
+Leave `custom_db` unset to use the built-in TaxSEA sets. Row names are mapped to
+NCBI taxonomy IDs, exactly as in standard `TaxSEA()`.
+
+```{r builtin, eval = FALSE}
+scores <- ssTaxSEA(counts)
+dim(scores)
+```
+
+### From a TreeSummarizedExperiment
+
+`ssTaxSEA()` accepts `SummarizedExperiment` and `TreeSummarizedExperiment`
+objects directly, extracting the first assay and using `rownames()` as taxon
+identifiers.
+
+```{r tse, message = FALSE, eval = requireNamespace("SummarizedExperiment", quietly = TRUE)}
+library(SummarizedExperiment)
+
+se <- SummarizedExperiment(assays = list(counts = counts))
+scores_se <- ssTaxSEA(se, custom_db = my_sets, min_set_size = 3)
+
+# Identical to the matrix result
+all.equal(scores, scores_se)
+```
+
+## Interpreting the scores
+
+**Compare across samples, within a set.** A higher score for `elevated_set` in
+sample 6 than in sample 2 means the set's members make up more of sample 6's
+community. This is the comparison the score is built for.
+
+**Do not compare across sets.** A set of abundant taxa scores higher than a set
+of rare taxa in every sample, regardless of biology, because its members are
+simply more abundant. In the example above the two sets sit at different
+baselines for exactly this reason:
+
+```{r baselines}
+rowMeans(scores)
+```
+
+For heatmaps and clustering, center or scale the rows first so that you are
+looking at variation between samples rather than differences in baseline
+abundance:
+
+```{r centering}
+scaled <- t(scale(t(scores)))
+round(scaled, 2)
+```
+
+**No p-values are returned.** The score is a descriptive statistic, and a
+p-value computed within a single sample would mostly be telling you whether the
+set's members are more abundant than the average taxon — a property of the set,
+not of the sample. To test a hypothesis, take one row of the matrix and compare
+it across samples with a test suited to your design:
+
+```{r testing}
+group <- rep(c("control", "case"), each = 4)
+wilcox.test(scores["elevated_set", ] ~ group)$p.value
+```
+
+**Remember that the data are compositional.** Because CLR values within a sample
+are constrained, raising one set's members slightly lowers everything else. Small
+shifts in sets you believe to be null are expected, and with enough samples they
+can reach statistical significance while being negligible in size. Report effect
+sizes alongside p-values rather than relying on p-values alone.
+
+## Practical considerations
+
+**The pseudocount matters.** Zeros cannot be log-transformed, so `pseudocount`
+(default 0.5) is added to every value before the transform. Adding it to all
+values rather than only to zeros keeps the transform monotonic in the counts.
+The choice does affect the scores, so report the value you used.
+
+```{r pseudocount}
+p1 <- ssTaxSEA(counts, custom_db = my_sets, min_set_size = 3, pseudocount = 1)
+round(p1["elevated_set", ] - scores["elevated_set", ], 3)
+```
+
+**Supply counts, not proportions.** Adding a pseudocount of 0.5 to values that
+sum to 1 would overwhelm the data completely, so `ssTaxSEA()` refuses input whose
+columns sum to 1. If you only have relative abundances, rescale them to a
+count-like scale first.
+
+**BugSigDB is excluded.** `ssTaxSEA()` uses the built-in TaxSEA database
+(GMRepoV2, MiMeDB, gutMGene, mBodyMap, BacDive) but does not load BugSigDB. This
+keeps the function fast and avoids the `bugsigdbr` dependency.
 
 ## When to use ssTaxSEA vs TaxSEA
 
 | | **TaxSEA** | **ssTaxSEA** |
 |---|---|---|
 | **Input** | Named vector of fold changes or correlations | Count matrix (taxa x samples) or TreeSummarizedExperiment |
-| **Output** | One enrichment result per taxon set | One enrichment score per sample per taxon set |
+| **Output** | One enrichment result per taxon set | One score per sample per taxon set |
 | **Question** | What trait-based shifts characterise the difference between groups? | Which individual samples show a given enrichment pattern? |
-| **Use case** | Interpreting DA results, contextualising group differences | Patient stratification, individual-level phenotyping, heterogeneity analysis |
+| **Use case** | Interpreting DA results, contextualising group differences | Patient stratification, individual-level phenotyping |
+| **Significance** | p-values and FDR per set | none; test scores across samples yourself |
 
-In practice, you might use both: run TaxSEA first to identify which taxon sets are enriched at the group level, then use ssTaxSEA to see how those enrichments distribute across individuals.
+In practice you might use both: run `TaxSEA()` to identify which taxon sets are
+enriched at the group level, then `ssTaxSEA()` to see how those enrichments
+distribute across individuals.
 
+## Downstream analysis
 
-## Usage
+The score matrix is designed to slot into standard workflows:
 
-### From a count matrix
-
-The input should be a matrix with taxa as rows and samples as columns. Row names must be taxon names (species or genus) in the same format as standard TaxSEA.
-
-```r
-library(TaxSEA)
-
-# counts: taxa (rows) x samples (columns)
-res <- ssTaxSEA(counts)
-
-# Enrichment scores: samples x taxon sets
-dim(res$scores)
-res$scores[1:5, 1:3]
-
-# P-values: samples x taxon sets
-res$pvalues[1:5, 1:3]
-```
-
-### From a TreeSummarizedExperiment
-
-`ssTaxSEA` accepts TSE objects directly. It will extract the count assay and use `rownames()` as taxon identifiers.
-
-```r
-library(mia)
-library(TaxSEA)
-
-data(GlobalPatterns, package = "mia")
-tse <- GlobalPatterns
-
-# Subset to two sample types
-tse <- tse[, colData(tse)$SampleType %in% c("Feces", "Soil")]
-tse <- tse[rowSums(assay(tse, "counts") > 0) >= 2, ]
-
-res <- ssTaxSEA(tse, min_set_size = 5)
-dim(res$scores)
-```
-
-### With custom taxon sets
-
-As with standard TaxSEA, you can provide your own taxon sets. When using a custom database, names in the sets should match your row names directly (no NCBI ID conversion is performed).
-
-```r
-my_sets <- list(
-  oral_taxa = c("Fusobacterium_nucleatum", "Streptococcus_mutans",
-                "Porphyromonas_gingivalis", "Prevotella_intermedia",
-                "Treponema_denticola", "Aggregatibacter_actinomycetemcomitans"),
-  scfa_producers = c("Faecalibacterium_prausnitzii", "Roseburia_intestinalis",
-                     "Eubacterium_rectale", "Coprococcus_catus",
-                     "Butyricicoccus_pullicaecorum", "Anaerostipes_caccae")
-)
-
-res <- ssTaxSEA(counts, custom_db = my_sets, min_set_size = 3)
-```
-
-
-## Interpreting the output
-
-**Scores.** A positive enrichment score for a given sample and taxon set means that the taxa in that set tend to have higher abundance in that sample relative to the rest of the cohort. A negative score means they tend to be lower. The magnitude reflects how strong and coordinated the shift is.
-
-**P-values.** The KS test p-value tells you whether the distribution of z-scores for set members differs from the background in that sample. Note that these are unadjusted p-values. Since you are testing many sets across many samples, apply your own multiple testing correction as appropriate for your analysis.
-
-
-## Practical considerations
-
-**Cohort composition matters.** Because z-scoring is relative to the cohort mean, the composition of your cohort affects the scores. If your cohort is 90% disease samples, the "average" will look disease-like and scores will be less extreme. A balanced cohort (or at least a well-defined reference group) generally gives more interpretable results.
-
-**Sample size.** Z-scoring requires a reasonable number of samples to estimate the mean and standard deviation for each taxon. With very few samples (fewer than ~10), estimates will be noisy.
-
-**BugSigDB is excluded.** `ssTaxSEA` uses the built-in TaxSEA database (GMRepoV2, MiMeDB, gutMGene, mBodyMap, BacDive) but does not load BugSigDB. This keeps the function fast and avoids the need for the `bugsigdbr` dependency.
-
-**Downstream analysis.** The score matrix is designed to slot into standard statistical workflows. You can use it for:
-
-- Heatmaps to visualise per-sample enrichment patterns
+- Heatmaps of per-sample enrichment patterns (scale the rows first)
 - Correlation with clinical metadata
-- Group comparisons (e.g. Wilcoxon test on scores between disease and control)
+- Group comparisons on a single set's scores
 - Clustering or ordination to identify patient subgroups
-- Survival analysis or regression using scores as predictors
+- Regression or survival analysis using scores as predictors
+
+```{r sessioninfo}
+sessionInfo()
+```
