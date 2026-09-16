@@ -4,7 +4,7 @@
 \alias{get_taxon_sets}
 \title{Retrieve Taxon Sets from TaxSEA Library}
 \usage{
-get_taxon_sets(taxon_to_fetch = taxon)
+get_taxon_sets(taxon_to_fetch)
 }
 \arguments{
 \item{taxon_to_fetch}{The taxon to search for in the TaxSEA database.}
@@ -19,6 +19,6 @@ and disease signatures) contain a taxon of interest.
 }
 \examples{
 # Retrieve sets for Bifidobacterium longum
-get_taxon_sets(taxon="Bifidobacterium_longum")
+get_taxon_sets(taxon_to_fetch = "Bifidobacterium_longum")
 
 }

@@ -111,7 +111,7 @@ names(results)
 results$family
 
 # --- Example 2: SummarizedExperiment / TreeSummarizedExperiment input ---
-\dontrun{
+\donttest{
 library(mia)
 data(GlobalPatterns, package = "mia")
 tse <- GlobalPatterns

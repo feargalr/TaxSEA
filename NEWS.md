@@ -1,5 +1,22 @@
 # TaxSEA News
 
+# TaxSEA 1.5.4
+
+## Bug fixes
+
+- `get_taxon_sets()` had a default argument referring to a nonexistent object,
+  so calling it with no argument failed with `object 'taxon' not found`. It
+  now reports the missing argument properly. It also no longer runs
+  unreachable code after `return()`, and correctly handles a lookup that
+  resolves to more than one NCBI ID.
+
+## Other
+
+- Raised the R dependency to 4.6.0 to match Bioconductor 3.24.
+- `get_ncbi_taxon_ids()` uses `vapply()` instead of `sapply()`, and qualifies
+  its `utils` calls.
+- `taxon_rank_sets()` examples use `\donttest` rather than `\dontrun`.
+
 # TaxSEA 1.5.3
 
 ## New

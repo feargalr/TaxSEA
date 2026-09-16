@@ -10,24 +10,26 @@
 #'
 #' @examples
 #' # Retrieve sets for Bifidobacterium longum
-#' get_taxon_sets(taxon="Bifidobacterium_longum")
+#' get_taxon_sets(taxon_to_fetch = "Bifidobacterium_longum")
 #'
 #' @export
-get_taxon_sets <- function(taxon_to_fetch=taxon) {
-  taxon <- get_ncbi_taxon_ids(taxon_to_fetch)
-  data("TaxSEA_db", package = "TaxSEA", envir = environment())
-data("NCBI_ids", package = "TaxSEA", envir = environment())
+get_taxon_sets <- function(taxon_to_fetch) {
+  if (missing(taxon_to_fetch)) {
+    stop("'taxon_to_fetch' is required: supply a taxon name, ",
+         "for example \"Bifidobacterium_longum\".")
+  }
 
+  taxon <- get_ncbi_taxon_ids(taxon_to_fetch)
+
+  utils::data("TaxSEA_db", package = "TaxSEA", envir = environment())
   taxon_sets <- TaxSEA_db
 
   # Using lapply to check for taxon presence
   taxon_presence <- lapply(taxon_sets, function(taxon_set) {
-    taxon %in% taxon_set
+    any(taxon %in% taxon_set)
   })
+
   # Filter the original list based on presence of the taxon
   filtered_taxon_sets <- taxon_sets[unlist(taxon_presence)]
-  return(names(filtered_taxon_sets))
-  rm(NCBI_ids)
-  rm(TaxSEA_db)
-
+  names(filtered_taxon_sets)
 }

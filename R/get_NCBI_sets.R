@@ -15,7 +15,7 @@ get_ncbi_taxon_ids <- function (taxon_names)
     get_ncbi_taxon_id <- function(taxon_name) {
     base_url <- "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/"
     esearch_url <- paste0(base_url, "esearch.fcgi?db=taxonomy&term=", 
-                          URLencode(taxon_name, reserved = TRUE),
+                          utils::URLencode(taxon_name, reserved = TRUE),
                           "&retmode=xml")
     con <- url(esearch_url, "r")
     on.exit(close(con))
@@ -30,15 +30,16 @@ get_ncbi_taxon_ids <- function (taxon_names)
     }
   }
   
-  data("TaxSEA_db", package = "TaxSEA", envir = environment())
-  data("NCBI_ids", package = "TaxSEA", envir = environment())
+  utils::data("TaxSEA_db", package = "TaxSEA", envir = environment())
+  utils::data("NCBI_ids", package = "TaxSEA", envir = environment())
   ids2fetch <- taxon_names[!taxon_names %in% names(NCBI_ids)]
   taxon_names <- taxon_names[taxon_names %in% names(NCBI_ids)]
   local_ids <- unlist(NCBI_ids[taxon_names])
   
   if (length(ids2fetch) > 0) {
     message("Fetching some NCBI IDs for input taxa. Please wait")
-    fetched_ids <- sapply(ids2fetch, get_ncbi_taxon_id)
+    fetched_ids <- vapply(ids2fetch, get_ncbi_taxon_id,
+                          character(1))
     taxon_ids <- c(local_ids, fetched_ids[!is.na(fetched_ids)])
   } else {
     taxon_ids <- local_ids
