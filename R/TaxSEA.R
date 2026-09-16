@@ -21,7 +21,11 @@
 #'   Default is 5.
 #' @param max_set_size Maximum size of taxon sets to include
 #'  in the analysis.
-#'   Default is 100.
+#'   Default is 300.
+#' @param bugsigdb Logical; whether to augment the built-in database with
+#'   BugSigDB signatures, which are downloaded (and cached) at run time
+#'   via \code{bugsigdbr}. Default is TRUE. Set to FALSE for offline or
+#'   reproducible analyses. Ignored when \code{custom_db} is supplied.
 #' @param custom_db A user-provided list of taxon sets. 
 #' If NULL (default),
 #'   the built-in database is used.
@@ -45,7 +49,8 @@ TaxSEA <- function(taxon_ranks = NULL,
                     lookup_missing = FALSE,
                     min_set_size = 5,
                     max_set_size = 300,
-                    custom_db = NULL) {
+                    custom_db = NULL,
+                    bugsigdb = TRUE) {
   
   # Infer mode if not provided (strict, no magic)
   if (is.null(mode)) {
@@ -82,7 +87,8 @@ TaxSEA <- function(taxon_ranks = NULL,
     lookup_missing = lookup_missing,
     min_set_size = min_set_size,
     max_set_size = max_set_size,
-    custom_db = custom_db
+    custom_db = custom_db,
+    bugsigdb = bugsigdb
   )
   
   core <- switch(

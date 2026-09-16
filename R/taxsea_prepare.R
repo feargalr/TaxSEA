@@ -9,6 +9,9 @@
 #' @param min_set_size Minimum set size to include.
 #' @param max_set_size Maximum set size to include.
 #' @param custom_db Optional list of taxon sets; if NULL uses built-in DB.
+#' @param bugsigdb Logical; augment the built-in DB with BugSigDB signatures,
+#'   which are downloaded at run time. Default TRUE. Ignored when custom_db
+#'   is supplied.
 #'
 #' @return An object of class \code{"TaxSEA_prep"}.
 #' @keywords internal
@@ -18,7 +21,8 @@ taxsea_prepare <- function(taxon_ranks = NULL,
                            lookup_missing = FALSE,
                            min_set_size = 5,
                            max_set_size = 100,
-                           custom_db = NULL) {
+                           custom_db = NULL,
+                           bugsigdb = TRUE) {
   
   has_ranks <- !is.null(taxon_ranks)
   has_taxa  <- !is.null(input_taxa)
@@ -52,16 +56,20 @@ taxsea_prepare <- function(taxon_ranks = NULL,
     utils::data("TaxSEA_db", package = "TaxSEA", envir = environment())
     taxon_sets <- TaxSEA_db
     
-    if (requireNamespace("bugsigdbr", quietly = TRUE)) {
-      bsdb <- bugsigdbr::importBugSigDB()
-      mp.sigs <- bugsigdbr::getSignatures(bsdb, tax.id.type = "ncbi")
-      bugsigdb_list <- utils::stack(mp.sigs)
-      names(bugsigdb_list) <- c("Species", "MSID")
-      bugsigdb_list <- split(bugsigdb_list$Species, bugsigdb_list$MSID)
-      names(bugsigdb_list) <- paste0("bsdb_", names(bugsigdb_list))
-      taxon_sets <- c(taxon_sets, bugsigdb_list)
-    } else {
-      warning("bugsigdbr not installed; skipping BugSigDB integration.")
+    # BugSigDB is fetched at run time (and cached by bugsigdbr), so it is
+    # skippable for offline or reproducible analyses.
+    if (isTRUE(bugsigdb)) {
+      if (requireNamespace("bugsigdbr", quietly = TRUE)) {
+        bsdb <- bugsigdbr::importBugSigDB()
+        mp.sigs <- bugsigdbr::getSignatures(bsdb, tax.id.type = "ncbi")
+        bugsigdb_list <- utils::stack(mp.sigs)
+        names(bugsigdb_list) <- c("Species", "MSID")
+        bugsigdb_list <- split(bugsigdb_list$Species, bugsigdb_list$MSID)
+        names(bugsigdb_list) <- paste0("bsdb_", names(bugsigdb_list))
+        taxon_sets <- c(taxon_sets, bugsigdb_list)
+      } else {
+        warning("bugsigdbr not installed; skipping BugSigDB integration.")
+      }
     }
   } else {
     taxon_sets <- custom_db

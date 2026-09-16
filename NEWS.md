@@ -1,5 +1,34 @@
 # TaxSEA News
 
+# TaxSEA 1.5.3
+
+## New
+
+- `TaxSEA()` gains a `bugsigdb` argument (default TRUE). Set it to FALSE to
+  skip the run-time BugSigDB download, for offline or reproducible analyses.
+
+## Testing
+
+- Added unit tests for `ssTaxSEA()`, for ORA mode and for `TaxSEA()` input
+  validation, none of which were previously covered.
+- Added regression snapshots of the results produced from the bundled test
+  data, so that database updates surface as a reviewable diff.
+- Added database integrity checks covering set naming, set sizes and
+  `NCBI_ids` coverage. These document two pre-existing issues: 84 set members
+  have no `NCBI_ids` entry and are silently dropped (worst affected are
+  `Siderophore_producers`, 73 members of which 25 are usable, and the
+  Valles-Colomer2019 Gut-Brain Modules), and
+  `GutMGene_producers_of_Phenylalanine` appears twice, so two of its taxa
+  are unreachable.
+
+## Documentation
+
+- Corrected the documented default for `max_set_size` in `TaxSEA()`, which
+  said 100 while the signature has been 300.
+- Documented that including BugSigDB changes p-values in every other output
+  category, because its signatures enlarge the background the competitive KS
+  test runs against.
+
 # TaxSEA 1.5.2
 
 ## Breaking changes
