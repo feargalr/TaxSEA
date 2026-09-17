@@ -84,7 +84,8 @@ microbiome compositional data. Genome Biol. 2022 Apr 14;23(1):95.
 taxon for a list of taxon names.
 - `get_ncbi_taxon_ids(taxon_names)`: Retrieves NCBI Taxonomy IDs for a 
 list of taxon names.
-- `TaxSEA(taxon_ranks, database = "All")`: Taxon set enrichment analysis.
+- `TaxSEA(taxon_ranks)`: Taxon set enrichment analysis. Add
+`bugsigdb = TRUE` to include published signatures from BugSigDB.
 
 
 ## Usage
@@ -135,9 +136,21 @@ head(sample(TaxSEA_test_data),4)
 
 
 ### Run TaxSEA with test data
+```{r bsdb-available, include = FALSE}
+# BugSigDB is downloaded from Zenodo at build time. If that fails, build the
+# vignette without the BugSigDB-dependent chunk rather than erroring.
+bsdb_available <- requireNamespace("bugsigdbr", quietly = TRUE) &&
+  tryCatch({ bugsigdbr::importBugSigDB(); TRUE },
+           error = function(e) FALSE)
+```
+
 ```{r example2}
 data("TaxSEA_test_data")
-taxsea_results <- TaxSEA(taxon_ranks=TaxSEA_test_data)
+# bugsigdb = TRUE downloads BugSigDB signatures at run time. It is off by
+# default because including it changes the p-values of every set, and
+# BugSigDB is updated independently of TaxSEA.
+taxsea_results <- TaxSEA(taxon_ranks=TaxSEA_test_data,
+                         bugsigdb = bsdb_available)
 
 #Enrichments among metabolite producers from gutMgene and MiMeDB
 metabolites.df = taxsea_results$Metabolite_producers
@@ -146,7 +159,7 @@ metabolites.df = taxsea_results$Metabolite_producers
 disease.df = taxsea_results$Health_associations
 
 #Enrichments amongh published associations from BugSigDB
-bsdb.df = taxsea_results$BugSigdB
+bsdb.df = taxsea_results$BugSigDB
 
 ```
 
@@ -171,7 +184,7 @@ Should users wish to find out more information about the signatures,
 they can do so by querying that database. 
 
 
-```{r bugsigdb}
+```{r bugsigdb, eval = bsdb_available}
 library(bugsigdbr) #This package is installable via Bioconductor
 bsdb <- importBugSigDB() #Import database 
 

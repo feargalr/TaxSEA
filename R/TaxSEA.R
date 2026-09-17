@@ -24,8 +24,13 @@
 #'   Default is 300.
 #' @param bugsigdb Logical; whether to augment the built-in database with
 #'   BugSigDB signatures, which are downloaded (and cached) at run time
-#'   via \code{bugsigdbr}. Default is TRUE. Set to FALSE for offline or
-#'   reproducible analyses. Ignored when \code{custom_db} is supplied.
+#'   via \code{bugsigdbr}. Default is FALSE. Each set is tested against
+#'   all the other taxa covered by the sets being analysed, and BugSigDB
+#'   adds many extra taxa, so including it changes the p-values of every
+#'   set, not only the BugSigDB ones. BugSigDB is also updated independently
+#'   of TaxSEA. Set to TRUE to include it, and record the BugSigDB version
+#'   used. If the download fails, a warning is given and the analysis
+#'   continues without BugSigDB. Ignored when \code{custom_db} is supplied.
 #' @param custom_db A user-provided list of taxon sets. 
 #' If NULL (default),
 #'   the built-in database is used.
@@ -36,6 +41,12 @@
 #' data("TaxSEA_test_data")
 #' res <- TaxSEA(taxon_ranks = TaxSEA_test_data)
 #' head(res$All_databases)
+#'
+#' \donttest{
+#' # Include BugSigDB signatures (downloaded at run time)
+#' res_bsdb <- TaxSEA(taxon_ranks = TaxSEA_test_data, bugsigdb = TRUE)
+#' head(res_bsdb$BugSigDB)
+#' }
 #'
 #' # ORA example (toy): treat taxa with positive values as "hits"
 #' hits <- names(TaxSEA_test_data)
@@ -50,7 +61,7 @@ TaxSEA <- function(taxon_ranks = NULL,
                     min_set_size = 5,
                     max_set_size = 300,
                     custom_db = NULL,
-                    bugsigdb = TRUE) {
+                    bugsigdb = FALSE) {
   
   # Infer mode if not provided (strict, no magic)
   if (is.null(mode)) {

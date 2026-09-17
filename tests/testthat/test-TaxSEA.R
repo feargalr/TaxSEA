@@ -1,3 +1,14 @@
+# skip_if_offline() only checks DNS. BugSigDB is served from Zenodo, which
+# can be unreachable while the network is fine, so probe the download itself.
+skip_if_no_bugsigdb <- function() {
+  skip_if_not_installed("bugsigdbr")
+  ok <- tryCatch({
+    bugsigdbr::importBugSigDB()
+    TRUE
+  }, error = function(e) FALSE)
+  if (!ok) skip("BugSigDB could not be downloaded")
+}
+
 test_that("TaxSEA returns the expected output structure", {
   data("TaxSEA_test_data", package = "TaxSEA")
 
@@ -26,8 +37,7 @@ test_that("TaxSEA returns the expected output structure", {
 })
 
 test_that("BugSigDB signatures are included when requested", {
-  skip_if_not_installed("bugsigdbr")
-  skip_if_offline()
+  skip_if_no_bugsigdb()
   data("TaxSEA_test_data", package = "TaxSEA")
 
   res <- suppressWarnings(TaxSEA(TaxSEA_test_data, bugsigdb = TRUE))
@@ -37,13 +47,17 @@ test_that("BugSigDB signatures are included when requested", {
   expect_true("BugSigDB_ID" %in% colnames(res$BugSigDB))
 })
 
-test_that("bugsigdb = FALSE avoids the download and empties that category", {
+test_that("BugSigDB is excluded by default", {
   data("TaxSEA_test_data", package = "TaxSEA")
 
-  res <- suppressWarnings(TaxSEA(TaxSEA_test_data, bugsigdb = FALSE))
+  expect_false(formals(TaxSEA)$bugsigdb)
 
-  expect_equal(nrow(res$BugSigDB), 0)
-  expect_false(any(grepl("bsdb", res$All_databases$taxonSetName)))
+  by_default <- suppressWarnings(TaxSEA(TaxSEA_test_data))
+  explicit <- suppressWarnings(TaxSEA(TaxSEA_test_data, bugsigdb = FALSE))
+
+  expect_equal(nrow(by_default$BugSigDB), 0)
+  expect_false(any(grepl("bsdb", by_default$All_databases$taxonSetName)))
+  expect_equal(by_default, explicit)
 })
 
 test_that("including BugSigDB shifts p-values in the other categories", {
@@ -52,8 +66,7 @@ test_that("including BugSigDB shifts p-values in the other categories", {
   # competitive KS test runs against, so every other category's p-values
   # move. Results are therefore not comparable between runs made with and
   # without BugSigDB, nor across BugSigDB releases.
-  skip_if_not_installed("bugsigdbr")
-  skip_if_offline()
+  skip_if_no_bugsigdb()
   data("TaxSEA_test_data", package = "TaxSEA")
 
   with_bsdb <- suppressWarnings(TaxSEA(TaxSEA_test_data, bugsigdb = TRUE))

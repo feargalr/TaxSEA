@@ -83,7 +83,7 @@ blong.sets <- get_taxon_sets(taxon="Bifidobacterium_longum")
 
 # Run TaxSEA with test data provided
 data(TaxSEA_test_data)
-taxsea_results <- TaxSEA(taxon_ranks=TaxSEA_test_data)
+taxsea_results <- TaxSEA(taxon_ranks=TaxSEA_test_data, bugsigdb = TRUE)
 
 #Enrichments among metabolite producers from gutMgene and MiMeDB
 metabolites.df <- taxsea_results$Metabolite_producers
@@ -92,7 +92,7 @@ metabolites.df <- taxsea_results$Metabolite_producers
 disease.df <- taxsea_results$Health_associations
 
 #Enrichments among published associations from BugSigDB
-bsdb.df <- taxsea_results$BugSigdB
+bsdb.df <- taxsea_results$BugSigDB
 
 ```
 
@@ -177,7 +177,7 @@ head(sample(TaxSEA_test_data),4)
 ### Run TaxSEA with test data
 ```r
 data("TaxSEA_test_data")
-taxsea_results <- TaxSEA(taxon_ranks=TaxSEA_test_data)
+taxsea_results <- TaxSEA(taxon_ranks=TaxSEA_test_data, bugsigdb = TRUE)
 
 #Enrichments among metabolite producers from gutMgene and MiMeDB
 metabolites.df <- taxsea_results$Metabolite_producers

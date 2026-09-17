@@ -2,8 +2,32 @@
 
 # TaxSEA 1.5.4
 
+## Breaking changes
+
+- `TaxSEA()` no longer includes BugSigDB by default; use `bugsigdb = TRUE`
+  to include it. Previously it was included automatically whenever
+  `bugsigdbr` was installed.
+
+  Why this matters: TaxSEA tests each taxon set by comparing its members
+  against all the other taxa covered by the sets being analysed. BugSigDB
+  adds thousands of signatures covering many extra taxa, so switching it on
+  changes that comparison for every set, not just the BugSigDB ones. The
+  same metabolite-producer set can get a different p-value depending on
+  whether BugSigDB was included, and on which BugSigDB release was
+  downloaded; on the bundled test data some p-values moved by as much as
+  0.26. Leaving it off by default keeps results reproducible and lets
+  `TaxSEA()` run offline.
+
 ## Bug fixes
 
+- If BugSigDB cannot be downloaded (for example during a Zenodo outage),
+  `TaxSEA(bugsigdb = TRUE)` now warns and continues without it instead of
+  failing. The vignette and tests likewise skip their BugSigDB-dependent
+  parts, so an upstream outage no longer breaks the package build.
+- The main vignette and README accessed BugSigDB results as
+  `taxsea_results$BugSigdB`, which silently returns `NULL`; corrected to
+  `$BugSigDB`. The vignette also documented a nonexistent `database`
+  argument.
 - `get_taxon_sets()` had a default argument referring to a nonexistent object,
   so calling it with no argument failed with `object 'taxon' not found`. It
   now reports the missing argument properly. It also no longer runs
@@ -21,8 +45,8 @@
 
 ## New
 
-- `TaxSEA()` gains a `bugsigdb` argument (default TRUE). Set it to FALSE to
-  skip the run-time BugSigDB download, for offline or reproducible analyses.
+- `TaxSEA()` gains a `bugsigdb` argument controlling whether BugSigDB
+  signatures are downloaded and included at run time.
 
 ## Testing
 
@@ -42,9 +66,8 @@
 
 - Corrected the documented default for `max_set_size` in `TaxSEA()`, which
   said 100 while the signature has been 300.
-- Documented that including BugSigDB changes p-values in every other output
-  category, because its signatures enlarge the background the competitive KS
-  test runs against.
+- Documented that including BugSigDB changes the p-values of all taxon sets,
+  not only the BugSigDB ones.
 
 # TaxSEA 1.5.2
 
@@ -75,6 +98,17 @@
   members. Previously the matrix was filtered to set members first, which made
   the geometric mean the CLR divides by depend on which sets were being
   tested and could manufacture apparent signal in sets that had none.
+
+# TaxSEA 1.5.1
+
+- Removed `R/TaxSEA_export.R`, an outdated duplicate of an internal
+  function that shadowed the current version.
+- Declared the `methods` import and the remaining `stats`/`utils` imports,
+  clearing the Bioconductor devel check warning.
+- Recompressed the bundled data (`NCBI_ids` 136 Kb to 42 Kb, `TaxSEA_db`
+  48 Kb to 35 Kb), clearing the data compression warning.
+- Added a GitHub Actions workflow running `R CMD check` and `BiocCheck`
+  against Bioconductor devel.
 
 # TaxSEA 1.3.3
 
