@@ -1,0 +1,15 @@
+key	value
+harvester	https://github.com/feargalr/bacdive_harvester
+harvester_commit	v1.0.0 (d16cd8e)
+bacdive_r_package	0.8.0
+harvest_first_date	2026-09-16
+harvest_last_date	2026-09-17
+genera_queried	705
+strain_records	76452
+species_harvested	11563
+sets_built	3199
+sets_shipped	1776
+ship_min_members	3
+taxa_in_shipped_sets	9045
+ncbi_ids_added	23130
+built_on	2026-09-17

@@ -23,17 +23,17 @@
         {
           "type": "character",
           "attributes": {},
-          "value": ["MiMeDB_producers_of_Glycocholic_acid", "GutMGene_producers_of_Phenylalanine", "MiMeDB_producers_of_Taurocholic_acid", "MiMeDB_producers_of_Dopamine", "GutMGene_producers_of_Butyrate", "GutMGene_producers_of_Indole-3-acetic_acid", "MiMeDB_producers_of_Isovaleric_acid", "MiMeDB_producers_of_Serotonin", "GutMGene_producers_of_4-Hydroxyphenylacetic_acid", "MiMeDB_producers_of_Butyric_acid", "MiMeDB_producers_of_L-carnitine", "MiMeDB_producers_of_Indole_3_propionic_acid_IPA", "MiMeDB_producers_of_Tyramine", "GutMGene_producers_of_Succinate", "GutMGene_producers_of_Kaempferol", "GutMGene_producers_of_Acetate", "MiMeDB_producers_of_Vitamin_A", "GutMGene_producers_of_Propionate", "GutMGene_producers_of_Daidzein", "MiMeDB_producers_of_Vitamin_K"]
+          "value": ["MiMeDB_producers_of_Glycocholic_acid", "GutMGene_producers_of_Phenylalanine", "MiMeDB_producers_of_Taurocholic_acid", "GutMGene_producers_of_Butyrate", "GutMGene_producers_of_Indole-3-acetic_acid", "MiMeDB_producers_of_Dopamine", "MiMeDB_producers_of_Isovaleric_acid", "MiMeDB_producers_of_Butyric_acid", "MiMeDB_producers_of_Serotonin", "GutMGene_producers_of_4-Hydroxyphenylacetic_acid", "MiMeDB_producers_of_Indole_3_propionic_acid_IPA", "MiMeDB_producers_of_L-carnitine", "MiMeDB_producers_of_Tyramine", "GutMGene_producers_of_Succinate", "GutMGene_producers_of_Kaempferol", "GutMGene_producers_of_Acetate", "GutMGene_producers_of_Propionate", "MiMeDB_producers_of_Vitamin_K", "MiMeDB_producers_of_Vitamin_A", "GutMGene_producers_of_Daidzein"]
         },
         {
           "type": "character",
           "attributes": {},
-          "value": ["1.538150e-03", "5.487814e-03", "6.738919e-03", "1.011146e-02", "1.026698e-02", "1.334023e-02", "3.208197e-02", "3.228757e-02", "4.214603e-02", "4.228204e-02", "1.824912e-01", "1.905080e-01", "1.932202e-01", "2.732886e-01", "2.958093e-01", "4.646146e-01", "4.922532e-01", "5.127995e-01", "6.422512e-01", "6.621417e-01"]
+          "value": ["1.061263e-03", "4.253693e-03", "4.404568e-03", "6.968493e-03", "1.066088e-02", "1.200340e-02", "2.192300e-02", "2.367061e-02", "3.439831e-02", "3.487245e-02", "1.684302e-01", "2.018296e-01", "2.137052e-01", "2.276387e-01", "2.517769e-01", "3.718825e-01", "4.397653e-01", "5.156387e-01", "5.387042e-01", "6.598930e-01"]
         },
         {
           "type": "character",
           "attributes": {},
-          "value": ["4.768266e-02", "6.365528e-02", "6.365528e-02", "6.365528e-02", "6.365528e-02", "6.892451e-02", "1.251143e-01", "1.251143e-01", "1.310743e-01", "1.310743e-01", "4.607557e-01", "4.607557e-01", "4.607557e-01", "6.051390e-01", "6.113392e-01", "8.831546e-01", "8.831546e-01", "8.831546e-01", "9.993854e-01", "9.993854e-01"]
+          "value": ["3.289915e-02", "4.551387e-02", "4.551387e-02", "5.400582e-02", "6.201756e-02", "6.201756e-02", "9.172362e-02", "9.172362e-02", "1.081046e-01", "1.081046e-01", "4.746670e-01", "5.040571e-01", "5.040571e-01", "5.040571e-01", "5.203390e-01", "7.205224e-01", "8.019249e-01", "8.789384e-01", "8.789384e-01", "9.919658e-01"]
         }
       ]
     }
@@ -63,17 +63,17 @@
         {
           "type": "character",
           "attributes": {},
-          "value": ["GMRepoV2_Decreased_in_Liver_Cirrhosis", "mBodyMap_Oral", "GMRepoV2_Decreased_in_Inflammatory_Bowel_Diseases", "GMRepoV2_Increased_in_Inflammatory_Bowel_Diseases", "BloSSUM_taxa_Carter2023", "GMRepoV2_Decreased_in_Tuberculosis", "GMRepoV2_Decreased_in_Scleroderma,_Systemic", "GMRepoV2_Decreased_in_Spondylitis,_Ankylosing", "GMRepoV2_Increased_in_Cardiovascular_Diseases", "GMRepoV2_Increased_in_Scleroderma,_Systemic", "GMRepoV2_Increased_in_Liver_Cirrhosis", "GMRepoV2_Increased_in_Crohn_Disease", "GMRepoV2_Decreased_in_COVID-19", "mBodyMap_skin", "GMRepoV2_Increased_in_Diabetes_Mellitus,_Type_2", "GMRepoV2_Decreased_in_Obesity", "GMRepoV2_Increased_in_Parkinson_Disease", "GMRepoV2_Decreased_in_Diabetes_Mellitus,_Type_2", "GMRepoV2_Decreased_in_Colitis,_Ulcerative", "GMRepoV2_Decreased_in_Cardiovascular_Diseases"]
+          "value": ["GMRepoV2_Decreased_in_Liver_Cirrhosis", "mBodyMap_Oral", "GMRepoV2_Decreased_in_Inflammatory_Bowel_Diseases", "BloSSUM_taxa_Carter2023", "GMRepoV2_Increased_in_Inflammatory_Bowel_Diseases", "GMRepoV2_Decreased_in_Tuberculosis", "GMRepoV2_Decreased_in_Scleroderma,_Systemic", "GMRepoV2_Decreased_in_Spondylitis,_Ankylosing", "GMRepoV2_Increased_in_Scleroderma,_Systemic", "GMRepoV2_Increased_in_Cardiovascular_Diseases", "GMRepoV2_Increased_in_Liver_Cirrhosis", "GMRepoV2_Decreased_in_COVID-19", "GMRepoV2_Increased_in_Crohn_Disease", "mBodyMap_skin", "GMRepoV2_Increased_in_Diabetes_Mellitus,_Type_2", "GMRepoV2_Decreased_in_Obesity", "GMRepoV2_Increased_in_Parkinson_Disease", "GMRepoV2_Decreased_in_Colitis,_Ulcerative", "GMRepoV2_Decreased_in_Diabetes_Mellitus,_Type_2", "GMRepoV2_Decreased_in_Cardiovascular_Diseases"]
         },
         {
           "type": "character",
           "attributes": {},
-          "value": ["8.497534e-06", "1.361344e-05", "1.406258e-04", "2.846321e-04", "6.560577e-04", "6.633300e-04", "7.889791e-04", "1.050883e-03", "1.962868e-03", "2.272561e-03", "2.629323e-03", "3.123229e-03", "4.922003e-03", "6.190894e-03", "6.553498e-03", "1.643819e-02", "3.041863e-02", "4.783975e-02", "5.695575e-02", "7.079712e-02"]
+          "value": ["4.159210e-06", "1.568875e-05", "9.592476e-05", "3.163143e-04", "3.607350e-04", "4.498233e-04", "5.250896e-04", "5.983572e-04", "2.603316e-03", "2.623705e-03", "2.738782e-03", "3.143771e-03", "3.591158e-03", "7.322516e-03", "8.978806e-03", "1.224032e-02", "2.304063e-02", "3.719408e-02", "3.984230e-02", "4.784731e-02"]
         },
         {
           "type": "character",
           "attributes": {},
-          "value": ["2.246218e-04", "2.246218e-04", "1.546883e-03", "2.348215e-03", "3.648315e-03", "3.648315e-03", "3.719473e-03", "4.334894e-03", "7.197182e-03", "7.499451e-03", "7.887968e-03", "8.588880e-03", "1.249431e-02", "1.441770e-02", "1.441770e-02", "3.390377e-02", "5.904792e-02", "8.770622e-02", "9.892314e-02", "1.168152e-01"]
+          "value": ["1.372539e-04", "2.588644e-04", "1.055172e-03", "2.380851e-03", "2.380851e-03", "2.468223e-03", "2.468223e-03", "2.468223e-03", "8.216347e-03", "8.216347e-03", "8.216347e-03", "8.645369e-03", "9.116015e-03", "1.726022e-02", "1.975337e-02", "2.524566e-02", "4.472593e-02", "6.818915e-02", "6.919979e-02", "7.894806e-02"]
         }
       ]
     }
@@ -103,17 +103,17 @@
         {
           "type": "character",
           "attributes": {},
-          "value": ["BacDive_Enzyme_alanine arylamidase", "BacDive_Enzyme_leucyl glycin arylamidase", "BacDive_coccus-shaped", "BacDive_facultative anaerobe", "BacDive_Enzyme_valine arylamidase", "BacDive_Enzyme_Alanyl-Phenylalanyl-Proline arylamidase", "BacDive_Utilizes_nitrate", "BacDive_Utilizes_turanose", "BacDive_Utilizes_rhamnose", "BacDive_Utilizes_hippurate", "BacDive_Enzyme_alpha-fucosidase", "BacDive_Utilizes_D-fructose", "BacDive_Enzyme_esterase (C 4)", "BacDive_Utilizes_trehalose", "BacDive_Utilizes_D-mannitol", "BacDive_Enzyme_alkaline phosphatase", "BacDive_Enzyme_N-acetyl-beta-glucosaminidase", "BacDive_Enzyme_glutamyl-glutamate arylamidase", "BacDive_Utilizes_N-acetylglucosamine", "BacDive_Utilizes_galactose"]
+          "value": ["BacDive_Uses_nitrate_reduction", "BacDive_Uses_ribose_fermentation_negative", "BacDive_Enzyme_gamma-glutamyltransferase_negative", "BacDive_Uses_D-xylose_fermentation_negative", "BacDive_Enzyme_lysine_decarboxylase_negative", "BacDive_Uses_pullulan_acid_negative", "BacDive_Uses_maltose_fermentation", "BacDive_Enzyme_ornithine_decarboxylase_negative", "BacDive_Prod_acetoin_negative", "BacDive_Test_voges-proskauer-test_negative", "BacDive_Enzyme_Alanyl-Phenylalanyl-Proline_arylamidase_negative", "BacDive_Uses_glucose_fermentation", "BacDive_Enzyme_caseinase_negative", "BacDive_Uses_ribose_acid_negative", "BacDive_Enzyme_esterase_lipase_negative", "BacDive_Uses_fructose_acid", "BacDive_Uses_alpha-cyclodextrin_acid_negative", "BacDive_Enzyme_alcohol_dehydrogenase_negative", "BacDive_Oxygen_facultative_anaerobe", "BacDive_Uses_melibiose_acid_negative"]
         },
         {
           "type": "character",
           "attributes": {},
-          "value": ["9.715598e-04", "9.715598e-04", "1.029711e-03", "3.596865e-03", "1.168109e-02", "1.373109e-02", "1.394039e-02", "2.368222e-02", "2.585413e-02", "2.669057e-02", "3.480422e-02", "3.923134e-02", "5.271705e-02", "5.273457e-02", "5.332803e-02", "6.248534e-02", "7.062568e-02", "7.641482e-02", "8.956228e-02", "9.067780e-02"]
+          "value": ["5.374713e-05", "4.154786e-04", "6.043920e-04", "6.251597e-04", "6.287644e-04", "7.551454e-04", "1.416937e-03", "1.433668e-03", "1.599932e-03", "1.599932e-03", "1.716506e-03", "1.948373e-03", "2.189648e-03", "2.215764e-03", "2.276617e-03", "2.280600e-03", "3.277332e-03", "3.971116e-03", "4.233853e-03", "4.299760e-03"]
         },
         {
           "type": "character",
           "attributes": {},
-          "value": ["2.711573e-02", "2.711573e-02", "2.711573e-02", "7.103809e-02", "1.573273e-01", "1.573273e-01", "1.573273e-01", "2.108555e-01", "2.108555e-01", "2.108555e-01", "2.499575e-01", "2.582730e-01", "2.808610e-01", "2.808610e-01", "2.808610e-01", "3.085214e-01", "3.282017e-01", "3.341662e-01", "3.341662e-01", "3.341662e-01"]
+          "value": ["1.220060e-02", "2.854591e-02", "2.854591e-02", "2.854591e-02", "2.854591e-02", "2.856967e-02", "3.235602e-02", "3.235602e-02", "3.235602e-02", "3.235602e-02", "3.235602e-02", "3.235602e-02", "3.235602e-02", "3.235602e-02", "3.235602e-02", "3.235602e-02", "4.218011e-02", "4.218011e-02", "4.218011e-02", "4.218011e-02"]
         }
       ]
     }
@@ -143,17 +143,17 @@
         {
           "type": "character",
           "attributes": {},
-          "value": ["Valles-Colomer2019_MGB032.Quinolinic.acid.synthesis", "Valles-Colomer2019_MGB047.Acetate.degradation", "Valles-Colomer2019_MGB031.17-beta-Estradiol.degradation", "Valles-Colomer2019_MGB022.GABA.synthesis.III", "Valles-Colomer2019_MGB001.Serotonin.synthesis.I", "Valles-Colomer2019_MGB033.Quinolinic.acid.degradation", "Valles-Colomer2019_MGB006.Glutamate.synthesis.I", "Valles-Colomer2019_MGB007.Glutamate.synthesis.II", "Valles-Colomer2019_MGB019.GABA.degradation", "Valles-Colomer2019_MGB052.Butyrate.synthesis.I", "Valles-Colomer2019_MGB043.Acetate.synthesis.I", "Valles-Colomer2019_MGB029.ClpB.(ATP-dependent.chaperone.protein)", "Valles-Colomer2019_MGB036.S-Adenosylmethionine.(SAM).synthesis", "Valles-Colomer2019_MGB015.p-Cresol.synthesis", "Valles-Colomer2019_MGB040.Menaquinone.synthesis.(vitamin.K2).I", "Valles-Colomer2019_MGB049.Tryptophan.degradation", "Valles-Colomer2019_MGB005.Tryptophan.synthesis", "Valles-Colomer2019_MGB038.Inositol.degradation", "Valles-Colomer2019_MGB037.Inositol.synthesis", "Valles-Colomer2019_MGB026.Nitric.oxide.synthesis.II.(nitrite.reductase)"]
+          "value": ["Valles-Colomer2019_MGB032.Quinolinic.acid.synthesis", "Valles-Colomer2019_MGB047.Acetate.degradation", "Valles-Colomer2019_MGB031.17-beta-Estradiol.degradation", "Valles-Colomer2019_MGB033.Quinolinic.acid.degradation", "Valles-Colomer2019_MGB001.Serotonin.synthesis.I", "Valles-Colomer2019_MGB006.Glutamate.synthesis.I", "Valles-Colomer2019_MGB007.Glutamate.synthesis.II", "Valles-Colomer2019_MGB022.GABA.synthesis.III", "Valles-Colomer2019_MGB043.Acetate.synthesis.I", "Valles-Colomer2019_MGB029.ClpB.(ATP-dependent.chaperone.protein)", "Valles-Colomer2019_MGB036.S-Adenosylmethionine.(SAM).synthesis", "Valles-Colomer2019_MGB052.Butyrate.synthesis.I", "Valles-Colomer2019_MGB015.p-Cresol.synthesis", "Valles-Colomer2019_MGB019.GABA.degradation", "Valles-Colomer2019_MGB040.Menaquinone.synthesis.(vitamin.K2).I", "Valles-Colomer2019_MGB005.Tryptophan.synthesis", "Valles-Colomer2019_MGB049.Tryptophan.degradation", "Valles-Colomer2019_MGB026.Nitric.oxide.synthesis.II.(nitrite.reductase)", "Valles-Colomer2019_MGB037.Inositol.synthesis", "Valles-Colomer2019_MGB038.Inositol.degradation"]
         },
         {
           "type": "character",
           "attributes": {},
-          "value": ["2.185610e-02", "3.215569e-02", "6.809576e-02", "8.366967e-02", "8.518521e-02", "9.193125e-02", "1.009887e-01", "1.012508e-01", "1.170150e-01", "1.175939e-01", "1.452286e-01", "1.652756e-01", "1.652756e-01", "1.805453e-01", "2.651071e-01", "3.243864e-01", "3.780956e-01", "4.174038e-01", "4.189721e-01", "4.215231e-01"]
+          "value": ["1.374329e-02", "2.188133e-02", "4.079980e-02", "4.761644e-02", "5.826941e-02", "6.782483e-02", "6.792913e-02", "6.841617e-02", "7.935949e-02", "8.174240e-02", "8.174240e-02", "8.459212e-02", "1.247266e-01", "1.321689e-01", "2.160688e-01", "2.585690e-01", "3.013482e-01", "3.722668e-01", "3.843172e-01", "4.254862e-01"]
         },
         {
           "type": "character",
           "attributes": {},
-          "value": ["2.587065e-01", "2.587065e-01", "2.587065e-01", "2.587065e-01", "2.587065e-01", "2.587065e-01", "2.587065e-01", "2.587065e-01", "2.587065e-01", "2.587065e-01", "2.796972e-01", "2.796972e-01", "2.796972e-01", "2.837141e-01", "3.888238e-01", "4.460312e-01", "4.636755e-01", "4.636755e-01", "4.636755e-01", "4.636755e-01"]
+          "value": ["1.550856e-01", "1.550856e-01", "1.550856e-01", "1.550856e-01", "1.550856e-01", "1.550856e-01", "1.550856e-01", "1.550856e-01", "1.550856e-01", "1.550856e-01", "1.550856e-01", "1.550856e-01", "2.076939e-01", "2.076939e-01", "3.169010e-01", "3.555324e-01", "3.899800e-01", "4.449989e-01", "4.449989e-01", "4.680349e-01"]
         }
       ]
     }
@@ -169,7 +169,7 @@
           "value": ["Metabolite_producers", "Health_associations", "BacDive_bacterial_physiology", "Gut_Brain_Modules_VallesColomer2019"]
         }
       },
-      "value": [31, 33, 79, 22]
+      "value": [31, 33, 227, 22]
     }
 
 # the bundled database has the expected shape
@@ -183,7 +183,7 @@
           "value": ["n_sets", "n_members", "n_unique_members"]
         }
       },
-      "value": [651, 27678, 1837]
+      "value": [2160, 390715, 9524]
     }
 
 # the per-source breakdown of unresolved members is stable
@@ -194,7 +194,7 @@
         "dim": {
           "type": "integer",
           "attributes": {},
-          "value": [6]
+          "value": [5]
         },
         "dimnames": {
           "type": "list",
@@ -203,12 +203,12 @@
             {
               "type": "character",
               "attributes": {},
-              "value": ["BloSSUM", "Mucin", "Siderophore", "VANISH", "Valles-Colomer2019", "mBodyMap"]
+              "value": ["BloSSUM", "Siderophore", "VANISH", "Valles-Colomer2019", "mBodyMap"]
             }
           ]
         }
       },
-      "value": [2, 2, 48, 8, 392, 2]
+      "value": [1, 40, 8, 87, 1]
     }
 
 # no set is emptied below min_set_size by unresolved members
@@ -216,6 +216,6 @@
     {
       "type": "character",
       "attributes": {},
-      "value": ["Valles-Colomer2019_MGB016.p-Cresol.degradation", "Valles-Colomer2019_MGB055.Propionate.synthesis.III"]
+      "value": []
     }
 

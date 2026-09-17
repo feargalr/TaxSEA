@@ -8,10 +8,12 @@ A dataset containing taxon sets. Each item in the list is a taxon set,
 and each member within a taxon set is a taxon.}
 \format{
 A list of vectors. Each vector contains character strings
-representing taxa.
+representing taxa as NCBI taxonomy IDs.
 }
 \source{
-See READ ME.
+See the README. BacDive sets: Schober et al. (2025) BacDive in
+2025: the core database for prokaryotic strain data, via
+\url{https://bacdive.dsmz.de}.
 }
 \usage{
 data(TaxSEA_db)
@@ -20,6 +22,30 @@ data(TaxSEA_db)
 TaxSEA Database
 A dataset containing taxon sets. Each item in the list is a taxon set,
 and each member within a taxon set is a taxon.
+}
+\details{
+Set names start with their source: \code{MiMeDB_}, \code{GutMGene_},
+\code{GMRepoV2_}, \code{mBodyMap_}, \code{BacDive_} and so on.
+
+The \code{BacDive_} sets describe measured phenotypes of cultured strains
+(oxygen tolerance, Gram stain, substrate use, enzyme activities, growth
+temperature, salt and pH ranges and others), aggregated to species over
+every strain BacDive holds. They are built by the bacdive_harvester
+pipeline (\url{https://github.com/feargalr/bacdive_harvester}); see
+\code{inst/scripts/make_BacDive_sets.R}. Only sets with at least 3 members
+are included. Names read \code{BacDive_<Family>_<value>}, optionally
+followed by an assay context (e.g. \code{_fermentation},
+\code{_reduction}) and \code{_negative} for species tested and found
+negative, e.g. \code{BacDive_Oxygen_facultative_anaerobe},
+\code{BacDive_Uses_nitrate_reduction}.
+
+Per-set provenance (source family, number of species and strains behind
+each set) and a record of the build (harvester release, BacDive client
+version, harvest dates) are shipped with the package:
+\preformatted{
+system.file("extdata", "BacDive_set_provenance.tsv", package = "TaxSEA")
+system.file("extdata", "BacDive_build_info.tsv", package = "TaxSEA")
+}
 }
 \examples{
 data(TaxSEA_db)

@@ -6,4 +6,5 @@
 TaxSEA.Rproj
 docs
 .Rapp.history
-inst/scripts/
+inst/scripts/*
+!inst/scripts/make_BacDive_sets.R

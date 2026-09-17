@@ -1,5 +1,66 @@
 # TaxSEA News
 
+# TaxSEA 1.5.5
+
+## Breaking changes
+
+- The BacDive sets in `TaxSEA_db` have been rebuilt from a fresh, complete
+  harvest of BacDive: **1,776 sets covering 9,045 taxa**, up from 267 sets
+  covering 716. Results for `BacDive_bacterial_physiology` will differ from
+  earlier releases, and code that refers to BacDive sets by name needs
+  updating.
+
+  - **Set names changed.** Names no longer contain spaces and follow
+    `BacDive_<Family>_<value>`. For example:
+
+    | Before | Now |
+    |---|---|
+    | `BacDive_facultative anaerobe` | `BacDive_Oxygen_facultative_anaerobe` |
+    | `BacDive_anaerobe`, `BacDive_aerobe`, `BacDive_microaerophile` | `BacDive_Oxygen_anaerobe`, `BacDive_Oxygen_aerobe`, `BacDive_Oxygen_microaerophile` |
+    | `BacDive_rod-shaped`, `BacDive_coccus-shaped` | `BacDive_Shape_rod`, `BacDive_Shape_coccus` (and `BacDive_Shape_coccoid`, coccus or ovoid) |
+    | `BacDive_Utilizes_<substrate>` | `BacDive_Uses_<substrate>`, split by assay (below) |
+    | `BacDive_Enzyme_alkaline phosphatase` | `BacDive_Enzyme_alkaline_phosphatase` |
+
+  - **Memberships changed.** Sets now contain measured BacDive data only,
+    aggregated over every strain of each species. Membership that came from
+    the earlier LLM-derived table is gone. For example, *Faecalibacterium
+    prausnitzii* is no longer in the anaerobe set, because BacDive holds no
+    oxygen tolerance record for it.
+
+  - **Substrate use is split by assay.** Growing on a substrate, fermenting
+    it, producing acid or gas from it, reducing it, respiring it and using it
+    as a nitrogen source are different physiology and are now separate sets.
+    The former `BacDive_Utilizes_nitrate` mixed several of these; the nearest
+    equivalent is `BacDive_Uses_nitrate_reduction`.
+
+  - Because TaxSEA compares each set against all other taxa covered by the
+    sets being analysed, the larger BacDive collection and the extended
+    `NCBI_ids` also shift p-values slightly for other sources. On the
+    bundled test data, the top-ranked metabolite-producer and
+    health-association sets are unchanged, with small movements in p-value
+    and order.
+
+## New features
+
+- New BacDive families: Gram stain, motility, spore formation, cell shape,
+  growth temperature class, salt tolerance, pH range, GC content, enzyme
+  activities, metabolite production, respiratory quinones, peptidoglycan
+  type and more. Sets of species tested and found **negative** are included
+  (suffix `_negative`), which earlier releases could not express.
+- `NCBI_ids` extended with the species names of every BacDive set member,
+  with spaces and with underscores, including former names of reclassified
+  species (e.g. `Bacteroides vulgatus` and `Phocaeicola vulgatus` both map
+  to 821), and each member's taxid as its own name. No existing entry was
+  changed. Names that were present with no taxid, and so never mapped, were
+  filled where BacDive resolves them. This also recovers members of other
+  sources: taxa in `TaxSEA_db` with no `NCBI_ids` entry fell from 84 to 57.
+- Provenance for the BacDive sets ships in `inst/extdata`:
+  `BacDive_set_provenance.tsv` (per set: source family, analyte, number of
+  species and strains) and `BacDive_build_info.tsv` (harvester release,
+  BacDive client version, harvest dates). How the sets were built is
+  documented in `inst/scripts/make_BacDive_sets.R`; the pipeline is
+  <https://github.com/feargalr/bacdive_harvester>.
+
 # TaxSEA 1.5.4
 
 ## Breaking changes

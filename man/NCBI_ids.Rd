@@ -5,23 +5,27 @@
 \alias{NCBI_ids}
 \title{NCBI IDs Dataset}
 \format{
-A named vector where:
+A named list where:
 \describe{
-  \item{names}{NCBI IDs}
-  \item{values}{Species or genus names}
+  \item{names}{Taxon names (e.g. "Bifidobacterium breve",
+  "Bifidobacterium_breve") or NCBI IDs}
+  \item{values}{NCBI taxonomy IDs, as character}
 }
-
-A named vector mapping NCBI IDs to species or genus names.
 }
 \source{
-NCBI
+NCBI Taxonomy; BacDive (\url{https://bacdive.dsmz.de}).
 }
 \usage{
 data(NCBI_ids)
 }
 \description{
-A dataset for mapping NCBI IDs to species/genus names. This named vector
-allows for lookup of NCBI IDs associated with species or genus names.
+A lookup from taxon names to NCBI taxonomy IDs, used to translate the
+names supplied to \code{TaxSEA()} into the IDs that \code{TaxSEA_db} is
+built on. Names are present both with spaces and with underscores, and
+each ID is also present as its own name so that IDs can be supplied
+directly. Species names, former names and IDs of the \code{BacDive_} set
+members were added from the BacDive harvest without changing any existing
+entry.
 }
 \examples{
 data(NCBI_ids)

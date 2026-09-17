@@ -103,17 +103,18 @@ test_that("the bundled database has the expected shape", {
   )
 })
 
-# Known, pre-existing gap: 84 members of TaxSEA_db have no entry in
+# Known, pre-existing gap: 57 members of TaxSEA_db have no entry in
 # NCBI_ids and are therefore silently dropped by taxsea_prepare(), which
 # shrinks the affected sets. The worst affected are Siderophore_producers
-# (73 members -> 25 effective) and the Valles-Colomer2019 Gut-Brain
-# Modules (392 member-slots lost across 46 sets). Two GBM sets fall below
-# min_set_size = 5 as a result and never appear in output at all.
+# (73 members -> 33 effective) and the Valles-Colomer2019 Gut-Brain
+# Modules (87 member-slots lost across 26 sets). No BacDive member is
+# affected: the 1.5.5 rebuild added every BacDive taxid to NCBI_ids, which
+# also lowered this from 84.
 #
 # This ceiling stops the gap growing. Lower it as NCBI_ids is extended;
 # do not raise it to accommodate a database update -- extend NCBI_ids
 # instead.
-KNOWN_UNRESOLVED_MEMBERS <- 84L
+KNOWN_UNRESOLVED_MEMBERS <- 57L
 
 unresolved_members <- function() {
   db <- get("TaxSEA_db")

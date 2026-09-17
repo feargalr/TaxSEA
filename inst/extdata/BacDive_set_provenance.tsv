@@ -1,0 +1,1777 @@
+set_name	family	section_source	analyte	polarity	evidence	n_species	n_taxa	n_strains_total	median_n_tested
+BacDive_Temp_mesophile	culture_temp	Temp	mesophile	pos	measured	8061	7829	25750	1
+BacDive_Shape_rod	shape	Shape	rod	pos	measured	4277	4168	7983	1
+BacDive_Prod_indole_negative	production	Prod	indole	neg	measured	4103	3980	12252	1
+BacDive_Enzyme_catalase	enzyme	Enzyme	catalase	pos	measured	3921	3828	8262	1
+BacDive_Enzyme_urease_negative	enzyme|hydrolysis	Enzyme	urease	neg	measured	3912	3789	29314	1
+BacDive_Enzyme_leucine_arylamidase	api_zym|enzyme	Enzyme	leucine arylamidase	pos	measured	3648	3547	17868	1
+BacDive_Enzyme_acid_phosphatase	api_zym|enzyme	Enzyme	acid phosphatase	pos	measured	3574	3465	16471	1
+BacDive_Enzyme_alpha-mannosidase_negative	api_zym|enzyme	Enzyme	alpha-mannosidase	neg	measured	3536	3422	18749	1
+BacDive_Enzyme_alkaline_phosphatase	api_zym|enzyme	Enzyme	alkaline phosphatase	pos	measured	3502	3410	16833	1
+BacDive_Enzyme_alpha-galactosidase_negative	api_zym|enzyme	Enzyme	alpha-galactosidase	neg	measured	3491	3392	19513	1
+BacDive_Enzyme_lipase_negative	api_zym|enzyme|hydrolysis	Enzyme	lipase	neg	measured	3494	3375	19345	1
+BacDive_Oxygen_aerobe	oxygen	Oxygen	aerobe	pos	measured	3260	3213	5992	1
+BacDive_Motility_no	motility	Motility	no	pos	measured	3283	3204	5784	1
+BacDive_Enzyme_N-acetyl-beta-glucosaminidase_negative	api_zym|enzyme	Enzyme	N-acetyl-beta-glucosaminidase	neg	measured	3312	3187	19954	1
+BacDive_Enzyme_alpha-chymotrypsin_negative	api_zym|enzyme	Enzyme	alpha-chymotrypsin	neg	measured	3272	3168	17571	1
+BacDive_Enzyme_esterase	api_zym|enzyme	Enzyme	esterase	pos	measured	3205	3123	15792	1
+BacDive_NaCl_growth_ge_2pct_NaCl	halophily	NaCl	growth_ge_2pct_NaCl	pos	measured	3160	3116	4173	1
+BacDive_Enzyme_naphthol-AS-BI-phosphohydrolase	api_zym|enzyme	Enzyme	naphthol-AS-BI-phosphohydrolase	pos	measured	3196	3104	15332	1
+BacDive_GC_GC_high	gc_content	GC	GC_high	pos	measured	3130	3087	3631	1
+BacDive_Enzyme_esterase_lipase	api_zym|enzyme	Enzyme	esterase lipase	pos	measured	3057	2977	14184	1
+BacDive_Enzyme_beta-galactosidase_negative	api_zym|enzyme	Enzyme	beta-galactosidase	neg	measured	3042	2954	18478	1
+BacDive_Uses_glucose	util	Uses	glucose	pos	measured	2968	2938	5107	1
+BacDive_Gram_negative	gram	Gram	negative	pos	measured	3000	2936	5709	1
+BacDive_Enzyme_beta-glucosidase_negative	api_zym|enzyme	Enzyme	beta-glucosidase	neg	measured	2937	2846	18596	1
+BacDive_Enzyme_cystine_arylamidase_negative	api_zym|enzyme	Enzyme	cystine arylamidase	neg	measured	2926	2845	16754	1
+BacDive_Uses_nitrate_reduction_negative	util	Uses	nitrate	neg	measured	2863	2774	8955	1
+BacDive_Enzyme_trypsin_negative	api_zym|enzyme|hydrolysis	Enzyme	trypsin	neg	measured	2755	2657	15533	1
+BacDive_Enzyme_gelatinase_negative	enzyme|hydrolysis	Enzyme	gelatinase	neg	measured	2668	2610	14724	1
+BacDive_Enzyme_alpha-glucosidase	api_zym|enzyme	Enzyme	alpha-glucosidase	pos	measured	2562	2474	12398	1
+BacDive_Enzyme_cytochrome_c_oxidase	enzyme	Enzyme	cytochrome c oxidase	pos	measured	2506	2457	5713	1
+BacDive_Gram_positive	gram	Gram	positive	pos	measured	2534	2453	4633	1
+BacDive_Enzyme_arginine_dihydrolase_negative	enzyme|hydrolysis	Enzyme	arginine dihydrolase	neg	measured	2477	2412	18609	1
+BacDive_Uses_nitrite_reduction_negative	util	Uses	nitrite	neg	measured	2461	2375	5304	1
+BacDive_Enzyme_ornithine_decarboxylase_negative	enzyme	Enzyme	ornithine decarboxylase	neg	measured	2411	2313	8677	1
+BacDive_Uses_tryptophan_negative	util	Uses	tryptophan	neg	measured	2335	2278	7957	1
+BacDive_Test_indole_test_negative	metabolite_test	Test	indole test	neg	measured	2331	2274	7955	1
+BacDive_Enzyme_lysine_decarboxylase_negative	enzyme	Enzyme	lysine decarboxylase	neg	measured	2330	2237	6171	1
+BacDive_Enzyme_valine_arylamidase_negative	api_zym|enzyme	Enzyme	valine arylamidase	neg	measured	2271	2201	13752	1
+BacDive_Uses_nitrate_reduction	util	Uses	nitrate	pos	measured	2263	2198	8306	1
+BacDive_Enzyme_beta-galactosidase	api_zym|enzyme	Enzyme	beta-galactosidase	pos	measured	2270	2186	11623	1
+BacDive_GC_GC_mid	gc_content	GC	GC_mid	pos	measured	2144	2124	2735	1
+BacDive_Enzyme_beta-glucosidase	api_zym|enzyme	Enzyme	beta-glucosidase	pos	measured	2153	2093	9846	1
+BacDive_Enzyme_esculin_hydrolysis	hydrolysis	Enzyme	esculin hydrolysis	pos	measured	2122	2086	4466	1
+BacDive_Enzyme_alpha-glucosidase_negative	api_zym|enzyme	Enzyme	alpha-glucosidase	neg	measured	2051	2011	11545	1
+BacDive_Enzyme_cytochrome_c_oxidase_negative	enzyme	Enzyme	cytochrome c oxidase	neg	measured	2079	2004	6090	1
+BacDive_NaCl_growth_ge_5pct_NaCl	halophily	NaCl	growth_ge_5pct_NaCl	pos	measured	1931	1897	2760	1
+BacDive_Motility_yes	motility	Motility	yes	pos	measured	1905	1870	3347	1
+BacDive_Uses_sorbitol_acid_negative	util	Uses	sorbitol	neg	measured	1920	1848	8578	1
+BacDive_Spore_no	spore	Spore	no	pos	measured	1762	1755	1865	1
+BacDive_Uses_melezitose_acid_negative	util	Uses	melezitose	neg	measured	1795	1723	8159	1
+BacDive_Uses_mannose	util	Uses	mannose	pos	measured	1720	1706	2580	1
+BacDive_Observation_menaquinone	observation	Observation	menaquinone	pos	measured	1713	1698	1935	1
+BacDive_Enzyme_esculin_hydrolysis_negative	hydrolysis	Enzyme	esculin hydrolysis	neg	measured	1744	1697	6221	1
+BacDive_pH_alkaliphile	culture_ph_max|ph_range	pH	alkaliphile	pos	measured	1699	1693	3191	1
+BacDive_Uses_maltose	util	Uses	maltose	pos	measured	1693	1680	2213	1
+BacDive_Enzyme_gelatinase	enzyme|hydrolysis	Enzyme	gelatinase	pos	measured	1691	1653	6831	1
+BacDive_Enzyme_valine_arylamidase	api_zym|enzyme	Enzyme	valine arylamidase	pos	measured	1671	1641	5845	1
+BacDive_Uses_glucose_fermentation_negative	util	Uses	glucose	neg	measured	1666	1639	4977	1
+BacDive_Uses_rhamnose_acid_negative	util	Uses	rhamnose	neg	measured	1703	1632	6142	1
+BacDive_Enzyme_alcohol_dehydrogenase_negative	enzyme	Enzyme	alcohol dehydrogenase	neg	measured	1687	1627	3828	1
+BacDive_Enzyme_urease	enzyme|hydrolysis	Enzyme	urease	pos	measured	1628	1592	7720	1
+BacDive_Test_voges-proskauer-test_negative	metabolite_test	Test	voges-proskauer-test	neg	measured	1618	1583	6507	1
+BacDive_Uses_fructose	util	Uses	fructose	pos	measured	1592	1582	1692	1
+BacDive_Uses_glucose_acid	util	Uses	glucose	pos	measured	1631	1568	6369	1
+BacDive_pH_growth_ge_pH9	culture_ph_max	pH	growth_ge_pH9	pos	measured	1534	1528	1546	1
+BacDive_Uses_mannitol	util	Uses	mannitol	pos	measured	1537	1525	2558	1
+BacDive_Uses_raffinose_acid_negative	util	Uses	raffinose	neg	measured	1558	1520	7211	1
+BacDive_Uses_glycogen_acid_negative	util	Uses	glycogen	neg	measured	1559	1501	7498	1
+BacDive_Uses_L-arabinose_acid_negative	util	Uses	L-arabinose	neg	measured	1532	1474	7713	1
+BacDive_Uses_melibiose_acid_negative	util	Uses	melibiose	neg	measured	1509	1467	7092	1
+BacDive_Uses_mannitol_acid_negative	util	Uses	mannitol	neg	measured	1499	1455	6976	1
+BacDive_Uses_sucrose	util	Uses	sucrose	pos	measured	1458	1453	1538	1
+BacDive_Enzyme_alkaline_phosphatase_negative	api_zym|enzyme	Enzyme	alkaline phosphatase	neg	measured	1492	1445	9709	1
+BacDive_Uses_lactose_acid_negative	util	Uses	lactose	neg	measured	1384	1351	5533	1
+BacDive_Uses_citrate_negative	util	Uses	citrate	neg	measured	1375	1345	4293	1
+BacDive_Uses_methyl_alpha-D-glucopyranoside_acid_negative	util	Uses	methyl alpha-D-glucopyranoside	neg	measured	1392	1339	5139	1
+BacDive_Uses_maltose_acid	util	Uses	maltose	pos	measured	1380	1323	7627	1
+BacDive_Oxygen_anaerobe	oxygen	Oxygen	anaerobe	pos	measured	1360	1317	2887	1
+BacDive_Enzyme_amylase_negative	enzyme|hydrolysis	Enzyme	amylase	neg	measured	1319	1300	1938	1
+BacDive_Uses_D-xylose_acid_negative	util	Uses	D-xylose	neg	measured	1358	1300	4974	1
+BacDive_Enzyme_pyrrolidonyl_arylamidase_negative	enzyme	Enzyme	pyrrolidonyl arylamidase	neg	measured	1346	1284	5177	1
+BacDive_Uses_fructose_acid	util	Uses	fructose	pos	measured	1338	1281	4649	1
+BacDive_Enzyme_N-acetyl-beta-glucosaminidase	api_zym|enzyme	Enzyme	N-acetyl-beta-glucosaminidase	pos	measured	1279	1248	5751	1
+BacDive_GC_GC_low	gc_content	GC	GC_low	pos	measured	1260	1245	1572	1
+BacDive_Uses_glycerol_acid_negative	util	Uses	glycerol	neg	measured	1296	1242	4161	1
+BacDive_NaCl_slight_halophile	halophily	NaCl	slight halophile	pos	measured	1242	1229	1503	1
+BacDive_NaCl_halotolerant	halophily	NaCl	halotolerant	pos	measured	1229	1223	1413	1
+BacDive_Prod_H2S_negative	production	Prod	H2S	neg	measured	1237	1211	3635	1
+BacDive_Uses_amygdalin_acid_negative	util	Uses	amygdalin	neg	measured	1245	1209	4358	1
+BacDive_Enzyme_trypsin	api_zym|enzyme	Enzyme	trypsin	pos	measured	1216	1202	4163	1
+BacDive_Uses_starch_acid_negative	util	Uses	starch	neg	measured	1243	1200	4240	1
+BacDive_Uses_Potassium_5-ketogluconate_acid_negative	util	Uses	Potassium 5-ketogluconate	neg	measured	1255	1198	5725	1
+BacDive_Uses_turanose_acid_negative	util	Uses	turanose	neg	measured	1226	1189	4589	1
+BacDive_Enzyme_caseinase_negative	enzyme|hydrolysis	Enzyme	caseinase	neg	measured	1188	1172	1761	1
+BacDive_Uses_sucrose_acid_negative	util	Uses	sucrose	neg	measured	1187	1160	5550	1
+BacDive_Uses_cellobiose_acid_negative	util	Uses	cellobiose	neg	measured	1181	1145	4644	1
+BacDive_Uses_malate	util	Uses	malate	pos	measured	1152	1138	2987	1
+BacDive_Uses_gluconate_acid_negative	util	Uses	gluconate	neg	measured	1158	1121	4177	1
+BacDive_Uses_mannitol_negative	util	Uses	mannitol	neg	measured	1121	1114	2227	1
+BacDive_Uses_mannose_acid	util	Uses	mannose	pos	measured	1152	1105	3689	1
+BacDive_Enzyme_alpha-galactosidase	api_zym|enzyme	Enzyme	alpha-galactosidase	pos	measured	1140	1097	5523	1
+BacDive_Uses_sucrose_acid	util	Uses	sucrose	pos	measured	1137	1094	5978	1
+BacDive_Uses_trehalose_acid_negative	util	Uses	trehalose	neg	measured	1119	1086	4535	1
+BacDive_Uses_gentiobiose_acid_negative	util	Uses	gentiobiose	neg	measured	1110	1079	4106	1
+BacDive_Uses_citrate	util	Uses	citrate	pos	measured	1095	1073	2363	1
+BacDive_Uses_salicin_acid_negative	util	Uses	salicin	neg	measured	1096	1067	3476	1
+BacDive_Uses_arabinose	util	Uses	arabinose	pos	measured	1057	1050	1109	1
+BacDive_Enzyme_lecithinase_negative	enzyme	Enzyme	lecithinase	neg	measured	1063	1038	2191	1
+BacDive_Uses_ribose_acid_negative	util	Uses	ribose	neg	measured	1063	1036	5039	1
+BacDive_Temp_growth_ge_45C	culture_temp	Temp	growth_ge_45C	pos	measured	1066	1035	8373	1
+BacDive_Uses_adipate_negative	util	Uses	adipate	neg	measured	1041	1028	2227	1
+BacDive_Enzyme_DNase_negative	enzyme|hydrolysis	Enzyme	DNase	neg	measured	1045	1025	1639	1
+BacDive_Uses_arbutin_acid_negative	util	Uses	arbutin	neg	measured	1052	1023	3614	1
+BacDive_Temp_thermophile	culture_temp	Temp	thermophile	pos	measured	1048	1017	8338	1
+BacDive_Temp_psychrotolerant	culture_temp_min	Temp	psychrotolerant	pos	measured	1014	1011	5234	1
+BacDive_Enzyme_tween_esterase_negative	enzyme|hydrolysis	Enzyme	tween esterase	neg	measured	1020	1002	1411	1
+BacDive_Uses_trehalose_acid	util	Uses	trehalose	pos	measured	1034	990	5638	1
+BacDive_Uses_mannitol_fermentation_negative	util	Uses	mannitol	neg	measured	995	970	3339	1
+BacDive_Uses_galactose	util	Uses	galactose	pos	measured	967	964	972	1
+BacDive_Oxygen_facultative_anaerobe	oxygen	Oxygen	facultative anaerobe	pos	measured	1002	962	5284	1
+BacDive_pH_acidophile	culture_ph_min|ph_range	pH	acidophile	pos	measured	957	955	1056	1
+BacDive_Uses_lactose_fermentation_negative	util	Uses	lactose	neg	measured	980	950	3437	1
+BacDive_Uses_N-acetyl-D-glucosamine	util	Uses	N-acetyl-D-glucosamine	pos	measured	956	945	1743	1
+BacDive_Shape_coccoid	shape_union		BacDive_Shape_coccoid	pos	measured	969	944	2078	1
+BacDive_Enzyme_cystine_arylamidase	api_zym|enzyme	Enzyme	cystine arylamidase	pos	measured	959	940	2721	1
+BacDive_Uses_maltose_negative	util	Uses	maltose	neg	measured	927	922	2631	1
+BacDive_Uses_rhamnose	util	Uses	rhamnose	pos	measured	927	922	982	1
+BacDive_Prod_acetoin_negative	production	Prod	acetoin	neg	measured	935	921	4212	1
+BacDive_Enzyme_esterase_lipase_negative	api_zym|enzyme	Enzyme	esterase lipase	neg	measured	923	904	5415	1
+BacDive_Spore_yes	spore	Spore	yes	pos	measured	909	900	1108	1
+BacDive_Uses_decanoate_negative	util	Uses	decanoate	neg	measured	902	894	1717	1
+BacDive_Uses_glucose_fermentation	util	Uses	glucose	pos	measured	925	889	5906	1
+BacDive_Uses_maltose_acid_negative	util	Uses	maltose	neg	measured	901	889	3706	1
+BacDive_Uses_gluconate	util	Uses	gluconate	pos	measured	891	882	2181	1
+BacDive_Uses_galactose_acid	util	Uses	galactose	pos	measured	902	862	2866	1
+BacDive_Enzyme_catalase_negative	enzyme	Enzyme	catalase	neg	measured	907	857	2871	1
+BacDive_Uses_mannose_negative	util	Uses	mannose	neg	measured	860	853	2196	1
+BacDive_Uses_ornithine_negative	util	Uses	ornithine	neg	measured	872	842	4843	1
+BacDive_Uses_N-acetyl-D-glucosamine_acid	util	Uses	N-acetyl-D-glucosamine	pos	measured	877	841	3035	1
+BacDive_Uses_galactose_acid_negative	util	Uses	galactose	neg	measured	854	840	2871	1
+BacDive_Uses_trehalose	util	Uses	trehalose	pos	measured	838	835	844	1
+BacDive_Uses_cellobiose	util	Uses	cellobiose	pos	measured	835	834	844	1
+BacDive_Uses_ribose_acid	util	Uses	ribose	pos	measured	867	833	3487	1
+BacDive_Uses_L-arabinose_negative	util	Uses	L-arabinose	neg	measured	839	832	2062	1
+BacDive_Uses_N-acetyl-D-glucosamine_negative	util	Uses	N-acetyl-D-glucosamine	neg	measured	837	832	2114	1
+BacDive_Uses_N-acetyl-D-glucosamine_acid_negative	util	Uses	N-acetyl-D-glucosamine	neg	measured	852	829	2674	1
+BacDive_Uses_D-xylose_fermentation_negative	util	Uses	D-xylose	neg	measured	851	828	2520	1
+BacDive_Uses_sucrose_fermentation_negative	util	Uses	sucrose	neg	measured	825	810	3034	1
+BacDive_Test_methylred-test_negative	metabolite_test	Test	methylred-test	neg	measured	823	809	1777	1
+BacDive_Enzyme_gamma-glutamyltransferase_negative	enzyme	Enzyme	gamma-glutamyltransferase	neg	measured	820	803	2705	1
+BacDive_Enzyme_hippurate_hydrolysis_negative	hydrolysis	Enzyme	hippurate hydrolysis	neg	measured	832	802	3577	1
+BacDive_Enzyme_leucine_arylamidase_negative	api_zym|enzyme	Enzyme	leucine arylamidase	neg	measured	822	796	3589	1
+BacDive_Enzyme_tween_esterase	enzyme|hydrolysis	Enzyme	tween esterase	pos	measured	804	793	1568	1
+BacDive_Enzyme_phenylalanine_ammonia-lyase_negative	enzyme	Enzyme	phenylalanine ammonia-lyase	neg	measured	810	791	1758	1
+BacDive_Enzyme_esterase_negative	api_zym|enzyme	Enzyme	esterase	neg	measured	791	771	4046	1
+BacDive_Test_voges-proskauer-test	metabolite_test	Test	voges-proskauer-test	pos	measured	814	767	4234	1
+BacDive_Enzyme_arginine_dihydrolase	enzyme|hydrolysis	Enzyme	arginine dihydrolase	pos	measured	793	765	6777	1
+BacDive_Uses_mannose_acid_negative	util	Uses	mannose	neg	measured	778	762	2454	1
+BacDive_pH_growth_ge_pH10	culture_ph_max	pH	growth_ge_pH10	pos	measured	756	756	764	1
+BacDive_Uses_cellobiose_acid	util	Uses	cellobiose	pos	measured	781	754	2618	1
+BacDive_Uses_ribose_fermentation_negative	util	Uses	ribose	neg	measured	775	753	2294	1
+BacDive_Enzyme_naphthol-AS-BI-phosphohydrolase_negative	api_zym|enzyme	Enzyme	naphthol-AS-BI-phosphohydrolase	neg	measured	760	752	4295	1
+BacDive_Uses_xylose	util	Uses	xylose	pos	measured	755	752	803	1
+BacDive_Uses_nitrate_respiration_negative	util	Uses	nitrate	neg	measured	764	750	1231	1
+BacDive_Enzyme_amylase	enzyme|hydrolysis	Enzyme	amylase	pos	measured	761	748	1261	1
+BacDive_Uses_esculin_acid	util	Uses	esculin	pos	measured	775	746	2175	1
+BacDive_Uses_L-arabinose	util	Uses	L-arabinose	pos	measured	743	734	1562	1
+BacDive_Prod_acetoin	production	Prod	acetoin	pos	measured	753	724	3456	1
+BacDive_Uses_raffinose	util	Uses	raffinose	pos	measured	725	722	756	1
+BacDive_Uses_L-glutamate_negative	util	Uses	L-glutamate	neg	measured	745	719	1881	1
+BacDive_Enzyme_acid_phosphatase_negative	api_zym|enzyme	Enzyme	acid phosphatase	neg	measured	723	718	3576	1
+BacDive_Enzyme_lipase	api_zym|enzyme|hydrolysis	Enzyme	lipase	pos	measured	727	718	2780	1
+BacDive_Uses_mannitol_acid	util	Uses	mannitol	pos	measured	741	714	3614	1
+BacDive_Uses_lactose_acid	util	Uses	lactose	pos	measured	726	695	3685	1
+BacDive_Uses_salicin_acid	util	Uses	salicin	pos	measured	723	693	2195	1
+BacDive_NaCl_growth_ge_10pct_NaCl	halophily	NaCl	growth_ge_10pct_NaCl	pos	measured	689	676	1257	1
+BacDive_Shape_coccus	shape	Shape	coccus	pos	measured	681	658	1527	1
+BacDive_Uses_glucose_acid_negative	util	Uses	glucose	neg	measured	658	651	2265	1
+BacDive_Uses_esculin_acid_negative	util	Uses	esculin	neg	measured	671	649	2948	1
+BacDive_Uses_glucose_negative	util	Uses	glucose	neg	measured	657	649	1708	1
+BacDive_Enzyme_caseinase	enzyme|hydrolysis	Enzyme	caseinase	pos	measured	665	648	1161	1
+BacDive_Enzyme_proline-arylamidase_negative	enzyme	Enzyme	proline-arylamidase	neg	measured	669	647	2202	1
+BacDive_Uses_lysine_negative	util	Uses	lysine	neg	measured	652	634	2564	1
+BacDive_Uses_raffinose_fermentation_negative	util	Uses	raffinose	neg	measured	664	634	2236	1
+BacDive_Uses_raffinose_negative	util	Uses	raffinose	neg	measured	634	631	668	1
+BacDive_Enzyme_alpha-chymotrypsin	api_zym|enzyme	Enzyme	alpha-chymotrypsin	pos	measured	638	630	2100	1
+BacDive_Oxygen_microaerophile	oxygen	Oxygen	microaerophile	pos	measured	638	628	2467	1
+BacDive_Enzyme_beta-Galactosidase_6-phosphate_negative	enzyme	Enzyme	beta-Galactosidase 6-phosphate	neg	measured	647	625	1766	1
+BacDive_Uses_maltose_fermentation_negative	util	Uses	maltose	neg	measured	637	623	1325	1
+BacDive_Enzyme_hippurate_hydrolysis	hydrolysis	Enzyme	hippurate hydrolysis	pos	measured	622	612	2238	1
+BacDive_Uses_gluconate_negative	util	Uses	gluconate	neg	measured	619	612	1363	1
+BacDive_Uses_sucrose_negative	util	Uses	sucrose	neg	measured	611	610	753	1
+BacDive_Uses_glycerol	util	Uses	glycerol	pos	measured	609	609	612	1
+BacDive_Uses_L-arabinose_acid	util	Uses	L-arabinose	pos	measured	625	609	2648	1
+BacDive_Uses_acetate	util	Uses	acetate	pos	measured	611	608	662	1
+BacDive_Enzyme_alpha-arabinosidase_negative	enzyme	Enzyme	alpha-arabinosidase	neg	measured	628	604	1758	1
+BacDive_Uses_ribose	util	Uses	ribose	pos	measured	604	603	607	1
+BacDive_Uses_arbutin_acid	util	Uses	arbutin	pos	measured	620	600	1879	1
+BacDive_Uses_inositol_negative	util	Uses	inositol	neg	measured	600	598	626	1
+BacDive_Uses_lactose	util	Uses	lactose	pos	measured	598	597	620	1
+BacDive_Enzyme_glutamyl-glutamate_arylamidase_negative	enzyme	Enzyme	glutamyl-glutamate arylamidase	neg	measured	612	590	1723	1
+BacDive_Enzyme_protease_negative	enzyme	Enzyme	protease	neg	measured	590	586	987	1
+BacDive_Uses_D-xylose_acid	util	Uses	D-xylose	pos	measured	598	585	1505	1
+BacDive_Uses_fructose_acid_negative	util	Uses	fructose	neg	measured	587	583	2279	1
+BacDive_NaCl_moderate_halophile	halophily	NaCl	moderate halophile	pos	measured	591	580	1155	1
+BacDive_Uses_inositol	util	Uses	inositol	pos	measured	580	579	603	1
+BacDive_Uses_rhamnose_negative	util	Uses	rhamnose	neg	measured	575	573	591	1
+BacDive_Uses_sucrose_fermentation	util	Uses	sucrose	pos	measured	596	573	2538	1
+BacDive_Uses_gentiobiose_acid	util	Uses	gentiobiose	pos	measured	566	546	1627	1
+BacDive_Uses_malate_negative	util	Uses	malate	neg	measured	550	544	1041	1
+BacDive_Enzyme_gamma-glutamyltransferase	enzyme	Enzyme	gamma-glutamyltransferase	pos	measured	549	540	1159	1
+BacDive_Uses_raffinose_acid	util	Uses	raffinose	pos	measured	563	539	1991	1
+BacDive_Uses_sorbitol	util	Uses	sorbitol	pos	measured	537	536	543	1
+BacDive_Enzyme_pyrazinamidase_negative	enzyme	Enzyme	pyrazinamidase	neg	measured	543	534	1124	1
+BacDive_NaCl_non-halophile	halophily	NaCl	non-halophile	pos	measured	531	531	537	1
+BacDive_Uses_melibiose	util	Uses	melibiose	pos	measured	530	529	533	1
+BacDive_Uses_salicin	util	Uses	salicin	pos	measured	521	521	525	1
+BacDive_Uses_nitrate_respiration	util	Uses	nitrate	pos	measured	548	517	1334	1
+BacDive_Enzyme_serine_arylamidase_negative	enzyme	Enzyme	serine arylamidase	neg	measured	523	504	1210	1
+BacDive_Uses_mannose_fermentation_negative	util	Uses	mannose	neg	measured	515	496	1423	1
+BacDive_Enzyme_L-arginine_arylamidase_negative	enzyme	Enzyme	L-arginine arylamidase	neg	measured	507	482	1823	1
+BacDive_Uses_melibiose_acid	util	Uses	melibiose	pos	measured	498	477	1903	1
+BacDive_Enzyme_glycin_arylamidase_negative	enzyme	Enzyme	glycin arylamidase	neg	measured	492	474	1165	1
+BacDive_Enzyme_phenylalanine_arylamidase_negative	enzyme	Enzyme	phenylalanine arylamidase	neg	measured	492	474	1134	1
+BacDive_Uses_glycerol_acid	util	Uses	glycerol	pos	measured	482	472	1627	1
+BacDive_Enzyme_tyrosine_arylamidase_negative	enzyme	Enzyme	tyrosine arylamidase	neg	measured	487	470	1102	1
+BacDive_Enzyme_pyrazinamidase	enzyme	Enzyme	pyrazinamidase	pos	measured	477	469	1839	1
+BacDive_Observation_aggregation_in_chains	observation	Observation	aggregation in chains	pos	measured	467	467	474	1
+BacDive_Prod_indole	production	Prod	indole	pos	measured	482	464	3026	1
+BacDive_Enzyme_histidine_arylamidase_negative	enzyme	Enzyme	histidine arylamidase	neg	measured	476	462	1138	1
+BacDive_Uses_cellulose_negative	util	Uses	cellulose	neg	measured	454	452	477	1
+BacDive_Enzyme_DNase	enzyme|hydrolysis	Enzyme	DNase	pos	measured	459	449	984	1
+BacDive_Enzyme_alpha-mannosidase	api_zym|enzyme	Enzyme	alpha-mannosidase	pos	measured	450	444	1160	1
+BacDive_Enzyme_pyrrolidonyl_arylamidase	enzyme	Enzyme	pyrrolidonyl arylamidase	pos	measured	451	442	2285	1
+BacDive_Uses_lactate	util	Uses	lactate	pos	measured	443	442	448	1
+BacDive_Enzyme_leucyl_glycin_arylamidase_negative	enzyme	Enzyme	leucyl glycin arylamidase	neg	measured	454	440	1220	1
+BacDive_Uses_amygdalin_acid	util	Uses	amygdalin	pos	measured	453	437	1365	1
+BacDive_Uses_turanose_acid	util	Uses	turanose	pos	measured	446	435	1087	1
+BacDive_Uses_starch_acid	util	Uses	starch	pos	measured	446	433	1440	1
+BacDive_Enzyme_beta-mannosidase_negative	enzyme	Enzyme	beta-mannosidase	neg	measured	429	409	3010	2
+BacDive_PathogenHuman_yes_in_single_cases	pathogen_human	PathogenHuman	yes, in single cases	pos	measured	411	408	1425	1
+BacDive_Uses_pullulan_acid_negative	util	Uses	pullulan	neg	measured	419	407	2499	2
+BacDive_Uses_alpha-cyclodextrin_acid_negative	util	Uses	alpha-cyclodextrin	neg	measured	425	406	3058	2
+BacDive_Uses_decanoate	util	Uses	decanoate	pos	measured	407	398	1646	1
+BacDive_Enzyme_alanine_arylamidase	enzyme	Enzyme	alanine arylamidase	pos	measured	396	385	1100	1
+BacDive_Enzyme_L-arginine_arylamidase	enzyme	Enzyme	L-arginine arylamidase	pos	measured	394	384	1244	1
+BacDive_Uses_succinate	util	Uses	succinate	pos	measured	387	384	565	1
+BacDive_Uses_mannitol_fermentation	util	Uses	mannitol	pos	measured	403	383	2472	1
+BacDive_Uses_propionate	util	Uses	propionate	pos	measured	384	383	425	1
+BacDive_Observation_ubiquinone	observation	Observation	ubiquinone	pos	measured	385	382	589	1
+BacDive_Uses_xylose_negative	util	Uses	xylose	neg	measured	384	382	407	1
+BacDive_Enzyme_beta-glucuronidase	api_zym|enzyme	Enzyme	beta-glucuronidase	pos	measured	392	379	2335	1
+BacDive_Uses_fructose_negative	util	Uses	fructose	neg	measured	379	379	494	1
+BacDive_Uses_phenylacetate_negative	util	Uses	phenylacetate	neg	measured	371	370	371	1
+BacDive_Test_indole_test	metabolite_test	Test	indole test	pos	measured	374	358	2278	1
+BacDive_Uses_malonate_negative	util	Uses	malonate	neg	measured	371	358	1887	1
+BacDive_Uses_maltose_fermentation	util	Uses	maltose	pos	measured	369	355	2139	2
+BacDive_Uses_ornithine	util	Uses	ornithine	pos	measured	361	352	1264	1
+BacDive_Uses_sorbitol_negative	util	Uses	sorbitol	neg	measured	352	352	353	1
+BacDive_Uses_mannose_fermentation	util	Uses	mannose	pos	measured	357	346	1369	2
+BacDive_Uses_sorbitol_fermentation_negative	util	Uses	sorbitol	neg	measured	349	343	953	1
+BacDive_Enzyme_alanine_arylamidase_negative	enzyme	Enzyme	alanine arylamidase	neg	measured	355	342	902	1
+BacDive_Enzyme_glycyl_tryptophan_arylamidase_negative	enzyme	Enzyme	glycyl tryptophan arylamidase	neg	measured	358	340	2407	2
+BacDive_Uses_glycogen_acid	util	Uses	glycogen	pos	measured	352	339	1047	1
+BacDive_Uses_methyl_beta-D-glucopyranoside_acid_negative	util	Uses	methyl beta-D-glucopyranoside	neg	measured	347	337	2273	2
+BacDive_Uses_rhamnose_acid	util	Uses	rhamnose	pos	measured	338	332	1553	1
+BacDive_Uses_adipate	util	Uses	adipate	pos	measured	335	331	1181	1
+BacDive_Uses_gluconate_acid	util	Uses	gluconate	pos	measured	340	331	1332	1
+BacDive_Uses_inositol_fermentation_negative	util	Uses	inositol	neg	measured	336	330	1755	1
+BacDive_Uses_arabinose_negative	util	Uses	arabinose	neg	measured	329	327	340	1
+BacDive_Uses_methyl_alpha-D-glucopyranoside_acid	util	Uses	methyl alpha-D-glucopyranoside	pos	measured	330	321	996	1
+BacDive_Enzyme_ornithine_decarboxylase	enzyme	Enzyme	ornithine decarboxylase	pos	measured	333	320	1612	1
+BacDive_Enzyme_protease	enzyme	Enzyme	protease	pos	measured	328	320	629	1
+BacDive_Uses_pyruvate	util	Uses	pyruvate	pos	measured	318	318	319	1
+BacDive_Test_methylred-test	metabolite_test	Test	methylred-test	pos	measured	310	303	1655	1
+BacDive_Uses_melibiose_fermentation_negative	util	Uses	melibiose	neg	measured	310	303	1674	1
+BacDive_Uses_rhamnose_fermentation_negative	util	Uses	rhamnose	neg	measured	307	300	911	1
+BacDive_Uses_lactose_negative	util	Uses	lactose	neg	measured	299	299	417	1
+BacDive_Uses_tryptophan	util	Uses	tryptophan	pos	measured	315	299	2211	1
+BacDive_Uses_cellobiose_negative	util	Uses	cellobiose	neg	measured	297	296	426	1
+BacDive_Uses_tween_80	util	Uses	tween 80	pos	measured	297	295	298	1
+BacDive_Uses_salicin_negative	util	Uses	salicin	neg	measured	290	290	421	1
+BacDive_Enzyme_leucyl_glycin_arylamidase	enzyme	Enzyme	leucyl glycin arylamidase	pos	measured	293	287	773	1
+BacDive_Shape_ovoid	shape	Shape	ovoid	pos	measured	288	287	551	1
+BacDive_Uses_dextrin	util	Uses	dextrin	pos	measured	288	287	290	1
+BacDive_Enzyme_lysine_decarboxylase	enzyme	Enzyme	lysine decarboxylase	pos	measured	294	286	2392	1
+BacDive_Uses_glycogen	util	Uses	glycogen	pos	measured	287	286	289	1
+BacDive_Enzyme_tyrosine_arylamidase	enzyme	Enzyme	tyrosine arylamidase	pos	measured	282	276	910	1
+BacDive_Prod_H2S	production	Prod	H2S	pos	measured	281	276	451	1
+BacDive_Enzyme_lecithinase	enzyme	Enzyme	lecithinase	pos	measured	281	271	1154	1
+BacDive_Uses_tween_40	util	Uses	tween 40	pos	measured	272	271	274	1
+BacDive_Uses_sorbitol_acid	util	Uses	sorbitol	pos	measured	277	269	1841	1
+BacDive_Enzyme_alpha-fucosidase	api_zym|enzyme	Enzyme	alpha-fucosidase	pos	measured	273	268	844	1
+BacDive_Uses_nitrite_reduction	util	Uses	nitrite	pos	measured	279	268	1157	1
+BacDive_Enzyme_histidine_arylamidase	enzyme	Enzyme	histidine arylamidase	pos	measured	264	258	831	2
+BacDive_Enzyme_proline-arylamidase	enzyme	Enzyme	proline-arylamidase	pos	measured	261	258	949	1
+BacDive_Uses_melibiose_negative	util	Uses	melibiose	neg	measured	256	256	256	1
+BacDive_Observation_aggregation_in_clumps	observation	Observation	aggregation in clumps	pos	measured	255	255	259	1
+BacDive_Enzyme_phenylalanine_arylamidase	enzyme	Enzyme	phenylalanine arylamidase	pos	measured	260	254	870	2
+BacDive_Uses_lactose_fermentation	util	Uses	lactose	pos	measured	263	252	1567	2
+BacDive_Enzyme_tryptophan_deaminase	enzyme	Enzyme	tryptophan deaminase	pos	measured	261	251	644	1
+BacDive_Temp_growth_ge_55C	culture_temp	Temp	growth_ge_55C	pos	measured	257	250	1542	1
+BacDive_Uses_lysine	util	Uses	lysine	pos	measured	255	249	1610	1
+BacDive_Uses_sodium_thiosulfate_gas_negative	util	Uses	sodium thiosulfate	neg	measured	259	249	828	1
+BacDive_Uses_L-glutamate	util	Uses	L-glutamate	pos	measured	248	248	370	1
+BacDive_Enzyme_Alanyl-Phenylalanyl-Proline_arylamidase	enzyme	Enzyme	Alanyl-Phenylalanyl-Proline arylamidase	pos	measured	252	237	2318	2
+BacDive_Uses_methyl_pyruvate	util	Uses	methyl pyruvate	pos	measured	235	235	236	1
+BacDive_Enzyme_glycin_arylamidase	enzyme	Enzyme	glycin arylamidase	pos	measured	239	233	785	2
+BacDive_Enzyme_cellulase_negative	enzyme|hydrolysis	Enzyme	cellulase	neg	measured	232	232	233	1
+BacDive_Uses_melezitose_acid	util	Uses	melezitose	pos	measured	235	225	794	1
+BacDive_Uses_propionate_negative	util	Uses	propionate	neg	measured	226	223	451	1
+BacDive_Enzyme_alcohol_dehydrogenase	enzyme	Enzyme	alcohol dehydrogenase	pos	measured	234	222	633	1
+BacDive_Uses_amygdalin_fermentation_negative	util	Uses	amygdalin	neg	measured	226	221	1170	1
+BacDive_Enzyme_Alanyl-Phenylalanyl-Proline_arylamidase_negative	enzyme	Enzyme	Alanyl-Phenylalanyl-Proline arylamidase	neg	measured	223	218	1122	1
+BacDive_Uses_ribose_fermentation	util	Uses	ribose	pos	measured	222	216	1175	2
+BacDive_Uses_sodium_citrate_negative	util	Uses	sodium citrate	neg	measured	215	215	215	1
+BacDive_Enzyme_serine_arylamidase	enzyme	Enzyme	serine arylamidase	pos	measured	220	214	774	2
+BacDive_Uses_ribose_negative	util	Uses	ribose	neg	measured	213	212	214	1
+BacDive_NaCl_growth_ge_15pct_NaCl	halophily	NaCl	growth_ge_15pct_NaCl	pos	measured	210	209	218	1
+BacDive_Uses_cellulose	util	Uses	cellulose	pos	measured	209	207	226	1
+BacDive_Uses_L-arabinose_fermentation_negative	util	Uses	L-arabinose	neg	measured	208	204	650	1
+BacDive_Uses_malonate	util	Uses	malonate	pos	measured	210	204	603	1
+BacDive_Uses_D-xylose	util	Uses	D-xylose	pos	measured	198	198	201	1
+BacDive_Uses_3-hydroxybutyrate	util	Uses	3-hydroxybutyrate	pos	measured	195	195	196	1
+BacDive_Uses_trehalose_negative	util	Uses	trehalose	neg	measured	195	195	195	1
+BacDive_Uses_L-arabinose_fermentation	util	Uses	L-arabinose	pos	measured	201	193	1104	1
+BacDive_Uses_D-xylose_negative	util	Uses	D-xylose	neg	measured	193	192	321	1
+BacDive_Uses_amygdalin_fermentation	util	Uses	amygdalin	pos	measured	195	189	585	1
+BacDive_Uses_galactose_negative	util	Uses	galactose	neg	measured	188	187	188	1
+BacDive_Uses_L-serine_negative	util	Uses	L-serine	neg	measured	187	187	187	1
+BacDive_Uses_raffinose_fermentation	util	Uses	raffinose	pos	measured	191	186	529	1
+BacDive_Uses_inositol_acid	util	Uses	inositol	pos	measured	187	184	808	1
+BacDive_PathogenHuman_yes	pathogen_human	PathogenHuman	yes	pos	measured	197	183	1551	2
+BacDive_Uses_L-histidine_negative	util	Uses	L-histidine	neg	measured	182	182	182	1
+BacDive_Uses_L-fucose_negative	util	Uses	L-fucose	neg	measured	181	181	181	1
+BacDive_Enzyme_L-aspartate_arylamidase_negative	enzyme	Enzyme	L-aspartate arylamidase	neg	measured	189	180	1299	2
+BacDive_Uses_Potassium_5-ketogluconate_acid	util	Uses	Potassium 5-ketogluconate	pos	measured	183	177	860	2
+BacDive_Uses_palatinose_acid_negative	util	Uses	palatinose	neg	measured	180	174	1126	2
+BacDive_Uses_glycerol_negative	util	Uses	glycerol	neg	measured	168	168	168	1
+BacDive_Uses_ribitol	util	Uses	ribitol	pos	measured	165	165	165	1
+BacDive_Uses_gelatin	util	Uses	gelatin	pos	measured	163	163	169	1
+BacDive_Uses_L-alanine	util	Uses	L-alanine	pos	measured	159	159	160	1
+BacDive_Uses_potassium_gluconate_negative	util	Uses	potassium gluconate	neg	measured	159	159	159	1
+BacDive_Uses_D-arabitol_acid	util	Uses	D-arabitol	pos	measured	162	158	636	1
+BacDive_Enzyme_alpha-maltosidase_negative	enzyme	Enzyme	alpha-maltosidase	neg	measured	162	156	1021	3
+BacDive_Uses_acetate_negative	util	Uses	acetate	neg	measured	155	152	375	1
+BacDive_Uses_D-tagatose_acid	util	Uses	D-tagatose	pos	measured	156	152	879	1
+BacDive_Uses_ribitol_negative	util	Uses	ribitol	neg	measured	152	152	152	1
+BacDive_Uses_formate	util	Uses	formate	pos	measured	151	151	151	1
+BacDive_Enzyme_beta-lactamase_negative	enzyme	Enzyme	beta-lactamase	neg	measured	151	150	855	2
+BacDive_Uses_methyl_beta-D-glucopyranoside_acid	util	Uses	methyl beta-D-glucopyranoside	pos	measured	155	150	1169	2
+BacDive_Uses_L-serine	util	Uses	L-serine	pos	measured	148	148	148	1
+BacDive_Uses_L-aspartate	util	Uses	L-aspartate	pos	measured	147	147	147	1
+BacDive_Uses_rhamnose_fermentation	util	Uses	rhamnose	pos	measured	153	147	1195	1
+BacDive_Uses_D-galacturonic_acid_acid_negative	util	Uses	D-galacturonic acid	neg	measured	152	146	737	2
+BacDive_Uses_melibiose_fermentation	util	Uses	melibiose	pos	measured	148	144	412	1
+BacDive_Uses_phenylacetate	util	Uses	phenylacetate	pos	measured	143	143	145	1
+BacDive_Uses_L-fucose_acid	util	Uses	L-fucose	pos	measured	144	142	577	1
+BacDive_Uses_L-histidine	util	Uses	L-histidine	pos	measured	142	142	144	1
+BacDive_Enzyme_tyrosine_hydrolysis_negative	hydrolysis	Enzyme	tyrosine hydrolysis	neg	measured	142	141	142	1
+BacDive_Uses_D-arabinose_negative	util	Uses	D-arabinose	neg	measured	139	139	263	1
+BacDive_Uses_L-alanine_negative	util	Uses	L-alanine	neg	measured	137	137	137	1
+BacDive_Uses_arabinose_fermentation_negative	util	Uses	arabinose	neg	measured	146	136	781	1
+BacDive_Uses_xylitol_negative	util	Uses	xylitol	neg	measured	137	136	137	1
+BacDive_Uses_glycogen_negative	util	Uses	glycogen	neg	measured	135	135	135	1
+BacDive_Uses_cellobiose_fermentation_negative	util	Uses	cellobiose	neg	measured	143	133	782	1
+BacDive_Uses_L-arabitol	util	Uses	L-arabitol	pos	measured	133	133	133	1
+BacDive_Uses_2-dehydro-D-gluconate_acid_negative	util	Uses	2-dehydro-D-gluconate	neg	measured	131	131	131	1
+BacDive_Uses_D-arabinose_acid	util	Uses	D-arabinose	pos	measured	130	130	193	1
+BacDive_Murein_A4alpha_L-Lys-D-Asp	murein	Murein	A4alpha L-Lys-D-Asp	pos	measured	128	128	218	1
+BacDive_Uses_5-dehydro-D-gluconate_acid_negative	util	Uses	5-dehydro-D-gluconate	neg	measured	128	128	128	1
+BacDive_Uses_D-arabitol_negative	util	Uses	D-arabitol	neg	measured	128	128	128	1
+BacDive_Uses_itaconate_negative	util	Uses	itaconate	neg	measured	128	128	128	1
+BacDive_Uses_inosine	util	Uses	inosine	pos	measured	127	127	127	1
+BacDive_Enzyme_alpha-arabinosidase	enzyme	Enzyme	alpha-arabinosidase	pos	measured	127	125	256	1
+BacDive_Enzyme_glycyl_tryptophan_arylamidase	enzyme	Enzyme	glycyl tryptophan arylamidase	pos	measured	125	123	1006	2
+BacDive_Uses_fucose	util	Uses	fucose	pos	measured	123	123	123	1
+BacDive_Uses_L-proline	util	Uses	L-proline	pos	measured	123	123	125	1
+BacDive_Uses_arginine	util	Uses	arginine	pos	measured	122	122	124	1
+BacDive_Uses_turanose_fermentation_negative	util	Uses	turanose	neg	measured	129	122	492	1
+BacDive_Uses_turanose_negative	util	Uses	turanose	neg	measured	122	122	122	1
+BacDive_Enzyme_chitinase_negative	enzyme|hydrolysis	Enzyme	chitinase	neg	measured	120	120	120	1
+BacDive_Uses_L-fucose	util	Uses	L-fucose	pos	measured	120	120	121	1
+BacDive_Uses_potassium_gluconate_acid_negative	util	Uses	potassium gluconate	neg	measured	120	120	120	1
+BacDive_Uses_lactate_negative	util	Uses	lactate	neg	measured	118	118	119	1
+BacDive_Enzyme_phenylalanine_ammonia-lyase	enzyme	Enzyme	phenylalanine ammonia-lyase	pos	measured	119	116	166	1
+BacDive_Uses_L-malate	util	Uses	L-malate	pos	measured	116	116	116	1
+BacDive_Uses_gentiobiose_negative	util	Uses	gentiobiose	neg	measured	115	115	115	1
+BacDive_Uses_fructose_fermentation	util	Uses	fructose	pos	measured	126	114	730	2
+BacDive_Uses_potassium_gluconate	util	Uses	potassium gluconate	pos	measured	115	114	116	1
+BacDive_Enzyme_glutamyl-glutamate_arylamidase	enzyme	Enzyme	glutamyl-glutamate arylamidase	pos	measured	114	113	241	1
+BacDive_Murein_A1gamma_m-Dpm-direct	murein	Murein	A1gamma m-Dpm-direct	pos	measured	114	113	190	1
+BacDive_Uses_2-oxoglutarate	util	Uses	2-oxoglutarate	pos	measured	113	113	113	1
+BacDive_Uses_esculin_ferric_citrate_acid	util	Uses	esculin ferric citrate	pos	measured	113	113	113	1
+BacDive_Uses_L-arginine_negative	util	Uses	L-arginine	neg	measured	113	113	113	1
+BacDive_Uses_starch	util	Uses	starch	pos	measured	113	113	117	1
+BacDive_Uses_potassium_2-dehydro-D-gluconate_acid_negative	util	Uses	potassium 2-dehydro-D-gluconate	neg	measured	112	112	112	1
+BacDive_Uses_tween_20	util	Uses	tween 20	pos	measured	112	112	112	1
+BacDive_Temp_growth_ge_65C	culture_temp	Temp	growth_ge_65C	pos	measured	112	111	769	1
+BacDive_Uses_turanose	util	Uses	turanose	pos	measured	110	110	110	1
+BacDive_Uses_L-proline_negative	util	Uses	L-proline	neg	measured	108	108	108	1
+BacDive_Uses_sodium_citrate	util	Uses	sodium citrate	pos	measured	110	108	118	1
+BacDive_Uses_xylitol	util	Uses	xylitol	pos	measured	107	107	107	1
+BacDive_Uses_3-hydroxybutyrate_negative	util	Uses	3-hydroxybutyrate	neg	measured	106	106	106	1
+BacDive_Uses_erythritol_negative	util	Uses	erythritol	neg	measured	106	106	106	1
+BacDive_Uses_inulin_acid	util	Uses	inulin	pos	measured	107	105	350	1
+BacDive_Uses_methyl_beta-D-xylopyranoside_acid	util	Uses	methyl beta-D-xylopyranoside	pos	measured	105	105	160	1
+BacDive_Uses_sorbitol_fermentation	util	Uses	sorbitol	pos	measured	110	105	1152	1
+BacDive_Uses_gentiobiose	util	Uses	gentiobiose	pos	measured	104	104	105	1
+BacDive_Uses_gamma-aminobutyric_acid_negative	util	Uses	gamma-aminobutyric acid	neg	measured	101	101	101	1
+BacDive_Uses_nitrate_gas_negative	util	Uses	nitrate	neg	measured	103	101	170	1
+BacDive_Uses_melezitose_negative	util	Uses	melezitose	neg	measured	100	100	100	1
+BacDive_Uses_succinate_negative	util	Uses	succinate	neg	measured	100	100	179	1
+BacDive_Uses_4-hydroxybenzoate_negative	util	Uses	4-hydroxybenzoate	neg	measured	99	99	99	1
+BacDive_Uses_glucuronamide	util	Uses	glucuronamide	pos	measured	99	99	99	1
+BacDive_Uses_L-aspartate_negative	util	Uses	L-aspartate	neg	measured	99	99	99	1
+BacDive_Uses_inositol_fermentation	util	Uses	inositol	pos	measured	101	98	316	1
+BacDive_NaCl_extreme_halophile	halophily	NaCl	extreme halophile	pos	measured	98	97	102	1
+BacDive_NaCl_growth_ge_20pct_NaCl	halophily	NaCl	growth_ge_20pct_NaCl	pos	measured	98	97	102	1
+BacDive_Enzyme_L-aspartate_arylamidase	enzyme	Enzyme	L-aspartate arylamidase	pos	measured	96	95	414	2
+BacDive_Prod_dinitrogen_negative	production	Prod	dinitrogen	neg	measured	96	95	630	1
+BacDive_Uses_3-hydroxybenzoate_negative	util	Uses	3-hydroxybenzoate	neg	measured	95	95	95	1
+BacDive_Uses_D-xylose_fermentation	util	Uses	D-xylose	pos	measured	95	94	348	1
+BacDive_Uses_methyl_alpha-D-mannoside_acid	util	Uses	methyl alpha-D-mannoside	pos	measured	95	94	177	1
+BacDive_Uses_N-acetylgalactosamine_negative	util	Uses	N-acetylgalactosamine	neg	measured	94	94	94	1
+BacDive_Uses_amygdalin_negative	util	Uses	amygdalin	neg	measured	92	92	92	1
+BacDive_Uses_D-serine_negative	util	Uses	D-serine	neg	measured	92	92	92	1
+BacDive_Uses_ethanol	util	Uses	ethanol	pos	measured	92	92	92	1
+BacDive_Uses_N-acetyl-D-glucosamine_fermentation_negative	util	Uses	N-acetyl-D-glucosamine	neg	measured	95	92	328	1
+BacDive_Uses_potassium_5-dehydro-D-gluconate_acid_negative	util	Uses	potassium 5-dehydro-D-gluconate	neg	measured	92	92	92	1
+BacDive_Uses_gelatin_negative	util	Uses	gelatin	neg	measured	91	91	91	1
+BacDive_Uses_valerate	util	Uses	valerate	pos	measured	91	91	91	1
+BacDive_Uses_formate_negative	util	Uses	formate	neg	measured	90	90	90	1
+BacDive_Uses_trehalose_fermentation_negative	util	Uses	trehalose	neg	measured	91	90	246	1
+BacDive_Enzyme_xanthine_hydrolysis_negative	hydrolysis	Enzyme	xanthine hydrolysis	neg	measured	89	89	89	1
+BacDive_Uses_4-hydroxyphenylacetic_acid_negative	util	Uses	4-hydroxyphenylacetic acid	neg	measured	89	89	89	1
+BacDive_Uses_ribitol_acid	util	Uses	ribitol	pos	measured	90	89	373	1
+BacDive_Uses_starch_negative	util	Uses	starch	neg	measured	88	88	88	1
+BacDive_Enzyme_chymotrypsin_negative	enzyme	Enzyme	chymotrypsin	neg	measured	87	87	87	1
+BacDive_Uses_acetoacetate	util	Uses	acetoacetate	pos	measured	87	87	87	1
+BacDive_Uses_galactitol_negative	util	Uses	galactitol	neg	measured	86	86	86	1
+BacDive_Uses_glucuronate	util	Uses	glucuronate	pos	measured	86	86	90	1
+BacDive_Uses_inosine_negative	util	Uses	inosine	neg	measured	86	86	86	1
+BacDive_Uses_methyl_D-glucoside	util	Uses	methyl D-glucoside	pos	measured	86	86	87	1
+BacDive_Uses_nitrite_gas_negative	util	Uses	nitrite	neg	measured	87	86	153	1
+BacDive_Uses_Potassium_2-ketogluconate_acid	util	Uses	Potassium 2-ketogluconate	pos	measured	87	86	237	1
+BacDive_Uses_D-fructose_6-phosphate	util	Uses	D-fructose 6-phosphate	pos	measured	85	85	85	1
+BacDive_Uses_D-galacturonic_acid	util	Uses	D-galacturonic acid	pos	measured	86	85	86	1
+BacDive_Uses_gamma-aminobutyric_acid	util	Uses	gamma-aminobutyric acid	pos	measured	85	85	85	1
+BacDive_Uses_D-arabitol	util	Uses	D-arabitol	pos	measured	84	84	85	1
+BacDive_Uses_uridine	util	Uses	uridine	pos	measured	84	84	84	1
+BacDive_Uses_inulin_negative	util	Uses	inulin	neg	measured	82	82	82	1
+BacDive_Uses_pectin	util	Uses	pectin	pos	measured	81	81	82	1
+BacDive_Uses_trehalose_fermentation	util	Uses	trehalose	pos	measured	89	81	597	2
+BacDive_Enzyme_cellulase	enzyme|hydrolysis	Enzyme	cellulase	pos	measured	80	80	84	1
+BacDive_Uses_2-oxoglutarate_negative	util	Uses	2-oxoglutarate	neg	measured	80	80	80	1
+BacDive_Uses_bromosuccinate	util	Uses	bromosuccinate	pos	measured	80	80	80	1
+BacDive_Uses_2-hydroxybutyrate	util	Uses	2-hydroxybutyrate	pos	measured	79	79	82	1
+BacDive_Uses_5-dehydro-D-gluconate	util	Uses	5-dehydro-D-gluconate	pos	measured	79	79	80	1
+BacDive_Uses_D-lyxose_acid	util	Uses	D-lyxose	pos	measured	79	79	128	1
+BacDive_Uses_D-fucose_negative	util	Uses	D-fucose	neg	measured	78	78	78	1
+BacDive_Uses_L-arginine	util	Uses	L-arginine	pos	measured	78	78	79	1
+BacDive_Uses_L-sorbose_negative	util	Uses	L-sorbose	neg	measured	78	78	78	1
+BacDive_Uses_xylitol_acid	util	Uses	xylitol	pos	measured	78	77	161	1
+BacDive_Uses_L-alaninamide	util	Uses	L-alaninamide	pos	measured	76	76	76	1
+BacDive_Uses_putrescine	util	Uses	putrescine	pos	measured	76	76	76	1
+BacDive_Uses_quinate	util	Uses	quinate	pos	measured	76	76	76	1
+BacDive_Temp_psychrophile	culture_temp	Temp	psychrophile	pos	measured	75	75	96	1
+BacDive_Prod_nitrite_negative	production	Prod	nitrite	neg	measured	75	74	687	1
+BacDive_Uses_esculin	util	Uses	esculin	pos	measured	74	74	74	1
+BacDive_Uses_D-glucose_6-phosphate	util	Uses	D-glucose 6-phosphate	pos	measured	73	73	73	1
+BacDive_Uses_suberic_acid_negative	util	Uses	suberic acid	neg	measured	73	73	73	1
+BacDive_Enzyme_beta-Galactosidase_6-phosphate	enzyme	Enzyme	beta-Galactosidase 6-phosphate	pos	measured	74	72	182	1
+BacDive_Uses_5-dehydro-D-gluconate_negative	util	Uses	5-dehydro-D-gluconate	neg	measured	72	72	72	1
+BacDive_Enzyme_hypoxanthine_hydrolysis_negative	hydrolysis	Enzyme	hypoxanthine hydrolysis	neg	measured	71	71	71	1
+BacDive_Uses_D-galacturonic_acid_negative	util	Uses	D-galacturonic acid	neg	measured	71	71	71	1
+BacDive_Uses_phenylalanine	util	Uses	phenylalanine	pos	measured	71	71	71	1
+BacDive_Uses_2-oxopentanoate	util	Uses	2-oxopentanoate	pos	measured	70	70	70	1
+BacDive_Uses_D-fucose	util	Uses	D-fucose	pos	measured	70	70	70	1
+BacDive_Uses_pullulan_acid	util	Uses	pullulan	pos	measured	75	70	956	1
+BacDive_Uses_tween_40_negative	util	Uses	tween 40	neg	measured	70	70	70	1
+BacDive_Uses_valerate_negative	util	Uses	valerate	neg	measured	70	70	70	1
+BacDive_Nutrition_chemoorganotroph	nutrition_type	Nutrition	chemoorganotroph	pos	measured	68	68	68	1
+BacDive_Uses_2-oxobutanoate	util	Uses	2-oxobutanoate	pos	measured	68	68	68	1
+BacDive_Uses_4-hydroxybenzoate	util	Uses	4-hydroxybenzoate	pos	measured	68	68	68	1
+BacDive_Uses_3-O-methyl-D-glucose_negative	util	Uses	3-O-methyl-D-glucose	neg	measured	67	67	67	1
+BacDive_Uses_bromosuccinate_negative	util	Uses	bromosuccinate	neg	measured	67	67	67	1
+BacDive_Uses_D-fucose_acid	util	Uses	D-fucose	pos	measured	67	67	72	1
+BacDive_Uses_glycogen_fermentation	util	Uses	glycogen	pos	measured	68	67	296	1
+BacDive_Uses_pyruvate_negative	util	Uses	pyruvate	neg	measured	67	67	68	1
+BacDive_Enzyme_beta-mannosidase	enzyme	Enzyme	beta-mannosidase	pos	measured	66	66	425	1
+BacDive_Uses_D-arabinose	util	Uses	D-arabinose	pos	measured	66	66	66	1
+BacDive_Uses_D-glucose_6-phosphate_negative	util	Uses	D-glucose 6-phosphate	neg	measured	66	66	66	1
+BacDive_Uses_L-leucine_negative	util	Uses	L-leucine	neg	measured	66	66	66	1
+BacDive_Uses_L-asparagine	util	Uses	L-asparagine	pos	measured	65	65	66	1
+BacDive_Uses_L-phenylalanine_negative	util	Uses	L-phenylalanine	neg	measured	65	65	65	1
+BacDive_Enzyme_beta-D-fucosidase_negative	enzyme	Enzyme	beta-D-fucosidase	neg	measured	64	64	64	1
+BacDive_Enzyme_glutamate_decarboxylase	enzyme	Enzyme	glutamate decarboxylase	pos	measured	64	64	184	1
+BacDive_Uses_fumarate	util	Uses	fumarate	pos	measured	64	64	68	1
+BacDive_Uses_glycine	util	Uses	glycine	pos	measured	64	64	64	1
+BacDive_Uses_putrescine_negative	util	Uses	putrescine	neg	measured	64	64	64	1
+BacDive_Uses_tween_60	util	Uses	tween 60	pos	measured	65	64	66	1
+BacDive_Uses_(S)-lactate	util	Uses	(S)-lactate	pos	measured	63	63	63	1
+BacDive_Uses_2-dehydro-D-gluconate_negative	util	Uses	2-dehydro-D-gluconate	neg	measured	63	63	63	1
+BacDive_Uses_D-tagatose_negative	util	Uses	D-tagatose	neg	measured	63	63	63	1
+BacDive_Uses_glucuronamide_negative	util	Uses	glucuronamide	neg	measured	63	63	63	1
+BacDive_Uses_thymidine	util	Uses	thymidine	pos	measured	63	63	63	1
+BacDive_Uses_L-malate_negative	util	Uses	L-malate	neg	measured	62	62	62	1
+BacDive_Uses_arbutin_negative	util	Uses	arbutin	neg	measured	61	61	61	1
+BacDive_Uses_D-aspartate_negative	util	Uses	D-aspartate	neg	measured	61	61	61	1
+BacDive_Uses_L-pyroglutamic_acid_negative	util	Uses	L-pyroglutamic acid	neg	measured	61	61	61	1
+BacDive_Uses_stachyose_negative	util	Uses	stachyose	neg	measured	61	61	61	1
+BacDive_Enzyme_tyrosine_hydrolysis	hydrolysis	Enzyme	tyrosine hydrolysis	pos	measured	60	60	60	1
+BacDive_Uses_2-hydroxybutyrate_negative	util	Uses	2-hydroxybutyrate	neg	measured	60	60	60	1
+BacDive_Uses_L-sorbose_acid	util	Uses	L-sorbose	pos	measured	62	60	232	1
+BacDive_Uses_methyl_alpha-D-mannoside_negative	util	Uses	methyl alpha-D-mannoside	neg	measured	60	60	60	1
+BacDive_Uses_2-oxobutanoate_negative	util	Uses	2-oxobutanoate	neg	measured	59	59	59	1
+BacDive_Uses_L-ornithine_negative	util	Uses	L-ornithine	neg	measured	59	59	59	1
+BacDive_Uses_glucuronate_negative	util	Uses	glucuronate	neg	measured	58	58	58	1
+BacDive_Uses_pectin_negative	util	Uses	pectin	neg	measured	58	58	58	1
+BacDive_Uses_2-dehydro-D-gluconate	util	Uses	2-dehydro-D-gluconate	pos	measured	57	57	59	1
+BacDive_Uses_arbutin	util	Uses	arbutin	pos	measured	57	57	59	1
+BacDive_Uses_D-malate	util	Uses	D-malate	pos	measured	57	57	57	1
+BacDive_Uses_galactarate_negative	util	Uses	galactarate	neg	measured	57	57	57	1
+BacDive_Uses_L-arabitol_negative	util	Uses	L-arabitol	neg	measured	57	57	57	1
+BacDive_Uses_N-acetyl-D-glucosamine_fermentation	util	Uses	N-acetyl-D-glucosamine	pos	measured	63	57	478	2
+BacDive_Uses_alpha-cyclodextrin	util	Uses	alpha-cyclodextrin	pos	measured	56	56	56	1
+BacDive_Uses_D-galacturonic_acid_acid	util	Uses	D-galacturonic acid	pos	measured	57	56	626	5
+BacDive_Uses_L-asparagine_Nsource	util	Uses	L-asparagine	pos	measured	56	56	57	1
+BacDive_Uses_N-acetylgalactosamine	util	Uses	N-acetylgalactosamine	pos	measured	56	56	56	1
+BacDive_Uses_glucose_gas_negative	util	Uses	glucose	neg	measured	55	55	55	1
+BacDive_Uses_methyl_beta-D-glucopyranoside_negative	util	Uses	methyl beta-D-glucopyranoside	neg	measured	55	55	55	1
+BacDive_Uses_D-malate_negative	util	Uses	D-malate	neg	measured	54	54	54	1
+BacDive_Uses_L-arginine_Nsource	util	Uses	L-arginine	pos	measured	54	54	54	1
+BacDive_Uses_sodium_thiosulfate_gas	util	Uses	sodium thiosulfate	pos	measured	55	54	240	1
+BacDive_Uses_dextrin_negative	util	Uses	dextrin	neg	measured	53	53	53	1
+BacDive_Uses_L-serine_Nsource	util	Uses	L-serine	pos	measured	53	53	53	1
+BacDive_Enzyme_pyroglutamic_acid_arylamidase_negative	enzyme	Enzyme	pyroglutamic acid arylamidase	neg	measured	52	52	52	1
+BacDive_Uses_glycine-proline	util	Uses	glycine-proline	pos	measured	52	52	53	1
+BacDive_Uses_L-leucine	util	Uses	L-leucine	pos	measured	52	52	52	1
+BacDive_Uses_methyl_pyruvate_negative	util	Uses	methyl pyruvate	neg	measured	52	52	52	1
+BacDive_Uses_fructose_fermentation_negative	util	Uses	fructose	neg	measured	51	51	120	1
+BacDive_Uses_xylose_acid_negative	util	Uses	xylose	neg	measured	52	51	52	1
+BacDive_Enzyme_alpha-maltosidase	enzyme	Enzyme	alpha-maltosidase	pos	measured	50	50	343	3
+BacDive_Uses_quinate_negative	util	Uses	quinate	neg	measured	50	50	50	1
+BacDive_Enzyme_6-phospho-beta-galactosidase_negative	enzyme	Enzyme	6-phospho-beta-galactosidase	neg	measured	49	49	49	1
+BacDive_Uses_3-hydroxybenzoate	util	Uses	3-hydroxybenzoate	pos	measured	49	49	53	1
+BacDive_Uses_alpha-cyclodextrin_acid	util	Uses	alpha-cyclodextrin	pos	measured	49	49	380	2
+BacDive_Uses_arabinose_acid_negative	util	Uses	arabinose	neg	measured	49	49	49	1
+BacDive_Uses_glycine-proline_negative	util	Uses	glycine-proline	neg	measured	49	49	49	1
+BacDive_Uses_methyl_alpha-D-glucopyranoside_negative	util	Uses	methyl alpha-D-glucopyranoside	neg	measured	49	49	49	1
+BacDive_Uses_sodium_acetate_negative	util	Uses	sodium acetate	neg	measured	49	49	49	1
+BacDive_Uses_benzoate_negative	util	Uses	benzoate	neg	measured	48	48	48	1
+BacDive_Uses_D-glucarate_negative	util	Uses	D-glucarate	neg	measured	48	48	48	1
+BacDive_Uses_L-alanine_Nsource	util	Uses	L-alanine	pos	measured	48	48	48	1
+BacDive_Uses_L-threonine	util	Uses	L-threonine	pos	measured	48	48	48	1
+BacDive_Uses_L-xylose_negative	util	Uses	L-xylose	neg	measured	48	48	48	1
+BacDive_Uses_sodium_malonate_negative	util	Uses	sodium malonate	neg	measured	48	48	48	1
+BacDive_Uses_urea_negative	util	Uses	urea	neg	measured	48	48	48	1
+BacDive_Uses_hexanoate_negative	util	Uses	hexanoate	neg	measured	47	47	47	1
+BacDive_Uses_itaconate	util	Uses	itaconate	pos	measured	47	47	47	1
+BacDive_Uses_L-tryptophan_negative	util	Uses	L-tryptophan	neg	measured	47	47	47	1
+BacDive_Uses_methyl_(R)-lactate_negative	util	Uses	methyl (R)-lactate	neg	measured	47	47	47	1
+BacDive_Uses_monomethyl_succinate	util	Uses	monomethyl succinate	pos	measured	47	47	47	1
+BacDive_Uses_tween_80_negative	util	Uses	tween 80	neg	measured	47	47	47	1
+BacDive_Uses_butyrate_negative	util	Uses	butyrate	neg	measured	46	46	46	1
+BacDive_Uses_D-alanine	util	Uses	D-alanine	pos	measured	46	46	46	1
+BacDive_Uses_L-pyroglutamic_acid	util	Uses	L-pyroglutamic acid	pos	measured	46	46	47	1
+BacDive_Uses_methyl_beta-D-glucopyranoside	util	Uses	methyl beta-D-glucopyranoside	pos	measured	46	46	46	1
+BacDive_Uses_methyl_beta-D-xylopyranoside_negative	util	Uses	methyl beta-D-xylopyranoside	neg	measured	46	46	46	1
+BacDive_Uses_n-acetylneuraminate_negative	util	Uses	n-acetylneuraminate	neg	measured	46	46	46	1
+BacDive_Uses_urea	util	Uses	urea	pos	measured	46	46	47	1
+BacDive_Uses_galactitol_acid	util	Uses	galactitol	pos	measured	46	45	362	1
+BacDive_Uses_glycine_negative	util	Uses	glycine	neg	measured	45	45	45	1
+BacDive_Uses_erythritol_acid	util	Uses	erythritol	pos	measured	44	44	65	1
+BacDive_Uses_glycyl-l-glutamate	util	Uses	glycyl-l-glutamate	pos	measured	44	44	46	1
+BacDive_Uses_L-arabitol_acid	util	Uses	L-arabitol	pos	measured	45	44	107	1
+BacDive_Prod_nitrite	production	Prod	nitrite	pos	measured	43	43	357	1
+BacDive_Uses_cis-aconitate_negative	util	Uses	cis-aconitate	neg	measured	43	43	43	1
+BacDive_Uses_esculin_negative	util	Uses	esculin	neg	measured	43	43	43	1
+BacDive_Uses_trans-aconitate_negative	util	Uses	trans-aconitate	neg	measured	43	43	43	1
+BacDive_Uses_beta-hydroxybutyrate	util	Uses	beta-hydroxybutyrate	pos	measured	43	42	43	1
+BacDive_Uses_galactarate	util	Uses	galactarate	pos	measured	42	42	43	1
+BacDive_Uses_melezitose	util	Uses	melezitose	pos	measured	42	42	42	1
+BacDive_Uses_tyrosine_negative	util	Uses	tyrosine	neg	measured	42	42	42	1
+BacDive_Uses_2,3-butanediol_negative	util	Uses	2, 3-butanediol	neg	measured	41	41	41	1
+BacDive_Uses_D-fructose_6-phosphate_negative	util	Uses	D-fructose 6-phosphate	neg	measured	41	41	41	1
+BacDive_Uses_L-glutamate_Nsource	util	Uses	L-glutamate	pos	measured	41	41	41	1
+BacDive_Uses_L-ornithine	util	Uses	L-ornithine	pos	measured	41	41	42	1
+BacDive_Uses_alpha-lactose	util	Uses	alpha-lactose	pos	measured	40	40	41	1
+BacDive_Uses_alpha-lactose_negative	util	Uses	alpha-lactose	neg	measured	40	40	40	1
+BacDive_Uses_D-lyxose_negative	util	Uses	D-lyxose	neg	measured	40	40	40	1
+BacDive_Uses_L-galactonic_acid_gamma-lactone	util	Uses	L-galactonic acid gamma-lactone	pos	measured	40	40	40	1
+BacDive_Uses_methanol_negative	util	Uses	methanol	neg	measured	40	40	40	1
+BacDive_Uses_N-acetyl-beta-D-mannosamine_negative	util	Uses	N-acetyl-beta-D-mannosamine	neg	measured	40	40	40	1
+BacDive_Uses_potassium_5-dehydro-D-gluconate_acid	util	Uses	potassium 5-dehydro-D-gluconate	pos	measured	40	40	40	1
+BacDive_Uses_urocanic_acid	util	Uses	urocanic acid	pos	measured	40	40	40	1
+BacDive_Enzyme_nitrate_reductase_negative	enzyme	Enzyme	nitrate reductase	neg	measured	39	39	39	1
+BacDive_Enzyme_phenylalanine_deaminase_negative	enzyme	Enzyme	phenylalanine deaminase	neg	measured	39	39	39	1
+BacDive_Uses_4-hydroxyphenylacetic_acid	util	Uses	4-hydroxyphenylacetic acid	pos	measured	39	39	39	1
+BacDive_Uses_5-dehydro-D-gluconate_acid	util	Uses	5-dehydro-D-gluconate	pos	measured	39	39	40	1
+BacDive_Uses_L-proline_Nsource	util	Uses	L-proline	pos	measured	39	39	39	1
+BacDive_Uses_L-threonine_Nsource	util	Uses	L-threonine	pos	measured	39	39	39	1
+BacDive_Uses_stachyose	util	Uses	stachyose	pos	measured	39	39	40	1
+BacDive_Uses_(S)-lactate_negative	util	Uses	(S)-lactate	neg	measured	38	38	38	1
+BacDive_Uses_2,3-butanediol	util	Uses	2, 3-butanediol	pos	measured	38	38	38	1
+BacDive_Uses_D-serine	util	Uses	D-serine	pos	measured	38	38	42	1
+BacDive_Uses_ethanol_negative	util	Uses	ethanol	neg	measured	38	38	38	1
+BacDive_Uses_fructose_respiration	util	Uses	fructose	pos	measured	38	38	39	1
+BacDive_Uses_glycine_Nsource	util	Uses	glycine	pos	measured	38	38	38	1
+BacDive_Uses_xylose_acid	util	Uses	xylose	pos	measured	38	38	38	1
+BacDive_Uses_arginine_negative	util	Uses	arginine	neg	measured	37	37	37	1
+BacDive_Uses_glucose_respiration	util	Uses	glucose	pos	measured	37	37	38	1
+BacDive_Uses_L-aspartate_Nsource	util	Uses	L-aspartate	pos	measured	37	37	37	1
+BacDive_Uses_sodium_acetate	util	Uses	sodium acetate	pos	measured	37	37	37	1
+BacDive_Uses_esculin_ferric_citrate_acid_negative	util	Uses	esculin ferric citrate	neg	measured	36	36	36	1
+BacDive_Uses_methyl_D-glucoside_negative	util	Uses	methyl D-glucoside	neg	measured	36	36	36	1
+BacDive_Uses_suberic_acid	util	Uses	suberic acid	pos	measured	36	36	36	1
+BacDive_Gram_variable	gram	Gram	variable	pos	measured	35	35	35	1
+BacDive_Test_citrate_test_negative	metabolite_test	Test	citrate test	neg	measured	35	35	35	1
+BacDive_Uses_casein_negative	util	Uses	casein	neg	measured	35	35	36	1
+BacDive_Uses_cis-aconitate	util	Uses	cis-aconitate	pos	measured	35	35	35	1
+BacDive_Uses_erythritol	util	Uses	erythritol	pos	measured	35	35	36	1
+BacDive_Uses_fumarate_negative	util	Uses	fumarate	neg	measured	35	35	35	1
+BacDive_Uses_L-threonine_negative	util	Uses	L-threonine	neg	measured	35	35	35	1
+BacDive_Uses_mannose_respiration	util	Uses	mannose	pos	measured	35	35	35	1
+BacDive_Uses_xylan	util	Uses	xylan	pos	measured	36	35	37	1
+BacDive_Uses_4-hydroxy-L-proline	util	Uses	4-hydroxy-L-proline	pos	measured	34	34	34	1
+BacDive_Uses_acetoacetate_negative	util	Uses	acetoacetate	neg	measured	34	34	34	1
+BacDive_Uses_azelaate_negative	util	Uses	azelaate	neg	measured	34	34	34	1
+BacDive_Uses_D-saccharate_negative	util	Uses	D-saccharate	neg	measured	34	34	34	1
+BacDive_Uses_lactulose_negative	util	Uses	lactulose	neg	measured	34	34	34	1
+BacDive_Uses_potassium_5-dehydro-D-gluconate_negative	util	Uses	potassium 5-dehydro-D-gluconate	neg	measured	34	34	34	1
+BacDive_Uses_casein	util	Uses	casein	pos	measured	33	33	33	1
+BacDive_Uses_ethanolamine_negative	util	Uses	ethanolamine	neg	measured	33	33	33	1
+BacDive_Uses_L-histidine_Nsource	util	Uses	L-histidine	pos	measured	33	33	33	1
+BacDive_Uses_L-phenylalanine	util	Uses	L-phenylalanine	pos	measured	32	32	32	1
+BacDive_Uses_potassium_gluconate_acid	util	Uses	potassium gluconate	pos	measured	32	32	32	1
+BacDive_Uses_succinamate	util	Uses	succinamate	pos	measured	32	32	32	1
+BacDive_Murein_A3alpha_L-Lys-L-Ala2	murein	Murein	A3alpha L-Lys-L-Ala2	pos	measured	31	31	47	1
+BacDive_Uses_galactose_fermentation	util	Uses	galactose	pos	measured	31	31	31	1
+BacDive_Uses_galactose_respiration	util	Uses	galactose	pos	measured	31	31	32	1
+BacDive_Uses_L-alanylglycine	util	Uses	L-alanylglycine	pos	measured	31	31	31	1
+BacDive_Uses_L-tyrosine_Nsource	util	Uses	L-tyrosine	pos	measured	32	31	32	1
+BacDive_Uses_L-valine_Nsource	util	Uses	L-valine	pos	measured	31	31	31	1
+BacDive_Uses_L-xylose_acid	util	Uses	L-xylose	pos	measured	31	31	31	1
+BacDive_Uses_maltose_respiration	util	Uses	maltose	pos	measured	31	31	32	1
+BacDive_Tolerance_lysozyme_tolerance	tolerance	Tolerance	lysozyme tolerance	pos	measured	30	30	31	1
+BacDive_Uses_(-)-quinic_acid_negative	util	Uses	(-)-quinic acid	neg	measured	30	30	30	1
+BacDive_Uses_acetate_respiration	util	Uses	acetate	pos	measured	30	30	31	1
+BacDive_Uses_cellobiose_fermentation	util	Uses	cellobiose	pos	measured	32	30	53	1
+BacDive_Uses_D-galactonic_acid_lactone	util	Uses	D-galactonic acid lactone	pos	measured	30	30	30	1
+BacDive_Uses_palatinose_acid	util	Uses	palatinose	pos	measured	31	30	239	5
+BacDive_Uses_potassium_2-dehydro-D-gluconate_negative	util	Uses	potassium 2-dehydro-D-gluconate	neg	measured	30	30	30	1
+BacDive_Uses_triphenyltetrazolium_chloride_reduction	util	Uses	triphenyltetrazolium chloride	pos	measured	31	30	208	1
+BacDive_Uses_triphenyltetrazolium_chloride_reduction_negative	util	Uses	triphenyltetrazolium chloride	neg	measured	30	30	107	1
+BacDive_Shape_filament	shape	Shape	filament	pos	measured	29	29	31	1
+BacDive_Uses_1_%_sodium_lactate	util	Uses	1 % sodium lactate	pos	measured	29	29	29	1
+BacDive_Uses_3-O-methyl-D-glucose	util	Uses	3-O-methyl-D-glucose	pos	measured	29	29	29	1
+BacDive_Uses_L-asparagine_negative	util	Uses	L-asparagine	neg	measured	29	29	29	1
+BacDive_Uses_L-glutamate_respiration	util	Uses	L-glutamate	pos	measured	29	29	29	1
+BacDive_Murein_A3alpha_L-Lys-Gly5-6	murein	Murein	A3alpha L-Lys-Gly5-6	pos	measured	28	28	46	1
+BacDive_Murein_B2beta_{Gly}_[L-Hsr]_D-Glu(Hyg)-Gly-D-Orn	murein	Murein	B2beta {Gly} [L-Hsr] D-Glu(Hyg)-Gly-D-Orn	pos	measured	30	28	32	1
+BacDive_Uses_amygdalin	util	Uses	amygdalin	pos	measured	28	28	30	1
+BacDive_Uses_glycine_Nsource_negative	util	Uses	glycine	neg	measured	28	28	28	1
+BacDive_Uses_inulin	util	Uses	inulin	pos	measured	28	28	29	1
+BacDive_Uses_L-galactonic_acid_gamma-lactone_negative	util	Uses	L-galactonic acid gamma-lactone	neg	measured	28	28	28	1
+BacDive_Uses_milk_negative	util	Uses	milk	neg	measured	29	28	29	1
+BacDive_Uses_thymidine_negative	util	Uses	thymidine	neg	measured	28	28	28	1
+BacDive_Uses_trehalose_respiration	util	Uses	trehalose	pos	measured	28	28	29	1
+BacDive_Enzyme_arylsulfatase	enzyme	Enzyme	arylsulfatase	pos	measured	27	27	27	1
+BacDive_Uses_4-hydroxybutyrate	util	Uses	4-hydroxybutyrate	pos	measured	27	27	27	1
+BacDive_Uses_alpha-cyclodextrin_negative	util	Uses	alpha-cyclodextrin	neg	measured	27	27	27	1
+BacDive_Uses_ammonium_Nsource	util	Uses	ammonium	pos	measured	27	27	27	1
+BacDive_Uses_butyrate	util	Uses	butyrate	pos	measured	27	27	27	1
+BacDive_Uses_D-aspartate	util	Uses	D-aspartate	pos	measured	27	27	27	1
+BacDive_Uses_glutaric_acid	util	Uses	glutaric acid	pos	measured	27	27	27	1
+BacDive_Uses_glutaric_acid_negative	util	Uses	glutaric acid	neg	measured	27	27	27	1
+BacDive_Uses_glycyl_L-aspartic_acid	util	Uses	glycyl L-aspartic acid	pos	measured	27	27	28	1
+BacDive_Uses_sebacic_acid_negative	util	Uses	sebacic acid	neg	measured	27	27	27	1
+BacDive_Uses_sorbose_negative	util	Uses	sorbose	neg	measured	27	27	27	1
+BacDive_Uses_sucrose_respiration	util	Uses	sucrose	pos	measured	27	27	29	1
+BacDive_Uses_tagatose_acid_negative	util	Uses	tagatose	neg	measured	27	27	27	1
+BacDive_Enzyme_chymotrypsin	enzyme	Enzyme	chymotrypsin	pos	measured	26	26	26	1
+BacDive_Murein_A3gamma_LL-Dpm-Gly	murein	Murein	A3gamma LL-Dpm-Gly	pos	measured	26	26	36	1
+BacDive_Tolerance_tellurite_tolerance	tolerance	Tolerance	tellurite tolerance	pos	measured	26	26	26	1
+BacDive_Uses_beta-alanine	util	Uses	beta-alanine	pos	measured	26	26	26	1
+BacDive_Uses_D-galactonic_acid_lactone_negative	util	Uses	D-galactonic acid lactone	neg	measured	26	26	26	1
+BacDive_Uses_glycerol_respiration	util	Uses	glycerol	pos	measured	26	26	26	1
+BacDive_Uses_L-glutamine_Nsource	util	Uses	L-glutamine	pos	measured	26	26	26	1
+BacDive_Uses_L-lysine_negative	util	Uses	L-lysine	neg	measured	26	26	26	1
+BacDive_Uses_methyl_(R)-lactate	util	Uses	methyl (R)-lactate	pos	measured	26	26	26	1
+BacDive_Uses_methyl_D-glucoside_acid_negative	util	Uses	methyl D-glucoside	neg	measured	26	26	26	1
+BacDive_Uses_milk	util	Uses	milk	pos	measured	26	26	27	1
+BacDive_Uses_phenylethylamine_negative	util	Uses	phenylethylamine	neg	measured	26	26	26	1
+BacDive_Uses_potassium_tellurite	util	Uses	potassium tellurite	pos	measured	26	26	26	1
+BacDive_Uses_turanose_fermentation	util	Uses	turanose	pos	measured	29	26	302	2
+BacDive_Uses_uridine_negative	util	Uses	uridine	neg	measured	26	26	26	1
+BacDive_Enzyme_lecithin_negative	hydrolysis	Enzyme	lecithin	neg	measured	25	25	25	1
+BacDive_Prod_melanin_negative	production	Prod	melanin	neg	measured	25	25	25	1
+BacDive_Uses_arabinose_fermentation	util	Uses	arabinose	pos	measured	27	25	52	1
+BacDive_Uses_cellobiose_respiration	util	Uses	cellobiose	pos	measured	25	25	25	1
+BacDive_Uses_D-alanine_negative	util	Uses	D-alanine	neg	measured	25	25	25	1
+BacDive_Uses_D-psicose	util	Uses	D-psicose	pos	measured	26	25	26	1
+BacDive_Uses_D-saccharate	util	Uses	D-saccharate	pos	measured	25	25	25	1
+BacDive_Uses_D-serine_respiration_negative	util	Uses	D-serine	neg	measured	25	25	25	1
+BacDive_Uses_mesaconate_negative	util	Uses	mesaconate	neg	measured	25	25	25	1
+BacDive_Uses_N-acetyl-D-glucosamine_respiration	util	Uses	N-acetyl-D-glucosamine	pos	measured	25	25	26	1
+BacDive_Uses_phenol_negative	util	Uses	phenol	neg	measured	25	25	30	1
+BacDive_Uses_raffinose_respiration_negative	util	Uses	raffinose	neg	measured	25	25	25	1
+BacDive_Enzyme_nitrate_reductase	enzyme	Enzyme	nitrate reductase	pos	measured	24	24	24	1
+BacDive_Observation_no_aggregation	observation	Observation	no aggregation	pos	measured	24	24	24	1
+BacDive_Shape_curved	shape	Shape	curved	pos	measured	24	24	24	1
+BacDive_Uses_4-hydroxybutyrate_negative	util	Uses	4-hydroxybutyrate	neg	measured	24	24	24	1
+BacDive_Uses_beta-alanine_negative	util	Uses	beta-alanine	neg	measured	24	24	24	1
+BacDive_Uses_D-glucosaminic_acid_negative	util	Uses	D-glucosaminic acid	neg	measured	24	24	24	1
+BacDive_Uses_gentiobiose_respiration	util	Uses	gentiobiose	pos	measured	24	24	24	1
+BacDive_Uses_L-alanylglycine_negative	util	Uses	L-alanylglycine	neg	measured	24	24	24	1
+BacDive_Uses_L-lysine_Nsource	util	Uses	L-lysine	pos	measured	24	24	24	1
+BacDive_Uses_L-pyroglutamic_acid_respiration_negative	util	Uses	L-pyroglutamic acid	neg	measured	24	24	24	1
+BacDive_Uses_L-tyrosine_Nsource_negative	util	Uses	L-tyrosine	neg	measured	24	24	24	1
+BacDive_Uses_2-oxopentanoate_negative	util	Uses	2-oxopentanoate	neg	measured	23	23	23	1
+BacDive_Uses_alanine_negative	util	Uses	alanine	neg	measured	23	23	23	1
+BacDive_Uses_beta-hydroxybutyrate_negative	util	Uses	beta-hydroxybutyrate	neg	measured	23	23	23	1
+BacDive_Uses_DL-carnitine	util	Uses	DL-carnitine	pos	measured	23	23	23	1
+BacDive_Uses_ethanolamine	util	Uses	ethanolamine	pos	measured	23	23	23	1
+BacDive_Uses_glucose_1-phosphate_negative	util	Uses	glucose 1-phosphate	neg	measured	23	23	23	1
+BacDive_Uses_H2S_negative	util	Uses	H2S	neg	measured	23	23	23	1
+BacDive_Uses_L-tartrate_negative	util	Uses	L-tartrate	neg	measured	23	23	23	1
+BacDive_Uses_L-tyrosine	util	Uses	L-tyrosine	pos	measured	23	23	24	1
+BacDive_Uses_mannitol_respiration	util	Uses	mannitol	pos	measured	23	23	23	1
+BacDive_Uses_melibiose_respiration	util	Uses	melibiose	pos	measured	23	23	24	1
+BacDive_Uses_xylan_negative	util	Uses	xylan	neg	measured	23	23	23	1
+BacDive_Shape_spiral	shape	Shape	spiral	pos	measured	22	22	22	1
+BacDive_Uses_2-hydroxybutyrate_respiration_negative	util	Uses	2-hydroxybutyrate	neg	measured	22	22	22	1
+BacDive_Uses_aztreonam	util	Uses	aztreonam	pos	measured	22	22	22	1
+BacDive_Uses_D-glucarate	util	Uses	D-glucarate	pos	measured	22	22	22	1
+BacDive_Uses_D-lyxose	util	Uses	D-lyxose	pos	measured	22	22	22	1
+BacDive_Uses_galactitol	util	Uses	galactitol	pos	measured	22	22	22	1
+BacDive_Uses_indole_negative	util	Uses	indole	neg	measured	22	22	22	1
+BacDive_Uses_L-alaninamide_negative	util	Uses	L-alaninamide	neg	measured	22	22	22	1
+BacDive_Uses_L-alanine_respiration	util	Uses	L-alanine	pos	measured	22	22	22	1
+BacDive_Uses_L-phenylalanine_Nsource	util	Uses	L-phenylalanine	pos	measured	22	22	22	1
+BacDive_Uses_L-serine_Nsource_negative	util	Uses	L-serine	neg	measured	22	22	22	1
+BacDive_Uses_lactate_respiration	util	Uses	lactate	pos	measured	22	22	23	1
+BacDive_Uses_N-acetyl-D-mannosamine_negative	util	Uses	N-acetyl-D-mannosamine	neg	measured	22	22	22	1
+BacDive_Uses_sodium_bromate_negative	util	Uses	sodium bromate	neg	measured	22	22	22	1
+BacDive_Uses_xanthine_negative	util	Uses	xanthine	neg	measured	22	22	22	1
+BacDive_Enzyme_beta-lactamase	enzyme	Enzyme	beta-lactamase	pos	measured	21	21	131	1
+BacDive_Enzyme_corn_oil_negative	hydrolysis	Enzyme	corn oil	neg	measured	21	21	21	1
+BacDive_Prod_polysaccharides_negative	production	Prod	polysaccharides	neg	measured	21	21	51	1
+BacDive_Prod_sulfide_negative	production	Prod	sulfide	neg	measured	21	21	21	1
+BacDive_Uses_2-oxobutanoate_respiration_negative	util	Uses	2-oxobutanoate	neg	measured	21	21	21	1
+BacDive_Uses_arabinose_acid	util	Uses	arabinose	pos	measured	21	21	22	1
+BacDive_Uses_dextrin_respiration	util	Uses	dextrin	pos	measured	21	21	21	1
+BacDive_Uses_DL-carnitine_negative	util	Uses	DL-carnitine	neg	measured	21	21	21	1
+BacDive_Uses_formate_respiration_negative	util	Uses	formate	neg	measured	21	21	21	1
+BacDive_Uses_glycyl_L-aspartic_acid_negative	util	Uses	glycyl L-aspartic acid	neg	measured	21	21	21	1
+BacDive_Uses_histamine_negative	util	Uses	histamine	neg	measured	21	21	21	1
+BacDive_Uses_inosine_respiration_negative	util	Uses	inosine	neg	measured	21	21	21	1
+BacDive_Uses_L-sorbose	util	Uses	L-sorbose	pos	measured	21	21	23	1
+BacDive_Uses_maltitol_negative	util	Uses	maltitol	neg	measured	21	21	21	1
+BacDive_Uses_N-acetyl-beta-D-mannosamine	util	Uses	N-acetyl-beta-D-mannosamine	pos	measured	21	21	21	1
+BacDive_Uses_nalidixic_acid	util	Uses	nalidixic acid	pos	measured	21	21	21	1
+BacDive_Uses_nitrate_negative	util	Uses	nitrate	neg	measured	21	21	21	1
+BacDive_Uses_propionate_respiration	util	Uses	propionate	pos	measured	21	21	22	1
+BacDive_Uses_starch_fermentation	util	Uses	starch	pos	measured	21	21	21	1
+BacDive_Uses_trigonelline_negative	util	Uses	trigonelline	neg	measured	21	21	21	1
+BacDive_Uses_xylose_fermentation_negative	util	Uses	xylose	neg	measured	23	21	961	1
+BacDive_Enzyme_adenine_negative	hydrolysis	Enzyme	adenine	neg	measured	20	20	20	1
+BacDive_Nutrition_chemoheterotroph	nutrition_type	Nutrition	chemoheterotroph	pos	measured	20	20	20	1
+BacDive_Uses_D-galacturonic_acid_respiration_negative	util	Uses	D-galacturonic acid	neg	measured	20	20	20	1
+BacDive_Uses_gluconate_respiration_negative	util	Uses	gluconate	neg	measured	20	20	20	1
+BacDive_Uses_inositol_respiration_negative	util	Uses	inositol	neg	measured	20	20	20	1
+BacDive_Uses_L-alanine_4-nitroanilide	util	Uses	L-alanine 4-nitroanilide	pos	measured	20	20	20	1
+BacDive_Uses_L-methionine_negative	util	Uses	L-methionine	neg	measured	20	20	20	1
+BacDive_Uses_L-serine_respiration	util	Uses	L-serine	pos	measured	20	20	21	1
+BacDive_Uses_methyl_pyruvate_respiration	util	Uses	methyl pyruvate	pos	measured	20	20	20	1
+BacDive_Uses_nitrate_Nsource	util	Uses	nitrate	pos	measured	20	20	20	1
+BacDive_Uses_nitrite_gas	util	Uses	nitrite	pos	measured	22	20	62	1
+BacDive_Uses_oxalate_negative	util	Uses	oxalate	neg	measured	20	20	20	1
+BacDive_Uses_suberate_negative	util	Uses	suberate	neg	measured	20	20	20	1
+BacDive_Uses_turanose_respiration	util	Uses	turanose	pos	measured	20	20	20	1
+BacDive_Uses_tween_20_negative	util	Uses	tween 20	neg	measured	21	20	21	1
+BacDive_Enzyme_arbutin	hydrolysis	Enzyme	arbutin	pos	measured	19	19	19	1
+BacDive_Enzyme_chitinase	enzyme|hydrolysis	Enzyme	chitinase	pos	measured	19	19	19	1
+BacDive_Enzyme_hypoxanthine_hydrolysis	hydrolysis	Enzyme	hypoxanthine hydrolysis	pos	measured	19	19	20	1
+BacDive_Uses_(-)-quinic_acid	util	Uses	(-)-quinic acid	pos	measured	19	19	19	1
+BacDive_Uses_4-hydroxyphenylacetic_acid_respiration_negative	util	Uses	4-hydroxyphenylacetic acid	neg	measured	19	19	19	1
+BacDive_Uses_creatine_Nsource	util	Uses	creatine	pos	measured	19	19	19	1
+BacDive_Uses_D-psicose_negative	util	Uses	D-psicose	neg	measured	19	19	19	1
+BacDive_Uses_esculin_ferric_citrate	util	Uses	esculin ferric citrate	pos	measured	19	19	19	1
+BacDive_Uses_gamma-aminobutyric_acid_respiration_negative	util	Uses	gamma-aminobutyric acid	neg	measured	19	19	19	1
+BacDive_Uses_hexanoate	util	Uses	hexanoate	pos	measured	19	19	19	1
+BacDive_Uses_hypoxanthine_negative	util	Uses	hypoxanthine	neg	measured	19	19	19	1
+BacDive_Uses_L-arginine_Nsource_negative	util	Uses	L-arginine	neg	measured	19	19	19	1
+BacDive_Uses_L-tryptophan	util	Uses	L-tryptophan	pos	measured	19	19	19	1
+BacDive_Uses_lithium_chloride	util	Uses	lithium chloride	pos	measured	19	19	19	1
+BacDive_Uses_methyl_pyruvate_respiration_negative	util	Uses	methyl pyruvate	neg	measured	19	19	19	1
+BacDive_Uses_propionate_respiration_negative	util	Uses	propionate	neg	measured	19	19	19	1
+BacDive_Uses_rhamnose_respiration_negative	util	Uses	rhamnose	neg	measured	19	19	19	1
+BacDive_Uses_sebacic_acid	util	Uses	sebacic acid	pos	measured	19	19	19	1
+BacDive_Uses_succinamate_negative	util	Uses	succinamate	neg	measured	19	19	19	1
+BacDive_Nutrition_heterotroph	nutrition_type	Nutrition	heterotroph	pos	measured	18	18	18	1
+BacDive_Temp_growth_ge_80C	culture_temp	Temp	growth_ge_80C	pos	measured	18	18	35	1
+BacDive_Temp_hyperthermophile	culture_temp	Temp	hyperthermophile	pos	measured	18	18	35	1
+BacDive_Uses_D-arabitol_respiration	util	Uses	D-arabitol	pos	measured	18	18	18	1
+BacDive_Uses_fusidate	util	Uses	fusidate	pos	measured	18	18	18	1
+BacDive_Uses_glucose_1-phosphate	util	Uses	glucose 1-phosphate	pos	measured	18	18	18	1
+BacDive_Uses_glucuronate_respiration_negative	util	Uses	glucuronate	neg	measured	18	18	18	1
+BacDive_Uses_glycerol_1-phosphate_negative	util	Uses	glycerol 1-phosphate	neg	measured	18	18	18	1
+BacDive_Uses_glycyl-l-glutamate_negative	util	Uses	glycyl-l-glutamate	neg	measured	18	18	18	1
+BacDive_Uses_L-alanine_respiration_negative	util	Uses	L-alanine	neg	measured	18	18	18	1
+BacDive_Uses_L-aspartate_respiration	util	Uses	L-aspartate	pos	measured	18	18	19	1
+BacDive_Uses_L-tyrosine_negative	util	Uses	L-tyrosine	neg	measured	18	18	18	1
+BacDive_Uses_melezitose_fermentation_negative	util	Uses	melezitose	neg	measured	18	18	18	1
+BacDive_Uses_rhamnose_respiration	util	Uses	rhamnose	pos	measured	18	18	18	1
+BacDive_Uses_sorbitol_respiration	util	Uses	sorbitol	pos	measured	18	18	18	1
+BacDive_Uses_tetrazolium_blue	util	Uses	tetrazolium blue	pos	measured	18	18	18	1
+BacDive_Uses_tricarballylate_negative	util	Uses	tricarballylate	neg	measured	18	18	18	1
+BacDive_Uses_tween_40_respiration	util	Uses	tween 40	pos	measured	18	18	18	1
+BacDive_Uses_urocanic_acid_negative	util	Uses	urocanic acid	neg	measured	18	18	18	1
+BacDive_Enzyme_6-phospho-beta-galactosidase	enzyme	Enzyme	6-phospho-beta-galactosidase	pos	measured	17	17	17	1
+BacDive_Enzyme_alginate_negative	hydrolysis	Enzyme	alginate	neg	measured	17	17	17	1
+BacDive_Test_citrate_test	metabolite_test	Test	citrate test	pos	measured	17	17	17	1
+BacDive_Uses_2-oxoglutarate_respiration_negative	util	Uses	2-oxoglutarate	neg	measured	17	17	17	1
+BacDive_Uses_4-oxopentanoate_negative	util	Uses	4-oxopentanoate	neg	measured	17	17	17	1
+BacDive_Uses_aspartate_negative	util	Uses	aspartate	neg	measured	17	17	17	1
+BacDive_Uses_benzoate	util	Uses	benzoate	pos	measured	17	17	17	1
+BacDive_Uses_D-arabitol_respiration_negative	util	Uses	D-arabitol	neg	measured	17	17	17	1
+BacDive_Uses_D-tagatose	util	Uses	D-tagatose	pos	measured	17	17	17	1
+BacDive_Uses_glycerol_1-phosphate	util	Uses	glycerol 1-phosphate	pos	measured	17	17	17	1
+BacDive_Uses_L-cysteine_Nsource_negative	util	Uses	L-cysteine	neg	measured	17	17	17	1
+BacDive_Uses_L-fucose_respiration	util	Uses	L-fucose	pos	measured	17	17	17	1
+BacDive_Uses_L-fucose_respiration_negative	util	Uses	L-fucose	neg	measured	17	17	17	1
+BacDive_Uses_L-glutamate_Nsource_negative	util	Uses	L-glutamate	neg	measured	17	17	17	1
+BacDive_Uses_L-valine_negative	util	Uses	L-valine	neg	measured	17	17	17	1
+BacDive_Uses_lactulose	util	Uses	lactulose	pos	measured	18	17	18	1
+BacDive_Uses_lithium_chloride_negative	util	Uses	lithium chloride	neg	measured	17	17	17	1
+BacDive_Uses_maltotriose	util	Uses	maltotriose	pos	measured	17	17	17	1
+BacDive_Uses_mannitol_respiration_negative	util	Uses	mannitol	neg	measured	17	17	17	1
+BacDive_Uses_methanol	util	Uses	methanol	pos	measured	17	17	17	1
+BacDive_Uses_methyl_alpha-D-glucopyranoside	util	Uses	methyl alpha-D-glucopyranoside	pos	measured	17	17	17	1
+BacDive_Uses_n-acetyl-neuraminic_acid_negative	util	Uses	n-acetyl-neuraminic acid	neg	measured	17	17	17	1
+BacDive_Uses_N-acetylgalactosamine_respiration_negative	util	Uses	N-acetylgalactosamine	neg	measured	17	17	17	1
+BacDive_Uses_palatinose_negative	util	Uses	palatinose	neg	measured	17	17	17	1
+BacDive_Uses_phenol	util	Uses	phenol	pos	measured	17	17	46	2
+BacDive_Uses_stachyose_respiration_negative	util	Uses	stachyose	neg	measured	17	17	17	1
+BacDive_Uses_tartrate_negative	util	Uses	tartrate	neg	measured	17	17	17	1
+BacDive_Uses_tryptamine_negative	util	Uses	tryptamine	neg	measured	17	17	17	1
+BacDive_Uses_yeast_extract	util	Uses	yeast extract	pos	measured	17	17	18	1
+BacDive_Murein_A3alpha_L-Lys-L-Ala3	murein	Murein	A3alpha L-Lys-L-Ala3	pos	measured	16	16	36	1
+BacDive_Shape_pleomorphic	shape	Shape	pleomorphic	pos	measured	16	16	16	1
+BacDive_Uses_2-dehydro-D-gluconate_acid	util	Uses	2-dehydro-D-gluconate	pos	measured	16	16	16	1
+BacDive_Uses_bromosuccinate_respiration	util	Uses	bromosuccinate	pos	measured	16	16	16	1
+BacDive_Uses_chitin_negative	util	Uses	chitin	neg	measured	16	16	16	1
+BacDive_Uses_D-glucosaminic_acid	util	Uses	D-glucosaminic acid	pos	measured	16	16	16	1
+BacDive_Uses_D-glucose_6-phosphate_respiration_negative	util	Uses	D-glucose 6-phosphate	neg	measured	16	16	16	1
+BacDive_Uses_D-rhamnose	util	Uses	D-rhamnose	pos	measured	16	16	16	1
+BacDive_Uses_L-cysteine_negative	util	Uses	L-cysteine	neg	measured	16	16	16	1
+BacDive_Uses_L-lactate	util	Uses	L-lactate	pos	measured	16	16	16	1
+BacDive_Uses_L-methionine_Nsource_negative	util	Uses	L-methionine	neg	measured	16	16	16	1
+BacDive_Uses_L-threonine_Nsource_negative	util	Uses	L-threonine	neg	measured	16	16	16	1
+BacDive_Uses_melibiose_respiration_negative	util	Uses	melibiose	neg	measured	16	16	16	1
+BacDive_Uses_N-acetylgalactosamine_respiration	util	Uses	N-acetylgalactosamine	pos	measured	16	16	16	1
+BacDive_Uses_sodium_butyrate_negative	util	Uses	sodium butyrate	neg	measured	16	16	16	1
+BacDive_Uses_sodium_pyruvate	util	Uses	sodium pyruvate	pos	measured	16	16	16	1
+BacDive_Uses_turanose_respiration_negative	util	Uses	turanose	neg	measured	16	16	16	1
+BacDive_Enzyme_agar_negative	hydrolysis	Enzyme	agar	neg	measured	15	15	15	1
+BacDive_Enzyme_phosphoamidase_negative	enzyme	Enzyme	phosphoamidase	neg	measured	15	15	15	1
+BacDive_Enzyme_skimmed_milk	hydrolysis	Enzyme	skimmed milk	pos	measured	15	15	15	1
+BacDive_Enzyme_tripeptide_aminopeptidase	enzyme	Enzyme	tripeptide aminopeptidase	pos	measured	15	15	15	1
+BacDive_Enzyme_tripeptide_aminopeptidase_negative	enzyme	Enzyme	tripeptide aminopeptidase	neg	measured	15	15	15	1
+BacDive_Murein_A3alpha_L-Lys-Gly2-4-L-Ser1-2-Gly	murein	Murein	A3alpha L-Lys-Gly2-4-L-Ser1-2-Gly	pos	measured	15	15	33	2
+BacDive_Produces_steroid_transformation	compound_class	Produces	steroid transformation	pos	measured	15	15	34	1
+BacDive_Uses_acetamide_negative	util	Uses	acetamide	neg	measured	15	15	15	1
+BacDive_Uses_bromosuccinate_respiration_negative	util	Uses	bromosuccinate	neg	measured	15	15	15	1
+BacDive_Uses_fusidate_negative	util	Uses	fusidate	neg	measured	15	15	15	1
+BacDive_Uses_gentiobiose_respiration_negative	util	Uses	gentiobiose	neg	measured	15	15	15	1
+BacDive_Uses_gluconate_respiration	util	Uses	gluconate	pos	measured	15	15	15	1
+BacDive_Uses_glucose_gas	util	Uses	glucose	pos	measured	15	15	15	1
+BacDive_Uses_guanidinium_chloride	util	Uses	guanidinium chloride	pos	measured	15	15	15	1
+BacDive_Uses_inositol_respiration	util	Uses	inositol	pos	measured	15	15	15	1
+BacDive_Uses_L-alanine_Nsource_negative	util	Uses	L-alanine	neg	measured	15	15	15	1
+BacDive_Uses_L-asparagine_respiration	util	Uses	L-asparagine	pos	measured	15	15	16	1
+BacDive_Uses_L-glutamine	util	Uses	L-glutamine	pos	measured	15	15	15	1
+BacDive_Uses_L-histidine_Nsource_negative	util	Uses	L-histidine	neg	measured	15	15	15	1
+BacDive_Uses_L-methionine_Nsource	util	Uses	L-methionine	pos	measured	15	15	15	1
+BacDive_Uses_L-proline_respiration	util	Uses	L-proline	pos	measured	15	15	15	1
+BacDive_Uses_nalidixic_acid_negative	util	Uses	nalidixic acid	neg	measured	15	15	15	1
+BacDive_Uses_potassium_2-dehydro-D-gluconate	util	Uses	potassium 2-dehydro-D-gluconate	pos	measured	15	15	15	1
+BacDive_Uses_potassium_2-dehydro-D-gluconate_acid	util	Uses	potassium 2-dehydro-D-gluconate	pos	measured	15	15	15	1
+BacDive_Uses_raffinose_respiration	util	Uses	raffinose	pos	measured	15	15	15	1
+BacDive_Uses_sodium_formate_negative	util	Uses	sodium formate	neg	measured	15	15	15	1
+BacDive_Uses_sorbitol_respiration_negative	util	Uses	sorbitol	neg	measured	15	15	15	1
+BacDive_Uses_tetrazolium_violet	util	Uses	tetrazolium violet	pos	measured	15	15	15	1
+BacDive_Uses_thiosulfate	util	Uses	thiosulfate	pos	measured	15	15	16	1
+BacDive_Uses_tyrosine	util	Uses	tyrosine	pos	measured	15	15	15	1
+BacDive_Enzyme_bis-4-nitrophenyl_phosphate	hydrolysis	Enzyme	bis-4-nitrophenyl phosphate	pos	measured	14	14	15	1
+BacDive_Enzyme_O-nitrophenyl-beta-D-galactopyranosid_negative	hydrolysis	Enzyme	O-nitrophenyl-beta-D-galactopyranosid	neg	measured	14	14	14	1
+BacDive_Enzyme_phosphatase	enzyme	Enzyme	phosphatase	pos	measured	14	14	14	1
+BacDive_Enzyme_pyroglutamic_acid_arylamidase	enzyme	Enzyme	pyroglutamic acid arylamidase	pos	measured	14	14	15	1
+BacDive_Murein_A3beta_L-Orn-Gly2-3	murein	Murein	A3beta L-Orn-Gly2-3	pos	measured	14	14	17	1
+BacDive_Nutrition_chemoorganoheterotroph	nutrition_type	Nutrition	chemoorganoheterotroph	pos	measured	14	14	14	1
+BacDive_Uses_3-hydroxybutyrate_respiration	util	Uses	3-hydroxybutyrate	pos	measured	14	14	14	1
+BacDive_Uses_adenine_negative	util	Uses	adenine	neg	measured	14	14	14	1
+BacDive_Uses_alpha-lactose_respiration	util	Uses	alpha-lactose	pos	measured	14	14	14	1
+BacDive_Uses_alpha-lactose_respiration_negative	util	Uses	alpha-lactose	neg	measured	14	14	14	1
+BacDive_Uses_butanol_negative	util	Uses	butanol	neg	measured	14	14	14	1
+BacDive_Uses_citrate_respiration_negative	util	Uses	citrate	neg	measured	14	14	14	1
+BacDive_Uses_esculin_ferric_citrate_negative	util	Uses	esculin ferric citrate	neg	measured	14	14	14	1
+BacDive_Uses_fucose_negative	util	Uses	fucose	neg	measured	14	14	14	1
+BacDive_Uses_glycolate_negative	util	Uses	glycolate	neg	measured	14	14	14	1
+BacDive_Uses_L-arabinose_respiration	util	Uses	L-arabinose	pos	measured	14	14	15	1
+BacDive_Uses_L-aspartate_respiration_negative	util	Uses	L-aspartate	neg	measured	14	14	14	1
+BacDive_Uses_L-histidine_respiration_negative	util	Uses	L-histidine	neg	measured	14	14	14	1
+BacDive_Uses_L-serine_respiration_negative	util	Uses	L-serine	neg	measured	14	14	14	1
+BacDive_Uses_L-tryptophan_Nsource_negative	util	Uses	L-tryptophan	neg	measured	14	14	14	1
+BacDive_Uses_L-valine	util	Uses	L-valine	pos	measured	14	14	14	1
+BacDive_Uses_maltitol	util	Uses	maltitol	pos	measured	14	14	14	1
+BacDive_Uses_methyl_beta-D-glucopyranoside_respiration	util	Uses	methyl beta-D-glucopyranoside	pos	measured	14	14	15	1
+BacDive_Uses_monomethyl_succinate_negative	util	Uses	monomethyl succinate	neg	measured	14	14	14	1
+BacDive_Uses_monomethyl_succinate_respiration	util	Uses	monomethyl succinate	pos	measured	14	14	14	1
+BacDive_Uses_N-acetyl-D-glucosamine_respiration_negative	util	Uses	N-acetyl-D-glucosamine	neg	measured	14	14	14	1
+BacDive_Uses_n-acetylneuraminate	util	Uses	n-acetylneuraminate	pos	measured	14	14	14	1
+BacDive_Uses_phenylalanine_negative	util	Uses	phenylalanine	neg	measured	14	14	14	1
+BacDive_Uses_potassium_5-dehydro-D-gluconate	util	Uses	potassium 5-dehydro-D-gluconate	pos	measured	14	14	14	1
+BacDive_Uses_potassium_tellurite_negative	util	Uses	potassium tellurite	neg	measured	14	14	14	1
+BacDive_Uses_sulfate	util	Uses	sulfate	pos	measured	14	14	14	1
+BacDive_Uses_troleandomycin	util	Uses	troleandomycin	pos	measured	14	14	14	1
+BacDive_Enzyme_phenylalanine_deaminase	enzyme	Enzyme	phenylalanine deaminase	pos	measured	13	13	13	1
+BacDive_Enzyme_phosphatase_negative	enzyme	Enzyme	phosphatase	neg	measured	13	13	13	1
+BacDive_Enzyme_xylan	hydrolysis	Enzyme	xylan	pos	measured	13	13	13	1
+BacDive_Enzyme_xylan_negative	hydrolysis	Enzyme	xylan	neg	measured	13	13	13	1
+BacDive_Uses_(R)-malic_acid	util	Uses	(R)-malic acid	pos	measured	13	13	13	1
+BacDive_Uses_2-oxoglutarate_respiration	util	Uses	2-oxoglutarate	pos	measured	13	13	13	1
+BacDive_Uses_4-hydroxy-L-proline_negative	util	Uses	4-hydroxy-L-proline	neg	measured	13	13	13	1
+BacDive_Uses_betaine_negative	util	Uses	betaine	neg	measured	13	13	13	1
+BacDive_Uses_cellobiose_respiration_negative	util	Uses	cellobiose	neg	measured	13	13	13	1
+BacDive_Uses_D-glucose_6-phosphate_respiration	util	Uses	D-glucose 6-phosphate	pos	measured	13	13	13	1
+BacDive_Uses_D-rhamnose_negative	util	Uses	D-rhamnose	neg	measured	13	13	13	1
+BacDive_Uses_D-saccharate_respiration_negative	util	Uses	D-saccharate	neg	measured	13	13	13	1
+BacDive_Uses_elemental_sulfur_negative	util	Uses	elemental sulfur	neg	measured	13	13	13	1
+BacDive_Uses_glucuronamide_respiration_negative	util	Uses	glucuronamide	neg	measured	13	13	13	1
+BacDive_Uses_glycerol_fermentation_negative	util	Uses	glycerol	neg	measured	13	13	13	1
+BacDive_Uses_guanine_negative	util	Uses	guanine	neg	measured	13	13	13	1
+BacDive_Uses_L-aspartate_Nsource_negative	util	Uses	L-aspartate	neg	measured	13	13	13	1
+BacDive_Uses_L-pyroglutamate_negative	util	Uses	L-pyroglutamate	neg	measured	13	13	13	1
+BacDive_Uses_lincomycin	util	Uses	lincomycin	pos	measured	13	13	13	1
+BacDive_Uses_maltose_hydrate_acid	util	Uses	maltose hydrate	pos	measured	13	13	13	1
+BacDive_Uses_N-acetyl-D-mannosamine	util	Uses	N-acetyl-D-mannosamine	pos	measured	13	13	13	1
+BacDive_Uses_nitrate	util	Uses	nitrate	pos	measured	13	13	13	1
+BacDive_Uses_thiosulfate_negative	util	Uses	thiosulfate	neg	measured	13	13	13	1
+BacDive_Uses_tween_60_negative	util	Uses	tween 60	neg	measured	13	13	13	1
+BacDive_Uses_xylose_fermentation	util	Uses	xylose	pos	measured	13	13	13	1
+BacDive_Enzyme_pectin_negative	hydrolysis	Enzyme	pectin	neg	measured	12	12	12	1
+BacDive_Murein_A1alpha_L-Lys-direct	murein	Murein	A1alpha L-Lys-direct	pos	measured	13	12	25	1
+BacDive_Murein_A3alpha_L-Lys-Gly	murein	Murein	A3alpha L-Lys-Gly	pos	measured	13	12	21	1
+BacDive_Prod_dinitrogen	production	Prod	dinitrogen	pos	measured	12	12	140	1
+BacDive_Produces_siderophore	compound_class	Produces	siderophore	pos	measured	12	12	31	1
+BacDive_Uses_2-hydroxybutyrate_respiration	util	Uses	2-hydroxybutyrate	pos	measured	12	12	12	1
+BacDive_Uses_2-oxopentanoate_respiration_negative	util	Uses	2-oxopentanoate	neg	measured	12	12	12	1
+BacDive_Uses_4-nitrophenyl_beta-D-galactopyranoside_negative	util	Uses	4-nitrophenyl beta-D-galactopyranoside	neg	measured	12	12	12	1
+BacDive_Uses_acetoacetate_respiration	util	Uses	acetoacetate	pos	measured	12	12	12	1
+BacDive_Uses_adenosine	util	Uses	adenosine	pos	measured	12	12	12	1
+BacDive_Uses_aztreonam_negative	util	Uses	aztreonam	neg	measured	12	12	12	1
+BacDive_Uses_carboxymethylcellulose_negative	util	Uses	carboxymethylcellulose	neg	measured	12	12	12	1
+BacDive_Uses_D-glucosamine	util	Uses	D-glucosamine	pos	measured	12	12	12	1
+BacDive_Uses_dextran_negative	util	Uses	dextran	neg	measured	12	12	12	1
+BacDive_Uses_dna_negative	util	Uses	dna	neg	measured	12	12	12	1
+BacDive_Uses_galactose_respiration_negative	util	Uses	galactose	neg	measured	12	12	12	1
+BacDive_Uses_gamma-aminobutyric_acid_respiration	util	Uses	gamma-aminobutyric acid	pos	measured	12	12	12	1
+BacDive_Uses_gentisate_negative	util	Uses	gentisate	neg	measured	12	12	12	1
+BacDive_Uses_glycerol_respiration_negative	util	Uses	glycerol	neg	measured	12	12	12	1
+BacDive_Uses_L-cysteine_Nsource	util	Uses	L-cysteine	pos	measured	12	12	12	1
+BacDive_Uses_L-histidine_respiration	util	Uses	L-histidine	pos	measured	12	12	12	1
+BacDive_Uses_L-malate_respiration	util	Uses	L-malate	pos	measured	12	12	12	1
+BacDive_Uses_L-phenylalanine_Nsource_negative	util	Uses	L-phenylalanine	neg	measured	12	12	12	1
+BacDive_Uses_lactulose_respiration_negative	util	Uses	lactulose	neg	measured	12	12	12	1
+BacDive_Uses_methyl_alpha-D-mannoside	util	Uses	methyl alpha-D-mannoside	pos	measured	12	12	12	1
+BacDive_Uses_methyl_beta-D-galactoside_negative	util	Uses	methyl beta-D-galactoside	neg	measured	12	12	12	1
+BacDive_Uses_niaproof	util	Uses	niaproof	pos	measured	12	12	12	1
+BacDive_Uses_quinate_respiration_negative	util	Uses	quinate	neg	measured	12	12	12	1
+BacDive_Uses_sodium_bromate	util	Uses	sodium bromate	pos	measured	12	12	12	1
+BacDive_Uses_succinate_respiration	util	Uses	succinate	pos	measured	12	12	12	1
+BacDive_Uses_sucrose_gas_negative	util	Uses	sucrose	neg	measured	12	12	12	1
+BacDive_Uses_sucrose_respiration_negative	util	Uses	sucrose	neg	measured	12	12	12	1
+BacDive_Uses_trans-aconitate	util	Uses	trans-aconitate	pos	measured	12	12	12	1
+BacDive_Uses_trehalose_respiration_negative	util	Uses	trehalose	neg	measured	12	12	12	1
+BacDive_Uses_tween_40_respiration_negative	util	Uses	tween 40	neg	measured	12	12	12	1
+BacDive_Uses_tween_80_respiration	util	Uses	tween 80	pos	measured	12	12	12	1
+BacDive_Enzyme_4-nitrophenyl_beta-D-galactopyranoside_negative	enzyme|hydrolysis	Enzyme	4-nitrophenyl beta-D-galactopyranoside	neg	measured	11	11	11	1
+BacDive_Enzyme_p-nitrophenyl_phenyl_phosphonate	hydrolysis	Enzyme	p-nitrophenyl phenyl phosphonate	pos	measured	11	11	11	1
+BacDive_Enzyme_pyrazinamide	hydrolysis	Enzyme	pyrazinamide	pos	measured	11	11	12	1
+BacDive_Enzyme_skimmed_milk_negative	hydrolysis	Enzyme	skimmed milk	neg	measured	11	11	11	1
+BacDive_Enzyme_xanthine_hydrolysis	hydrolysis	Enzyme	xanthine hydrolysis	pos	measured	11	11	12	1
+BacDive_Produces_antibiotic_(unspecified)	compound_class	Produces	antibiotic (unspecified)	pos	measured	11	11	26	1
+BacDive_Produces_ethanol	compound_class	Produces	ethanol	pos	measured	11	11	13	1
+BacDive_Produces_polyhydroxyalkanoate	compound_class	Produces	polyhydroxyalkanoate	pos	measured	11	11	14	1
+BacDive_Uses_2,3-butanediol_respiration_negative	util	Uses	2, 3-butanediol	neg	measured	11	11	11	1
+BacDive_Uses_alginate_negative	util	Uses	alginate	neg	measured	11	11	11	1
+BacDive_Uses_citrate_respiration	util	Uses	citrate	pos	measured	11	11	11	1
+BacDive_Uses_D-arabinose_fermentation_negative	util	Uses	D-arabinose	neg	measured	11	11	11	1
+BacDive_Uses_D-galacturonic_acid_respiration	util	Uses	D-galacturonic acid	pos	measured	11	11	11	1
+BacDive_Uses_D-glucosaminic_acid_respiration_negative	util	Uses	D-glucosaminic acid	neg	measured	11	11	11	1
+BacDive_Uses_D-psicose_respiration_negative	util	Uses	D-psicose	neg	measured	11	11	11	1
+BacDive_Uses_dextrin_respiration_negative	util	Uses	dextrin	neg	measured	11	11	11	1
+BacDive_Uses_fructose_gas_negative	util	Uses	fructose	neg	measured	11	11	11	1
+BacDive_Uses_gelatin_respiration_negative	util	Uses	gelatin	neg	measured	11	11	11	1
+BacDive_Uses_gentisate	util	Uses	gentisate	pos	measured	11	11	11	1
+BacDive_Uses_glucuronate_respiration	util	Uses	glucuronate	pos	measured	11	11	11	1
+BacDive_Uses_glycogen_respiration_negative	util	Uses	glycogen	neg	measured	11	11	11	1
+BacDive_Uses_hypoxanthine	util	Uses	hypoxanthine	pos	measured	11	11	11	1
+BacDive_Uses_L-glutamine_negative	util	Uses	L-glutamine	neg	measured	11	11	11	1
+BacDive_Uses_L-glutamine_Nsource_negative	util	Uses	L-glutamine	neg	measured	11	11	11	1
+BacDive_Uses_L-leucine_Nsource	util	Uses	L-leucine	pos	measured	11	11	11	1
+BacDive_Uses_L-lysine	util	Uses	L-lysine	pos	measured	11	11	11	1
+BacDive_Uses_L-ornithine_respiration_negative	util	Uses	L-ornithine	neg	measured	11	11	11	1
+BacDive_Uses_L-pyroglutamate	util	Uses	L-pyroglutamate	pos	measured	11	11	11	1
+BacDive_Uses_maltose_hydrate	util	Uses	maltose hydrate	pos	measured	11	11	11	1
+BacDive_Uses_mannose_respiration_negative	util	Uses	mannose	neg	measured	11	11	11	1
+BacDive_Uses_methyl_alpha-D-galactoside_negative	util	Uses	methyl alpha-D-galactoside	neg	measured	11	11	11	1
+BacDive_Uses_n-acetylneuraminate_respiration_negative	util	Uses	n-acetylneuraminate	neg	measured	11	11	11	1
+BacDive_Uses_nitrate_gas	util	Uses	nitrate	pos	measured	12	11	51	1
+BacDive_Uses_propanol_negative	util	Uses	propanol	neg	measured	11	11	11	1
+BacDive_Uses_serine_negative	util	Uses	serine	neg	measured	11	11	11	1
+BacDive_Uses_uridine_respiration_negative	util	Uses	uridine	neg	measured	11	11	11	1
+BacDive_Uses_vancomycin	util	Uses	vancomycin	pos	measured	11	11	11	1
+BacDive_Enzyme_4-nitrophenyl_beta-D-galactopyranoside	hydrolysis	Enzyme	4-nitrophenyl beta-D-galactopyranoside	pos	measured	10	10	10	1
+BacDive_Enzyme_4-nitrophenyl_beta-D-glucopyranoside	hydrolysis	Enzyme	4-nitrophenyl beta-D-glucopyranoside	pos	measured	10	10	10	1
+BacDive_Enzyme_guanine_negative	hydrolysis	Enzyme	guanine	neg	measured	10	10	10	1
+BacDive_Enzyme_phosphoamidase	enzyme	Enzyme	phosphoamidase	pos	measured	10	10	10	1
+BacDive_Enzyme_pyrazinamide_negative	hydrolysis	Enzyme	pyrazinamide	neg	measured	10	10	68	1
+BacDive_Murein_A4alpha_L-Lys-L-Ala-L-Glu	murein	Murein	A4alpha L-Lys-L-Ala-L-Glu	pos	measured	10	10	31	1
+BacDive_Murein_B2gamma_{Gly}_[L-Dab]_D-Glu-D-Dab	murein	Murein	B2gamma {Gly} [L-Dab] D-Glu-D-Dab	pos	measured	10	10	13	1
+BacDive_Produces_vitamin_B12	compound_class	Produces	vitamin B12	pos	measured	10	10	31	2
+BacDive_Uses_(R)-malic_acid_negative	util	Uses	(R)-malic acid	neg	measured	10	10	10	1
+BacDive_Uses_(S)-malic_acid	util	Uses	(S)-malic acid	pos	measured	10	10	10	1
+BacDive_Uses_2-oxobutanoate_respiration	util	Uses	2-oxobutanoate	pos	measured	10	10	11	1
+BacDive_Uses_3-hydroxybutyrate_respiration_negative	util	Uses	3-hydroxybutyrate	neg	measured	10	10	10	1
+BacDive_Uses_4-nitrophenyl_beta-D-galactopyranoside	util	Uses	4-nitrophenyl beta-D-galactopyranoside	pos	measured	10	10	11	1
+BacDive_Uses_agar_negative	util	Uses	agar	neg	measured	10	10	10	1
+BacDive_Uses_alpha-cyclodextrin_respiration	util	Uses	alpha-cyclodextrin	pos	measured	10	10	11	1
+BacDive_Uses_alpha-hydroxybutyrate_negative	util	Uses	alpha-hydroxybutyrate	neg	measured	10	10	10	1
+BacDive_Uses_azelaate	util	Uses	azelaate	pos	measured	10	10	10	1
+BacDive_Uses_carboxymethylcellulose	util	Uses	carboxymethylcellulose	pos	measured	10	10	10	1
+BacDive_Uses_D-alanine_respiration_negative	util	Uses	D-alanine	neg	measured	10	10	10	1
+BacDive_Uses_D-fucose_respiration	util	Uses	D-fucose	pos	measured	10	10	10	1
+BacDive_Uses_D-galactonic_acid_lactone_respiration_negative	util	Uses	D-galactonic acid lactone	neg	measured	10	10	10	1
+BacDive_Uses_D-glucarate_respiration_negative	util	Uses	D-glucarate	neg	measured	10	10	10	1
+BacDive_Uses_DL-carnitine_respiration_negative	util	Uses	DL-carnitine	neg	measured	10	10	10	1
+BacDive_Uses_dna	util	Uses	dna	pos	measured	10	10	10	1
+BacDive_Uses_elemental_sulfur	util	Uses	elemental sulfur	pos	measured	10	10	10	1
+BacDive_Uses_erythritol_respiration_negative	util	Uses	erythritol	neg	measured	10	10	10	1
+BacDive_Uses_glucose_1-phosphate_respiration_negative	util	Uses	glucose 1-phosphate	neg	measured	10	10	10	1
+BacDive_Uses_glutamate_negative	util	Uses	glutamate	neg	measured	10	10	10	1
+BacDive_Uses_glycerol_3-phosphate_negative	util	Uses	glycerol 3-phosphate	neg	measured	10	10	10	1
+BacDive_Uses_glycerol_fermentation	util	Uses	glycerol	pos	measured	10	10	10	1
+BacDive_Uses_glycyl-l-glutamate_respiration	util	Uses	glycyl-l-glutamate	pos	measured	10	10	11	1
+BacDive_Uses_inosine_respiration	util	Uses	inosine	pos	measured	10	10	10	1
+BacDive_Uses_L-alaninamide_respiration_negative	util	Uses	L-alaninamide	neg	measured	10	10	10	1
+BacDive_Uses_L-alanylglycine_respiration	util	Uses	L-alanylglycine	pos	measured	10	10	10	1
+BacDive_Uses_L-proline_Nsource_negative	util	Uses	L-proline	neg	measured	10	10	10	1
+BacDive_Uses_L-threonine_respiration	util	Uses	L-threonine	pos	measured	10	10	10	1
+BacDive_Uses_L-valine_Nsource_negative	util	Uses	L-valine	neg	measured	10	10	10	1
+BacDive_Uses_L-xylose	util	Uses	L-xylose	pos	measured	10	10	10	1
+BacDive_Uses_methionine_negative	util	Uses	methionine	neg	measured	10	10	10	1
+BacDive_Uses_methyl_beta-D-xylopyranoside	util	Uses	methyl beta-D-xylopyranoside	pos	measured	10	10	10	1
+BacDive_Uses_methyl_D-glucoside_acid	util	Uses	methyl D-glucoside	pos	measured	10	10	10	1
+BacDive_Uses_niaproof_negative	util	Uses	niaproof	neg	measured	10	10	10	1
+BacDive_Uses_pectin_respiration_negative	util	Uses	pectin	neg	measured	10	10	10	1
+BacDive_Uses_peptone	util	Uses	peptone	pos	measured	10	10	10	1
+BacDive_Uses_peptone_negative	util	Uses	peptone	neg	measured	10	10	10	1
+BacDive_Uses_phenylethylamine	util	Uses	phenylethylamine	pos	measured	10	10	10	1
+BacDive_Uses_phenylethylamine_respiration_negative	util	Uses	phenylethylamine	neg	measured	10	10	10	1
+BacDive_Uses_Potassium_5-ketogluconate_negative	util	Uses	Potassium 5-ketogluconate	neg	measured	10	10	10	1
+BacDive_Uses_pyruvate_fermentation	util	Uses	pyruvate	pos	measured	10	10	10	1
+BacDive_Uses_salicin_fermentation	util	Uses	salicin	pos	measured	10	10	10	1
+BacDive_Uses_salicin_fermentation_negative	util	Uses	salicin	neg	measured	10	10	10	1
+BacDive_Uses_sarcosine_negative	util	Uses	sarcosine	neg	measured	10	10	10	1
+BacDive_Uses_skimmed_milk	util	Uses	skimmed milk	pos	measured	10	10	10	1
+BacDive_Uses_sodium_butyrate	util	Uses	sodium butyrate	pos	measured	10	10	10	1
+BacDive_Uses_sodium_malonate	util	Uses	sodium malonate	pos	measured	10	10	10	1
+BacDive_Uses_xylitol_respiration_negative	util	Uses	xylitol	neg	measured	10	10	10	1
+BacDive_Enzyme_arginine_decarboxylase_negative	enzyme	Enzyme	arginine decarboxylase	neg	measured	9	9	9	1
+BacDive_Enzyme_beta-N-acetylgalactosaminidase_negative	enzyme	Enzyme	beta-N-acetylgalactosaminidase	neg	measured	9	9	9	1
+BacDive_Enzyme_elastin_negative	hydrolysis	Enzyme	elastin	neg	measured	9	9	9	1
+BacDive_Enzyme_gamma-L-glutamate-4-nitroanilide_negative	hydrolysis	Enzyme	gamma-L-glutamate-4-nitroanilide	neg	measured	9	9	9	1
+BacDive_Enzyme_L-proline-4-nitroanilide	hydrolysis	Enzyme	L-proline-4-nitroanilide	pos	measured	9	9	9	1
+BacDive_Enzyme_O-nitrophenyl-beta-D-galactopyranosid	hydrolysis	Enzyme	O-nitrophenyl-beta-D-galactopyranosid	pos	measured	9	9	9	1
+BacDive_Murein_A4alpha_L-Lys-Gly-D-Asp	murein	Murein	A4alpha L-Lys-Gly-D-Asp	pos	measured	9	9	9	1
+BacDive_Uses_(S)-lactate_respiration	util	Uses	(S)-lactate	pos	measured	9	9	9	1
+BacDive_Uses_(S)-malic_acid_negative	util	Uses	(S)-malic acid	neg	measured	9	9	9	1
+BacDive_Uses_2-oxogluconate	util	Uses	2-oxogluconate	pos	measured	9	9	9	1
+BacDive_Uses_3-O-methyl-D-glucose_respiration_negative	util	Uses	3-O-methyl-D-glucose	neg	measured	9	9	9	1
+BacDive_Uses_4-hydroxybutyrate_respiration_negative	util	Uses	4-hydroxybutyrate	neg	measured	9	9	9	1
+BacDive_Uses_acetate_respiration_negative	util	Uses	acetate	neg	measured	9	9	9	1
+BacDive_Uses_alpha-cyclodextrin_respiration_negative	util	Uses	alpha-cyclodextrin	neg	measured	9	9	9	1
+BacDive_Uses_chitin	util	Uses	chitin	pos	measured	9	9	9	1
+BacDive_Uses_cis-aconitate_respiration_negative	util	Uses	cis-aconitate	neg	measured	9	9	9	1
+BacDive_Uses_cysteine_negative	util	Uses	cysteine	neg	measured	9	9	9	1
+BacDive_Uses_D-aspartate_respiration_negative	util	Uses	D-aspartate	neg	measured	9	9	9	1
+BacDive_Uses_D-malate_respiration_negative	util	Uses	D-malate	neg	measured	9	9	9	1
+BacDive_Uses_D-sorbose_acid_negative	util	Uses	D-sorbose	neg	measured	9	9	9	1
+BacDive_Uses_galactarate_respiration_negative	util	Uses	galactarate	neg	measured	9	9	9	1
+BacDive_Uses_galactose_gas_negative	util	Uses	galactose	neg	measured	9	9	9	1
+BacDive_Uses_glutamate_Nsource	util	Uses	glutamate	pos	measured	9	9	9	1
+BacDive_Uses_glycyl_L-aspartic_acid_respiration_negative	util	Uses	glycyl L-aspartic acid	neg	measured	9	9	9	1
+BacDive_Uses_inulin_fermentation_negative	util	Uses	inulin	neg	measured	9	9	9	1
+BacDive_Uses_L-alaninamide_respiration	util	Uses	L-alaninamide	pos	measured	9	9	9	1
+BacDive_Uses_L-asparagine_Nsource_negative	util	Uses	L-asparagine	neg	measured	9	9	9	1
+BacDive_Uses_L-galactonic_acid_gamma-lactone_respiration_negative	util	Uses	L-galactonic acid gamma-lactone	neg	measured	9	9	9	1
+BacDive_Uses_L-isoleucine	util	Uses	L-isoleucine	pos	measured	9	9	9	1
+BacDive_Uses_L-isoleucine_Nsource	util	Uses	L-isoleucine	pos	measured	9	9	9	1
+BacDive_Uses_maltose_respiration_negative	util	Uses	maltose	neg	measured	9	9	9	1
+BacDive_Uses_mannose_gas_negative	util	Uses	mannose	neg	measured	9	9	9	1
+BacDive_Uses_methionine	util	Uses	methionine	pos	measured	9	9	9	1
+BacDive_Uses_minocycline_negative	util	Uses	minocycline	neg	measured	9	9	9	1
+BacDive_Uses_palatinose	util	Uses	palatinose	pos	measured	9	9	9	1
+BacDive_Uses_ribitol_fermentation_negative	util	Uses	ribitol	neg	measured	9	9	9	1
+BacDive_Uses_sodium_propionate_negative	util	Uses	sodium propionate	neg	measured	9	9	9	1
+BacDive_Uses_succinamate_respiration_negative	util	Uses	succinamate	neg	measured	9	9	9	1
+BacDive_Uses_sulfate_negative	util	Uses	sulfate	neg	measured	9	9	9	1
+BacDive_Uses_trehalose_gas_negative	util	Uses	trehalose	neg	measured	9	9	9	1
+BacDive_Uses_uridine_respiration	util	Uses	uridine	pos	measured	9	9	9	1
+BacDive_Uses_xanthine	util	Uses	xanthine	pos	measured	9	9	9	1
+BacDive_Enzyme_arbutin_negative	hydrolysis	Enzyme	arbutin	neg	measured	8	8	8	1
+BacDive_Enzyme_beta-D-fucosidase	enzyme	Enzyme	beta-D-fucosidase	pos	measured	8	8	8	1
+BacDive_Enzyme_bis-4-nitrophenyl-phosphorylcholine_negative	hydrolysis	Enzyme	bis-4-nitrophenyl-phosphorylcholine	neg	measured	8	8	8	1
+BacDive_Enzyme_lecithin	hydrolysis	Enzyme	lecithin	pos	measured	8	8	8	1
+BacDive_Murein_A3alpha_L-Lys-L-Ala	murein	Murein	A3alpha L-Lys-L-Ala	pos	measured	8	8	21	2
+BacDive_Murein_A3alpha_L-Lys-L-Ala-L-Thr-L-Ala	murein	Murein	A3alpha L-Lys-L-Ala-L-Thr-L-Ala	pos	measured	8	8	27	1
+BacDive_Murein_A3alpha_L-Lys-L-Ser-L-Ala2	murein	Murein	A3alpha L-Lys-L-Ser-L-Ala2	pos	measured	8	8	9	1
+BacDive_Murein_A4beta_L-Orn-D-Asp	murein	Murein	A4beta L-Orn-D-Asp	pos	measured	8	8	12	1
+BacDive_Murein_A4beta_L-Orn-D-Glu	murein	Murein	A4beta L-Orn-D-Glu	pos	measured	8	8	8	1
+BacDive_Produces_carotenoid	compound_class	Produces	carotenoid	pos	measured	8	8	10	1
+BacDive_Produces_pigment	compound_class	Produces	pigment	pos	measured	8	8	23	1
+BacDive_Uses_2-oxogluconate_acid_negative	util	Uses	2-oxogluconate	neg	measured	8	8	8	1
+BacDive_Uses_2,3-butanediol_respiration	util	Uses	2, 3-butanediol	pos	measured	8	8	8	1
+BacDive_Uses_4-hydroxy-L-proline_respiration_negative	util	Uses	4-hydroxy-L-proline	neg	measured	8	8	8	1
+BacDive_Uses_adenine	util	Uses	adenine	pos	measured	8	8	8	1
+BacDive_Uses_alanine_Nsource	util	Uses	alanine	pos	measured	8	8	8	1
+BacDive_Uses_butanol	util	Uses	butanol	pos	measured	8	8	8	1
+BacDive_Uses_casamino_acids_negative	util	Uses	casamino acids	neg	measured	8	8	8	1
+BacDive_Uses_D-alanine_respiration	util	Uses	D-alanine	pos	measured	8	8	8	1
+BacDive_Uses_D-arabitol_fermentation_negative	util	Uses	D-arabitol	neg	measured	8	8	8	1
+BacDive_Uses_D-fucose_respiration_negative	util	Uses	D-fucose	neg	measured	8	8	8	1
+BacDive_Uses_D-lactic_acid_methyl_ester_negative	util	Uses	D-lactic acid methyl ester	neg	measured	8	8	8	1
+BacDive_Uses_D-psicose_respiration	util	Uses	D-psicose	pos	measured	8	8	8	1
+BacDive_Uses_dihydrogen_negative	util	Uses	dihydrogen	neg	measured	8	8	8	1
+BacDive_Uses_erythritol_fermentation_negative	util	Uses	erythritol	neg	measured	8	8	8	1
+BacDive_Uses_fructose_respiration_negative	util	Uses	fructose	neg	measured	8	8	8	1
+BacDive_Uses_galactitol_fermentation_negative	util	Uses	galactitol	neg	measured	8	8	8	1
+BacDive_Uses_galactose_fermentation_negative	util	Uses	galactose	neg	measured	8	8	8	1
+BacDive_Uses_glucuronamide_respiration	util	Uses	glucuronamide	pos	measured	8	8	8	1
+BacDive_Uses_glycogen_respiration	util	Uses	glycogen	pos	measured	8	8	9	1
+BacDive_Uses_glycyl_L-aspartic_acid_respiration	util	Uses	glycyl L-aspartic acid	pos	measured	8	8	8	1
+BacDive_Uses_guanidinium_chloride_negative	util	Uses	guanidinium chloride	neg	measured	8	8	8	1
+BacDive_Uses_hippurate	util	Uses	hippurate	pos	measured	8	8	8	1
+BacDive_Uses_histidine_negative	util	Uses	histidine	neg	measured	8	8	8	1
+BacDive_Uses_hydroxyproline	util	Uses	hydroxyproline	pos	measured	8	8	8	1
+BacDive_Uses_inulin_fermentation	util	Uses	inulin	pos	measured	8	8	8	1
+BacDive_Uses_isocitrate	util	Uses	isocitrate	pos	measured	8	8	8	1
+BacDive_Uses_L-alanine_4-nitroanilide_negative	util	Uses	L-alanine 4-nitroanilide	neg	measured	8	8	8	1
+BacDive_Uses_L-arabitol_fermentation_negative	util	Uses	L-arabitol	neg	measured	8	8	8	1
+BacDive_Uses_L-asparagine_respiration_negative	util	Uses	L-asparagine	neg	measured	8	8	8	1
+BacDive_Uses_L-citrulline_negative	util	Uses	L-citrulline	neg	measured	8	8	8	1
+BacDive_Uses_L-glutamate_respiration_negative	util	Uses	L-glutamate	neg	measured	8	8	8	1
+BacDive_Uses_L-lysine_Nsource_negative	util	Uses	L-lysine	neg	measured	8	8	8	1
+BacDive_Uses_L-tartrate	util	Uses	L-tartrate	pos	measured	8	8	8	1
+BacDive_Uses_lactate_fermentation_negative	util	Uses	lactate	neg	measured	8	8	8	1
+BacDive_Uses_lactose_respiration	util	Uses	lactose	pos	measured	8	8	9	1
+BacDive_Uses_malonate_respiration_negative	util	Uses	malonate	neg	measured	8	8	8	1
+BacDive_Uses_maltotriose_negative	util	Uses	maltotriose	neg	measured	8	8	8	1
+BacDive_Uses_meso-tartrate_negative	util	Uses	meso-tartrate	neg	measured	8	8	8	1
+BacDive_Uses_methyl_(R)-lactate_respiration_negative	util	Uses	methyl (R)-lactate	neg	measured	8	8	8	1
+BacDive_Uses_methyl_beta-D-glucopyranoside_respiration_negative	util	Uses	methyl beta-D-glucopyranoside	neg	measured	8	8	8	1
+BacDive_Uses_nitrite_negative	util	Uses	nitrite	neg	measured	8	8	8	1
+BacDive_Uses_propanol	util	Uses	propanol	pos	measured	8	8	8	1
+BacDive_Uses_putrescine_respiration_negative	util	Uses	putrescine	neg	measured	8	8	8	1
+BacDive_Uses_ribitol_respiration_negative	util	Uses	ribitol	neg	measured	8	8	8	1
+BacDive_Uses_ribose_gas_negative	util	Uses	ribose	neg	measured	8	8	8	1
+BacDive_Uses_starch_fermentation_negative	util	Uses	starch	neg	measured	8	8	8	1
+BacDive_Uses_sulfite	util	Uses	sulfite	pos	measured	8	8	8	1
+BacDive_Uses_sulfite_negative	util	Uses	sulfite	neg	measured	8	8	8	1
+BacDive_Uses_thymidine_respiration_negative	util	Uses	thymidine	neg	measured	8	8	8	1
+BacDive_Uses_urea_fermentation_negative	util	Uses	urea	neg	measured	8	8	8	1
+BacDive_Enzyme_2-nitrophenyl_beta-D-galactopyranoside	enzyme	Enzyme	2-nitrophenyl beta-D-galactopyranoside	pos	measured	7	7	7	1
+BacDive_Enzyme_allantoin	hydrolysis	Enzyme	allantoin	pos	measured	7	7	7	1
+BacDive_Enzyme_L-arginine_negative	hydrolysis	Enzyme	L-arginine	neg	measured	7	7	7	1
+BacDive_Enzyme_milk	hydrolysis	Enzyme	milk	pos	measured	7	7	7	1
+BacDive_Murein_A3alpha_L-Lys-L-Ser-L-Thr-L-Ala	murein	Murein	A3alpha L-Lys-L-Ser-L-Thr-L-Ala	pos	measured	7	7	29	1
+BacDive_Murein_A5alpha_L-Lys-L-Lys-D-Glu	murein	Murein	A5alpha L-Lys-L-Lys-D-Glu	pos	measured	7	7	9	1
+BacDive_Murein_B2beta_{Gly}_[L-Hsr]_D-Glu-D-Orn	murein	Murein	B2beta {Gly} [L-Hsr] D-Glu-D-Orn	pos	measured	7	7	11	1
+BacDive_Prod_isobutyrate	production	Prod	isobutyrate	pos	measured	7	7	7	1
+BacDive_Prod_n-butanol	production	Prod	n-butanol	pos	measured	7	7	74	1
+BacDive_Prod_streptomycin	production	Prod	streptomycin	pos	measured	7	7	9	1
+BacDive_Uses_1_%_sodium_lactate_negative	util	Uses	1 % sodium lactate	neg	measured	7	7	7	1
+BacDive_Uses_2-deoxyadenosine	util	Uses	2-deoxyadenosine	pos	measured	7	7	7	1
+BacDive_Uses_2-oxogluconate_negative	util	Uses	2-oxogluconate	neg	measured	7	7	7	1
+BacDive_Uses_3-O-methyl_alpha-D-glucopyranoside_acid_negative	util	Uses	3-O-methyl alpha-D-glucopyranoside	neg	measured	7	7	7	1
+BacDive_Uses_acetamide	util	Uses	acetamide	pos	measured	7	7	7	1
+BacDive_Uses_aztreonam_respiration	util	Uses	aztreonam	pos	measured	7	7	7	1
+BacDive_Uses_casamino_acids_Nsource	util	Uses	casamino acids	pos	measured	7	7	7	1
+BacDive_Uses_creatine_negative	util	Uses	creatine	neg	measured	7	7	7	1
+BacDive_Uses_creatine_Nsource_negative	util	Uses	creatine	neg	measured	7	7	7	1
+BacDive_Uses_D-fructose_6-phosphate_respiration	util	Uses	D-fructose 6-phosphate	pos	measured	7	7	7	1
+BacDive_Uses_dextrin_acid	util	Uses	dextrin	pos	measured	7	7	7	1
+BacDive_Uses_fucose_acid_negative	util	Uses	fucose	neg	measured	7	7	7	1
+BacDive_Uses_gamma-cyclodextrin	util	Uses	gamma-cyclodextrin	pos	measured	7	7	7	1
+BacDive_Uses_gelatin_fermentation_negative	util	Uses	gelatin	neg	measured	7	7	7	1
+BacDive_Uses_glucose_respiration_negative	util	Uses	glucose	neg	measured	7	7	7	1
+BacDive_Uses_glycerate	util	Uses	glycerate	pos	measured	7	7	7	1
+BacDive_Uses_hydroxyproline_Nsource_negative	util	Uses	hydroxyproline	neg	measured	7	7	7	1
+BacDive_Uses_L-arabinose_respiration_negative	util	Uses	L-arabinose	neg	measured	7	7	7	1
+BacDive_Uses_L-arginine_fermentation_negative	util	Uses	L-arginine	neg	measured	7	7	7	1
+BacDive_Uses_L-arginine_respiration	util	Uses	L-arginine	pos	measured	7	7	7	1
+BacDive_Uses_L-fucose_fermentation_negative	util	Uses	L-fucose	neg	measured	7	7	7	1
+BacDive_Uses_L-isoleucine_negative	util	Uses	L-isoleucine	neg	measured	7	7	7	1
+BacDive_Uses_L-lactate_negative	util	Uses	L-lactate	neg	measured	7	7	7	1
+BacDive_Uses_L-leucine_respiration_negative	util	Uses	L-leucine	neg	measured	7	7	7	1
+BacDive_Uses_L-proline-4-nitroanilide	util	Uses	L-proline-4-nitroanilide	pos	measured	7	7	7	1
+BacDive_Uses_L-threonine_respiration_negative	util	Uses	L-threonine	neg	measured	7	7	7	1
+BacDive_Uses_L-tryptophan_Nsource	util	Uses	L-tryptophan	pos	measured	7	7	7	1
+BacDive_Uses_lactate_respiration_negative	util	Uses	lactate	neg	measured	7	7	7	1
+BacDive_Uses_lactulose_respiration	util	Uses	lactulose	pos	measured	7	7	8	1
+BacDive_Uses_lincomycin_respiration	util	Uses	lincomycin	pos	measured	7	7	7	1
+BacDive_Uses_mannan_negative	util	Uses	mannan	neg	measured	7	7	7	1
+BacDive_Uses_methyl_alpha-D-mannoside_fermentation_negative	util	Uses	methyl alpha-D-mannoside	neg	measured	7	7	7	1
+BacDive_Uses_methyl_alpha-D-xylopyranoside_acid_negative	util	Uses	methyl alpha-D-xylopyranoside	neg	measured	7	7	7	1
+BacDive_Uses_minocycline	util	Uses	minocycline	pos	measured	7	7	7	1
+BacDive_Uses_monomethyl_succinate_respiration_negative	util	Uses	monomethyl succinate	neg	measured	7	7	7	1
+BacDive_Uses_N-acetyl-L-glutamate	util	Uses	N-acetyl-L-glutamate	pos	measured	7	7	7	1
+BacDive_Uses_norleucine_negative	util	Uses	norleucine	neg	measured	7	7	7	1
+BacDive_Uses_pectin_respiration	util	Uses	pectin	pos	measured	7	7	7	1
+BacDive_Uses_pullulan_fermentation	util	Uses	pullulan	pos	measured	7	7	7	1
+BacDive_Uses_salicin_respiration	util	Uses	salicin	pos	measured	7	7	7	1
+BacDive_Uses_salicin_respiration_negative	util	Uses	salicin	neg	measured	7	7	7	1
+BacDive_Uses_sodium_bromate_respiration_negative	util	Uses	sodium bromate	neg	measured	7	7	7	1
+BacDive_Uses_sodium_chloride	util	Uses	sodium chloride	pos	measured	7	7	7	1
+BacDive_Uses_sodium_propionate	util	Uses	sodium propionate	pos	measured	7	7	7	1
+BacDive_Uses_suberate	util	Uses	suberate	pos	measured	7	7	8	1
+BacDive_Uses_succinate_respiration_negative	util	Uses	succinate	neg	measured	7	7	7	1
+BacDive_Uses_sulfate_reduction_negative	util	Uses	sulfate	neg	measured	7	7	7	1
+BacDive_Uses_tartrate	util	Uses	tartrate	pos	measured	7	7	7	1
+BacDive_Uses_urocanic_acid_respiration_negative	util	Uses	urocanic acid	neg	measured	7	7	7	1
+BacDive_Uses_valine_negative	util	Uses	valine	neg	measured	7	7	7	1
+BacDive_Enzyme_4-nitrophenyl_alpha-D-glucopyranoside	hydrolysis	Enzyme	4-nitrophenyl alpha-D-glucopyranoside	pos	measured	6	6	6	1
+BacDive_Enzyme_4-nitrophenyl_beta-D-xylopyranoside	hydrolysis	Enzyme	4-nitrophenyl beta-D-xylopyranoside	pos	measured	6	6	6	1
+BacDive_Enzyme_4-nitrophenyl_beta-D-xylopyranoside_negative	hydrolysis	Enzyme	4-nitrophenyl beta-D-xylopyranoside	neg	measured	6	6	6	1
+BacDive_Enzyme_adenine	hydrolysis	Enzyme	adenine	pos	measured	6	6	6	1
+BacDive_Enzyme_arylsulfatase_negative	enzyme	Enzyme	arylsulfatase	neg	measured	6	6	6	1
+BacDive_Enzyme_bis-4-nitrophenyl-phosphorylcholine	hydrolysis	Enzyme	bis-4-nitrophenyl-phosphorylcholine	pos	measured	6	6	6	1
+BacDive_Enzyme_coagulase	enzyme	Enzyme	coagulase	pos	measured	6	6	85	1
+BacDive_Enzyme_crab_shell_chitin_negative	hydrolysis	Enzyme	crab shell chitin	neg	measured	6	6	6	1
+BacDive_Enzyme_crystalline_cellulose_negative	hydrolysis	Enzyme	crystalline cellulose	neg	measured	6	6	6	1
+BacDive_Enzyme_L-proline-4-nitroanilide_negative	hydrolysis	Enzyme	L-proline-4-nitroanilide	neg	measured	6	6	6	1
+BacDive_Enzyme_N-acetylglucosamine	hydrolysis	Enzyme	N-acetylglucosamine	pos	measured	6	6	6	1
+BacDive_Enzyme_pectin	hydrolysis	Enzyme	pectin	pos	measured	6	6	7	1
+BacDive_Enzyme_phosphohydrolase	enzyme	Enzyme	phosphohydrolase	pos	measured	6	6	6	1
+BacDive_Murein_A3alpha_L-Lys-L-Ala4	murein	Murein	A3alpha L-Lys-L-Ala4	pos	measured	6	6	10	1.5
+BacDive_Murein_A3alpha_L-Lys-L-Thr-L-Ala	murein	Murein	A3alpha L-Lys-L-Thr-L-Ala	pos	measured	6	6	7	1
+BacDive_Murein_A3alpha_L-Lys-L-Thr-L-Ala3	murein	Murein	A3alpha L-Lys-L-Thr-L-Ala3	pos	measured	6	6	24	1
+BacDive_Murein_A4alpha_L-Lys-L-Glu	murein	Murein	A4alpha L-Lys-L-Glu	pos	measured	6	6	7	1
+BacDive_Murein_A4gamma_m-Dpm-D-Glu2_alpha-carboxyl_group_of_D-Glu_substituted_by_glycine	murein	Murein	A4gamma m-Dpm-D-Glu2, alpha-carboxyl group of D-Glu substituted by glycine	pos	measured	6	6	7	1
+BacDive_Murein_B1alpha_{Gly}_[L-Lys]_D-Glu(Hyg)-Gly-L-Lys	murein	Murein	B1alpha {Gly} [L-Lys] D-Glu(Hyg)-Gly-L-Lys	pos	measured	6	6	7	1
+BacDive_Prod_isovalerate	production	Prod	isovalerate	pos	measured	6	6	6	1
+BacDive_Prod_succinate	production	Prod	succinate	pos	measured	6	6	6	1
+BacDive_Produces_bacteriocin	compound_class	Produces	bacteriocin	pos	measured	8	6	10	1
+BacDive_Uses_(R)-lactate	util	Uses	(R)-lactate	pos	measured	6	6	6	1
+BacDive_Uses_2-deoxyadenosine_negative	util	Uses	2-deoxyadenosine	neg	measured	6	6	6	1
+BacDive_Uses_2-oxopentanoate_respiration	util	Uses	2-oxopentanoate	pos	measured	6	6	7	1
+BacDive_Uses_3-aminobutyrate_negative	util	Uses	3-aminobutyrate	neg	measured	6	6	6	1
+BacDive_Uses_3-phenylpropionate_negative	util	Uses	3-phenylpropionate	neg	measured	6	6	6	1
+BacDive_Uses_4-hydroxybutyrate_respiration	util	Uses	4-hydroxybutyrate	pos	measured	6	6	6	1
+BacDive_Uses_4-hydroxyphenylacetic_acid_respiration	util	Uses	4-hydroxyphenylacetic acid	pos	measured	6	6	6	1
+BacDive_Uses_4-nitrophenyl_beta-D-galactopyranoside_hydrolysate	util	Uses	4-nitrophenyl beta-D-galactopyranoside hydrolysate	pos	measured	6	6	6	1
+BacDive_Uses_acetoin_negative	util	Uses	acetoin	neg	measured	6	6	6	1
+BacDive_Uses_adenosine_negative	util	Uses	adenosine	neg	measured	6	6	6	1
+BacDive_Uses_alginate	util	Uses	alginate	pos	measured	6	6	6	1
+BacDive_Uses_alpha-D-glucose_6-phosphate	util	Uses	alpha-D-glucose 6-phosphate	pos	measured	6	6	6	1
+BacDive_Uses_alpha-lactose_acid	util	Uses	alpha-lactose	pos	measured	6	6	6	1
+BacDive_Uses_ammonium_chloride_Nsource	util	Uses	ammonium chloride	pos	measured	6	6	6	1
+BacDive_Uses_arbutin_fermentation	util	Uses	arbutin	pos	measured	6	6	6	1
+BacDive_Uses_arginine_Nsource	util	Uses	arginine	pos	measured	6	6	6	1
+BacDive_Uses_beta-cyclodextrin	util	Uses	beta-cyclodextrin	pos	measured	6	6	6	1
+BacDive_Uses_beta-gentiobiose	util	Uses	beta-gentiobiose	pos	measured	6	6	6	1
+BacDive_Uses_casamino_acids	util	Uses	casamino acids	pos	measured	6	6	6	1
+BacDive_Uses_chitosan	util	Uses	chitosan	pos	measured	6	6	6	1
+BacDive_Uses_citrate_acid	util	Uses	citrate	pos	measured	6	6	6	1
+BacDive_Uses_coumarate_negative	util	Uses	coumarate	neg	measured	6	6	6	1
+BacDive_Uses_cysteine_Nsource_negative	util	Uses	cysteine	neg	measured	6	6	6	1
+BacDive_Uses_disodium_fumarate_negative	util	Uses	disodium fumarate	neg	measured	6	6	6	1
+BacDive_Uses_egg_yolk_negative	util	Uses	egg yolk	neg	measured	6	6	6	1
+BacDive_Uses_esculin_fermentation	util	Uses	esculin	pos	measured	6	6	6	1
+BacDive_Uses_ethanol_acid_negative	util	Uses	ethanol	neg	measured	6	6	6	1
+BacDive_Uses_ethylamine_negative	util	Uses	ethylamine	neg	measured	6	6	6	1
+BacDive_Uses_gelatin_acid	util	Uses	gelatin	pos	measured	6	6	6	1
+BacDive_Uses_gentiobiose_fermentation_negative	util	Uses	gentiobiose	neg	measured	6	6	6	1
+BacDive_Uses_glucose_1-phosphate_respiration	util	Uses	glucose 1-phosphate	pos	measured	6	6	6	1
+BacDive_Uses_glutamine_Nsource	util	Uses	glutamine	pos	measured	6	6	6	1
+BacDive_Uses_glutarate_negative	util	Uses	glutarate	neg	measured	6	6	6	1
+BacDive_Uses_glycerol_1-phosphate_respiration	util	Uses	glycerol 1-phosphate	pos	measured	6	6	6	1
+BacDive_Uses_glycerol_1-phosphate_respiration_negative	util	Uses	glycerol 1-phosphate	neg	measured	6	6	6	1
+BacDive_Uses_glycerol_3-phosphate	util	Uses	glycerol 3-phosphate	pos	measured	6	6	6	1
+BacDive_Uses_glycine-proline_respiration	util	Uses	glycine-proline	pos	measured	6	6	6	1
+BacDive_Uses_glycyl-l-glutamate_respiration_negative	util	Uses	glycyl-l-glutamate	neg	measured	6	6	6	1
+BacDive_Uses_guanidinium_chloride_respiration_negative	util	Uses	guanidinium chloride	neg	measured	6	6	6	1
+BacDive_Uses_hippurate_negative	util	Uses	hippurate	neg	measured	6	6	6	1
+BacDive_Uses_inuline_fermentation_negative	util	Uses	inuline	neg	measured	8	6	618	13.5
+BacDive_Uses_isocitrate_negative	util	Uses	isocitrate	neg	measured	6	6	6	1
+BacDive_Uses_L-alanylglycine_respiration_negative	util	Uses	L-alanylglycine	neg	measured	6	6	6	1
+BacDive_Uses_L-arginine_respiration_negative	util	Uses	L-arginine	neg	measured	6	6	6	1
+BacDive_Uses_L-pyroglutamic_acid_2-naphthylamide_negative	util	Uses	L-pyroglutamic acid 2-naphthylamide	neg	measured	6	6	6	1
+BacDive_Uses_L-sorbose_fermentation_negative	util	Uses	L-sorbose	neg	measured	6	6	6	1
+BacDive_Uses_leucine_negative	util	Uses	leucine	neg	measured	6	6	6	1
+BacDive_Uses_lysine_Nsource	util	Uses	lysine	pos	measured	6	6	6	1
+BacDive_Uses_maleic_acid_negative	util	Uses	maleic acid	neg	measured	6	6	6	1
+BacDive_Uses_meso-tartrate	util	Uses	meso-tartrate	pos	measured	6	6	6	1
+BacDive_Uses_methyl_D-glucoside_respiration	util	Uses	methyl D-glucoside	pos	measured	6	6	6	1
+BacDive_Uses_methylamine	util	Uses	methylamine	pos	measured	6	6	6	1
+BacDive_Uses_pectin_fermentation	util	Uses	pectin	pos	measured	6	6	6	1
+BacDive_Uses_pimelate_negative	util	Uses	pimelate	neg	measured	6	6	6	1
+BacDive_Uses_proline_negative	util	Uses	proline	neg	measured	6	6	6	1
+BacDive_Uses_psicose_negative	util	Uses	psicose	neg	measured	6	6	6	1
+BacDive_Uses_rifamycin_sv_respiration	util	Uses	rifamycin sv	pos	measured	6	6	6	1
+BacDive_Uses_salicin_gas_negative	util	Uses	salicin	neg	measured	6	6	6	1
+BacDive_Uses_sodium_lactate	util	Uses	sodium lactate	pos	measured	6	6	6	1
+BacDive_Uses_sodium_lactate_negative	util	Uses	sodium lactate	neg	measured	6	6	6	1
+BacDive_Uses_sodium_succinate	util	Uses	sodium succinate	pos	measured	6	6	6	1
+BacDive_Uses_succinamate_respiration	util	Uses	succinamate	pos	measured	6	6	6	1
+BacDive_Uses_threonine_negative	util	Uses	threonine	neg	measured	6	6	6	1
+BacDive_Uses_thymidine_respiration	util	Uses	thymidine	pos	measured	6	6	6	1
+BacDive_Uses_trigonelline	util	Uses	trigonelline	pos	measured	6	6	6	1
+BacDive_Uses_tryptamine	util	Uses	tryptamine	pos	measured	6	6	6	1
+BacDive_Uses_urea_Nsource	util	Uses	urea	pos	measured	6	6	6	1
+BacDive_Uses_uridine_5'-monophosphate_negative	util	Uses	uridine 5'-monophosphate	neg	measured	6	6	6	1
+BacDive_Uses_urocanic_acid_respiration	util	Uses	urocanic acid	pos	measured	6	6	6	1
+BacDive_Uses_yeast_extract_negative	util	Uses	yeast extract	neg	measured	6	6	6	1
+BacDive_Enzyme_2-nitrophenyl_beta-D-galactopyranoside_negative	enzyme	Enzyme	2-nitrophenyl beta-D-galactopyranoside	neg	measured	5	5	5	1
+BacDive_Enzyme_4-nitrophenyl_alpha-D-glucopyranoside_negative	hydrolysis	Enzyme	4-nitrophenyl alpha-D-glucopyranoside	neg	measured	5	5	5	1
+BacDive_Enzyme_4-nitrophenyl_beta-D-glucopyranoside_negative	hydrolysis	Enzyme	4-nitrophenyl beta-D-glucopyranoside	neg	measured	5	5	5	1
+BacDive_Enzyme_beta-galactopyranosidase	enzyme	Enzyme	beta-galactopyranosidase	pos	measured	5	5	5	1
+BacDive_Enzyme_beta-glucoronidase_negative	enzyme	Enzyme	beta-glucoronidase	neg	measured	5	5	5	1
+BacDive_Enzyme_beta-xylosidase_negative	enzyme	Enzyme	beta-xylosidase	neg	measured	5	5	5	1
+BacDive_Enzyme_lysine_negative	hydrolysis	Enzyme	lysine	neg	measured	5	5	5	1
+BacDive_Enzyme_ornithine_negative	hydrolysis	Enzyme	ornithine	neg	measured	5	5	5	1
+BacDive_Enzyme_p-nitrophenyl_phenyl_phosphonate_negative	hydrolysis	Enzyme	p-nitrophenyl phenyl phosphonate	neg	measured	5	5	5	1
+BacDive_Murein_A3alpha_L-Lys-L-Thr-L-Ala2	murein	Murein	A3alpha L-Lys-L-Thr-L-Ala2	pos	measured	5	5	5	1
+BacDive_Murein_A3gamma'_LL-Dpm-Gly	murein	Murein	A3gamma' LL-Dpm-Gly	pos	measured	5	5	5	1
+BacDive_Murein_A4alpha_L-Lys-D-Glu	murein	Murein	A4alpha L-Lys-D-Glu	pos	measured	5	5	5	1
+BacDive_Nutrition_chemolithoautotroph	nutrition_type	Nutrition	chemolithoautotroph	pos	measured	5	5	5	1
+BacDive_Nutrition_methylotroph	nutrition_type	Nutrition	methylotroph	pos	measured	5	5	5	1
+BacDive_Prod_2-dehydro-D-gluconate	production	Prod	2-dehydro-D-gluconate	pos	measured	5	5	5	1
+BacDive_Prod_5-dehydro-D-gluconate_negative	production	Prod	5-dehydro-D-gluconate	neg	measured	5	5	5	1
+BacDive_Prod_acetone	production	Prod	acetone	pos	measured	5	5	77	5
+BacDive_Prod_actinomycin_X	production	Prod	actinomycin X	pos	measured	5	5	5	1
+BacDive_Prod_dihydroxyacetone_negative	production	Prod	dihydroxyacetone	neg	measured	5	5	5	1
+BacDive_Prod_oxytetracycline	production	Prod	oxytetracycline	pos	measured	5	5	6	1
+BacDive_Prod_sulfide	production	Prod	sulfide	pos	measured	5	5	5	1
+BacDive_Shape_spore-shaped	shape	Shape	spore-shaped	pos	measured	5	5	5	1
+BacDive_Tolerance_bile_tolerance	tolerance	Tolerance	bile tolerance	pos	measured	5	5	5	1
+BacDive_Uses_(-)-quinic_acid_respiration_negative	util	Uses	(-)-quinic acid	neg	measured	5	5	5	1
+BacDive_Uses_(S)-mandelic_acid_negative	util	Uses	(S)-mandelic acid	neg	measured	5	5	5	1
+BacDive_Uses_4-aminobutyrate	util	Uses	4-aminobutyrate	pos	measured	5	5	5	1
+BacDive_Uses_5-aminovaleric_acid	util	Uses	5-aminovaleric acid	pos	measured	5	5	5	1
+BacDive_Uses_5-aminovaleric_acid_negative	util	Uses	5-aminovaleric acid	neg	measured	5	5	5	1
+BacDive_Uses_adenine_Nsource_negative	util	Uses	adenine	neg	measured	5	5	5	1
+BacDive_Uses_amp_negative	util	Uses	amp	neg	measured	5	5	5	1
+BacDive_Uses_arabinitol	util	Uses	arabinitol	pos	measured	5	5	5	1
+BacDive_Uses_arbutin_fermentation_negative	util	Uses	arbutin	neg	measured	5	5	5	1
+BacDive_Uses_aspartate_Nsource	util	Uses	aspartate	pos	measured	5	5	5	1
+BacDive_Uses_beta-D-glucuronic_acid_negative	util	Uses	beta-D-glucuronic acid	neg	measured	5	5	5	1
+BacDive_Uses_beta-gentiobiose_negative	util	Uses	beta-gentiobiose	neg	measured	5	5	5	1
+BacDive_Uses_cellobiose_gas_negative	util	Uses	cellobiose	neg	measured	5	5	5	1
+BacDive_Uses_crotonate_negative	util	Uses	crotonate	neg	measured	5	5	5	1
+BacDive_Uses_cyclodextrin_negative	util	Uses	cyclodextrin	neg	measured	5	5	5	1
+BacDive_Uses_cysteine	util	Uses	cysteine	pos	measured	5	5	5	1
+BacDive_Uses_D-arabinose_fermentation	util	Uses	D-arabinose	pos	measured	5	5	5	1
+BacDive_Uses_D-arabitol_fermentation	util	Uses	D-arabitol	pos	measured	5	5	5	1
+BacDive_Uses_D-aspartate_respiration	util	Uses	D-aspartate	pos	measured	5	5	5	1
+BacDive_Uses_D-fucose_fermentation_negative	util	Uses	D-fucose	neg	measured	5	5	5	1
+BacDive_Uses_D-galactonate	util	Uses	D-galactonate	pos	measured	5	5	5	1
+BacDive_Uses_D-galactonic_acid_lactone_respiration	util	Uses	D-galactonic acid lactone	pos	measured	5	5	5	1
+BacDive_Uses_D-lactic_acid_methyl_ester	util	Uses	D-lactic acid methyl ester	pos	measured	5	5	5	1
+BacDive_Uses_D-rhamnose_acid_negative	util	Uses	D-rhamnose	neg	measured	5	5	5	1
+BacDive_Uses_D-saccharate_respiration	util	Uses	D-saccharate	pos	measured	5	5	5	1
+BacDive_Uses_D-serine_respiration	util	Uses	D-serine	pos	measured	5	5	5	1
+BacDive_Uses_D-tagatose_fermentation_negative	util	Uses	D-tagatose	neg	measured	5	5	5	1
+BacDive_Uses_D-xylose_gas_negative	util	Uses	D-xylose	neg	measured	5	5	5	1
+BacDive_Uses_dextran	util	Uses	dextran	pos	measured	5	5	5	1
+BacDive_Uses_dihydrogen	util	Uses	dihydrogen	pos	measured	5	5	5	1
+BacDive_Uses_formate_respiration	util	Uses	formate	pos	measured	5	5	5	1
+BacDive_Uses_fucose_acid	util	Uses	fucose	pos	measured	5	5	5	1
+BacDive_Uses_fumarate_fermentation	util	Uses	fumarate	pos	measured	5	5	5	1
+BacDive_Uses_galactarate_respiration	util	Uses	galactarate	pos	measured	5	5	5	1
+BacDive_Uses_gamma-cyclodextrin_negative	util	Uses	gamma-cyclodextrin	neg	measured	5	5	5	1
+BacDive_Uses_gelatin_respiration	util	Uses	gelatin	pos	measured	5	5	5	1
+BacDive_Uses_gentiobiose_fermentation	util	Uses	gentiobiose	pos	measured	5	5	5	1
+BacDive_Uses_gluconate_fermentation_negative	util	Uses	gluconate	neg	measured	5	5	5	1
+BacDive_Uses_glycerate_negative	util	Uses	glycerate	neg	measured	5	5	5	1
+BacDive_Uses_glycerol_3-phosphate_acid_negative	util	Uses	glycerol 3-phosphate	neg	measured	5	5	5	1
+BacDive_Uses_glycerol_gas_negative	util	Uses	glycerol	neg	measured	5	5	5	1
+BacDive_Uses_guanine	util	Uses	guanine	pos	measured	5	5	5	1
+BacDive_Uses_hexadecane_negative	util	Uses	hexadecane	neg	measured	5	5	5	1
+BacDive_Uses_hydroxyproline_negative	util	Uses	hydroxyproline	neg	measured	5	5	5	1
+BacDive_Uses_indole	util	Uses	indole	pos	measured	5	5	6	1
+BacDive_Uses_isoleucine_Nsource	util	Uses	isoleucine	pos	measured	5	5	5	1
+BacDive_Uses_L-arabinose_gas_negative	util	Uses	L-arabinose	neg	measured	5	5	5	1
+BacDive_Uses_L-cystine_negative	util	Uses	L-cystine	neg	measured	5	5	5	1
+BacDive_Uses_L-isoleucine_Nsource_negative	util	Uses	L-isoleucine	neg	measured	5	5	5	1
+BacDive_Uses_L-leucine_respiration	util	Uses	L-leucine	pos	measured	5	5	5	1
+BacDive_Uses_L-lyxose_acid_negative	util	Uses	L-lyxose	neg	measured	5	5	5	1
+BacDive_Uses_L-ornithine_respiration	util	Uses	L-ornithine	pos	measured	5	5	6	1
+BacDive_Uses_L-proline_respiration_negative	util	Uses	L-proline	neg	measured	5	5	5	1
+BacDive_Uses_lactamide	util	Uses	lactamide	pos	measured	5	5	5	1
+BacDive_Uses_lactamide_negative	util	Uses	lactamide	neg	measured	5	5	5	1
+BacDive_Uses_lactate_fermentation	util	Uses	lactate	pos	measured	5	5	6	1
+BacDive_Uses_lecithin_negative	util	Uses	lecithin	neg	measured	5	5	5	1
+BacDive_Uses_maltodextrin_fermentation	util	Uses	maltodextrin	pos	measured	5	5	5	1
+BacDive_Uses_melezitose_fermentation	util	Uses	melezitose	pos	measured	5	5	5	1
+BacDive_Uses_methyl_alpha-D-galactoside	util	Uses	methyl alpha-D-galactoside	pos	measured	5	5	5	1
+BacDive_Uses_methyl_beta-D-xylopyranoside_fermentation_negative	util	Uses	methyl beta-D-xylopyranoside	neg	measured	5	5	5	1
+BacDive_Uses_methyl_D-glucoside_respiration_negative	util	Uses	methyl D-glucoside	neg	measured	5	5	5	1
+BacDive_Uses_N-acetyl-beta-D-mannosamine_respiration	util	Uses	N-acetyl-beta-D-mannosamine	pos	measured	5	5	5	1
+BacDive_Uses_N-acetyl-beta-D-mannosamine_respiration_negative	util	Uses	N-acetyl-beta-D-mannosamine	neg	measured	5	5	5	1
+BacDive_Uses_N-acetyl-L-glutamate_negative	util	Uses	N-acetyl-L-glutamate	neg	measured	5	5	5	1
+BacDive_Uses_nalidixic_acid_respiration	util	Uses	nalidixic acid	pos	measured	5	5	5	1
+BacDive_Uses_nalidixic_acid_respiration_negative	util	Uses	nalidixic acid	neg	measured	5	5	5	1
+BacDive_Uses_niaproof_respiration_negative	util	Uses	niaproof	neg	measured	5	5	5	1
+BacDive_Uses_nitrate_Nsource_negative	util	Uses	nitrate	neg	measured	5	5	5	1
+BacDive_Uses_nonanoate_negative	util	Uses	nonanoate	neg	measured	5	5	5	1
+BacDive_Uses_phthalate_negative	util	Uses	phthalate	neg	measured	5	5	5	1
+BacDive_Uses_potassium_gluconate_fermentation	util	Uses	potassium gluconate	pos	measured	5	5	5	1
+BacDive_Uses_protocatechuate_negative	util	Uses	protocatechuate	neg	measured	5	5	5	1
+BacDive_Uses_putrescine_respiration	util	Uses	putrescine	pos	measured	5	5	5	1
+BacDive_Uses_pyruvate_respiration	util	Uses	pyruvate	pos	measured	5	5	5	1
+BacDive_Uses_ribitol_respiration	util	Uses	ribitol	pos	measured	5	5	5	1
+BacDive_Uses_sedoheptulosan_negative	util	Uses	sedoheptulosan	neg	measured	5	5	5	1
+BacDive_Uses_starch_gas_negative	util	Uses	starch	neg	measured	5	5	5	1
+BacDive_Uses_tagatose_acid	util	Uses	tagatose	pos	measured	5	5	5	1
+BacDive_Uses_thymidine_5'-monophosphate_negative	util	Uses	thymidine 5'-monophosphate	neg	measured	5	5	5	1
+BacDive_Uses_tributyrin	util	Uses	tributyrin	pos	measured	5	5	5	1
+BacDive_Uses_tricarballylate	util	Uses	tricarballylate	pos	measured	5	5	5	1
+BacDive_Uses_troleandomycin_negative	util	Uses	troleandomycin	neg	measured	5	5	5	1
+BacDive_Uses_valine	util	Uses	valine	pos	measured	5	5	5	1
+BacDive_Uses_vancomycin_negative	util	Uses	vancomycin	neg	measured	5	5	5	1
+BacDive_Uses_xylitol_respiration	util	Uses	xylitol	pos	measured	5	5	5	1
+BacDive_Enzyme_2-deoxythymidine-5'-4-nitrophenyl_phosphate	hydrolysis	Enzyme	2-deoxythymidine-5'-4-nitrophenyl phosphate	pos	measured	4	4	4	1
+BacDive_Enzyme_4-nitrophenyl_beta-D-galactopyranoside_hydrolysate	hydrolysis	Enzyme	4-nitrophenyl beta-D-galactopyranoside hydrolysate	pos	measured	4	4	4	1
+BacDive_Enzyme_4-nitrophenyl_N-acetyl-beta-D-glucosaminide_negative	hydrolysis	Enzyme	4-nitrophenyl N-acetyl-beta-D-glucosaminide	neg	measured	4	4	4	1
+BacDive_Enzyme_acetamide_negative	hydrolysis	Enzyme	acetamide	neg	measured	4	4	4	1
+BacDive_Enzyme_allantoin_negative	hydrolysis	Enzyme	allantoin	neg	measured	4	4	4	1
+BacDive_Enzyme_arginine_decarboxylase	enzyme	Enzyme	arginine decarboxylase	pos	measured	4	4	4	1
+BacDive_Enzyme_beta-galactopyranosidase_negative	enzyme	Enzyme	beta-galactopyranosidase	neg	measured	4	4	4	1
+BacDive_Enzyme_beta-xylosidase	enzyme	Enzyme	beta-xylosidase	pos	measured	4	4	4	1
+BacDive_Enzyme_bis-4-nitrophenyl_phosphate_negative	hydrolysis	Enzyme	bis-4-nitrophenyl phosphate	neg	measured	4	4	4	1
+BacDive_Enzyme_citrate_negative	hydrolysis	Enzyme	citrate	neg	measured	4	4	4	1
+BacDive_Enzyme_dextrin_negative	hydrolysis	Enzyme	dextrin	neg	measured	4	4	4	1
+BacDive_Enzyme_egg_yolk_negative	hydrolysis	Enzyme	egg yolk	neg	measured	4	4	4	1
+BacDive_Enzyme_galacturonidase_negative	enzyme	Enzyme	galacturonidase	neg	measured	4	4	4	1
+BacDive_Enzyme_gamma-L-glutamate-4-nitroanilide	hydrolysis	Enzyme	gamma-L-glutamate-4-nitroanilide	pos	measured	4	4	4	1
+BacDive_Enzyme_glucuronidase_negative	enzyme	Enzyme	glucuronidase	neg	measured	4	4	4	1
+BacDive_Enzyme_glutamyl_arylamidase_pNA	enzyme	Enzyme	glutamyl arylamidase pNA	pos	measured	4	4	4	1
+BacDive_Enzyme_guanine	hydrolysis	Enzyme	guanine	pos	measured	4	4	4	1
+BacDive_Enzyme_milk_negative	hydrolysis	Enzyme	milk	neg	measured	4	4	4	1
+BacDive_Enzyme_trehalose_negative	hydrolysis	Enzyme	trehalose	neg	measured	4	4	4	1
+BacDive_Murein_A3alpha_L-Lys-L-Ala-L-Ser	murein	Murein	A3alpha L-Lys-L-Ala-L-Ser	pos	measured	4	4	5	1
+BacDive_Murein_A3alpha_L-Lys-L-Thr-L-Ser(L-Ala)	murein	Murein	A3alpha L-Lys-L-Thr-L-Ser(L-Ala)	pos	measured	4	4	7	1.5
+BacDive_Murein_A3alpha_L-Lys(L-Orn)-L-Ala(L-Ser)-L-Ala2	murein	Murein	A3alpha L-Lys(L-Orn)-L-Ala(L-Ser)-L-Ala2	pos	measured	5	4	7	1
+BacDive_Murein_A3alpha_L-Lys(L-Orn)-L-Ala2-L-Ser	murein	Murein	A3alpha L-Lys(L-Orn)-L-Ala2-L-Ser	pos	measured	4	4	6	1.5
+BacDive_Murein_A4alpha_L-Lys(L-Orn)-D-Asp	murein	Murein	A4alpha L-Lys(L-Orn)-D-Asp	pos	measured	4	4	11	3
+BacDive_Murein_A4gamma_m-Dpm-D-Asp-D-Glu_alpha-carboxyl_group_of_D-Glu_substituted_by_glycine	murein	Murein	A4gamma m-Dpm-D-Asp-D-Glu, alpha-carboxyl group of D-Glu substituted by glycine	pos	measured	4	4	4	1
+BacDive_Murein_A5alpha_L-Lys-L-Ala-L-Lys-D-Glu	murein	Murein	A5alpha L-Lys-L-Ala-L-Lys-D-Glu	pos	measured	4	4	7	1.5
+BacDive_Murein_A5beta_L-Orn-L-Lys-D-Glu	murein	Murein	A5beta L-Orn-L-Lys-D-Glu	pos	measured	4	4	4	1
+BacDive_Murein_B1beta_{Gly}_[L-Hsr]_D-Glu(Hyg)-Gly2-L-Lys	murein	Murein	B1beta {Gly} [L-Hsr] D-Glu(Hyg)-Gly2-L-Lys	pos	measured	4	4	4	1
+BacDive_Prod_(R)-lactate	production	Prod	(R)-lactate	pos	measured	4	4	4	1
+BacDive_Prod_(S)-lactate	production	Prod	(S)-lactate	pos	measured	4	4	4	1
+BacDive_Prod_2-dehydro-D-gluconate_negative	production	Prod	2-dehydro-D-gluconate	neg	measured	4	4	4	1
+BacDive_Prod_actinomycin	production	Prod	actinomycin	pos	measured	4	4	4	1
+BacDive_Prod_amicetin	production	Prod	amicetin	pos	measured	4	4	4	1
+BacDive_Prod_bambermycin	production	Prod	bambermycin	pos	measured	4	4	4	1
+BacDive_Prod_elemental_sulfur_negative	production	Prod	elemental sulfur	neg	measured	4	4	4	1
+BacDive_Prod_hydroxystreptomycin	production	Prod	hydroxystreptomycin	pos	measured	4	4	5	1
+BacDive_Prod_vitamin_B12	production	Prod	vitamin B12	pos	measured	4	4	4	1
+BacDive_Produces_exopolysaccharide	compound_class	Produces	exopolysaccharide	pos	measured	4	4	4	1
+BacDive_Shape_other	shape	Shape	other	pos	measured	4	4	4	1
+BacDive_Uses_(-)-D-fructose	util	Uses	(-)-D-fructose	pos	measured	4	4	4	1
+BacDive_Uses_(R)-lactate_negative	util	Uses	(R)-lactate	neg	measured	4	4	4	1
+BacDive_Uses_(R)-mandelate_negative	util	Uses	(R)-mandelate	neg	measured	4	4	4	1
+BacDive_Uses_1_%_sodium_lactate_respiration	util	Uses	1 % sodium lactate	pos	measured	4	4	4	1
+BacDive_Uses_1,2-propandiol_negative	util	Uses	1, 2-propandiol	neg	measured	4	4	4	1
+BacDive_Uses_2-aminobutyrate_negative	util	Uses	2-aminobutyrate	neg	measured	4	4	4	1
+BacDive_Uses_3-O-methyl-D-glucose_respiration	util	Uses	3-O-methyl-D-glucose	pos	measured	4	4	4	1
+BacDive_Uses_4-oxopentanoate	util	Uses	4-oxopentanoate	pos	measured	4	4	4	1
+BacDive_Uses_5-dehydro-D-gluconate_fermentation_negative	util	Uses	5-dehydro-D-gluconate	neg	measured	4	4	4	1
+BacDive_Uses_aconitate_negative	util	Uses	aconitate	neg	measured	4	4	4	1
+BacDive_Uses_allantoin_negative	util	Uses	allantoin	neg	measured	4	4	4	1
+BacDive_Uses_alpha-hydroxybutyrate	util	Uses	alpha-hydroxybutyrate	pos	measured	4	4	4	1
+BacDive_Uses_amp	util	Uses	amp	pos	measured	4	4	4	1
+BacDive_Uses_arginine_acid_negative	util	Uses	arginine	neg	measured	4	4	4	1
+BacDive_Uses_benzylamine_negative	util	Uses	benzylamine	neg	measured	4	4	4	1
+BacDive_Uses_beta-cyclodextrin_negative	util	Uses	beta-cyclodextrin	neg	measured	4	4	4	1
+BacDive_Uses_beta-hydroxybutyrate_respiration	util	Uses	beta-hydroxybutyrate	pos	measured	4	4	4	1
+BacDive_Uses_biotin	util	Uses	biotin	pos	measured	4	4	4	1
+BacDive_Uses_butan-1-amine_negative	util	Uses	butan-1-amine	neg	measured	4	4	4	1
+BacDive_Uses_cellulose_fermentation_negative	util	Uses	cellulose	neg	measured	4	4	4	1
+BacDive_Uses_cetrimide_negative	util	Uses	cetrimide	neg	measured	4	4	4	1
+BacDive_Uses_chitosan_negative	util	Uses	chitosan	neg	measured	4	4	4	1
+BacDive_Uses_D-fructose_6-phosphate_respiration_negative	util	Uses	D-fructose 6-phosphate	neg	measured	4	4	4	1
+BacDive_Uses_D-glucosamine_negative	util	Uses	D-glucosamine	neg	measured	4	4	4	1
+BacDive_Uses_D-lyxose_fermentation_negative	util	Uses	D-lyxose	neg	measured	4	4	4	1
+BacDive_Uses_D-serine_Nsource_negative	util	Uses	D-serine	neg	measured	4	4	4	1
+BacDive_Uses_decanoate_acid_negative	util	Uses	decanoate	neg	measured	4	4	4	1
+BacDive_Uses_elastin_negative	util	Uses	elastin	neg	measured	4	4	4	1
+BacDive_Uses_erythritol_respiration	util	Uses	erythritol	pos	measured	4	4	4	1
+BacDive_Uses_esculin_fermentation_negative	util	Uses	esculin	neg	measured	4	4	4	1
+BacDive_Uses_ethanol_acid	util	Uses	ethanol	pos	measured	4	4	4	1
+BacDive_Uses_ethylene_glycol_acid_negative	util	Uses	ethylene glycol	neg	measured	4	4	4	1
+BacDive_Uses_ferric_iron_negative	util	Uses	ferric iron	neg	measured	4	4	4	1
+BacDive_Uses_fumarate_fermentation_negative	util	Uses	fumarate	neg	measured	4	4	4	1
+BacDive_Uses_fusidate_respiration_negative	util	Uses	fusidate	neg	measured	4	4	4	1
+BacDive_Uses_glutamine_negative	util	Uses	glutamine	neg	measured	4	4	4	1
+BacDive_Uses_glutamyl-glutamic_acid	util	Uses	glutamyl-glutamic acid	pos	measured	4	4	4	1
+BacDive_Uses_glycol_acid_negative	util	Uses	glycol	neg	measured	4	4	4	1
+BacDive_Uses_glyoxylate_negative	util	Uses	glyoxylate	neg	measured	4	4	4	1
+BacDive_Uses_H2S	util	Uses	H2S	pos	measured	4	4	4	1
+BacDive_Uses_heptanoate_negative	util	Uses	heptanoate	neg	measured	4	4	4	1
+BacDive_Uses_hexadecanoate_negative	util	Uses	hexadecanoate	neg	measured	4	4	4	1
+BacDive_Uses_histamine	util	Uses	histamine	pos	measured	4	4	4	1
+BacDive_Uses_hydroxyproline_Nsource	util	Uses	hydroxyproline	pos	measured	4	4	4	1
+BacDive_Uses_hypoxanthine_Nsource	util	Uses	hypoxanthine	pos	measured	4	4	4	1
+BacDive_Uses_isobutyrate	util	Uses	isobutyrate	pos	measured	4	4	4	1
+BacDive_Uses_isoleucine_negative	util	Uses	isoleucine	neg	measured	4	4	4	1
+BacDive_Uses_isophthalate_negative	util	Uses	isophthalate	neg	measured	4	4	4	1
+BacDive_Uses_isovalerate	util	Uses	isovalerate	pos	measured	4	4	4	1
+BacDive_Uses_L-arginine_acid_negative	util	Uses	L-arginine	neg	measured	4	4	4	1
+BacDive_Uses_L-cystine_Nsource	util	Uses	L-cystine	pos	measured	4	4	4	1
+BacDive_Uses_L-leucine_Nsource_negative	util	Uses	L-leucine	neg	measured	4	4	4	1
+BacDive_Uses_L-lyxose	util	Uses	L-lyxose	pos	measured	4	4	4	1
+BacDive_Uses_L-methionine	util	Uses	L-methionine	pos	measured	4	4	4	1
+BacDive_Uses_L-tryptophan_acid_negative	util	Uses	L-tryptophan	neg	measured	4	4	4	1
+BacDive_Uses_L-xylose_fermentation_negative	util	Uses	L-xylose	neg	measured	4	4	4	1
+BacDive_Uses_lyxose_acid	util	Uses	lyxose	pos	measured	4	4	4	1
+BacDive_Uses_lyxose_acid_negative	util	Uses	lyxose	neg	measured	4	4	4	1
+BacDive_Uses_malate_acid_negative	util	Uses	malate	neg	measured	4	4	4	1
+BacDive_Uses_malate_fermentation_negative	util	Uses	malate	neg	measured	4	4	4	1
+BacDive_Uses_maltose_hydrate_negative	util	Uses	maltose hydrate	neg	measured	4	4	4	1
+BacDive_Uses_methionine_Nsource	util	Uses	methionine	pos	measured	4	4	4	1
+BacDive_Uses_methyl_alpha-D-glucopyranoside_fermentation	util	Uses	methyl alpha-D-glucopyranoside	pos	measured	4	4	4	1
+BacDive_Uses_methyl_alpha-D-glucopyranoside_fermentation_negative	util	Uses	methyl alpha-D-glucopyranoside	neg	measured	4	4	4	1
+BacDive_Uses_N-acetyl-D-glucosamine_Nsource	util	Uses	N-acetyl-D-glucosamine	pos	measured	4	4	4	1
+BacDive_Uses_n-acetylneuraminate_respiration	util	Uses	n-acetylneuraminate	pos	measured	4	4	4	1
+BacDive_Uses_oxaloacetate	util	Uses	oxaloacetate	pos	measured	4	4	4	1
+BacDive_Uses_pentan-1-amine_negative	util	Uses	pentan-1-amine	neg	measured	4	4	4	1
+BacDive_Uses_phenylalanine_Nsource_negative	util	Uses	phenylalanine	neg	measured	4	4	4	1
+BacDive_Uses_proline_Nsource	util	Uses	proline	pos	measured	4	4	4	1
+BacDive_Uses_protocatechuate	util	Uses	protocatechuate	pos	measured	4	4	4	1
+BacDive_Uses_serine_Nsource	util	Uses	serine	pos	measured	4	4	4	1
+BacDive_Uses_sodium_formate	util	Uses	sodium formate	pos	measured	4	4	4	1
+BacDive_Uses_sodium_gluconate	util	Uses	sodium gluconate	pos	measured	4	4	4	1
+BacDive_Uses_sodium_pyruvate_negative	util	Uses	sodium pyruvate	neg	measured	4	4	4	1
+BacDive_Uses_sodium_succinate_negative	util	Uses	sodium succinate	neg	measured	4	4	4	1
+BacDive_Uses_sodium_tartrate_negative	util	Uses	sodium tartrate	neg	measured	4	4	4	1
+BacDive_Uses_sorbose	util	Uses	sorbose	pos	measured	4	4	4	1
+BacDive_Uses_spermine_negative	util	Uses	spermine	neg	measured	4	4	4	1
+BacDive_Uses_stachyose_respiration	util	Uses	stachyose	pos	measured	4	4	4	1
+BacDive_Uses_tagatose	util	Uses	tagatose	pos	measured	4	4	4	1
+BacDive_Uses_terephthalate_negative	util	Uses	terephthalate	neg	measured	4	4	4	1
+BacDive_Uses_tetrazolium_violet_negative	util	Uses	tetrazolium violet	neg	measured	4	4	4	1
+BacDive_Uses_tetrazolium_violet_respiration	util	Uses	tetrazolium violet	pos	measured	4	4	4	1
+BacDive_Uses_thymidine_5'-monophosphate	util	Uses	thymidine 5'-monophosphate	pos	measured	4	4	4	1
+BacDive_Uses_toluene	util	Uses	toluene	pos	measured	4	4	4	1
+BacDive_Uses_troleandomycin_respiration_negative	util	Uses	troleandomycin	neg	measured	4	4	4	1
+BacDive_Uses_tween_80_respiration_negative	util	Uses	tween 80	neg	measured	4	4	4	1
+BacDive_Uses_tyrosine_Nsource	util	Uses	tyrosine	pos	measured	4	4	4	1
+BacDive_Uses_urea_acid_negative	util	Uses	urea	neg	measured	4	4	4	1
+BacDive_Uses_uric_acid	util	Uses	uric acid	pos	measured	4	4	4	1
+BacDive_Uses_valine_Nsource	util	Uses	valine	pos	measured	4	4	4	1
+BacDive_Uses_vanillate_negative	util	Uses	vanillate	neg	measured	4	4	4	1
+BacDive_Enzyme_4-nitrophenyl_beta-D-galactopyranoside_hydrolysate_negative	hydrolysis	Enzyme	4-nitrophenyl beta-D-galactopyranoside hydrolysate	neg	measured	3	3	3	1
+BacDive_Enzyme_adenyl_cyclase_hemolysin	enzyme	Enzyme	adenyl cyclase hemolysin	pos	measured	3	3	108	10
+BacDive_Enzyme_agar	hydrolysis	Enzyme	agar	pos	measured	3	3	3	1
+BacDive_Enzyme_agarase_negative	enzyme	Enzyme	agarase	neg	measured	3	3	3	1
+BacDive_Enzyme_alginate	hydrolysis	Enzyme	alginate	pos	measured	3	3	3	1
+BacDive_Enzyme_alpha-xylosidase_negative	enzyme	Enzyme	alpha-xylosidase	neg	measured	3	3	3	1
+BacDive_Enzyme_beta-alanine_arylamidase_pNA_negative	enzyme	Enzyme	beta-alanine arylamidase pNA	neg	measured	3	3	3	1
+BacDive_Enzyme_chondroitin_sulfate_negative	hydrolysis	Enzyme	chondroitin sulfate	neg	measured	3	3	3	1
+BacDive_Enzyme_corn_oil	hydrolysis	Enzyme	corn oil	pos	measured	3	3	3	1
+BacDive_Enzyme_D-glucose_negative	hydrolysis	Enzyme	D-glucose	neg	measured	3	3	3	1
+BacDive_Enzyme_D-xylose_negative	hydrolysis	Enzyme	D-xylose	neg	measured	3	3	3	1
+BacDive_Enzyme_gellan_gum	hydrolysis	Enzyme	gellan gum	pos	measured	3	3	3	1
+BacDive_Enzyme_hippurate_hydrolase_negative	enzyme	Enzyme	hippurate hydrolase	neg	measured	3	3	3	1
+BacDive_Enzyme_indole_negative	hydrolysis	Enzyme	indole	neg	measured	3	3	3	1
+BacDive_Enzyme_indoxyl_acetate_negative	hydrolysis	Enzyme	indoxyl acetate	neg	measured	3	3	3	1
+BacDive_Enzyme_L-arginine	hydrolysis	Enzyme	L-arginine	pos	measured	3	3	3	1
+BacDive_Enzyme_L-glutamate-gamma-3-carboxy-4-nitroanilide_negative	hydrolysis	Enzyme	L-glutamate-gamma-3-carboxy-4-nitroanilide	neg	measured	3	3	3	1
+BacDive_Enzyme_lactosidase_negative	enzyme	Enzyme	lactosidase	neg	measured	3	3	3	1
+BacDive_Enzyme_N-acetylglucosamine_negative	hydrolysis	Enzyme	N-acetylglucosamine	neg	measured	3	3	3	1
+BacDive_Enzyme_neuramindase_negative	enzyme	Enzyme	neuramindase	neg	measured	3	3	3	1
+BacDive_Enzyme_phosphatidylinositol_phospholipase_C_negative	enzyme	Enzyme	phosphatidylinositol phospholipase C	neg	measured	3	3	3	1
+BacDive_Enzyme_tryptophan_decarboxylase_negative	enzyme	Enzyme	tryptophan decarboxylase	neg	measured	3	3	3	1
+BacDive_Enzyme_tryptophan_negative	hydrolysis	Enzyme	tryptophan	neg	measured	3	3	3	1
+BacDive_Murein_A3alpha_L-Lys-L-Ala-Gly4-5	murein	Murein	A3alpha L-Lys-L-Ala-Gly4-5	pos	measured	3	3	5	2
+BacDive_Murein_A3alpha_L-Lys-L-Ala-L-Ala(L-Ser)	murein	Murein	A3alpha L-Lys-L-Ala-L-Ala(L-Ser)	pos	measured	3	3	3	1
+BacDive_Murein_A3alpha_L-Lys-L-Thr-Gly	murein	Murein	A3alpha L-Lys-L-Thr-Gly	pos	measured	3	3	12	2
+BacDive_Murein_A4alpha_L-Lys-D-Glu2	murein	Murein	A4alpha L-Lys-D-Glu2	pos	measured	3	3	4	1
+BacDive_Murein_A4alpha_L-Lys-Gly-D-Glu	murein	Murein	A4alpha L-Lys-Gly-D-Glu	pos	measured	3	3	3	1
+BacDive_Murein_A4alpha_L-Lys-Gly-L-Glu	murein	Murein	A4alpha L-Lys-Gly-L-Glu	pos	measured	3	3	21	1
+BacDive_Murein_A4alpha'_L-Lys-D-Glu	murein	Murein	A4alpha' L-Lys-D-Glu	pos	measured	3	3	4	1
+BacDive_Murein_B2alpha_{Gly}_[L-Orn]_D-Glu-D-Orn	murein	Murein	B2alpha {Gly} [L-Orn] D-Glu-D-Orn	pos	measured	3	3	4	1
+BacDive_Murein_B2alpha_{Gly}_[L-Orn]_D-Glu-Gly-D-Orn	murein	Murein	B2alpha {Gly} [L-Orn] D-Glu-Gly-D-Orn	pos	measured	3	3	6	1
+BacDive_Murein_B2delta_{Gly}_[L-Ala]_D-Glu-D-Dab-L-Thr	murein	Murein	B2delta {Gly} [L-Ala] D-Glu-D-Dab-L-Thr	pos	measured	3	3	3	1
+BacDive_Prod_blasticidin_S	production	Prod	blasticidin S	pos	measured	3	3	3	1
+BacDive_Prod_carbomycin	production	Prod	carbomycin	pos	measured	3	3	4	1
+BacDive_Prod_chloramphenicol	production	Prod	chloramphenicol	pos	measured	3	3	8	2
+BacDive_Prod_cycloheximide	production	Prod	cycloheximide	pos	measured	3	3	3	1
+BacDive_Prod_dihydroxyacetone	production	Prod	dihydroxyacetone	pos	measured	3	3	3	1
+BacDive_Prod_fungichromin	production	Prod	fungichromin	pos	measured	3	3	5	1
+BacDive_Prod_hygromycin	production	Prod	hygromycin	pos	measured	3	3	3	1
+BacDive_Prod_L-glutamate	production	Prod	L-glutamate	pos	measured	3	3	6	1
+BacDive_Prod_melanin	production	Prod	melanin	pos	measured	3	3	3	1
+BacDive_Prod_methane	production	Prod	methane	pos	measured	3	3	3	1
+BacDive_Prod_mycobacidin	production	Prod	mycobacidin	pos	measured	3	3	4	1
+BacDive_Prod_nicotinate_negative	production	Prod	nicotinate	neg	measured	3	3	3	1
+BacDive_Prod_paromomycin	production	Prod	paromomycin	pos	measured	3	3	3	1
+BacDive_Prod_polyhydroxybutyrate_negative	production	Prod	polyhydroxybutyrate	neg	measured	4	3	4	1
+BacDive_Prod_polysaccharides	production	Prod	polysaccharides	pos	measured	3	3	4	1
+BacDive_Prod_pyocyanine_negative	production	Prod	pyocyanine	neg	measured	3	3	3	1
+BacDive_Prod_siderophore	production	Prod	siderophore	pos	measured	3	3	3	1
+BacDive_Prod_sisomycin	production	Prod	sisomycin	pos	measured	3	3	3	1
+BacDive_Prod_tubercidin	production	Prod	tubercidin	pos	measured	3	3	3	1
+BacDive_Produces_biosurfactant	compound_class	Produces	biosurfactant	pos	measured	3	3	3	1
+BacDive_Produces_butanediol	compound_class	Produces	butanediol	pos	measured	3	3	5	1
+BacDive_Produces_propanediol	compound_class	Produces	propanediol	pos	measured	3	3	5	1
+BacDive_Shape_flask	shape	Shape	flask	pos	measured	3	3	3	1
+BacDive_Uses_(R)-amygdalin_acid_negative	util	Uses	(R)-amygdalin	neg	measured	3	3	3	1
+BacDive_Uses_2-aminobenzoate_negative	util	Uses	2-aminobenzoate	neg	measured	3	3	3	1
+BacDive_Uses_2-butanol_negative	util	Uses	2-butanol	neg	measured	3	3	3	1
+BacDive_Uses_2-dehydro-D-gluconate_fermentation	util	Uses	2-dehydro-D-gluconate	pos	measured	3	3	3	1
+BacDive_Uses_2-oxoglutarate_acid_negative	util	Uses	2-oxoglutarate	neg	measured	3	3	3	1
+BacDive_Uses_3-aminobutyrate	util	Uses	3-aminobutyrate	pos	measured	3	3	3	1
+BacDive_Uses_3-hydroxybutyrate_acid_negative	util	Uses	3-hydroxybutyrate	neg	measured	3	3	3	1
+BacDive_Uses_4-aminobenzoate_negative	util	Uses	4-aminobenzoate	neg	measured	3	3	3	1
+BacDive_Uses_4-aminobutyrate_negative	util	Uses	4-aminobutyrate	neg	measured	3	3	3	1
+BacDive_Uses_4-coumarate_negative	util	Uses	4-coumarate	neg	measured	3	3	3	1
+BacDive_Uses_4-hydroxy-L-proline_respiration	util	Uses	4-hydroxy-L-proline	pos	measured	3	3	4	1
+BacDive_Uses_4-nitrophenyl_alpha-D-glucopyranoside_negative	util	Uses	4-nitrophenyl alpha-D-glucopyranoside	neg	measured	3	3	3	1
+BacDive_Uses_4-nitrophenyl_beta-D-galactopyranoside_acid	util	Uses	4-nitrophenyl beta-D-galactopyranoside	pos	measured	3	3	3	1
+BacDive_Uses_4-nitrophenyl_beta-D-glucopyranoside_negative	util	Uses	4-nitrophenyl beta-D-glucopyranoside	neg	measured	3	3	3	1
+BacDive_Uses_acetoacetate_respiration_negative	util	Uses	acetoacetate	neg	measured	3	3	3	1
+BacDive_Uses_acetone_negative	util	Uses	acetone	neg	measured	3	3	3	1
+BacDive_Uses_adenine_Nsource	util	Uses	adenine	pos	measured	3	3	3	1
+BacDive_Uses_agar	util	Uses	agar	pos	measured	3	3	3	1
+BacDive_Uses_alpha-lactose_acid_negative	util	Uses	alpha-lactose	neg	measured	3	3	3	1
+BacDive_Uses_ammonia_Nsource	util	Uses	ammonia	pos	measured	3	3	3	1
+BacDive_Uses_ammonium_Nsource_negative	util	Uses	ammonium	neg	measured	3	3	3	1
+BacDive_Uses_amygdalin_respiration	util	Uses	amygdalin	pos	measured	3	3	3	1
+BacDive_Uses_arabinitol_negative	util	Uses	arabinitol	neg	measured	3	3	3	1
+BacDive_Uses_arabinose_gas_negative	util	Uses	arabinose	neg	measured	3	3	3	1
+BacDive_Uses_aspartate_Nsource_negative	util	Uses	aspartate	neg	measured	3	3	3	1
+BacDive_Uses_aztreonam_respiration_negative	util	Uses	aztreonam	neg	measured	3	3	3	1
+BacDive_Uses_beta-D-glucuronic_acid	util	Uses	beta-D-glucuronic acid	pos	measured	3	3	3	1
+BacDive_Uses_beta-hydroxybutyrate_respiration_negative	util	Uses	beta-hydroxybutyrate	neg	measured	3	3	3	1
+BacDive_Uses_betaine	util	Uses	betaine	pos	measured	3	3	3	1
+BacDive_Uses_biotin_negative	util	Uses	biotin	neg	measured	3	3	3	1
+BacDive_Uses_catechol_negative	util	Uses	catechol	neg	measured	3	3	3	1
+BacDive_Uses_cellobiose_Nsource	util	Uses	cellobiose	pos	measured	3	3	3	1
+BacDive_Uses_cellulose_fermentation	util	Uses	cellulose	pos	measured	3	3	3	1
+BacDive_Uses_choline	util	Uses	choline	pos	measured	3	3	3	1
+BacDive_Uses_choline_negative	util	Uses	choline	neg	measured	3	3	3	1
+BacDive_Uses_cis-aconitate_respiration	util	Uses	cis-aconitate	pos	measured	3	3	3	1
+BacDive_Uses_citrate_acid_negative	util	Uses	citrate	neg	measured	3	3	3	1
+BacDive_Uses_crotonate	util	Uses	crotonate	pos	measured	3	3	3	1
+BacDive_Uses_D-galactonate_negative	util	Uses	D-galactonate	neg	measured	3	3	3	1
+BacDive_Uses_D-lactate	util	Uses	D-lactate	pos	measured	3	3	3	1
+BacDive_Uses_D-lyxose_fermentation	util	Uses	D-lyxose	pos	measured	3	3	3	1
+BacDive_Uses_D-malate_respiration	util	Uses	D-malate	pos	measured	3	3	3	1
+BacDive_Uses_D-sorbose_acid	util	Uses	D-sorbose	pos	measured	3	3	3	1
+BacDive_Uses_D-sorbose_negative	util	Uses	D-sorbose	neg	measured	3	3	3	1
+BacDive_Uses_dinitrogen_Nsource	util	Uses	dinitrogen	pos	measured	3	3	3	1
+BacDive_Uses_disodium_malate	util	Uses	disodium malate	pos	measured	3	3	3	1
+BacDive_Uses_disodium_malate_negative	util	Uses	disodium malate	neg	measured	3	3	3	1
+BacDive_Uses_ethylene_glycol_negative	util	Uses	ethylene glycol	neg	measured	3	3	3	1
+BacDive_Uses_ferric_citrate_acid	util	Uses	ferric citrate	pos	measured	3	3	3	1
+BacDive_Uses_ferric_iron	util	Uses	ferric iron	pos	measured	3	3	3	1
+BacDive_Uses_ferulate_negative	util	Uses	ferulate	neg	measured	3	3	3	1
+BacDive_Uses_formaldehyde_negative	util	Uses	formaldehyde	neg	measured	3	3	3	1
+BacDive_Uses_galacturonate_acid_negative	util	Uses	galacturonate	neg	measured	3	3	3	1
+BacDive_Uses_galacturonate_negative	util	Uses	galacturonate	neg	measured	3	3	3	1
+BacDive_Uses_gelatin_acid_negative	util	Uses	gelatin	neg	measured	3	3	3	1
+BacDive_Uses_gluconate_fermentation	util	Uses	gluconate	pos	measured	3	3	3	1
+BacDive_Uses_glutamine	util	Uses	glutamine	pos	measured	3	3	3	1
+BacDive_Uses_glycerol_3-phosphate_acid	util	Uses	glycerol 3-phosphate	pos	measured	3	3	3	1
+BacDive_Uses_glycine-proline_Nsource	util	Uses	glycine-proline	pos	measured	3	3	3	1
+BacDive_Uses_glycine-proline_respiration_negative	util	Uses	glycine-proline	neg	measured	3	3	3	1
+BacDive_Uses_glycolate	util	Uses	glycolate	pos	measured	3	3	3	1
+BacDive_Uses_guanidinium_chloride_Nsource_negative	util	Uses	guanidinium chloride	neg	measured	3	3	3	1
+BacDive_Uses_hydroxyproline_respiration	util	Uses	hydroxyproline	pos	measured	3	3	3	1
+BacDive_Uses_hypoxanthine_Nsource_negative	util	Uses	hypoxanthine	neg	measured	3	3	3	1
+BacDive_Uses_inositol_gas_negative	util	Uses	inositol	neg	measured	3	3	3	1
+BacDive_Uses_isoleucine	util	Uses	isoleucine	pos	measured	3	3	3	1
+BacDive_Uses_isoleucine_Nsource_negative	util	Uses	isoleucine	neg	measured	3	3	3	1
+BacDive_Uses_itaconate_acid_negative	util	Uses	itaconate	neg	measured	3	3	3	1
+BacDive_Uses_kynurenine_negative	util	Uses	kynurenine	neg	measured	3	3	3	1
+BacDive_Uses_L-citrulline	util	Uses	L-citrulline	pos	measured	3	3	3	1
+BacDive_Uses_L-cysteine	util	Uses	L-cysteine	pos	measured	3	3	3	1
+BacDive_Uses_L-fructose	util	Uses	L-fructose	pos	measured	3	3	3	1
+BacDive_Uses_L-galactonate	util	Uses	L-galactonate	pos	measured	3	3	3	1
+BacDive_Uses_L-galactonate_negative	util	Uses	L-galactonate	neg	measured	3	3	3	1
+BacDive_Uses_L-norleucine	util	Uses	L-norleucine	pos	measured	3	3	3	1
+BacDive_Uses_L-pyroglutamic_acid_respiration	util	Uses	L-pyroglutamic acid	pos	measured	3	3	3	1
+BacDive_Uses_L-serine_2-naphthylamide	util	Uses	L-serine 2-naphthylamide	pos	measured	3	3	3	1
+BacDive_Uses_L-serine_acid	util	Uses	L-serine	pos	measured	3	3	3	1
+BacDive_Uses_L-serine_acid_negative	util	Uses	L-serine	neg	measured	3	3	3	1
+BacDive_Uses_L-tryptophan_fermentation_negative	util	Uses	L-tryptophan	neg	measured	3	3	3	1
+BacDive_Uses_L-xylose_fermentation	util	Uses	L-xylose	pos	measured	3	3	3	1
+BacDive_Uses_lactate_acid	util	Uses	lactate	pos	measured	3	3	3	1
+BacDive_Uses_lactose_respiration_negative	util	Uses	lactose	neg	measured	3	3	3	1
+BacDive_Uses_lincomycin_negative	util	Uses	lincomycin	neg	measured	3	3	3	1
+BacDive_Uses_m-coumaric_acid_negative	util	Uses	m-coumaric acid	neg	measured	3	3	3	1
+BacDive_Uses_magnesium(2+)	util	Uses	magnesium(2+)	pos	measured	3	3	3	1
+BacDive_Uses_malate_acid	util	Uses	malate	pos	measured	3	3	3	1
+BacDive_Uses_malonate_acid_negative	util	Uses	malonate	neg	measured	3	3	3	1
+BacDive_Uses_maltose_hydrate_acid_negative	util	Uses	maltose hydrate	neg	measured	3	3	3	1
+BacDive_Uses_melezitose_gas_negative	util	Uses	melezitose	neg	measured	3	3	3	1
+BacDive_Uses_mesaconate	util	Uses	mesaconate	pos	measured	3	3	3	1
+BacDive_Uses_methionine_Nsource_negative	util	Uses	methionine	neg	measured	3	3	3	1
+BacDive_Uses_methyl_(R)-lactate_respiration	util	Uses	methyl (R)-lactate	pos	measured	3	3	3	1
+BacDive_Uses_methyl_D-glucoside_fermentation_negative	util	Uses	methyl D-glucoside	neg	measured	3	3	3	1
+BacDive_Uses_methylmalonic_acid_negative	util	Uses	methylmalonic acid	neg	measured	3	3	3	1
+BacDive_Uses_N-acetyl-L-glutamate_respiration	util	Uses	N-acetyl-L-glutamate	pos	measured	3	3	3	1
+BacDive_Uses_n-acetyl-neuraminic_acid	util	Uses	n-acetyl-neuraminic acid	pos	measured	3	3	3	1
+BacDive_Uses_N-acetylgalactosamine_acid	util	Uses	N-acetylgalactosamine	pos	measured	3	3	3	1
+BacDive_Uses_N-acetylgalactosamine_fermentation	util	Uses	N-acetylgalactosamine	pos	measured	3	3	3	1
+BacDive_Uses_olive_oil_negative	util	Uses	olive oil	neg	measured	3	3	3	1
+BacDive_Uses_oxalate	util	Uses	oxalate	pos	measured	3	3	3	1
+BacDive_Uses_p-nitrophenyl_palmitate_negative	util	Uses	p-nitrophenyl palmitate	neg	measured	3	3	3	1
+BacDive_Uses_phenanthrene	util	Uses	phenanthrene	pos	measured	3	3	3	1
+BacDive_Uses_phenylacetate_acid_negative	util	Uses	phenylacetate	neg	measured	3	3	3	1
+BacDive_Uses_potassium_gluconate_fermentation_negative	util	Uses	potassium gluconate	neg	measured	3	3	3	1
+BacDive_Uses_potassium_tellurite_reduction_negative	util	Uses	potassium tellurite	neg	measured	3	3	3	1
+BacDive_Uses_propionamide	util	Uses	propionamide	pos	measured	3	3	3	1
+BacDive_Uses_pyridine	util	Uses	pyridine	pos	measured	3	3	3	1
+BacDive_Uses_quinate_respiration	util	Uses	quinate	pos	measured	3	3	3	1
+BacDive_Uses_rhamnose_gas_negative	util	Uses	rhamnose	neg	measured	3	3	3	1
+BacDive_Uses_salicylate_negative	util	Uses	salicylate	neg	measured	3	3	3	1
+BacDive_Uses_sarcosine	util	Uses	sarcosine	pos	measured	3	3	3	1
+BacDive_Uses_sedoheptulosan	util	Uses	sedoheptulosan	pos	measured	3	3	3	1
+BacDive_Uses_selenite_reduction_negative	util	Uses	selenite	neg	measured	3	3	3	1
+BacDive_Uses_skimmed_milk_negative	util	Uses	skimmed milk	neg	measured	3	3	3	1
+BacDive_Uses_sodium_gluconate_negative	util	Uses	sodium gluconate	neg	measured	3	3	3	1
+BacDive_Uses_sodium_L-glutamate	util	Uses	sodium L-glutamate	pos	measured	3	3	3	1
+BacDive_Uses_sodium_malonate_acid_negative	util	Uses	sodium malonate	neg	measured	3	3	3	1
+BacDive_Uses_sodium_thiosulfate_negative	util	Uses	sodium thiosulfate	neg	measured	3	3	3	1
+BacDive_Uses_sorbic_acid_negative	util	Uses	sorbic acid	neg	measured	3	3	3	1
+BacDive_Uses_sorbose_acid	util	Uses	sorbose	pos	measured	3	3	3	1
+BacDive_Uses_sulfite_reduction	util	Uses	sulfite	pos	measured	3	3	3	1
+BacDive_Uses_tetrathionate	util	Uses	tetrathionate	pos	measured	3	3	4	1
+BacDive_Uses_tetrazolium_blue_negative	util	Uses	tetrazolium blue	neg	measured	3	3	3	1
+BacDive_Uses_thiamine	util	Uses	thiamine	pos	measured	3	3	3	1
+BacDive_Uses_thiosulfate_reduction	util	Uses	thiosulfate	pos	measured	3	3	3	1
+BacDive_Uses_thiosulfate_reduction_negative	util	Uses	thiosulfate	neg	measured	3	3	3	1
+BacDive_Uses_threonine_Nsource	util	Uses	threonine	pos	measured	3	3	3	1
+BacDive_Uses_toluene_negative	util	Uses	toluene	neg	measured	3	3	3	1
+BacDive_Uses_trehalose_dihydrate_negative	util	Uses	trehalose dihydrate	neg	measured	3	3	3	1
+BacDive_Uses_trimethoxybenzoate	util	Uses	trimethoxybenzoate	pos	measured	3	3	3	1
+BacDive_Uses_tryptone	util	Uses	tryptone	pos	measured	3	3	3	1
+BacDive_Uses_tryptophan_Nsource	util	Uses	tryptophan	pos	measured	3	3	3	1
+BacDive_Uses_turanose_gas_negative	util	Uses	turanose	neg	measured	3	3	3	1
+BacDive_Uses_urea_Nsource_negative	util	Uses	urea	neg	measured	3	3	3	1
+BacDive_Uses_uridine_5'-monophosphate	util	Uses	uridine 5'-monophosphate	pos	measured	3	3	3	1
+BacDive_Uses_xanthine_Nsource_negative	util	Uses	xanthine	neg	measured	3	3	3	1
+BacDive_Uses_xylan_fermentation	util	Uses	xylan	pos	measured	3	3	3	1
+BacDive_Uses_yeast_extract_(0.01_%_w/v)	util	Uses	yeast extract (0.01 %, w/v)	pos	measured	3	3	3	1
+BacDive_Uses_yeast_extract_Nsource	util	Uses	yeast extract	pos	measured	3	3	3	1
