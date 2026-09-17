@@ -19,6 +19,8 @@ navbar:
           href: articles/TaxSEA.html
         - text: "Analysis types"
           href: articles/ORA_vs_ES.html
+        - text: "BacDive physiology sets"
+          href: articles/BacDive-sets.html
 
 
 

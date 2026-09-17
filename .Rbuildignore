@@ -8,3 +8,4 @@
 ^\.Rhistory$
 \.Rhistory$
 \.DS_Store$
+^vignettes/articles$

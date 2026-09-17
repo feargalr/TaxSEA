@@ -50,6 +50,13 @@ By default TaxSEA utilizes taxon sets generated from six reference databases
 (**BacDive**,**gutMGene**, **GMrepo v2**, **MiMeDB**, **mBodyMap**, **BugSigDB**). See below for 
 examples of using custom databases or taxonomically defined taxon sets. 
 
+The **BacDive** sets describe measured bacterial physiology: oxygen tolerance,
+Gram stain, substrate use and fermentation, enzyme activities, growth temperature,
+salt and pH ranges and more, across more than 9,000 taxa. They were rebuilt in
+TaxSEA 1.5.5 with new set names (e.g. `BacDive_Oxygen_facultative_anaerobe`); see the
+[BacDive physiology sets](https://feargalr.github.io/TaxSEA/articles/BacDive-sets.html)
+guide.
+
 Please cite the appropriate database if using:
 
 - Schober et al. BacDive in 2025: the core database for prokaryotic strain data.
@@ -90,6 +97,9 @@ metabolites.df <- taxsea_results$Metabolite_producers
 
 #Enrichments among health and disease signatures from GMRepoV2 and mBodyMap
 disease.df <- taxsea_results$Health_associations
+
+#Enrichments among bacterial physiology sets from BacDive
+bacdive.df <- taxsea_results$BacDive_bacterial_physiology
 
 #Enrichments among published associations from BugSigDB
 bsdb.df <- taxsea_results$BugSigDB
