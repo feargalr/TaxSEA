@@ -1,31 +1,36 @@
 # NCBI IDs Dataset
 
-A dataset for mapping NCBI IDs to species/genus names. This named vector
-allows for lookup of NCBI IDs associated with species or genus names.
+A lookup from taxon names to NCBI taxonomy IDs, used to translate the
+names supplied to
+[`TaxSEA()`](https://feargalr.github.io/TaxSEA/reference/TaxSEA.md) into
+the IDs that `TaxSEA_db` is built on. Names are present both with spaces
+and with underscores, and each ID is also present as its own name so
+that IDs can be supplied directly. Species names, former names and IDs
+of the `BacDive_` set members were added from the BacDive harvest
+without changing any existing entry.
 
 ## Usage
 
 ``` r
-NCBI_ids
+data(NCBI_ids)
 ```
 
 ## Format
 
-A named vector where:
+A named list where:
 
 - names:
 
+  Taxon names (e.g. "Bifidobacterium breve", "Bifidobacterium_breve") or
   NCBI IDs
 
 - values:
 
-  Species or genus names
-
-A named vector mapping NCBI IDs to species or genus names.
+  NCBI taxonomy IDs, as character
 
 ## Source
 
-NCBI
+NCBI Taxonomy; BacDive (<https://bacdive.dsmz.de>).
 
 ## Examples
 

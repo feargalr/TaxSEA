@@ -15,7 +15,7 @@ Pham C, Rankin T, Stinear T, Walsh C, Ryan F (2025). “TaxSEA: rapid
 interpretation of microbiome alterations using taxon set enrichment
 analysis and public databases.” *Briefings in Bioinformatics*, **Volume
 26, Issue 2**.
-[doi:10.1093/bib/bbaf173](https://doi.org/10.1093/bib/bbaf173),
+[doi:10.1093/bib/bbaf173](https://doi.org/10.1093/bib/bbaf173).
 <https://doi.org/10.1093/bib/bbaf173>.
 
     @Article{,

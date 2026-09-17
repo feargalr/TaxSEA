@@ -32,6 +32,7 @@ function.
 
 ``` r
 
+
 #### Enrichment testing with taxonomically defined ranks  
 # --- Example 1: Data frame input ---
 # Create a lineage data frame (e.g., parsed from curatedMetagenomicData)

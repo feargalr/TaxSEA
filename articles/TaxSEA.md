@@ -19,6 +19,7 @@ to a previously published study.
 To install the latest version of TaxSEA from Bioconductor:
 
 ``` r
+
 if (!requireNamespace("BiocManager", quietly = TRUE))
     install.packages("BiocManager")
 
@@ -71,14 +72,15 @@ LinDA.
   particular taxon for a list of taxon names.
 - `get_ncbi_taxon_ids(taxon_names)`: Retrieves NCBI Taxonomy IDs for a
   list of taxon names.
-- `TaxSEA(taxon_ranks, database = "All")`: Taxon set enrichment
-  analysis.
+- `TaxSEA(taxon_ranks)`: Taxon set enrichment analysis. Add
+  `bugsigdb = TRUE` to include published signatures from BugSigDB.
 
 ### Usage
 
 #### Retrieve sets containing a particular taxon
 
 ``` r
+
 library(TaxSEA)
 
 # Retrieve taxon sets containing Bifidobacterium longum.
@@ -106,6 +108,7 @@ name. E.g. “Bifidobacterium longum”, “Bifidobacterium_longum” - Genus
 name. E.g. “Bifidobacterium” - NCBI ID E.g. 216816
 
 ``` r
+
 #Input IDs with the full taxonomic lineage should be split up. E.g.
 x <- paste0(
   "d__Bacteria.p__Actinobacteriota.c__Actinomycetes.",
@@ -118,6 +121,7 @@ print(x)
     ## [1] "Bifidobacterium"
 
 ``` r
+
 ## Example test data
 library(TaxSEA)
 data(TaxSEA_test_data)
@@ -132,12 +136,69 @@ head(sample(TaxSEA_test_data),4)
 #### Run TaxSEA with test data
 
 ``` r
+
 data("TaxSEA_test_data")
-taxsea_results <- TaxSEA(taxon_ranks=TaxSEA_test_data)
+# bugsigdb = TRUE downloads BugSigDB signatures at run time. It is off by
+# default because including it changes the p-values of every set, and
+# BugSigDB is updated independently of TaxSEA.
+taxsea_results <- TaxSEA(taxon_ranks=TaxSEA_test_data,
+                         bugsigdb = bsdb_available)
 ```
 
-    ## Using cached version from 2026-02-12 03:30:04
+    ## Using cached version from 2026-09-17 08:40:55
 
+    ## Warning in ks.test.default(taxon_set_ranks, taxon_ranks): p-value will be
+    ## approximate in the presence of ties
+    ## Warning in ks.test.default(taxon_set_ranks, taxon_ranks): p-value will be
+    ## approximate in the presence of ties
+    ## Warning in ks.test.default(taxon_set_ranks, taxon_ranks): p-value will be
+    ## approximate in the presence of ties
+    ## Warning in ks.test.default(taxon_set_ranks, taxon_ranks): p-value will be
+    ## approximate in the presence of ties
+    ## Warning in ks.test.default(taxon_set_ranks, taxon_ranks): p-value will be
+    ## approximate in the presence of ties
+    ## Warning in ks.test.default(taxon_set_ranks, taxon_ranks): p-value will be
+    ## approximate in the presence of ties
+    ## Warning in ks.test.default(taxon_set_ranks, taxon_ranks): p-value will be
+    ## approximate in the presence of ties
+    ## Warning in ks.test.default(taxon_set_ranks, taxon_ranks): p-value will be
+    ## approximate in the presence of ties
+    ## Warning in ks.test.default(taxon_set_ranks, taxon_ranks): p-value will be
+    ## approximate in the presence of ties
+    ## Warning in ks.test.default(taxon_set_ranks, taxon_ranks): p-value will be
+    ## approximate in the presence of ties
+    ## Warning in ks.test.default(taxon_set_ranks, taxon_ranks): p-value will be
+    ## approximate in the presence of ties
+    ## Warning in ks.test.default(taxon_set_ranks, taxon_ranks): p-value will be
+    ## approximate in the presence of ties
+    ## Warning in ks.test.default(taxon_set_ranks, taxon_ranks): p-value will be
+    ## approximate in the presence of ties
+    ## Warning in ks.test.default(taxon_set_ranks, taxon_ranks): p-value will be
+    ## approximate in the presence of ties
+    ## Warning in ks.test.default(taxon_set_ranks, taxon_ranks): p-value will be
+    ## approximate in the presence of ties
+    ## Warning in ks.test.default(taxon_set_ranks, taxon_ranks): p-value will be
+    ## approximate in the presence of ties
+    ## Warning in ks.test.default(taxon_set_ranks, taxon_ranks): p-value will be
+    ## approximate in the presence of ties
+    ## Warning in ks.test.default(taxon_set_ranks, taxon_ranks): p-value will be
+    ## approximate in the presence of ties
+    ## Warning in ks.test.default(taxon_set_ranks, taxon_ranks): p-value will be
+    ## approximate in the presence of ties
+    ## Warning in ks.test.default(taxon_set_ranks, taxon_ranks): p-value will be
+    ## approximate in the presence of ties
+    ## Warning in ks.test.default(taxon_set_ranks, taxon_ranks): p-value will be
+    ## approximate in the presence of ties
+    ## Warning in ks.test.default(taxon_set_ranks, taxon_ranks): p-value will be
+    ## approximate in the presence of ties
+    ## Warning in ks.test.default(taxon_set_ranks, taxon_ranks): p-value will be
+    ## approximate in the presence of ties
+    ## Warning in ks.test.default(taxon_set_ranks, taxon_ranks): p-value will be
+    ## approximate in the presence of ties
+    ## Warning in ks.test.default(taxon_set_ranks, taxon_ranks): p-value will be
+    ## approximate in the presence of ties
+    ## Warning in ks.test.default(taxon_set_ranks, taxon_ranks): p-value will be
+    ## approximate in the presence of ties
     ## Warning in ks.test.default(taxon_set_ranks, taxon_ranks): p-value will be
     ## approximate in the presence of ties
     ## Warning in ks.test.default(taxon_set_ranks, taxon_ranks): p-value will be
@@ -168,6 +229,7 @@ taxsea_results <- TaxSEA(taxon_ranks=TaxSEA_test_data)
     ## approximate in the presence of ties
 
 ``` r
+
 #Enrichments among metabolite producers from gutMgene and MiMeDB
 metabolites.df = taxsea_results$Metabolite_producers
 
@@ -175,7 +237,7 @@ metabolites.df = taxsea_results$Metabolite_producers
 disease.df = taxsea_results$Health_associations
 
 #Enrichments amongh published associations from BugSigDB
-bsdb.df = taxsea_results$BugSigdB
+bsdb.df = taxsea_results$BugSigDB
 ```
 
 ##### Output
@@ -196,13 +258,15 @@ users wish to find out more information about the signatures, they can
 do so by querying that database.
 
 ``` r
+
 library(bugsigdbr) #This package is installable via Bioconductor
 bsdb <- importBugSigDB() #Import database 
 ```
 
-    ## Using cached version from 2026-02-12 03:30:04
+    ## Using cached version from 2026-09-17 08:40:55
 
 ``` r
+
 #E.g. if the BugSigDB identifier you found enriched was 
 #bsdb:74/1/2_obesity:obese_vs_non-obese_DOWN
 #This is Study 74, Experiment 1, Signature 2
@@ -224,18 +288,19 @@ bsdb[bsdb$Study=="Study 74" &
     ## [21] Group 1 definition         Group 0 sample size       
     ## [23] Group 1 sample size        Antibiotics exclusion     
     ## [25] Sequencing type            16S variable region       
-    ## [27] Sequencing platform        Statistical test          
-    ## [29] Significance threshold     MHT correction            
-    ## [31] LDA Score above            Matched on                
-    ## [33] Confounders controlled for Pielou                    
-    ## [35] Shannon                    Chao1                     
-    ## [37] Simpson                    Inverse Simpson           
-    ## [39] Richness                   Signature page name       
-    ## [41] Source                     Curated date              
-    ## [43] Curator                    Revision editor           
-    ## [45] Description                Abundance in Group 1      
-    ## [47] MetaPhlAn taxon names      NCBI Taxonomy IDs         
-    ## [49] State                      Reviewer                  
+    ## [27] Sequencing platform        Data transformation       
+    ## [29] Statistical test           Significance threshold    
+    ## [31] MHT correction             LDA Score above           
+    ## [33] Matched on                 Confounders controlled for
+    ## [35] Pielou                     Shannon                   
+    ## [37] Chao1                      Simpson                   
+    ## [39] Inverse Simpson            Richness                  
+    ## [41] Signature page name        Source                    
+    ## [43] Curated date               Curator                   
+    ## [45] Revision editor            Description               
+    ## [47] Abundance in Group 1       MetaPhlAn taxon names     
+    ## [49] NCBI Taxonomy IDs          State                     
+    ## [51] Reviewer                  
     ## <0 rows> (or 0-length row.names)
 
 ##### TaxSEA database with other enrichment tools
@@ -247,6 +312,7 @@ tool the database is formatted in such a way that should be possible.
 See below for an example with fast gene set enrichment analysis (fgsea).
 
 ``` r
+
 library(fgsea) #This package is installable via Bioconductor
 data("TaxSEA_test_data")
 data("TaxSEA_db")
@@ -258,16 +324,17 @@ TaxSEA_test_data = TaxSEA_test_data[!is.na(names(TaxSEA_test_data))]
 fgsea_results <- fgsea(TaxSEA_db, TaxSEA_test_data, minSize=5, maxSize=500)
 ```
 
-    ## Warning in preparePathwaysAndStats(pathways, stats, minSize, maxSize, gseaParam, : There are ties in the preranked stats (1.83% of the list).
+    ## Warning in prepareStats(stats, scoreType, gseaParam): There are ties in the preranked stats (1.83% of the list).
     ## The order of those tied genes will be arbitrary, which may produce unexpected results.
 
 ``` r
+
 sessionInfo()
 ```
 
-    ## R version 4.5.2 (2025-10-31)
+    ## R version 4.6.1 (2026-06-24)
     ## Platform: x86_64-pc-linux-gnu
-    ## Running under: Ubuntu 24.04.3 LTS
+    ## Running under: Ubuntu 24.04.5 LTS
     ## 
     ## Matrix products: default
     ## BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3 
@@ -286,28 +353,28 @@ sessionInfo()
     ## [1] stats     graphics  grDevices utils     datasets  methods   base     
     ## 
     ## other attached packages:
-    ## [1] fgsea_1.36.2     bugsigdbr_1.16.2 TaxSEA_1.3.3     BiocStyle_2.38.0
+    ## [1] fgsea_1.38.0     bugsigdbr_1.18.0 TaxSEA_1.5.5     BiocStyle_2.40.0
     ## 
     ## loaded via a namespace (and not attached):
-    ##  [1] fastmatch_1.1-8     gtable_0.3.6        xfun_0.56          
-    ##  [4] bslib_0.10.0        ggplot2_4.0.2       httr2_1.2.2        
-    ##  [7] lattice_0.22-7      vctrs_0.7.1         tools_4.5.2        
-    ## [10] generics_0.1.4      curl_7.0.0          parallel_4.5.2     
-    ## [13] tibble_3.3.1        RSQLite_2.4.6       blob_1.3.0         
-    ## [16] pkgconfig_2.0.3     Matrix_1.7-4        data.table_1.18.2.1
-    ## [19] dbplyr_2.5.1        RColorBrewer_1.1-3  S7_0.2.1           
-    ## [22] desc_1.4.3          lifecycle_1.0.5     compiler_4.5.2     
-    ## [25] farver_2.1.2        textshaping_1.0.4   codetools_0.2-20   
+    ##  [1] fastmatch_1.1-8     gtable_0.3.6        xfun_0.61          
+    ##  [4] bslib_0.12.0        ggplot2_4.0.3       httr2_1.3.0        
+    ##  [7] lattice_0.22-9      vctrs_0.7.3         tools_4.6.1        
+    ## [10] generics_0.1.4      curl_8.0.0          parallel_4.6.1     
+    ## [13] tibble_3.3.1        RSQLite_3.53.3      blob_1.3.0         
+    ## [16] pkgconfig_2.0.3     Matrix_1.7-5        data.table_1.18.6.1
+    ## [19] dbplyr_2.6.0        RColorBrewer_1.1-3  S7_0.2.2           
+    ## [22] desc_1.4.3          lifecycle_1.0.5     compiler_4.6.1     
+    ## [25] farver_2.1.2        textshaping_1.0.5   codetools_0.2-20   
     ## [28] htmltools_0.5.9     sass_0.4.10         yaml_2.3.12        
-    ## [31] pillar_1.11.1       pkgdown_2.2.0       jquerylib_0.1.4    
-    ## [34] BiocParallel_1.44.0 cachem_1.1.0        tidyselect_1.2.1   
-    ## [37] digest_0.6.39       dplyr_1.2.0         purrr_1.2.1        
-    ## [40] bookdown_0.46       cowplot_1.2.0       fastmap_1.2.0      
-    ## [43] grid_4.5.2          cli_3.6.5           magrittr_2.0.4     
-    ## [46] withr_3.0.2         filelock_1.0.3      scales_1.4.0       
-    ## [49] rappdirs_0.3.4      bit64_4.6.0-1       rmarkdown_2.30     
-    ## [52] bit_4.6.0           ragg_1.5.0          memoise_2.0.1      
-    ## [55] evaluate_1.0.5      knitr_1.51          BiocFileCache_3.0.0
-    ## [58] rlang_1.1.7         Rcpp_1.1.1          glue_1.8.0         
-    ## [61] DBI_1.2.3           BiocManager_1.30.27 jsonlite_2.0.0     
-    ## [64] R6_2.6.1            systemfonts_1.3.1   fs_1.6.6
+    ## [31] pillar_1.11.1       pkgdown_2.2.1       jquerylib_0.1.4    
+    ## [34] BiocParallel_1.46.0 cachem_1.1.0        tidyselect_1.2.1   
+    ## [37] digest_0.6.39       dplyr_1.2.1         purrr_1.2.2        
+    ## [40] bookdown_0.48       cowplot_1.2.0       fastmap_1.2.0      
+    ## [43] grid_4.6.1          cli_3.6.6           magrittr_2.0.5     
+    ## [46] withr_3.0.3         filelock_1.0.3      scales_1.4.0       
+    ## [49] bit64_4.8.6         rmarkdown_2.32      bit_4.6.0          
+    ## [52] otel_0.2.0          ragg_1.5.2          memoise_2.0.1      
+    ## [55] evaluate_1.0.5      knitr_1.52          BiocFileCache_3.2.0
+    ## [58] rlang_1.3.0         Rcpp_1.1.2          glue_1.8.1         
+    ## [61] DBI_1.3.0           BiocManager_1.30.27 jsonlite_2.0.0     
+    ## [64] R6_2.6.1            systemfonts_1.3.2   fs_2.1.0

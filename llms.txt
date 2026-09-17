@@ -69,6 +69,15 @@ databases (**BacDive**,**gutMGene**, **GMrepo v2**, **MiMeDB**,
 **mBodyMap**, **BugSigDB**). See below for examples of using custom
 databases or taxonomically defined taxon sets.
 
+The **BacDive** sets describe measured bacterial physiology: oxygen
+tolerance, Gram stain, substrate use and fermentation, enzyme
+activities, growth temperature, salt and pH ranges and more, across more
+than 9,000 taxa. They were rebuilt in TaxSEA 1.5.5 with new set names
+(e.g. `BacDive_Oxygen_facultative_anaerobe`); see the [BacDive
+physiology
+sets](https://feargalr.github.io/TaxSEA/articles/BacDive-sets.html)
+guide.
+
 Please cite the appropriate database if using:
 
 - Schober et al. BacDive in 2025: the core database for prokaryotic
@@ -90,6 +99,7 @@ Please cite the appropriate database if using:
 ### Installation
 
 ``` r
+
 if (!requireNamespace("BiocManager", quietly = TRUE))
     install.packages("BiocManager")
 BiocManager::install("TaxSEA")
@@ -100,6 +110,7 @@ BiocManager::install("TaxSEA")
 #### Quick start (mode 1, enrichment rank based)
 
 ``` r
+
 library(TaxSEA)
 
 # Retrieve taxon sets containing Bifidobacterium longum.
@@ -107,7 +118,7 @@ blong.sets <- get_taxon_sets(taxon="Bifidobacterium_longum")
 
 # Run TaxSEA with test data provided
 data(TaxSEA_test_data)
-taxsea_results <- TaxSEA(taxon_ranks=TaxSEA_test_data)
+taxsea_results <- TaxSEA(taxon_ranks=TaxSEA_test_data, bugsigdb = TRUE)
 
 #Enrichments among metabolite producers from gutMgene and MiMeDB
 metabolites.df <- taxsea_results$Metabolite_producers
@@ -115,13 +126,17 @@ metabolites.df <- taxsea_results$Metabolite_producers
 #Enrichments among health and disease signatures from GMRepoV2 and mBodyMap
 disease.df <- taxsea_results$Health_associations
 
+#Enrichments among bacterial physiology sets from BacDive
+bacdive.df <- taxsea_results$BacDive_bacterial_physiology
+
 #Enrichments among published associations from BugSigDB
-bsdb.df <- taxsea_results$BugSigdB
+bsdb.df <- taxsea_results$BugSigDB
 ```
 
 #### Quick start (mode 2, ORA)
 
 ``` r
+
 library(TaxSEA)
 
 # A list of oral taxa
@@ -182,6 +197,7 @@ Input taxa names should be in the format of like one of the following
 - NCBI ID E.g. 216816
 
 ``` r
+
 #Input IDs with the full taxonomic lineage should be split up. E.g.
 x <- "d__Bacteria.p__Actinobacteriota.c__Actinomycetes.o__Bifidobacteriales.f__Bifidobacteriaceae.g__Bifidobacterium"
 x <- strsplit(x,split="\\.")[[1]][6]
@@ -200,8 +216,9 @@ head(sample(TaxSEA_test_data),4)
 ### Run TaxSEA with test data
 
 ``` r
+
 data("TaxSEA_test_data")
-taxsea_results <- TaxSEA(taxon_ranks=TaxSEA_test_data)
+taxsea_results <- TaxSEA(taxon_ranks=TaxSEA_test_data, bugsigdb = TRUE)
 
 #Enrichments among metabolite producers from gutMgene and MiMeDB
 metabolites.df <- taxsea_results$Metabolite_producers
@@ -258,6 +275,7 @@ flag disables the automatic ID conversion and NCBI API lookup. However
 we have functionality available via other functions
 
 ``` r
+
 # Perform enrichment analysis using TaxSEA
 custom_taxsea_results <- TaxSEA(taxon_ranks = log2_fold_changes, custom_db = custom_taxon_sets)
 custom_taxsea_results <- custom_taxsea_results$custom_sets
@@ -285,6 +303,7 @@ widely applicable including to testing with amplicon data such as from
 16S rRNA gene sequencing.
 
 ``` r
+
 
 #### Enrichment testing with taxonomically defined ranks  
 # --- Example 1: Data frame input ---
@@ -414,6 +433,7 @@ using the PubMed ID as the study ID (Although not all studies have these
 yet). See below for an example.
 
 ``` r
+
 library(bugsigdbr) #This package is installable via Bioconductor
 bsdb <- importBugSigDB() #Import database 
 
@@ -433,6 +453,7 @@ tool the database is formatted in such a way that should be possible.
 See below for an example with fast gene set enrichment analysis (fgsea).
 
 ``` r
+
 library(fgsea) #This package is installable via Bioconductor
 data(TaxSEA_DB)
 #Convert input names to NCBI taxon ids
@@ -469,6 +490,8 @@ fgsea_results <- fgsea(TaxSEA_db, TaxSEA_test_data, minSize=5, maxSize=500)
 
 ### All vignettes
 
+- [BacDive physiology
+  sets](https://feargalr.github.io/TaxSEA/articles/BacDive-sets.md):
 - [Frequently Asked
   Questions](https://feargalr.github.io/TaxSEA/articles/FAQs.md):
 - [Analysis

@@ -1,14 +1,15 @@
-pandoc: 3.1.11
-pkgdown: 2.2.0
+pandoc: 3.8.3
+pkgdown: 2.2.1
 pkgdown_sha: ~
 articles:
+  articles/BacDive-sets: BacDive-sets.html
   FAQs: FAQs.html
   ORA_vs_ES: ORA_vs_ES.html
   single-sample-enrichment: single-sample-enrichment.html
   Taxonomic-aggregation: Taxonomic-aggregation.html
   TaxSEA: TaxSEA.html
   why-taxon-set-enrichment: why-taxon-set-enrichment.html
-last_built: 2026-02-12T03:29Z
+last_built: 2026-09-17T08:40Z
 urls:
   reference: https://feargalr.github.io/TaxSEA/reference
   article: https://feargalr.github.io/TaxSEA/articles

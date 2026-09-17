@@ -7,8 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Single-sample enrichment with ssTaxSEA • TaxSEA</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
 <meta property="og:title" content="Single-sample enrichment with ssTaxSEA">
@@ -21,7 +21,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">TaxSEA</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.3.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.5.5</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,6 +39,7 @@
     <li><a class="dropdown-item" href="../articles/Taxonomic-aggregation.html">Taxonomic aggregation</a></li>
     <li><a class="dropdown-item" href="../articles/TaxSEA.html">Using TaxSEA</a></li>
     <li><a class="dropdown-item" href="../articles/ORA_vs_ES.html">Analysis types</a></li>
+    <li><a class="dropdown-item" href="../articles/BacDive-sets.html">BacDive physiology sets</a></li>
   </ul>
 </li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
@@ -75,71 +76,196 @@
 </h2>
 <p>Standard TaxSEA works at the group level. You run a differential
 abundance analysis, get a fold change for each taxon, and ask whether
-biologically related taxa shift together. That’s powerful for
+biologically related taxa shift together. That is powerful for
 characterising what differs between groups.</p>
 <p>But sometimes the more interesting question is about individuals:</p>
 <ul>
 <li>Which patients in my IBD cohort show an oral bacteria
 signature?</li>
-<li>Does this person’s microbiome look more “disease-like” or
-“health-like” for a particular trait?</li>
+<li>Does this person’s microbiome look more “disease-like” for a
+particular trait?</li>
 <li>Can I stratify my cohort by enrichment patterns rather than by
 diagnosis alone?</li>
 </ul>
-<p>Group-level enrichment can’t answer these questions because it
+<p>Group-level enrichment cannot answer these questions because it
 collapses all individuals into a single summary statistic.
-<code>ssTaxSEA</code> extends TaxSEA to produce an enrichment score for
-every sample, for every taxon set.</p>
+<code><a href="../reference/ssTaxSEA.html">ssTaxSEA()</a></code> produces a score for every sample, for every
+taxon set.</p>
 </div>
 <div class="section level2">
 <h2 id="how-it-works">How it works<a class="anchor" aria-label="anchor" href="#how-it-works"></a>
 </h2>
-<p>The core idea is borrowed from single-sample Gene Set Enrichment
-Analysis (ssGSEA), adapted for microbiome count data.</p>
-<p>The approach has four steps:</p>
-<ol style="list-style-type: decimal">
-<li><p><strong>CLR transform.</strong> Raw counts are transformed using
-the centered log-ratio, which accounts for the compositional nature of
-microbiome data. Zeros are replaced with a small pseudocount (0.5)
-before transformation.</p></li>
-<li><p><strong>Z-score each taxon across the cohort.</strong> After CLR
-transformation, each taxon is z-scored across all samples. This is the
-critical step. It means that values no longer reflect within-sample
-abundance, but instead reflect how much higher or lower a taxon is in a
-given sample <em>relative to the cohort mean</em>. Without this step,
-you would only be asking “are these taxa the most abundant in this
-person?” rather than “does this person have unusually high levels of
-these taxa compared to everyone else?”.</p></li>
-<li><p><strong>Rank and score.</strong> For each sample, the z-scores
-are ranked and an ssGSEA-style weighted running-sum enrichment score is
-computed for each taxon set.</p></li>
-<li><p><strong>KS test.</strong> A Kolmogorov-Smirnov p-value is
-computed per sample per set, testing whether the set members are shifted
-relative to all taxa in that sample.</p></li>
-</ol>
-<p>The output is a matrix of enrichment scores (samples x taxon sets)
-and a corresponding matrix of p-values.</p>
+<p>For each sample, the counts are centered log-ratio (CLR) transformed,
+and the score for a taxon set is simply the <strong>mean of the CLR
+values of the set’s members</strong>:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>s</mi><mi>c</mi><mi>o</mi><mi>r</mi><msub><mi>e</mi><mrow><mi>S</mi><mo>,</mo><mi>j</mi></mrow></msub><mo>=</mo><mfrac><mn>1</mn><mrow><mo stretchy="false" form="prefix">|</mo><mi>S</mi><mo stretchy="false" form="prefix">|</mo></mrow></mfrac><munder><mo>∑</mo><mrow><mi>i</mi><mo>∈</mo><mi>S</mi></mrow></munder><mi>c</mi><mi>l</mi><msub><mi>r</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub></mrow><annotation encoding="application/x-tex">score_{S,j} = \frac{1}{|S|} \sum_{i \in S} clr_{ij}</annotation></semantics></math></p>
+<p>That is the whole method. There is no ranking, no running-sum
+statistic and no cohort-relative standardisation.</p>
+<p>Two details are worth stating explicitly.</p>
+<p><strong>The CLR is computed across all taxa you supply, before any
+subsetting to set members.</strong> The CLR divides each taxon by the
+geometric mean of the sample, so that denominator has to represent the
+whole community. If you were to subset the matrix to set members first
+and transform afterwards, the denominator would depend on which sets you
+happened to be testing — and sets with no real signal would pick up an
+apparent one. <code><a href="../reference/ssTaxSEA.html">ssTaxSEA()</a></code> does this in the right order; the
+point matters if you are ever tempted to hand-roll the calculation.</p>
+<p><strong>The score is a within-sample quantity.</strong> It does not
+reference the rest of the cohort at all, which means
+<code><a href="../reference/ssTaxSEA.html">ssTaxSEA()</a></code> is well defined for a single sample.</p>
 </div>
 <div class="section level2">
-<h2 id="why-z-scoring-matters">Why z-scoring matters<a class="anchor" aria-label="anchor" href="#why-z-scoring-matters"></a>
+<h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
 </h2>
-<p>This is worth emphasising because it’s the key difference between a
-naive per-sample approach and one that actually works.</p>
-<p>Consider oral bacteria in an IBD cohort. At the group level, these
-taxa are consistently elevated in IBD relative to healthy controls, and
-TaxSEA picks this up easily from fold changes. But in any individual
-sample, oral bacteria are unlikely to be the <em>most abundant</em>
-taxa. They might sit at moderate abundance in IBD samples and low
-abundance in controls.</p>
-<p>If you simply rank each sample’s taxa by their own abundance and run
-enrichment, oral bacteria won’t stand out in either group because both
-groups have the same dominant gut commensals. The within-sample ranking
-buries the between-group signal.</p>
-<p>Z-scoring across the cohort solves this. A taxon gets a high z-score
-in a sample only if that sample has more of it than average. So in IBD
-samples, oral bacteria will have positive z-scores (elevated relative to
-the cohort), and in healthy samples, they will have negative z-scores.
-The enrichment test then picks up exactly the pattern you expect.</p>
+<div class="section level3">
+<h3 id="from-a-count-matrix">From a count matrix<a class="anchor" aria-label="anchor" href="#from-a-count-matrix"></a>
+</h3>
+<p>Rows are taxa, columns are samples, and row names are taxon names in
+the same format standard TaxSEA expects.</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">42</span><span class="op">)</span></span>
+<span><span class="va">counts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Poisson.html" class="external-link">rpois</a></span><span class="op">(</span><span class="fl">30</span> <span class="op">*</span> <span class="fl">8</span>, lambda <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">30</span>, ncol <span class="op">=</span> <span class="fl">8</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">counts</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"Taxon_"</span>, <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_len</a></span><span class="op">(</span><span class="fl">30</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">counts</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"Sample_"</span>, <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_len</a></span><span class="op">(</span><span class="fl">8</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Plant a signal: raise one set's members in the last four samples</span></span>
+<span><span class="va">counts</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">6</span>, <span class="fl">5</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">counts</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">6</span>, <span class="fl">5</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span> <span class="op">*</span> <span class="fl">5</span></span>
+<span></span>
+<span><span class="va">my_sets</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>  elevated_set <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"Taxon_"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span>,</span>
+<span>  control_set  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"Taxon_"</span>, <span class="fl">20</span><span class="op">:</span><span class="fl">27</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">scores</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ssTaxSEA.html">ssTaxSEA</a></span><span class="op">(</span><span class="va">counts</span>, custom_db <span class="op">=</span> <span class="va">my_sets</span>, min_set_size <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">scores</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 2 8</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">scores</span>, <span class="fl">2</span><span class="op">)</span></span>
+<span><span class="co">#&gt;              Sample_1 Sample_2 Sample_3 Sample_4 Sample_5 Sample_6 Sample_7</span></span>
+<span><span class="co">#&gt; elevated_set     0.02     0.20     0.04    -0.13     1.15     1.37     1.31</span></span>
+<span><span class="co">#&gt; control_set     -0.09     0.02     0.01    -0.01    -0.29    -0.34    -0.52</span></span>
+<span><span class="co">#&gt;              Sample_8</span></span>
+<span><span class="co">#&gt; elevated_set     1.07</span></span>
+<span><span class="co">#&gt; control_set     -0.14</span></span></code></pre></div>
+<p>The returned object is a plain numeric matrix with <strong>taxon sets
+as rows and samples as columns</strong>. The planted signal is visible
+as higher scores in the last four samples of
+<code>elevated_set</code>:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">rowMeans</a></span><span class="op">(</span><span class="va">scores</span><span class="op">[</span>, <span class="fl">5</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">rowMeans</a></span><span class="op">(</span><span class="va">scores</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="co">#&gt; elevated_set  control_set </span></span>
+<span><span class="co">#&gt;    1.1948884   -0.3033688</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="a-single-sample">A single sample<a class="anchor" aria-label="anchor" href="#a-single-sample"></a>
+</h3>
+<p>Because the score never references the cohort, one sample is
+enough:</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/ssTaxSEA.html">ssTaxSEA</a></span><span class="op">(</span><span class="va">counts</span><span class="op">[</span>, <span class="fl">1</span>, drop <span class="op">=</span> <span class="cn">FALSE</span><span class="op">]</span>, custom_db <span class="op">=</span> <span class="va">my_sets</span>, min_set_size <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
+<span><span class="co">#&gt;                 Sample_1</span></span>
+<span><span class="co">#&gt; elevated_set  0.01662292</span></span>
+<span><span class="co">#&gt; control_set  -0.08585010</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="with-the-built-in-database">With the built-in database<a class="anchor" aria-label="anchor" href="#with-the-built-in-database"></a>
+</h3>
+<p>Leave <code>custom_db</code> unset to use the built-in TaxSEA sets.
+Row names are mapped to NCBI taxonomy IDs, exactly as in standard
+<code><a href="../reference/TaxSEA.html">TaxSEA()</a></code>.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">scores</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ssTaxSEA.html">ssTaxSEA</a></span><span class="op">(</span><span class="va">counts</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">scores</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="from-a-treesummarizedexperiment">From a TreeSummarizedExperiment<a class="anchor" aria-label="anchor" href="#from-a-treesummarizedexperiment"></a>
+</h3>
+<p><code><a href="../reference/ssTaxSEA.html">ssTaxSEA()</a></code> accepts <code>SummarizedExperiment</code> and
+<code>TreeSummarizedExperiment</code> objects directly, extracting the
+first assay and using <code><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames()</a></code> as taxon identifiers.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://bioconductor.org/packages/SummarizedExperiment" class="external-link">SummarizedExperiment</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">se</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html" class="external-link">SummarizedExperiment</a></span><span class="op">(</span>assays <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>counts <span class="op">=</span> <span class="va">counts</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">scores_se</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ssTaxSEA.html">ssTaxSEA</a></span><span class="op">(</span><span class="va">se</span>, custom_db <span class="op">=</span> <span class="va">my_sets</span>, min_set_size <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Identical to the matrix result</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/all.equal.html" class="external-link">all.equal</a></span><span class="op">(</span><span class="va">scores</span>, <span class="va">scores_se</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] TRUE</span></span></code></pre></div>
+</div>
+</div>
+<div class="section level2">
+<h2 id="interpreting-the-scores">Interpreting the scores<a class="anchor" aria-label="anchor" href="#interpreting-the-scores"></a>
+</h2>
+<p><strong>Compare across samples, within a set.</strong> A higher score
+for <code>elevated_set</code> in sample 6 than in sample 2 means the
+set’s members make up more of sample 6’s community. This is the
+comparison the score is built for.</p>
+<p><strong>Do not compare across sets.</strong> A set of abundant taxa
+scores higher than a set of rare taxa in every sample, regardless of
+biology, because its members are simply more abundant. In the example
+above the two sets sit at different baselines for exactly this
+reason:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/MatrixGenerics/man/rowMeans.html" class="external-link">rowMeans</a></span><span class="op">(</span><span class="va">scores</span><span class="op">)</span></span>
+<span><span class="co">#&gt; elevated_set  control_set </span></span>
+<span><span class="co">#&gt;    0.6292661   -0.1682476</span></span></code></pre></div>
+<p>For heatmaps and clustering, center or scale the rows first so that
+you are looking at variation between samples rather than differences in
+baseline abundance:</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">scaled</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/scale.html" class="external-link">scale</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="va">scores</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">scaled</span>, <span class="fl">2</span><span class="op">)</span></span>
+<span><span class="co">#&gt;              Sample_1 Sample_2 Sample_3 Sample_4 Sample_5 Sample_6 Sample_7</span></span>
+<span><span class="co">#&gt; elevated_set    -0.94    -0.66    -0.90    -1.17     0.80     1.14     1.05</span></span>
+<span><span class="co">#&gt; control_set      0.42     0.96     0.94     0.80    -0.61    -0.89    -1.79</span></span>
+<span><span class="co">#&gt;              Sample_8</span></span>
+<span><span class="co">#&gt; elevated_set     0.68</span></span>
+<span><span class="co">#&gt; control_set      0.17</span></span>
+<span><span class="co">#&gt; attr(,"scaled:center")</span></span>
+<span><span class="co">#&gt; elevated_set  control_set </span></span>
+<span><span class="co">#&gt;    0.6292661   -0.1682476 </span></span>
+<span><span class="co">#&gt; attr(,"scaled:scale")</span></span>
+<span><span class="co">#&gt; elevated_set  control_set </span></span>
+<span><span class="co">#&gt;    0.6513343    0.1946639</span></span></code></pre></div>
+<p><strong>No p-values are returned.</strong> The score is a descriptive
+statistic, and a p-value computed within a single sample would mostly be
+telling you whether the set’s members are more abundant than the average
+taxon — a property of the set, not of the sample. To test a hypothesis,
+take one row of the matrix and compare it across samples with a test
+suited to your design:</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">group</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"control"</span>, <span class="st">"case"</span><span class="op">)</span>, each <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html" class="external-link">wilcox.test</a></span><span class="op">(</span><span class="va">scores</span><span class="op">[</span><span class="st">"elevated_set"</span>, <span class="op">]</span> <span class="op">~</span> <span class="va">group</span><span class="op">)</span><span class="op">$</span><span class="va">p.value</span></span>
+<span><span class="co">#&gt; [1] 0.02857143</span></span></code></pre></div>
+<p><strong>Remember that the data are compositional.</strong> Because
+CLR values within a sample are constrained, raising one set’s members
+slightly lowers everything else. Small shifts in sets you believe to be
+null are expected, and with enough samples they can reach statistical
+significance while being negligible in size. Report effect sizes
+alongside p-values rather than relying on p-values alone.</p>
+</div>
+<div class="section level2">
+<h2 id="practical-considerations">Practical considerations<a class="anchor" aria-label="anchor" href="#practical-considerations"></a>
+</h2>
+<p><strong>The pseudocount matters.</strong> Zeros cannot be
+log-transformed, so <code>pseudocount</code> (default 0.5) is added to
+every value before the transform. Adding it to all values rather than
+only to zeros keeps the transform monotonic in the counts. The choice
+does affect the scores, so report the value you used.</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ssTaxSEA.html">ssTaxSEA</a></span><span class="op">(</span><span class="va">counts</span>, custom_db <span class="op">=</span> <span class="va">my_sets</span>, min_set_size <span class="op">=</span> <span class="fl">3</span>, pseudocount <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">p1</span><span class="op">[</span><span class="st">"elevated_set"</span>, <span class="op">]</span> <span class="op">-</span> <span class="va">scores</span><span class="op">[</span><span class="st">"elevated_set"</span>, <span class="op">]</span>, <span class="fl">3</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Sample_1 Sample_2 Sample_3 Sample_4 Sample_5 Sample_6 Sample_7 Sample_8 </span></span>
+<span><span class="co">#&gt;   -0.002   -0.008   -0.002    0.007   -0.032   -0.037   -0.037   -0.027</span></span></code></pre></div>
+<p><strong>Supply counts, not proportions.</strong> Adding a pseudocount
+of 0.5 to values that sum to 1 would overwhelm the data completely, so
+<code><a href="../reference/ssTaxSEA.html">ssTaxSEA()</a></code> refuses input whose columns sum to 1. If you
+only have relative abundances, rescale them to a count-like scale
+first.</p>
+<p><strong>BugSigDB is excluded.</strong> <code><a href="../reference/ssTaxSEA.html">ssTaxSEA()</a></code> uses
+the built-in TaxSEA database (GMRepoV2, MiMeDB, gutMGene, mBodyMap,
+BacDive) but does not load BugSigDB. This keeps the function fast and
+avoids the <code>bugsigdbr</code> dependency.</p>
 </div>
 <div class="section level2">
 <h2 id="when-to-use-sstaxsea-vs-taxsea">When to use ssTaxSEA vs TaxSEA<a class="anchor" aria-label="anchor" href="#when-to-use-sstaxsea-vs-taxsea"></a>
@@ -164,7 +290,7 @@ The enrichment test then picks up exactly the pattern you expect.</p>
 <tr class="even">
 <td><strong>Output</strong></td>
 <td>One enrichment result per taxon set</td>
-<td>One enrichment score per sample per taxon set</td>
+<td>One score per sample per taxon set</td>
 </tr>
 <tr class="odd">
 <td><strong>Question</strong></td>
@@ -175,116 +301,76 @@ groups?</td>
 <tr class="even">
 <td><strong>Use case</strong></td>
 <td>Interpreting DA results, contextualising group differences</td>
-<td>Patient stratification, individual-level phenotyping, heterogeneity
-analysis</td>
+<td>Patient stratification, individual-level phenotyping</td>
+</tr>
+<tr class="odd">
+<td><strong>Significance</strong></td>
+<td>p-values and FDR per set</td>
+<td>none; test scores across samples yourself</td>
 </tr>
 </tbody>
 </table>
-<p>In practice, you might use both: run TaxSEA first to identify which
-taxon sets are enriched at the group level, then use ssTaxSEA to see how
-those enrichments distribute across individuals.</p>
+<p>In practice you might use both: run <code><a href="../reference/TaxSEA.html">TaxSEA()</a></code> to identify
+which taxon sets are enriched at the group level, then
+<code><a href="../reference/ssTaxSEA.html">ssTaxSEA()</a></code> to see how those enrichments distribute across
+individuals.</p>
 </div>
 <div class="section level2">
-<h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
+<h2 id="downstream-analysis">Downstream analysis<a class="anchor" aria-label="anchor" href="#downstream-analysis"></a>
 </h2>
-<div class="section level3">
-<h3 id="from-a-count-matrix">From a count matrix<a class="anchor" aria-label="anchor" href="#from-a-count-matrix"></a>
-</h3>
-<p>The input should be a matrix with taxa as rows and samples as
-columns. Row names must be taxon names (species or genus) in the same
-format as standard TaxSEA.</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/feargalr/taxsea" class="external-link">TaxSEA</a></span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># counts: taxa (rows) x samples (columns)</span></span>
-<span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ssTaxSEA.html">ssTaxSEA</a></span><span class="op">(</span><span class="va">counts</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Enrichment scores: samples x taxon sets</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">res</span><span class="op">$</span><span class="va">scores</span><span class="op">)</span></span>
-<span><span class="va">res</span><span class="op">$</span><span class="va">scores</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span></span>
-<span></span>
-<span><span class="co"># P-values: samples x taxon sets</span></span>
-<span><span class="va">res</span><span class="op">$</span><span class="va">pvalues</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span></span></code></pre></div>
-</div>
-<div class="section level3">
-<h3 id="from-a-treesummarizedexperiment">From a TreeSummarizedExperiment<a class="anchor" aria-label="anchor" href="#from-a-treesummarizedexperiment"></a>
-</h3>
-<p><code>ssTaxSEA</code> accepts TSE objects directly. It will extract
-the count assay and use <code><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames()</a></code> as taxon
-identifiers.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://microbiome.github.io/mia/" class="external-link">mia</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/feargalr/taxsea" class="external-link">TaxSEA</a></span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">GlobalPatterns</span>, package <span class="op">=</span> <span class="st">"mia"</span><span class="op">)</span></span>
-<span><span class="va">tse</span> <span class="op">&lt;-</span> <span class="va">GlobalPatterns</span></span>
-<span></span>
-<span><span class="co"># Subset to two sample types</span></span>
-<span><span class="va">tse</span> <span class="op">&lt;-</span> <span class="va">tse</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html" class="external-link">colData</a></span><span class="op">(</span><span class="va">tse</span><span class="op">)</span><span class="op">$</span><span class="va">SampleType</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Feces"</span>, <span class="st">"Soil"</span><span class="op">)</span><span class="op">]</span></span>
-<span><span class="va">tse</span> <span class="op">&lt;-</span> <span class="va">tse</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">rowSums</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html" class="external-link">assay</a></span><span class="op">(</span><span class="va">tse</span>, <span class="st">"counts"</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span> <span class="op">&gt;=</span> <span class="fl">2</span>, <span class="op">]</span></span>
-<span></span>
-<span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ssTaxSEA.html">ssTaxSEA</a></span><span class="op">(</span><span class="va">tse</span>, min_set_size <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">res</span><span class="op">$</span><span class="va">scores</span><span class="op">)</span></span></code></pre></div>
-</div>
-<div class="section level3">
-<h3 id="with-custom-taxon-sets">With custom taxon sets<a class="anchor" aria-label="anchor" href="#with-custom-taxon-sets"></a>
-</h3>
-<p>As with standard TaxSEA, you can provide your own taxon sets. When
-using a custom database, names in the sets should match your row names
-directly (no NCBI ID conversion is performed).</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">my_sets</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
-<span>  oral_taxa <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Fusobacterium_nucleatum"</span>, <span class="st">"Streptococcus_mutans"</span>,</span>
-<span>                <span class="st">"Porphyromonas_gingivalis"</span>, <span class="st">"Prevotella_intermedia"</span>,</span>
-<span>                <span class="st">"Treponema_denticola"</span>, <span class="st">"Aggregatibacter_actinomycetemcomitans"</span><span class="op">)</span>,</span>
-<span>  scfa_producers <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Faecalibacterium_prausnitzii"</span>, <span class="st">"Roseburia_intestinalis"</span>,</span>
-<span>                     <span class="st">"Eubacterium_rectale"</span>, <span class="st">"Coprococcus_catus"</span>,</span>
-<span>                     <span class="st">"Butyricicoccus_pullicaecorum"</span>, <span class="st">"Anaerostipes_caccae"</span><span class="op">)</span></span>
-<span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ssTaxSEA.html">ssTaxSEA</a></span><span class="op">(</span><span class="va">counts</span>, custom_db <span class="op">=</span> <span class="va">my_sets</span>, min_set_size <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code></pre></div>
-</div>
-</div>
-<div class="section level2">
-<h2 id="interpreting-the-output">Interpreting the output<a class="anchor" aria-label="anchor" href="#interpreting-the-output"></a>
-</h2>
-<p><strong>Scores.</strong> A positive enrichment score for a given
-sample and taxon set means that the taxa in that set tend to have higher
-abundance in that sample relative to the rest of the cohort. A negative
-score means they tend to be lower. The magnitude reflects how strong and
-coordinated the shift is.</p>
-<p><strong>P-values.</strong> The KS test p-value tells you whether the
-distribution of z-scores for set members differs from the background in
-that sample. Note that these are unadjusted p-values. Since you are
-testing many sets across many samples, apply your own multiple testing
-correction as appropriate for your analysis.</p>
-</div>
-<div class="section level2">
-<h2 id="practical-considerations">Practical considerations<a class="anchor" aria-label="anchor" href="#practical-considerations"></a>
-</h2>
-<p><strong>Cohort composition matters.</strong> Because z-scoring is
-relative to the cohort mean, the composition of your cohort affects the
-scores. If your cohort is 90% disease samples, the “average” will look
-disease-like and scores will be less extreme. A balanced cohort (or at
-least a well-defined reference group) generally gives more interpretable
-results.</p>
-<p><strong>Sample size.</strong> Z-scoring requires a reasonable number
-of samples to estimate the mean and standard deviation for each taxon.
-With very few samples (fewer than ~10), estimates will be noisy.</p>
-<p><strong>BugSigDB is excluded.</strong> <code>ssTaxSEA</code> uses the
-built-in TaxSEA database (GMRepoV2, MiMeDB, gutMGene, mBodyMap, BacDive)
-but does not load BugSigDB. This keeps the function fast and avoids the
-need for the <code>bugsigdbr</code> dependency.</p>
-<p><strong>Downstream analysis.</strong> The score matrix is designed to
-slot into standard statistical workflows. You can use it for:</p>
+<p>The score matrix is designed to slot into standard workflows:</p>
 <ul>
-<li>Heatmaps to visualise per-sample enrichment patterns</li>
+<li>Heatmaps of per-sample enrichment patterns (scale the rows
+first)</li>
 <li>Correlation with clinical metadata</li>
-<li>Group comparisons (e.g. Wilcoxon test on scores between disease and
-control)</li>
+<li>Group comparisons on a single set’s scores</li>
 <li>Clustering or ordination to identify patient subgroups</li>
-<li>Survival analysis or regression using scores as predictors</li>
+<li>Regression or survival analysis using scores as predictors</li>
 </ul>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html" class="external-link">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; R version 4.6.1 (2026-06-24)</span></span>
+<span><span class="co">#&gt; Platform: x86_64-pc-linux-gnu</span></span>
+<span><span class="co">#&gt; Running under: Ubuntu 24.04.5 LTS</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Matrix products: default</span></span>
+<span><span class="co">#&gt; BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3 </span></span>
+<span><span class="co">#&gt; LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/libopenblasp-r0.3.26.so;  LAPACK version 3.12.0</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; locale:</span></span>
+<span><span class="co">#&gt;  [1] LC_CTYPE=C.UTF-8       LC_NUMERIC=C           LC_TIME=C.UTF-8       </span></span>
+<span><span class="co">#&gt;  [4] LC_COLLATE=C.UTF-8     LC_MONETARY=C.UTF-8    LC_MESSAGES=C.UTF-8   </span></span>
+<span><span class="co">#&gt;  [7] LC_PAPER=C.UTF-8       LC_NAME=C              LC_ADDRESS=C          </span></span>
+<span><span class="co">#&gt; [10] LC_TELEPHONE=C         LC_MEASUREMENT=C.UTF-8 LC_IDENTIFICATION=C   </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; time zone: UTC</span></span>
+<span><span class="co">#&gt; tzcode source: system (glibc)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; attached base packages:</span></span>
+<span><span class="co">#&gt; [1] stats4    stats     graphics  grDevices utils     datasets  methods  </span></span>
+<span><span class="co">#&gt; [8] base     </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; other attached packages:</span></span>
+<span><span class="co">#&gt;  [1] SummarizedExperiment_1.42.0 Biobase_2.72.0             </span></span>
+<span><span class="co">#&gt;  [3] GenomicRanges_1.64.0        Seqinfo_1.2.0              </span></span>
+<span><span class="co">#&gt;  [5] IRanges_2.46.0              S4Vectors_0.50.2           </span></span>
+<span><span class="co">#&gt;  [7] BiocGenerics_0.58.1         generics_0.1.4             </span></span>
+<span><span class="co">#&gt;  [9] MatrixGenerics_1.24.0       matrixStats_1.5.0          </span></span>
+<span><span class="co">#&gt; [11] TaxSEA_1.5.5               </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; loaded via a namespace (and not attached):</span></span>
+<span><span class="co">#&gt;  [1] Matrix_1.7-5        jsonlite_2.0.0      compiler_4.6.1     </span></span>
+<span><span class="co">#&gt;  [4] jquerylib_0.1.4     systemfonts_1.3.2   textshaping_1.0.5  </span></span>
+<span><span class="co">#&gt;  [7] yaml_2.3.12         fastmap_1.2.0       lattice_0.22-9     </span></span>
+<span><span class="co">#&gt; [10] R6_2.6.1            XVector_0.52.0      S4Arrays_1.12.0    </span></span>
+<span><span class="co">#&gt; [13] knitr_1.52          DelayedArray_0.38.2 desc_1.4.3         </span></span>
+<span><span class="co">#&gt; [16] bslib_0.12.0        rlang_1.3.0         cachem_1.1.0       </span></span>
+<span><span class="co">#&gt; [19] xfun_0.61           fs_2.1.0            sass_0.4.10        </span></span>
+<span><span class="co">#&gt; [22] otel_0.2.0          SparseArray_1.12.2  cli_3.6.6          </span></span>
+<span><span class="co">#&gt; [25] pkgdown_2.2.1       digest_0.6.39       grid_4.6.1         </span></span>
+<span><span class="co">#&gt; [28] lifecycle_1.0.5     evaluate_1.0.5      ragg_1.5.2         </span></span>
+<span><span class="co">#&gt; [31] abind_1.4-8         rmarkdown_2.32      tools_4.6.1        </span></span>
+<span><span class="co">#&gt; [34] htmltools_0.5.9</span></span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
@@ -297,7 +383,7 @@ control)</li>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer>

@@ -7,8 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>TaxSEA • TaxSEA</title>
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
+<script src="deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><link href="extra.css" rel="stylesheet">
 <meta property="og:title" content="TaxSEA">
@@ -23,7 +23,7 @@
 
     <a class="navbar-brand me-2" href="index.html">TaxSEA</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.3.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.5.5</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -41,6 +41,7 @@
     <li><a class="dropdown-item" href="articles/Taxonomic-aggregation.html">Taxonomic aggregation</a></li>
     <li><a class="dropdown-item" href="articles/TaxSEA.html">Using TaxSEA</a></li>
     <li><a class="dropdown-item" href="articles/ORA_vs_ES.html">Analysis types</a></li>
+    <li><a class="dropdown-item" href="articles/BacDive-sets.html">BacDive physiology sets</a></li>
   </ul>
 </li>
 <li class="nav-item"><a class="nav-link" href="news/index.html">Changelog</a></li>
@@ -86,6 +87,7 @@ Available on <a href="https://bioconductor.org/packages/TaxSEA" class="external-
 <h3 id="taxon-set-database">Taxon set database<a class="anchor" aria-label="anchor" href="#taxon-set-database"></a>
 </h3>
 <p>By default TaxSEA utilizes taxon sets generated from six reference databases (<strong>BacDive</strong>,<strong>gutMGene</strong>, <strong>GMrepo v2</strong>, <strong>MiMeDB</strong>, <strong>mBodyMap</strong>, <strong>BugSigDB</strong>). See below for examples of using custom databases or taxonomically defined taxon sets.</p>
+<p>The <strong>BacDive</strong> sets describe measured bacterial physiology: oxygen tolerance, Gram stain, substrate use and fermentation, enzyme activities, growth temperature, salt and pH ranges and more, across more than 9,000 taxa. They were rebuilt in TaxSEA 1.5.5 with new set names (e.g. <code>BacDive_Oxygen_facultative_anaerobe</code>); see the <a href="https://feargalr.github.io/TaxSEA/articles/BacDive-sets.html">BacDive physiology sets</a> guide.</p>
 <p>Please cite the appropriate database if using:</p>
 <ul>
 <li>Schober et al. BacDive in 2025: the core database for prokaryotic strain data. Nucleic Acids Res. 2025.</li>
@@ -118,7 +120,7 @@ Available on <a href="https://bioconductor.org/packages/TaxSEA" class="external-
 <span></span>
 <span><span class="co"># Run TaxSEA with test data provided</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">TaxSEA_test_data</span><span class="op">)</span></span>
-<span><span class="va">taxsea_results</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/TaxSEA.html">TaxSEA</a></span><span class="op">(</span>taxon_ranks<span class="op">=</span><span class="va">TaxSEA_test_data</span><span class="op">)</span></span>
+<span><span class="va">taxsea_results</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/TaxSEA.html">TaxSEA</a></span><span class="op">(</span>taxon_ranks<span class="op">=</span><span class="va">TaxSEA_test_data</span>, bugsigdb <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">#Enrichments among metabolite producers from gutMgene and MiMeDB</span></span>
 <span><span class="va">metabolites.df</span> <span class="op">&lt;-</span> <span class="va">taxsea_results</span><span class="op">$</span><span class="va">Metabolite_producers</span></span>
@@ -126,8 +128,11 @@ Available on <a href="https://bioconductor.org/packages/TaxSEA" class="external-
 <span><span class="co">#Enrichments among health and disease signatures from GMRepoV2 and mBodyMap</span></span>
 <span><span class="va">disease.df</span> <span class="op">&lt;-</span> <span class="va">taxsea_results</span><span class="op">$</span><span class="va">Health_associations</span></span>
 <span></span>
+<span><span class="co">#Enrichments among bacterial physiology sets from BacDive</span></span>
+<span><span class="va">bacdive.df</span> <span class="op">&lt;-</span> <span class="va">taxsea_results</span><span class="op">$</span><span class="va">BacDive_bacterial_physiology</span></span>
+<span></span>
 <span><span class="co">#Enrichments among published associations from BugSigDB</span></span>
-<span><span class="va">bsdb.df</span> <span class="op">&lt;-</span> <span class="va">taxsea_results</span><span class="op">$</span><span class="va">BugSigdB</span></span></code></pre></div>
+<span><span class="va">bsdb.df</span> <span class="op">&lt;-</span> <span class="va">taxsea_results</span><span class="op">$</span><span class="va">BugSigDB</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="quick-start-mode-2-ora">Quick start (mode 2, ORA)<a class="anchor" aria-label="anchor" href="#quick-start-mode-2-ora"></a>
@@ -208,7 +213,7 @@ The method relies on the <strong>full distribution</strong> of values to detect 
 </h3>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"TaxSEA_test_data"</span><span class="op">)</span></span>
-<span><span class="va">taxsea_results</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/TaxSEA.html">TaxSEA</a></span><span class="op">(</span>taxon_ranks<span class="op">=</span><span class="va">TaxSEA_test_data</span><span class="op">)</span></span>
+<span><span class="va">taxsea_results</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/TaxSEA.html">TaxSEA</a></span><span class="op">(</span>taxon_ranks<span class="op">=</span><span class="va">TaxSEA_test_data</span>, bugsigdb <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">#Enrichments among metabolite producers from gutMgene and MiMeDB</span></span>
 <span><span class="va">metabolites.df</span> <span class="op">&lt;-</span> <span class="va">taxsea_results</span><span class="op">$</span><span class="va">Metabolite_producers</span></span>
@@ -388,7 +393,7 @@ The method relies on the <strong>full distribution</strong> of values to detect 
 </h4>
 <p>The TaxSEA function by default uses the Kolmogorov Smirnov test and the original idea was inspired by gene set enrichment analyses from RNASeq. Should users wish to use an alternative gene set enrichment analysis tool the database is formatted in such a way that should be possible. See below for an example with fast gene set enrichment analysis (fgsea).</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ctlab/fgsea/" class="external-link">fgsea</a></span><span class="op">)</span> <span class="co">#This package is installable via Bioconductor</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/alserglab/fgsea/" class="external-link">fgsea</a></span><span class="op">)</span> <span class="co">#This package is installable via Bioconductor</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">TaxSEA_DB</span><span class="op">)</span></span>
 <span><span class="co">#Convert input names to NCBI taxon ids</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">TaxSEA_test_data</span><span class="op">)</span> <span class="op">=</span> <span class="fu"><a href="reference/get_ncbi_taxon_ids.html">get_ncbi_taxon_ids</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">TaxSEA_test_data</span><span class="op">)</span><span class="op">)</span></span>
@@ -450,7 +455,7 @@ The method relies on the <strong>full distribution</strong> of values to detect 
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer>

@@ -7,8 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>TaxSEA • TaxSEA</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
 <meta property="og:title" content="TaxSEA">
@@ -21,7 +21,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">TaxSEA</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.3.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.5.5</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,6 +39,7 @@
     <li><a class="dropdown-item" href="../articles/Taxonomic-aggregation.html">Taxonomic aggregation</a></li>
     <li><a class="dropdown-item" href="../articles/TaxSEA.html">Using TaxSEA</a></li>
     <li><a class="dropdown-item" href="../articles/ORA_vs_ES.html">Analysis types</a></li>
+    <li><a class="dropdown-item" href="../articles/BacDive-sets.html">BacDive physiology sets</a></li>
   </ul>
 </li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
@@ -65,7 +66,7 @@
                         <h4 data-toc-skip class="author">Feargal
 Ryan</h4>
             
-            <h4 data-toc-skip class="date">2026-02-12</h4>
+            <h4 data-toc-skip class="date">2026-09-17</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/feargalr/taxsea/blob/main/vignettes/TaxSEA.Rmd" class="external-link"><code>vignettes/TaxSEA.Rmd</code></a></small>
       <div class="d-none name"><code>TaxSEA.Rmd</code></div>
@@ -151,8 +152,9 @@ contain a particular taxon for a list of taxon names.</li>
 <code>get_ncbi_taxon_ids(taxon_names)</code>: Retrieves NCBI
 Taxonomy IDs for a list of taxon names.</li>
 <li>
-<code>TaxSEA(taxon_ranks, database = "All")</code>: Taxon set
-enrichment analysis.</li>
+<code>TaxSEA(taxon_ranks)</code>: Taxon set enrichment analysis. Add
+<code>bugsigdb = TRUE</code> to include published signatures from
+BugSigDB.</li>
 </ul>
 </div>
 <div class="section level3">
@@ -209,9 +211,65 @@ Genus name. E.g. “Bifidobacterium” - NCBI ID E.g. 216816</p>
 </h4>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"TaxSEA_test_data"</span><span class="op">)</span></span>
-<span><span class="va">taxsea_results</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/TaxSEA.html">TaxSEA</a></span><span class="op">(</span>taxon_ranks<span class="op">=</span><span class="va">TaxSEA_test_data</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Using cached version from 2026-02-12 03:30:04</span></span></code></pre>
+<span><span class="co"># bugsigdb = TRUE downloads BugSigDB signatures at run time. It is off by</span></span>
+<span><span class="co"># default because including it changes the p-values of every set, and</span></span>
+<span><span class="co"># BugSigDB is updated independently of TaxSEA.</span></span>
+<span><span class="va">taxsea_results</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/TaxSEA.html">TaxSEA</a></span><span class="op">(</span>taxon_ranks<span class="op">=</span><span class="va">TaxSEA_test_data</span>,</span>
+<span>                         bugsigdb <span class="op">=</span> <span class="va">bsdb_available</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Using cached version from 2026-09-17 08:40:55</span></span></code></pre>
 <pre><code><span><span class="co">## Warning in ks.test.default(taxon_set_ranks, taxon_ranks): p-value will be</span></span>
+<span><span class="co">## approximate in the presence of ties</span></span>
+<span><span class="co">## Warning in ks.test.default(taxon_set_ranks, taxon_ranks): p-value will be</span></span>
+<span><span class="co">## approximate in the presence of ties</span></span>
+<span><span class="co">## Warning in ks.test.default(taxon_set_ranks, taxon_ranks): p-value will be</span></span>
+<span><span class="co">## approximate in the presence of ties</span></span>
+<span><span class="co">## Warning in ks.test.default(taxon_set_ranks, taxon_ranks): p-value will be</span></span>
+<span><span class="co">## approximate in the presence of ties</span></span>
+<span><span class="co">## Warning in ks.test.default(taxon_set_ranks, taxon_ranks): p-value will be</span></span>
+<span><span class="co">## approximate in the presence of ties</span></span>
+<span><span class="co">## Warning in ks.test.default(taxon_set_ranks, taxon_ranks): p-value will be</span></span>
+<span><span class="co">## approximate in the presence of ties</span></span>
+<span><span class="co">## Warning in ks.test.default(taxon_set_ranks, taxon_ranks): p-value will be</span></span>
+<span><span class="co">## approximate in the presence of ties</span></span>
+<span><span class="co">## Warning in ks.test.default(taxon_set_ranks, taxon_ranks): p-value will be</span></span>
+<span><span class="co">## approximate in the presence of ties</span></span>
+<span><span class="co">## Warning in ks.test.default(taxon_set_ranks, taxon_ranks): p-value will be</span></span>
+<span><span class="co">## approximate in the presence of ties</span></span>
+<span><span class="co">## Warning in ks.test.default(taxon_set_ranks, taxon_ranks): p-value will be</span></span>
+<span><span class="co">## approximate in the presence of ties</span></span>
+<span><span class="co">## Warning in ks.test.default(taxon_set_ranks, taxon_ranks): p-value will be</span></span>
+<span><span class="co">## approximate in the presence of ties</span></span>
+<span><span class="co">## Warning in ks.test.default(taxon_set_ranks, taxon_ranks): p-value will be</span></span>
+<span><span class="co">## approximate in the presence of ties</span></span>
+<span><span class="co">## Warning in ks.test.default(taxon_set_ranks, taxon_ranks): p-value will be</span></span>
+<span><span class="co">## approximate in the presence of ties</span></span>
+<span><span class="co">## Warning in ks.test.default(taxon_set_ranks, taxon_ranks): p-value will be</span></span>
+<span><span class="co">## approximate in the presence of ties</span></span>
+<span><span class="co">## Warning in ks.test.default(taxon_set_ranks, taxon_ranks): p-value will be</span></span>
+<span><span class="co">## approximate in the presence of ties</span></span>
+<span><span class="co">## Warning in ks.test.default(taxon_set_ranks, taxon_ranks): p-value will be</span></span>
+<span><span class="co">## approximate in the presence of ties</span></span>
+<span><span class="co">## Warning in ks.test.default(taxon_set_ranks, taxon_ranks): p-value will be</span></span>
+<span><span class="co">## approximate in the presence of ties</span></span>
+<span><span class="co">## Warning in ks.test.default(taxon_set_ranks, taxon_ranks): p-value will be</span></span>
+<span><span class="co">## approximate in the presence of ties</span></span>
+<span><span class="co">## Warning in ks.test.default(taxon_set_ranks, taxon_ranks): p-value will be</span></span>
+<span><span class="co">## approximate in the presence of ties</span></span>
+<span><span class="co">## Warning in ks.test.default(taxon_set_ranks, taxon_ranks): p-value will be</span></span>
+<span><span class="co">## approximate in the presence of ties</span></span>
+<span><span class="co">## Warning in ks.test.default(taxon_set_ranks, taxon_ranks): p-value will be</span></span>
+<span><span class="co">## approximate in the presence of ties</span></span>
+<span><span class="co">## Warning in ks.test.default(taxon_set_ranks, taxon_ranks): p-value will be</span></span>
+<span><span class="co">## approximate in the presence of ties</span></span>
+<span><span class="co">## Warning in ks.test.default(taxon_set_ranks, taxon_ranks): p-value will be</span></span>
+<span><span class="co">## approximate in the presence of ties</span></span>
+<span><span class="co">## Warning in ks.test.default(taxon_set_ranks, taxon_ranks): p-value will be</span></span>
+<span><span class="co">## approximate in the presence of ties</span></span>
+<span><span class="co">## Warning in ks.test.default(taxon_set_ranks, taxon_ranks): p-value will be</span></span>
+<span><span class="co">## approximate in the presence of ties</span></span>
+<span><span class="co">## Warning in ks.test.default(taxon_set_ranks, taxon_ranks): p-value will be</span></span>
+<span><span class="co">## approximate in the presence of ties</span></span>
+<span><span class="co">## Warning in ks.test.default(taxon_set_ranks, taxon_ranks): p-value will be</span></span>
 <span><span class="co">## approximate in the presence of ties</span></span>
 <span><span class="co">## Warning in ks.test.default(taxon_set_ranks, taxon_ranks): p-value will be</span></span>
 <span><span class="co">## approximate in the presence of ties</span></span>
@@ -247,7 +305,7 @@ Genus name. E.g. “Bifidobacterium” - NCBI ID E.g. 216816</p>
 <span><span class="va">disease.df</span> <span class="op">=</span> <span class="va">taxsea_results</span><span class="op">$</span><span class="va">Health_associations</span></span>
 <span></span>
 <span><span class="co">#Enrichments amongh published associations from BugSigDB</span></span>
-<span><span class="va">bsdb.df</span> <span class="op">=</span> <span class="va">taxsea_results</span><span class="op">$</span><span class="va">BugSigdB</span></span></code></pre></div>
+<span><span class="va">bsdb.df</span> <span class="op">=</span> <span class="va">taxsea_results</span><span class="op">$</span><span class="va">BugSigDB</span></span></code></pre></div>
 <div class="section level5">
 <h5 id="output">Output<a class="anchor" aria-label="anchor" href="#output"></a>
 </h5>
@@ -269,7 +327,7 @@ they can do so by querying that database.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/waldronlab/bugsigdbr" class="external-link">bugsigdbr</a></span><span class="op">)</span> <span class="co">#This package is installable via Bioconductor</span></span>
 <span><span class="va">bsdb</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/bugsigdbr/man/importBugSigDB.html" class="external-link">importBugSigDB</a></span><span class="op">(</span><span class="op">)</span> <span class="co">#Import database </span></span></code></pre></div>
-<pre><code><span><span class="co">## Using cached version from 2026-02-12 03:30:04</span></span></code></pre>
+<pre><code><span><span class="co">## Using cached version from 2026-09-17 08:40:55</span></span></code></pre>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#E.g. if the BugSigDB identifier you found enriched was </span></span>
 <span><span class="co">#bsdb:74/1/2_obesity:obese_vs_non-obese_DOWN</span></span>
@@ -290,18 +348,19 @@ they can do so by querying that database.</p>
 <span><span class="co">## [21] Group 1 definition         Group 0 sample size       </span></span>
 <span><span class="co">## [23] Group 1 sample size        Antibiotics exclusion     </span></span>
 <span><span class="co">## [25] Sequencing type            16S variable region       </span></span>
-<span><span class="co">## [27] Sequencing platform        Statistical test          </span></span>
-<span><span class="co">## [29] Significance threshold     MHT correction            </span></span>
-<span><span class="co">## [31] LDA Score above            Matched on                </span></span>
-<span><span class="co">## [33] Confounders controlled for Pielou                    </span></span>
-<span><span class="co">## [35] Shannon                    Chao1                     </span></span>
-<span><span class="co">## [37] Simpson                    Inverse Simpson           </span></span>
-<span><span class="co">## [39] Richness                   Signature page name       </span></span>
-<span><span class="co">## [41] Source                     Curated date              </span></span>
-<span><span class="co">## [43] Curator                    Revision editor           </span></span>
-<span><span class="co">## [45] Description                Abundance in Group 1      </span></span>
-<span><span class="co">## [47] MetaPhlAn taxon names      NCBI Taxonomy IDs         </span></span>
-<span><span class="co">## [49] State                      Reviewer                  </span></span>
+<span><span class="co">## [27] Sequencing platform        Data transformation       </span></span>
+<span><span class="co">## [29] Statistical test           Significance threshold    </span></span>
+<span><span class="co">## [31] MHT correction             LDA Score above           </span></span>
+<span><span class="co">## [33] Matched on                 Confounders controlled for</span></span>
+<span><span class="co">## [35] Pielou                     Shannon                   </span></span>
+<span><span class="co">## [37] Chao1                      Simpson                   </span></span>
+<span><span class="co">## [39] Inverse Simpson            Richness                  </span></span>
+<span><span class="co">## [41] Signature page name        Source                    </span></span>
+<span><span class="co">## [43] Curated date               Curator                   </span></span>
+<span><span class="co">## [45] Revision editor            Description               </span></span>
+<span><span class="co">## [47] Abundance in Group 1       MetaPhlAn taxon names     </span></span>
+<span><span class="co">## [49] NCBI Taxonomy IDs          State                     </span></span>
+<span><span class="co">## [51] Reviewer                  </span></span>
 <span><span class="co">## &lt;0 rows&gt; (or 0-length row.names)</span></span></code></pre>
 </div>
 <div class="section level5">
@@ -314,7 +373,7 @@ analysis tool the database is formatted in such a way that should be
 possible. See below for an example with fast gene set enrichment
 analysis (fgsea).</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ctlab/fgsea/" class="external-link">fgsea</a></span><span class="op">)</span> <span class="co">#This package is installable via Bioconductor</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/alserglab/fgsea/" class="external-link">fgsea</a></span><span class="op">)</span> <span class="co">#This package is installable via Bioconductor</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"TaxSEA_test_data"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"TaxSEA_db"</span><span class="op">)</span></span>
 <span><span class="co">#Convert input names to NCBI taxon ids</span></span>
@@ -323,13 +382,13 @@ analysis (fgsea).</p>
 <span></span>
 <span><span class="co">#Run fgsea</span></span>
 <span><span class="va">fgsea_results</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/fgsea/man/fgsea.html" class="external-link">fgsea</a></span><span class="op">(</span><span class="va">TaxSEA_db</span>, <span class="va">TaxSEA_test_data</span>, minSize<span class="op">=</span><span class="fl">5</span>, maxSize<span class="op">=</span><span class="fl">500</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Warning in preparePathwaysAndStats(pathways, stats, minSize, maxSize, gseaParam, : There are ties in the preranked stats (1.83% of the list).</span></span>
+<pre><code><span><span class="co">## Warning in prepareStats(stats, scoreType, gseaParam): There are ties in the preranked stats (1.83% of the list).</span></span>
 <span><span class="co">## The order of those tied genes will be arbitrary, which may produce unexpected results.</span></span></code></pre>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html" class="external-link">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## R version 4.5.2 (2025-10-31)</span></span>
+<pre><code><span><span class="co">## R version 4.6.1 (2026-06-24)</span></span>
 <span><span class="co">## Platform: x86_64-pc-linux-gnu</span></span>
-<span><span class="co">## Running under: Ubuntu 24.04.3 LTS</span></span>
+<span><span class="co">## Running under: Ubuntu 24.04.5 LTS</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Matrix products: default</span></span>
 <span><span class="co">## BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3 </span></span>
@@ -348,31 +407,31 @@ analysis (fgsea).</p>
 <span><span class="co">## [1] stats     graphics  grDevices utils     datasets  methods   base     </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## other attached packages:</span></span>
-<span><span class="co">## [1] fgsea_1.36.2     bugsigdbr_1.16.2 TaxSEA_1.3.3     BiocStyle_2.38.0</span></span>
+<span><span class="co">## [1] fgsea_1.38.0     bugsigdbr_1.18.0 TaxSEA_1.5.5     BiocStyle_2.40.0</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## loaded via a namespace (and not attached):</span></span>
-<span><span class="co">##  [1] fastmatch_1.1-8     gtable_0.3.6        xfun_0.56          </span></span>
-<span><span class="co">##  [4] bslib_0.10.0        ggplot2_4.0.2       httr2_1.2.2        </span></span>
-<span><span class="co">##  [7] lattice_0.22-7      vctrs_0.7.1         tools_4.5.2        </span></span>
-<span><span class="co">## [10] generics_0.1.4      curl_7.0.0          parallel_4.5.2     </span></span>
-<span><span class="co">## [13] tibble_3.3.1        RSQLite_2.4.6       blob_1.3.0         </span></span>
-<span><span class="co">## [16] pkgconfig_2.0.3     Matrix_1.7-4        data.table_1.18.2.1</span></span>
-<span><span class="co">## [19] dbplyr_2.5.1        RColorBrewer_1.1-3  S7_0.2.1           </span></span>
-<span><span class="co">## [22] desc_1.4.3          lifecycle_1.0.5     compiler_4.5.2     </span></span>
-<span><span class="co">## [25] farver_2.1.2        textshaping_1.0.4   codetools_0.2-20   </span></span>
+<span><span class="co">##  [1] fastmatch_1.1-8     gtable_0.3.6        xfun_0.61          </span></span>
+<span><span class="co">##  [4] bslib_0.12.0        ggplot2_4.0.3       httr2_1.3.0        </span></span>
+<span><span class="co">##  [7] lattice_0.22-9      vctrs_0.7.3         tools_4.6.1        </span></span>
+<span><span class="co">## [10] generics_0.1.4      curl_8.0.0          parallel_4.6.1     </span></span>
+<span><span class="co">## [13] tibble_3.3.1        RSQLite_3.53.3      blob_1.3.0         </span></span>
+<span><span class="co">## [16] pkgconfig_2.0.3     Matrix_1.7-5        data.table_1.18.6.1</span></span>
+<span><span class="co">## [19] dbplyr_2.6.0        RColorBrewer_1.1-3  S7_0.2.2           </span></span>
+<span><span class="co">## [22] desc_1.4.3          lifecycle_1.0.5     compiler_4.6.1     </span></span>
+<span><span class="co">## [25] farver_2.1.2        textshaping_1.0.5   codetools_0.2-20   </span></span>
 <span><span class="co">## [28] htmltools_0.5.9     sass_0.4.10         yaml_2.3.12        </span></span>
-<span><span class="co">## [31] pillar_1.11.1       pkgdown_2.2.0       jquerylib_0.1.4    </span></span>
-<span><span class="co">## [34] BiocParallel_1.44.0 cachem_1.1.0        tidyselect_1.2.1   </span></span>
-<span><span class="co">## [37] digest_0.6.39       dplyr_1.2.0         purrr_1.2.1        </span></span>
-<span><span class="co">## [40] bookdown_0.46       cowplot_1.2.0       fastmap_1.2.0      </span></span>
-<span><span class="co">## [43] grid_4.5.2          cli_3.6.5           magrittr_2.0.4     </span></span>
-<span><span class="co">## [46] withr_3.0.2         filelock_1.0.3      scales_1.4.0       </span></span>
-<span><span class="co">## [49] rappdirs_0.3.4      bit64_4.6.0-1       rmarkdown_2.30     </span></span>
-<span><span class="co">## [52] bit_4.6.0           ragg_1.5.0          memoise_2.0.1      </span></span>
-<span><span class="co">## [55] evaluate_1.0.5      knitr_1.51          BiocFileCache_3.0.0</span></span>
-<span><span class="co">## [58] rlang_1.1.7         Rcpp_1.1.1          glue_1.8.0         </span></span>
-<span><span class="co">## [61] DBI_1.2.3           BiocManager_1.30.27 jsonlite_2.0.0     </span></span>
-<span><span class="co">## [64] R6_2.6.1            systemfonts_1.3.1   fs_1.6.6</span></span></code></pre>
+<span><span class="co">## [31] pillar_1.11.1       pkgdown_2.2.1       jquerylib_0.1.4    </span></span>
+<span><span class="co">## [34] BiocParallel_1.46.0 cachem_1.1.0        tidyselect_1.2.1   </span></span>
+<span><span class="co">## [37] digest_0.6.39       dplyr_1.2.1         purrr_1.2.2        </span></span>
+<span><span class="co">## [40] bookdown_0.48       cowplot_1.2.0       fastmap_1.2.0      </span></span>
+<span><span class="co">## [43] grid_4.6.1          cli_3.6.6           magrittr_2.0.5     </span></span>
+<span><span class="co">## [46] withr_3.0.3         filelock_1.0.3      scales_1.4.0       </span></span>
+<span><span class="co">## [49] bit64_4.8.6         rmarkdown_2.32      bit_4.6.0          </span></span>
+<span><span class="co">## [52] otel_0.2.0          ragg_1.5.2          memoise_2.0.1      </span></span>
+<span><span class="co">## [55] evaluate_1.0.5      knitr_1.52          BiocFileCache_3.2.0</span></span>
+<span><span class="co">## [58] rlang_1.3.0         Rcpp_1.1.2          glue_1.8.1         </span></span>
+<span><span class="co">## [61] DBI_1.3.0           BiocManager_1.30.27 jsonlite_2.0.0     </span></span>
+<span><span class="co">## [64] R6_2.6.1            systemfonts_1.3.2   fs_2.1.0</span></span></code></pre>
 </div>
 </div>
 </div>
@@ -388,7 +447,7 @@ analysis (fgsea).</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer>

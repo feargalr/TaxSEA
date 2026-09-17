@@ -132,8 +132,91 @@ results$family
 #> 6   Enterobacteriaceae                -0.06271410 1.0000000      0.1904762   1
 
 # --- Example 2: SummarizedExperiment / TreeSummarizedExperiment input ---
-if (FALSE) { # \dontrun{
+# \donttest{
 library(mia)
+#> Loading required package: MultiAssayExperiment
+#> Loading required package: SummarizedExperiment
+#> Loading required package: MatrixGenerics
+#> Loading required package: matrixStats
+#> 
+#> Attaching package: ‘MatrixGenerics’
+#> The following objects are masked from ‘package:matrixStats’:
+#> 
+#>     colAlls, colAnyNAs, colAnys, colAvgsPerRowSet, colCollapse,
+#>     colCounts, colCummaxs, colCummins, colCumprods, colCumsums,
+#>     colDiffs, colIQRDiffs, colIQRs, colLogSumExps, colMadDiffs,
+#>     colMads, colMaxs, colMeans2, colMedians, colMins, colOrderStats,
+#>     colProds, colQuantiles, colRanges, colRanks, colSdDiffs, colSds,
+#>     colSums2, colTabulates, colVarDiffs, colVars, colWeightedMads,
+#>     colWeightedMeans, colWeightedMedians, colWeightedSds,
+#>     colWeightedVars, rowAlls, rowAnyNAs, rowAnys, rowAvgsPerColSet,
+#>     rowCollapse, rowCounts, rowCummaxs, rowCummins, rowCumprods,
+#>     rowCumsums, rowDiffs, rowIQRDiffs, rowIQRs, rowLogSumExps,
+#>     rowMadDiffs, rowMads, rowMaxs, rowMeans2, rowMedians, rowMins,
+#>     rowOrderStats, rowProds, rowQuantiles, rowRanges, rowRanks,
+#>     rowSdDiffs, rowSds, rowSums2, rowTabulates, rowVarDiffs, rowVars,
+#>     rowWeightedMads, rowWeightedMeans, rowWeightedMedians,
+#>     rowWeightedSds, rowWeightedVars
+#> Loading required package: GenomicRanges
+#> Loading required package: stats4
+#> Loading required package: BiocGenerics
+#> Loading required package: generics
+#> 
+#> Attaching package: ‘generics’
+#> The following objects are masked from ‘package:base’:
+#> 
+#>     as.difftime, as.factor, as.ordered, intersect, is.element, setdiff,
+#>     setequal, union
+#> 
+#> Attaching package: ‘BiocGenerics’
+#> The following objects are masked from ‘package:stats’:
+#> 
+#>     IQR, mad, sd, var, xtabs
+#> The following objects are masked from ‘package:base’:
+#> 
+#>     Filter, Find, Map, Position, Reduce, anyDuplicated, aperm, append,
+#>     as.data.frame, basename, cbind, colnames, dirname, do.call,
+#>     duplicated, eval, evalq, get, grep, grepl, is.unsorted, lapply,
+#>     mapply, match, mget, order, paste, pmax, pmax.int, pmin, pmin.int,
+#>     rank, rbind, rownames, sapply, saveRDS, table, tapply, unique,
+#>     unsplit, which.max, which.min
+#> Loading required package: S4Vectors
+#> 
+#> Attaching package: ‘S4Vectors’
+#> The following object is masked from ‘package:utils’:
+#> 
+#>     findMatches
+#> The following objects are masked from ‘package:base’:
+#> 
+#>     I, expand.grid, unname
+#> Loading required package: IRanges
+#> Loading required package: Seqinfo
+#> Loading required package: Biobase
+#> Welcome to Bioconductor
+#> 
+#>     Vignettes contain introductory material; view with
+#>     'browseVignettes()'. To cite Bioconductor, see
+#>     'citation("Biobase")', and for packages 'citation("pkgname")'.
+#> 
+#> Attaching package: ‘Biobase’
+#> The following object is masked from ‘package:MatrixGenerics’:
+#> 
+#>     rowMedians
+#> The following objects are masked from ‘package:matrixStats’:
+#> 
+#>     anyMissing, rowMedians
+#> Loading required package: SingleCellExperiment
+#> Loading required package: TreeSummarizedExperiment
+#> Loading required package: Biostrings
+#> Loading required package: XVector
+#> 
+#> Attaching package: ‘Biostrings’
+#> The following object is masked from ‘package:base’:
+#> 
+#>     strsplit
+#> This is mia version 1.20.0
+#> - Online documentation and vignettes: https://microbiome.github.io/mia/
+#> - Online book 'Orchestrating Microbiome Analysis (OMA)': https://microbiome.github.io/OMA/docs/devel/
 data(GlobalPatterns, package = "mia")
 tse <- GlobalPatterns
 
@@ -144,7 +227,12 @@ tse <- GlobalPatterns
 
 # Run taxon rank set enrichment directly from the TSE
 results <- taxon_rank_sets(fc, tse, min_set_size = 5)
+#> Detected SummarizedExperiment input. Extracting taxonomy from rowData().
+#> Using mia::taxonomyRanks() to identify rank columns: Kingdom, Phylum, Class, Order, Family, Genus, Species
+#> Error in taxon_rank_sets(fc, tse, min_set_size = 5): No overlap between names in 'taxon_ranks' and 'lineage_df$species'. Ensure that the names of your taxon_ranks vector match the feature identifiers in your lineage data.
 names(results)  # Kingdom, Phylum, Class, Order, Family, Genus
+#> [1] "kingdom" "phylum"  "class"   "order"   "family"  "genus"  
 results$Family
-} # }
+#> NULL
+# }
 ```

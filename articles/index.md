@@ -2,6 +2,8 @@
 
 ### All vignettes
 
+- [BacDive physiology
+  sets](https://feargalr.github.io/TaxSEA/articles/BacDive-sets.md):
 - [Frequently Asked
   Questions](https://feargalr.github.io/TaxSEA/articles/FAQs.md):
 - [Analysis
