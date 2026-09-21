@@ -145,7 +145,7 @@ taxsea_results <- TaxSEA(taxon_ranks=TaxSEA_test_data,
                          bugsigdb = bsdb_available)
 ```
 
-    ## Using cached version from 2026-09-17 08:40:55
+    ## Using cached version from 2026-09-21 00:06:45
 
     ## Warning in ks.test.default(taxon_set_ranks, taxon_ranks): p-value will be
     ## approximate in the presence of ties
@@ -263,7 +263,7 @@ library(bugsigdbr) #This package is installable via Bioconductor
 bsdb <- importBugSigDB() #Import database 
 ```
 
-    ## Using cached version from 2026-09-17 08:40:55
+    ## Using cached version from 2026-09-21 00:06:45
 
 ``` r
 
@@ -353,7 +353,7 @@ sessionInfo()
     ## [1] stats     graphics  grDevices utils     datasets  methods   base     
     ## 
     ## other attached packages:
-    ## [1] fgsea_1.38.0     bugsigdbr_1.18.0 TaxSEA_1.5.5     BiocStyle_2.40.0
+    ## [1] fgsea_1.38.0     bugsigdbr_1.18.0 TaxSEA_1.5.6     BiocStyle_2.40.0
     ## 
     ## loaded via a namespace (and not attached):
     ##  [1] fastmatch_1.1-8     gtable_0.3.6        xfun_0.61          

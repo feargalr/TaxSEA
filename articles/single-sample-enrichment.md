@@ -282,10 +282,10 @@ sessionInfo()
 #> other attached packages:
 #>  [1] SummarizedExperiment_1.42.0 Biobase_2.72.0             
 #>  [3] GenomicRanges_1.64.0        Seqinfo_1.2.0              
-#>  [5] IRanges_2.46.0              S4Vectors_0.50.2           
+#>  [5] IRanges_2.46.0              S4Vectors_0.50.3           
 #>  [7] BiocGenerics_0.58.1         generics_0.1.4             
 #>  [9] MatrixGenerics_1.24.0       matrixStats_1.5.0          
-#> [11] TaxSEA_1.5.5               
+#> [11] TaxSEA_1.5.6               
 #> 
 #> loaded via a namespace (and not attached):
 #>  [1] Matrix_1.7-5        jsonlite_2.0.0      compiler_4.6.1     

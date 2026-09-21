@@ -1,5 +1,15 @@
 # Changelog
 
+## TaxSEA 1.5.6
+
+- Rewrote the package description: it now leads with what TaxSEA is for
+  and describes both approaches,
+  [`TaxSEA()`](https://feargalr.github.io/TaxSEA/reference/TaxSEA.md) on
+  ranked taxa and
+  [`ssTaxSEA()`](https://feargalr.github.io/TaxSEA/reference/ssTaxSEA.md)
+  on a single sample. Also fixed two long-standing typos in it
+  (“alternations”, and a missing “can be applied”).
+
 ## TaxSEA 1.5.5
 
 ### Breaking changes
