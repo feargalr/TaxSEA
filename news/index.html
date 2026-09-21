@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">TaxSEA</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.5.6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.5.7</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -15,16 +15,17 @@
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
-      <ul class="navbar-nav me-auto"><li class="nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
-<li class="nav-item dropdown">
+      <ul class="navbar-nav me-auto"><li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-guides" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Guides</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-guides"><li><a class="dropdown-item" href="../articles/why-taxon-set-enrichment.html">Why use taxon set enrichment?</a></li>
-    <li><a class="dropdown-item" href="../articles/FAQs.html">FAQs</a></li>
-    <li><a class="dropdown-item" href="../articles/Taxonomic-aggregation.html">Taxonomic aggregation</a></li>
     <li><a class="dropdown-item" href="../articles/TaxSEA.html">Using TaxSEA</a></li>
     <li><a class="dropdown-item" href="../articles/ORA_vs_ES.html">Analysis types</a></li>
+    <li><a class="dropdown-item" href="../articles/single-sample-enrichment.html">Single sample enrichment</a></li>
+    <li><a class="dropdown-item" href="../articles/Taxonomic-aggregation.html">Taxonomic aggregation</a></li>
     <li><a class="dropdown-item" href="../articles/BacDive-sets.html">BacDive physiology sets</a></li>
+    <li><a class="dropdown-item" href="../articles/FAQs.html">FAQs</a></li>
   </ul></li>
+<li class="nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
 <li class="active nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
@@ -41,6 +42,16 @@
       <small>Source: <a href="https://github.com/feargalr/taxsea/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.5.7" id="taxsea-157">TaxSEA 1.5.7<a class="anchor" aria-label="anchor" href="#taxsea-157"></a></h2>
+<div class="section level3">
+<h3 id="documentation-1-5-7">Documentation<a class="anchor" aria-label="anchor" href="#documentation-1-5-7"></a></h3>
+<ul><li>Corrected the described output of <code><a href="../reference/TaxSEA.html">TaxSEA()</a></code> in the README and the main vignette: it returns <code>All_databases</code> plus one data frame per group of sources, each with 6 columns, not three data frames with 5.</li>
+<li>The README said BugSigDB was one of six databases used by default; it has been optional since 1.5.4. It now also lists the literature-collated sets (Valles-Colomer gut-brain modules, BloSSUM, VANISH and others).</li>
+<li>Added <code><a href="../reference/ssTaxSEA.html">ssTaxSEA()</a></code> to the README, which did not mention single-sample scoring at all, and corrected <code>taxon_set_ranks()</code> to <code><a href="../reference/taxon_rank_sets.html">taxon_rank_sets()</a></code> and <code>data(TaxSEA_DB)</code> to <code>data(TaxSEA_db)</code>.</li>
+<li>The README now points at the guides on the package website, and the website leads with them.</li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.5.6" id="taxsea-156">TaxSEA 1.5.6<a class="anchor" aria-label="anchor" href="#taxsea-156"></a></h2>
 <ul><li>Rewrote the package description: it now leads with what TaxSEA is for and describes both approaches, <code><a href="../reference/TaxSEA.html">TaxSEA()</a></code> on ranked taxa and <code><a href="../reference/ssTaxSEA.html">ssTaxSEA()</a></code> on a single sample. Also fixed two long-standing typos in it (“alternations”, and a missing “can be applied”).</li>

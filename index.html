@@ -23,7 +23,7 @@
 
     <a class="navbar-brand me-2" href="index.html">TaxSEA</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.5.6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.5.7</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -32,18 +32,19 @@
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
-<li class="nav-item"><a class="nav-link" href="reference/index.html">Reference</a></li>
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-guides" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Guides</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-guides">
 <li><a class="dropdown-item" href="articles/why-taxon-set-enrichment.html">Why use taxon set enrichment?</a></li>
-    <li><a class="dropdown-item" href="articles/FAQs.html">FAQs</a></li>
-    <li><a class="dropdown-item" href="articles/Taxonomic-aggregation.html">Taxonomic aggregation</a></li>
     <li><a class="dropdown-item" href="articles/TaxSEA.html">Using TaxSEA</a></li>
     <li><a class="dropdown-item" href="articles/ORA_vs_ES.html">Analysis types</a></li>
+    <li><a class="dropdown-item" href="articles/single-sample-enrichment.html">Single sample enrichment</a></li>
+    <li><a class="dropdown-item" href="articles/Taxonomic-aggregation.html">Taxonomic aggregation</a></li>
     <li><a class="dropdown-item" href="articles/BacDive-sets.html">BacDive physiology sets</a></li>
+    <li><a class="dropdown-item" href="articles/FAQs.html">FAQs</a></li>
   </ul>
 </li>
+<li class="nav-item"><a class="nav-link" href="reference/index.html">Reference</a></li>
 <li class="nav-item"><a class="nav-link" href="news/index.html">Changelog</a></li>
       </ul>
 <ul class="navbar-nav">
@@ -63,30 +64,86 @@
 </h1></div>
 <p><a href="https://bioconductor.org/packages/TaxSEA" class="external-link"><img src="https://www.bioconductor.org/shields/years-in-bioc/TaxSEA.svg" alt="Bioconductor"></a><br>
 Available on <a href="https://bioconductor.org/packages/TaxSEA" class="external-link"><strong>Bioconductor</strong></a><br><a href="https://academic.oup.com/bib/article/26/2/bbaf173/8116684" class="external-link">Read the paper in Briefings in Bioinformatics</a></p>
+<p><strong>This repository is the companion to the Bioconductor package</strong>: tutorials, worked examples and issues. Install TaxSEA itself from <a href="https://bioconductor.org/packages/TaxSEA" class="external-link">Bioconductor</a>; the guides below are at <a href="https://feargalr.github.io/TaxSEA/">feargalr.github.io/TaxSEA</a>.</p>
 <div class="section level3">
 <h3 id="what-is-taxsea">What is TaxSEA?<a class="anchor" aria-label="anchor" href="#what-is-taxsea"></a>
 </h3>
 <p>TaxSEA is technique to move from analysisng individual microbes to looking at groups of microbes with a shared functional characteristic.</p>
 <p>Traditional microbiome analysis tools often look at individual microbes going up or down. This sounds sensible but in human microbiome studies it can fail apart because everyone’s microbiome is unique, with few species shared across people.</p>
 <p>TaxSEA doesn’t test for individual species but rather asks if there a group of species with a shared characteristic that is altered between groups of people. For example are we seeing a shift in bugs with increased oxygen tolerance, or an increase in bugs which produce a certain metabolite or enzyme, or even are we seeing a change in bugs which have a known disease association in humans. If you want to know more check out our paper, but we find this approach to be far more reproducible than standard Differential Abundance (DA) analysis as well as capable of extracting biologically meaningful patterns. TaxSEA usually can run within seconds with standard hardware.</p>
-<p>TaxSEA supports <strong>three complementary analysis modes</strong>:</p>
+<p>TaxSEA supports <strong>four complementary analysis modes</strong>:</p>
 <ol style="list-style-type: decimal">
-<li><strong>Enrichment using public reference databases</strong></li>
 <li>
-<strong>ORA – Over-Representation Analysis</strong><br>
+<strong>Enrichment using public reference databases</strong> – ranked taxa in, <code><a href="reference/TaxSEA.html">TaxSEA()</a></code>
 </li>
-<li><strong>Enrichment using taxonomic sets</strong></li>
+<li>
+<strong>ORA – Over-Representation Analysis</strong> – a list of taxa in, <code><a href="reference/TaxSEA.html">TaxSEA()</a></code>
+</li>
+<li>
+<strong>Enrichment using taxonomic sets</strong> – <code><a href="reference/taxon_rank_sets.html">taxon_rank_sets()</a></code>
+</li>
+<li>
+<strong>Single sample scoring</strong> – one score per set per sample, <code><a href="reference/ssTaxSEA.html">ssTaxSEA()</a></code>
+</li>
 </ol>
 <p>Modes 1 and 2 Both use the same taxon-set databases but answer slightly different questions. Mode 1 which is the default we reccomend in most cases takes as input a list of bacteria a rank (E.g. fold change). It then tests whether any of the taxon sets in the database are skewed to one end of the distribution or another. Mode 2 uses the same database but only takes as input a list of bacterial names. While answering a similar question this approach is often less powerful as it requires a hard cut-off to select bacteria of interest.</p>
-<p>Mode 3 allows users to test for differences at a particular taxonomic rank. For example instead of just summing up or aggregating all the species in a genus. We see if the distribution of species within a genus is different between groups. This is a more powerful approach as simply summing/aggregating to a rank can risk missing when you can get shifts within a taxon. This approach is implemented in the taxon_set_ranks() function.</p>
+<p>Mode 3 allows users to test for differences at a particular taxonomic rank. For example instead of just summing up or aggregating all the species in a genus. We see if the distribution of species within a genus is different between groups. This is a more powerful approach as simply summing/aggregating to a rank can risk missing when you can get shifts within a taxon. This approach is implemented in the <code><a href="reference/taxon_rank_sets.html">taxon_rank_sets()</a></code> function.</p>
+<p>Mode 4 does not compare groups at all. <code><a href="reference/ssTaxSEA.html">ssTaxSEA()</a></code> scores every taxon set within each sample as the mean centered log-ratio of its members, giving you a sets x samples matrix to correlate with a phenotype, model over time, or plot per sample.</p>
 <p>In short, TaxSEA aims to make it easy to intepret changes in your microbiome data.</p>
+</div>
+<div class="section level3">
+<h3 id="guides">Guides<a class="anchor" aria-label="anchor" href="#guides"></a>
+</h3>
+<table class="table">
+<colgroup>
+<col width="50%">
+<col width="50%">
+</colgroup>
+<thead><tr>
+<th>Guide</th>
+<th>What it covers</th>
+</tr></thead>
+<tbody>
+<tr>
+<td><a href="https://feargalr.github.io/TaxSEA/articles/why-taxon-set-enrichment.html">Why use taxon set enrichment?</a></td>
+<td>The problem with testing species one at a time</td>
+</tr>
+<tr>
+<td><a href="https://feargalr.github.io/TaxSEA/articles/TaxSEA.html">Using TaxSEA</a></td>
+<td>The main walkthrough, from input to output</td>
+</tr>
+<tr>
+<td><a href="https://feargalr.github.io/TaxSEA/articles/ORA_vs_ES.html">Analysis types</a></td>
+<td>Ranked enrichment vs over-representation</td>
+</tr>
+<tr>
+<td><a href="https://feargalr.github.io/TaxSEA/articles/single-sample-enrichment.html">Single sample enrichment</a></td>
+<td>
+<code><a href="reference/ssTaxSEA.html">ssTaxSEA()</a></code>, per-sample scores</td>
+</tr>
+<tr>
+<td><a href="https://feargalr.github.io/TaxSEA/articles/Taxonomic-aggregation.html">Taxonomic aggregation</a></td>
+<td>Testing within a genus, family or phylum</td>
+</tr>
+<tr>
+<td><a href="https://feargalr.github.io/TaxSEA/articles/BacDive-sets.html">BacDive physiology sets</a></td>
+<td>What the physiology sets are and how they are named</td>
+</tr>
+<tr>
+<td><a href="https://feargalr.github.io/TaxSEA/articles/FAQs.html">FAQs</a></td>
+<td>Common questions</td>
+</tr>
+</tbody>
+</table>
 <p>TaxSEA takes as input a vector of species names and a rank. For example log2 fold changes or Spearman’s rho.</p>
 <p>Note: Although TaxSEA in principle can be applied to microbiome data from any source, the databases utilized largely cover human associated microbiomes and the human gut microbiome in particular. As such the database testing in TaxSEA will likely perform best on human gut microbiome data.</p>
 </div>
 <div class="section level3">
 <h3 id="taxon-set-database">Taxon set database<a class="anchor" aria-label="anchor" href="#taxon-set-database"></a>
 </h3>
-<p>By default TaxSEA utilizes taxon sets generated from six reference databases (<strong>BacDive</strong>,<strong>gutMGene</strong>, <strong>GMrepo v2</strong>, <strong>MiMeDB</strong>, <strong>mBodyMap</strong>, <strong>BugSigDB</strong>). See below for examples of using custom databases or taxonomically defined taxon sets.</p>
+<p>TaxSEA ships taxon sets built from five reference databases (<strong>BacDive</strong>, <strong>gutMGene</strong>, <strong>GMrepo v2</strong>, <strong>MiMeDB</strong>, <strong>mBodyMap</strong>), together with sets collated from the literature: the Gut-Brain Modules of Valles-Colomer et al., BloSSUM and VANISH sets, and mucin degraders, siderophore producers and similar groupings.</p>
+<p><strong>BugSigDB is optional and off by default.</strong> Pass <code>bugsigdb = TRUE</code> to include it; it is downloaded at run time. Including it also changes the p-values of every other set, because TaxSEA compares each set against all the other taxa covered by the sets being analysed, so leaving it off keeps results reproducible and lets TaxSEA run offline.</p>
+<p>See below for examples of using custom databases or taxonomically defined taxon sets.</p>
 <p>The <strong>BacDive</strong> sets describe measured bacterial physiology: oxygen tolerance, Gram stain, substrate use and fermentation, enzyme activities, growth temperature, salt and pH ranges and more, across more than 9,000 taxa. They were rebuilt in TaxSEA 1.5.5 with new set names (e.g. <code>BacDive_Oxygen_facultative_anaerobe</code>); see the <a href="https://feargalr.github.io/TaxSEA/articles/BacDive-sets.html">BacDive physiology sets</a> guide.</p>
 <p>Please cite the appropriate database if using:</p>
 <ul>
@@ -96,6 +153,7 @@ Available on <a href="https://bioconductor.org/packages/TaxSEA" class="external-
 <li>Wishart et. al. MiMeDB: the Human Microbial Metabolome Database Nucleic Acids Res. 2023.</li>
 <li>Jin et al. mBodyMap: a curated database for microbes across human body and their associations with health and diseases. Nucleic Acids Res. 2022.</li>
 <li>Geistlinger et al. BugSigDB captures patterns of differential abundance across a broad range of host-associated microbial signatures. Nature Biotech. 2023.</li>
+<li>Valles-Colomer et al. The neuroactive potential of the human gut microbiota in quality of life and depression. Nature Microbiology. 2019.</li>
 </ul>
 </div>
 <div class="section level3">
@@ -104,7 +162,10 @@ Available on <a href="https://bioconductor.org/packages/TaxSEA" class="external-
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"BiocManager"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
 <span>    <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"BiocManager"</span><span class="op">)</span></span>
-<span><span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://bioconductor.github.io/BiocManager/reference/install.html" class="external-link">install</a></span><span class="op">(</span><span class="st">"TaxSEA"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://bioconductor.github.io/BiocManager/reference/install.html" class="external-link">install</a></span><span class="op">(</span><span class="st">"TaxSEA"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># The development version, with the rebuilt BacDive sets:</span></span>
+<span><span class="co"># BiocManager::install("TaxSEA", version = "devel")</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
@@ -120,7 +181,11 @@ Available on <a href="https://bioconductor.org/packages/TaxSEA" class="external-
 <span></span>
 <span><span class="co"># Run TaxSEA with test data provided</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">TaxSEA_test_data</span><span class="op">)</span></span>
+<span><span class="co"># bugsigdb = TRUE is optional and downloads BugSigDB at run time</span></span>
 <span><span class="va">taxsea_results</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/TaxSEA.html">TaxSEA</a></span><span class="op">(</span>taxon_ranks<span class="op">=</span><span class="va">TaxSEA_test_data</span>, bugsigdb <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#Every set tested, all sources together</span></span>
+<span><span class="va">all.df</span> <span class="op">&lt;-</span> <span class="va">taxsea_results</span><span class="op">$</span><span class="va">All_databases</span></span>
 <span></span>
 <span><span class="co">#Enrichments among metabolite producers from gutMgene and MiMeDB</span></span>
 <span><span class="va">metabolites.df</span> <span class="op">&lt;-</span> <span class="va">taxsea_results</span><span class="op">$</span><span class="va">Metabolite_producers</span></span>
@@ -161,6 +226,23 @@ Available on <a href="https://bioconductor.org/packages/TaxSEA" class="external-
 <span><span class="va">disease.df</span> <span class="op">&lt;-</span> <span class="va">taxsea_results</span><span class="op">$</span><span class="va">Health_associations</span></span></code></pre></div>
 </div>
 <div class="section level4">
+<h4 id="quick-start-mode-4-single-sample-scores">Quick start (mode 4, single sample scores)<a class="anchor" aria-label="anchor" href="#quick-start-mode-4-single-sample-scores"></a>
+</h4>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/feargalr/taxsea" class="external-link">TaxSEA</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># counts: taxa as rows, samples as columns (counts or CPM, not proportions)</span></span>
+<span><span class="va">scores</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/ssTaxSEA.html">ssTaxSEA</a></span><span class="op">(</span><span class="va">counts</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># a matrix of taxon sets (rows) x samples (columns)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">scores</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># correlate a set with a phenotype, or model it however suits your design</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/cor.test.html" class="external-link">cor.test</a></span><span class="op">(</span><span class="va">scores</span><span class="op">[</span><span class="st">"BacDive_Oxygen_facultative_anaerobe"</span>, <span class="op">]</span>, <span class="va">calprotectin</span>,</span>
+<span>         method <span class="op">=</span> <span class="st">"spearman"</span><span class="op">)</span></span></code></pre></div>
+<p>See the <a href="https://feargalr.github.io/TaxSEA/articles/single-sample-enrichment.html">single sample enrichment</a> guide for what the score means and how to compare scores properly.</p>
+</div>
+<div class="section level4">
 <h4 id="input">Input<a class="anchor" aria-label="anchor" href="#input"></a>
 </h4>
 <p>TaxSEA supports multiple input types, depending on the analysis mode you choose:</p>
@@ -191,7 +273,7 @@ The method relies on the <strong>full distribution</strong> of values to detect 
 <li>Genus name. E.g. “Bifidobacterium”</li>
 <li>NCBI ID E.g. 216816</li>
 </ul>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#Input IDs with the full taxonomic lineage should be split up. E.g.</span></span>
 <span><span class="va">x</span> <span class="op">&lt;-</span> <span class="st">"d__Bacteria.p__Actinobacteriota.c__Actinomycetes.o__Bifidobacteriales.f__Bifidobacteriaceae.g__Bifidobacterium"</span></span>
 <span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/strsplit.html" class="external-link">strsplit</a></span><span class="op">(</span><span class="va">x</span>,split<span class="op">=</span><span class="st">"\\."</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fl">6</span><span class="op">]</span></span>
@@ -211,7 +293,7 @@ The method relies on the <strong>full distribution</strong> of values to detect 
 <div class="section level3">
 <h3 id="run-taxsea-with-test-data">Run TaxSEA with test data<a class="anchor" aria-label="anchor" href="#run-taxsea-with-test-data"></a>
 </h3>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"TaxSEA_test_data"</span><span class="op">)</span></span>
 <span><span class="va">taxsea_results</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/TaxSEA.html">TaxSEA</a></span><span class="op">(</span>taxon_ranks<span class="op">=</span><span class="va">TaxSEA_test_data</span>, bugsigdb <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
@@ -232,18 +314,35 @@ The method relies on the <strong>full distribution</strong> of values to detect 
 <li>Pasolli et al. Accessible, curated metagenomic data through ExperimentHub. Nat Methods. 2017 Oct 31;14(11):1023-1024. doi: 10.1038/nmeth.4468.</li>
 <li>Zhou et al. LinDA: linear models for differential abundance analysis of microbiome compositional data. Genome Biol. 2022 Apr 14;23(1):95.</li>
 </ul>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">head</span>(<span class="fu">sample</span>(TaxSEA_test_data),<span class="dv">3</span>)</span>
-<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>Bacteroides_thetaiotaomicron           Blautia_sp_CAG_257          Ruminococcus bromii</span>
-<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>                       <span class="fl">1.908</span>                        <span class="fl">3.650</span>                       <span class="sc">-</span><span class="fl">5.038</span> </span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">head</span>(<span class="fu">sample</span>(TaxSEA_test_data),<span class="dv">3</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>Bacteroides_thetaiotaomicron           Blautia_sp_CAG_257          Ruminococcus bromii</span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a>                       <span class="fl">1.908</span>                        <span class="fl">3.650</span>                       <span class="sc">-</span><span class="fl">5.038</span> </span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="output">Output<a class="anchor" aria-label="anchor" href="#output"></a>
 </h4>
-<p>The output is a list of three data frames providing enrichment results for metabolite producers, health/disease associations, and published signatures from BugSigDB. Each dataframe has 5 columns</p>
+<p>The output is a list of data frames, one per group of sources, plus <code>All_databases</code> holding every set tested:</p>
+<ul>
+<li>
+<code>All_databases</code> - every taxon set tested</li>
+<li>
+<code>Metabolite_producers</code> - gutMGene and MiMeDB</li>
+<li>
+<code>Health_associations</code> - GMRepoV2 and mBodyMap</li>
+<li>
+<code>BacDive_bacterial_physiology</code> - measured physiology from BacDive</li>
+<li>
+<code>Gut_Brain_Modules_VallesColomer2019</code> - gut-brain modules</li>
+<li>
+<code>BugSigDB</code> - published signatures, empty unless <code>bugsigdb = TRUE</code>
+</li>
+</ul>
+<p>Each data frame has 6 columns</p>
 <ul>
 <li>taxonSetName - The name of the taxon set tested</li>
-<li>median_rank - This is simply the median rank across all detected members in the set. This allows you to see the direction of change</li>
-<li>P value - Kolmogorov-Smirnov test P value.</li>
+<li>median_rank_of_set_members - This is simply the median rank across all detected members in the set. This allows you to see the direction of change</li>
+<li>PValue - Kolmogorov-Smirnov test P value.</li>
+<li>Test_statistic - The KS test statistic (in ORA mode this column is an odds ratio)</li>
 <li>FDR - P value adjusted for multiple testing.</li>
 <li>TaxonSet - Returns list of taxa in the set to show what is driving the signal</li>
 </ul>
@@ -252,7 +351,7 @@ The method relies on the <strong>full distribution</strong> of values to detect 
 <h4 id="custom-databases">Custom databases<a class="anchor" aria-label="anchor" href="#custom-databases"></a>
 </h4>
 <p>Many users may want to utilise TaxSEA with a custom database. For example for testing if there is a flag in the TaxSEA function “custom_db” which expects as input a named list of vectors. This is the same format as the default TaxSEA database. Note: using the custom_db flag disables the automatic ID conversion and NCBI API lookup. However we have functionality available via other functions</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Perform enrichment analysis using TaxSEA</span></span>
 <span><span class="va">custom_taxsea_results</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/TaxSEA.html">TaxSEA</a></span><span class="op">(</span>taxon_ranks <span class="op">=</span> <span class="va">log2_fold_changes</span>, custom_db <span class="op">=</span> <span class="va">custom_taxon_sets</span><span class="op">)</span></span>
 <span><span class="va">custom_taxsea_results</span> <span class="op">&lt;-</span> <span class="va">custom_taxsea_results</span><span class="op">$</span><span class="va">custom_sets</span></span></code></pre></div>
@@ -262,7 +361,7 @@ The method relies on the <strong>full distribution</strong> of values to detect 
 </h4>
 <p>In addition to taxon sets defined from public databases by, users can define sets based on taxonomy from their own data. We have implemtned this in the taxon_rank_sets() function which takes as input an set of taxa and ranks (similar to enrichment testing above) and then either a table of taxonomic lineage or a TreeSummarizedExperiment object. See below for examples with both approaches.</p>
 <p>Current methods to test at higher taxonomic levels (e.g., phylum or family), involve aggregating counts. However, this approach may miss opposing shifts in individual species which cancel each other out, obscuring meaningful biological patterns. For instance, antibiotic treatment may suppress certain species while allowing resistant species within the same genus to expand and occupy the vacant niche, creating an ecological shift that appears as no net change at broader taxonomic levels. Whereas the database testing works best with shotgun metagenomic data in order to have sufficient resolution. This approach is much more widely applicable including to testing with amplicon data such as from 16S rRNA gene sequencing.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co">#### Enrichment testing with taxonomically defined ranks  </span></span>
 <span><span class="co"># --- Example 1: Data frame input ---</span></span>
@@ -377,7 +476,7 @@ The method relies on the <strong>full distribution</strong> of values to detect 
 <h4 id="bugsigdb">BugSigDB<a class="anchor" aria-label="anchor" href="#bugsigdb"></a>
 </h4>
 <p>The format of BugSigDB is that each publication is entered as a “Study”, and within this there is different experiments and signatures. For example one of the signatures may be taxa increased in an experiment, and another signature is taxa that are decreased. Users can find out more by querying the BugSigDB. In recent updates BugSigDB has moved to using the PubMed ID as the study ID (Although not all studies have these yet). See below for an example.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/waldronlab/bugsigdbr" class="external-link">bugsigdbr</a></span><span class="op">)</span> <span class="co">#This package is installable via Bioconductor</span></span>
 <span><span class="va">bsdb</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/bugsigdbr/man/importBugSigDB.html" class="external-link">importBugSigDB</a></span><span class="op">(</span><span class="op">)</span> <span class="co">#Import database </span></span>
 <span></span>
@@ -392,9 +491,9 @@ The method relies on the <strong>full distribution</strong> of values to detect 
 <h4 id="taxsea-database-with-other-enrichment-tools">TaxSEA database with other enrichment tools<a class="anchor" aria-label="anchor" href="#taxsea-database-with-other-enrichment-tools"></a>
 </h4>
 <p>The TaxSEA function by default uses the Kolmogorov Smirnov test and the original idea was inspired by gene set enrichment analyses from RNASeq. Should users wish to use an alternative gene set enrichment analysis tool the database is formatted in such a way that should be possible. See below for an example with fast gene set enrichment analysis (fgsea).</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/alserglab/fgsea/" class="external-link">fgsea</a></span><span class="op">)</span> <span class="co">#This package is installable via Bioconductor</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">TaxSEA_DB</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">TaxSEA_db</span><span class="op">)</span></span>
 <span><span class="co">#Convert input names to NCBI taxon ids</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">TaxSEA_test_data</span><span class="op">)</span> <span class="op">=</span> <span class="fu"><a href="reference/get_ncbi_taxon_ids.html">get_ncbi_taxon_ids</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">TaxSEA_test_data</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">TaxSEA_test_data</span> <span class="op">=</span> <span class="va">TaxSEA_test_data</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">TaxSEA_test_data</span><span class="op">)</span><span class="op">)</span><span class="op">]</span></span>

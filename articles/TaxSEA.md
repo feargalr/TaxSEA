@@ -145,7 +145,7 @@ taxsea_results <- TaxSEA(taxon_ranks=TaxSEA_test_data,
                          bugsigdb = bsdb_available)
 ```
 
-    ## Using cached version from 2026-09-21 00:06:45
+    ## Using cached version from 2026-09-21 00:13:13
 
     ## Warning in ks.test.default(taxon_set_ranks, taxon_ranks): p-value will be
     ## approximate in the presence of ties
@@ -242,13 +242,21 @@ bsdb.df = taxsea_results$BugSigDB
 
 ##### Output
 
-The output is a list of three dataframes providing enrichment results
-for metabolite produers, health/disease associations, and published
-signatures from BugSigDB. Each dataframe has 5 columns - taxonSetName -
-The name of the taxon set tested - median_rank - The median rank of set
-members - P value - Kolmogorov-Smirnov test P value. - FDR - P value
-adjusted for multiple testing. - TaxonSet - Returns list of taxa in the
-set to show what is driving the signal
+The output is a list of dataframes: `All_databases` with every set
+tested, then one per group of sources – `Metabolite_producers`
+(gutMGene, MiMeDB), `Health_associations` (GMRepoV2, mBodyMap),
+`BacDive_bacterial_physiology`, `Gut_Brain_Modules_VallesColomer2019`,
+and `BugSigDB`, which is empty unless `bugsigdb = TRUE`.
+
+Each dataframe has 6 columns
+
+- taxonSetName - The name of the taxon set tested
+- median_rank_of_set_members - The median rank of set members
+- PValue - Kolmogorov-Smirnov test P value.
+- Test_statistic - The KS test statistic (an odds ratio in ORA mode)
+- FDR - P value adjusted for multiple testing.
+- TaxonSet - Returns list of taxa in the set to show what is driving the
+  signal
 
 ##### BugSigDB
 
@@ -263,7 +271,7 @@ library(bugsigdbr) #This package is installable via Bioconductor
 bsdb <- importBugSigDB() #Import database 
 ```
 
-    ## Using cached version from 2026-09-21 00:06:45
+    ## Using cached version from 2026-09-21 00:13:13
 
 ``` r
 
@@ -353,7 +361,7 @@ sessionInfo()
     ## [1] stats     graphics  grDevices utils     datasets  methods   base     
     ## 
     ## other attached packages:
-    ## [1] fgsea_1.38.0     bugsigdbr_1.18.0 TaxSEA_1.5.6     BiocStyle_2.40.0
+    ## [1] fgsea_1.38.0     bugsigdbr_1.18.0 TaxSEA_1.5.7     BiocStyle_2.40.0
     ## 
     ## loaded via a namespace (and not attached):
     ##  [1] fastmatch_1.1-8     gtable_0.3.6        xfun_0.61          
