@@ -5,7 +5,7 @@
 \alias{TaxSEA-package}
 \title{TaxSEA: Taxon Set Enrichment Analysis}
 \description{
-TaxSEA is an R package for Taxon Set Enrichment Analysis, which utilises a Kolmogorov-Smirnov test analyses to investigate differential abundance analysis output for whether there are alternations in a-priori defined sets of taxa from public databases (BugSigDB, MiMeDB, GutMGene, mBodyMap, BacDive and GMRepoV2) and collated from the literature. TaxSEA takes as input a list of taxonomic identifiers (e.g. species names, NCBI IDs etc.) and a rank (E.g. fold change, correlation coefficient). TaxSEA be applied to any microbiota taxonomic profiling technology (array-based, 16S rRNA gene sequencing, shotgun metagenomics & metatranscriptomics etc.) and enables researchers to rapidly contextualize their findings within the broader literature to accelerate interpretation of results.
+TaxSEA makes metagenomic data easier to interpret. Rather than reading species one at a time, it tests whether a-priori defined sets of taxa shift together, drawing on public databases (BugSigDB, MiMeDB, GutMGene, mBodyMap, BacDive and GMRepoV2) and on sets collated from the literature. Two approaches are provided. TaxSEA takes taxon names or NCBI IDs with a rank per taxon, such as a fold change or correlation coefficient, and tests each set with a Kolmogorov-Smirnov test. ssTaxSEA scores every set in a single sample as the mean centered log-ratio of its members, giving a per-sample value to use in any downstream model. Both work with any taxonomic profiling technology, including 16S rRNA gene sequencing, shotgun metagenomics and metatranscriptomics.
 }
 \seealso{
 Useful links:

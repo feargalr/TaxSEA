@@ -1,5 +1,12 @@
 # TaxSEA News
 
+# TaxSEA 1.5.6
+
+- Rewrote the package description: it now leads with what TaxSEA is for and
+  describes both approaches, `TaxSEA()` on ranked taxa and `ssTaxSEA()` on a
+  single sample. Also fixed two long-standing typos in it ("alternations",
+  and a missing "can be applied").
+
 # TaxSEA 1.5.5
 
 ## Breaking changes
