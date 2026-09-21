@@ -165,13 +165,18 @@ bsdb.df = taxsea_results$BugSigDB
 
 
 #### Output
-The output is a list of three dataframes providing enrichment results for 
-metabolite produers, health/disease associations, and published signatures 
-from BugSigDB.
-Each dataframe has 5 columns
+The output is a list of dataframes: `All_databases` with every set tested, then one
+per group of sources -- `Metabolite_producers` (gutMGene, MiMeDB),
+`Health_associations` (GMRepoV2, mBodyMap), `BacDive_bacterial_physiology`,
+`Gut_Brain_Modules_VallesColomer2019`, and `BugSigDB`, which is empty unless
+`bugsigdb = TRUE`.
+
+Each dataframe has 6 columns
+
 - taxonSetName - The name of the taxon set tested
-- median_rank - The median rank of set members
-- P value - Kolmogorov-Smirnov test P value.
+- median_rank_of_set_members - The median rank of set members
+- PValue - Kolmogorov-Smirnov test P value.
+- Test_statistic - The KS test statistic (an odds ratio in ORA mode)
 - FDR - P value adjusted for multiple testing. 
 - TaxonSet - Returns list of taxa in the set to show what is driving the 
 signal

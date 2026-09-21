@@ -4,23 +4,25 @@ template:
 
 navbar:
   structure:
-    left: [reference, guides, news]
+    left: [guides, reference, news]
   components:
     guides:
       text: "Guides"
       menu:
         - text: "Why use taxon set enrichment?"
           href: articles/why-taxon-set-enrichment.html
-        - text: "FAQs"
-          href: articles/FAQs.html
-        - text: "Taxonomic aggregation"
-          href: articles/Taxonomic-aggregation.html
         - text: "Using TaxSEA"
           href: articles/TaxSEA.html
         - text: "Analysis types"
           href: articles/ORA_vs_ES.html
+        - text: "Single sample enrichment"
+          href: articles/single-sample-enrichment.html
+        - text: "Taxonomic aggregation"
+          href: articles/Taxonomic-aggregation.html
         - text: "BacDive physiology sets"
           href: articles/BacDive-sets.html
+        - text: "FAQs"
+          href: articles/FAQs.html
 
 
 

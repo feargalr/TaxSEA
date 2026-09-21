@@ -1,5 +1,21 @@
 # TaxSEA News
 
+# TaxSEA 1.5.7
+
+## Documentation
+
+- Corrected the described output of `TaxSEA()` in the README and the main
+  vignette: it returns `All_databases` plus one data frame per group of
+  sources, each with 6 columns, not three data frames with 5.
+- The README said BugSigDB was one of six databases used by default; it has
+  been optional since 1.5.4. It now also lists the literature-collated sets
+  (Valles-Colomer gut-brain modules, BloSSUM, VANISH and others).
+- Added `ssTaxSEA()` to the README, which did not mention single-sample
+  scoring at all, and corrected `taxon_set_ranks()` to `taxon_rank_sets()`
+  and `data(TaxSEA_DB)` to `data(TaxSEA_db)`.
+- The README now points at the guides on the package website, and the website
+  leads with them.
+
 # TaxSEA 1.5.6
 
 - Rewrote the package description: it now leads with what TaxSEA is for and

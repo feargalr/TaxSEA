@@ -3,6 +3,11 @@
 Available on [**Bioconductor**](https://bioconductor.org/packages/TaxSEA)  
 [Read the paper in Briefings in Bioinformatics](https://academic.oup.com/bib/article/26/2/bbaf173/8116684)
 
+**This repository is the companion to the Bioconductor package**: tutorials, worked
+examples and issues. Install TaxSEA itself from
+[Bioconductor](https://bioconductor.org/packages/TaxSEA); the guides below are at
+[feargalr.github.io/TaxSEA](https://feargalr.github.io/TaxSEA/).
+
 ### What is TaxSEA? ###
 TaxSEA is technique to move from analysisng individual microbes to looking at groups of microbes with a shared functional characteristic. 
 
@@ -17,11 +22,12 @@ which have a known disease association in humans. If you want to know more check
 this approach to be far more reproducible than standard Differential Abundance (DA) analysis as well as capable of extracting biologically 
 meaningful patterns. TaxSEA usually can run within seconds with standard hardware.  
 
-TaxSEA supports **three complementary analysis modes**:
+TaxSEA supports **four complementary analysis modes**:
 
-1. **Enrichment using public reference databases**
-2. **ORA – Over-Representation Analysis**            
-3. **Enrichment using taxonomic sets**
+1. **Enrichment using public reference databases** – ranked taxa in, `TaxSEA()`
+2. **ORA – Over-Representation Analysis** – a list of taxa in, `TaxSEA()`
+3. **Enrichment using taxonomic sets** – `taxon_rank_sets()`
+4. **Single sample scoring** – one score per set per sample, `ssTaxSEA()`
 
 Modes 1 and 2 Both use the same taxon-set databases but answer slightly different questions. Mode 1 which is
 the default we reccomend in most cases takes as input a list of bacteria a rank (E.g. fold change). It then tests
@@ -33,9 +39,25 @@ approach is often less powerful as it requires a hard cut-off to select bacteria
 Mode 3 allows users to test for differences at a particular taxonomic rank. For example instead of just summing up
 or aggregating all the species in a genus. We see if the distribution of species within a genus is different between groups. This
 is a more powerful approach as simply summing/aggregating to a rank can risk missing when you can get shifts 
-within a taxon. This approach is implemented in the taxon_set_ranks() function. 
+within a taxon. This approach is implemented in the `taxon_rank_sets()` function.
+
+Mode 4 does not compare groups at all. `ssTaxSEA()` scores every taxon set within each
+sample as the mean centered log-ratio of its members, giving you a sets x samples matrix
+to correlate with a phenotype, model over time, or plot per sample.
 
 In short, TaxSEA aims to make it easy to intepret changes in your microbiome data.
+
+### Guides
+
+| Guide | What it covers |
+|---|---|
+| [Why use taxon set enrichment?](https://feargalr.github.io/TaxSEA/articles/why-taxon-set-enrichment.html) | The problem with testing species one at a time |
+| [Using TaxSEA](https://feargalr.github.io/TaxSEA/articles/TaxSEA.html) | The main walkthrough, from input to output |
+| [Analysis types](https://feargalr.github.io/TaxSEA/articles/ORA_vs_ES.html) | Ranked enrichment vs over-representation |
+| [Single sample enrichment](https://feargalr.github.io/TaxSEA/articles/single-sample-enrichment.html) | `ssTaxSEA()`, per-sample scores |
+| [Taxonomic aggregation](https://feargalr.github.io/TaxSEA/articles/Taxonomic-aggregation.html) | Testing within a genus, family or phylum |
+| [BacDive physiology sets](https://feargalr.github.io/TaxSEA/articles/BacDive-sets.html) | What the physiology sets are and how they are named |
+| [FAQs](https://feargalr.github.io/TaxSEA/articles/FAQs.html) | Common questions |
 
 TaxSEA takes as input a vector of species names and a rank. 
 For example log2 fold changes or Spearman's rho.
@@ -46,9 +68,17 @@ and the human gut microbiome in particular. As such the database testing in TaxS
 best on human gut microbiome data. 
 
 ### Taxon set database
-By default TaxSEA utilizes taxon sets generated from six reference databases 
-(**BacDive**,**gutMGene**, **GMrepo v2**, **MiMeDB**, **mBodyMap**, **BugSigDB**). See below for 
-examples of using custom databases or taxonomically defined taxon sets. 
+TaxSEA ships taxon sets built from five reference databases (**BacDive**, **gutMGene**,
+**GMrepo v2**, **MiMeDB**, **mBodyMap**), together with sets collated from the
+literature: the Gut-Brain Modules of Valles-Colomer et al., BloSSUM and VANISH sets,
+and mucin degraders, siderophore producers and similar groupings.
+
+**BugSigDB is optional and off by default.** Pass `bugsigdb = TRUE` to include it; it is
+downloaded at run time. Including it also changes the p-values of every other set,
+because TaxSEA compares each set against all the other taxa covered by the sets being
+analysed, so leaving it off keeps results reproducible and lets TaxSEA run offline.
+
+See below for examples of using custom databases or taxonomically defined taxon sets.
 
 The **BacDive** sets describe measured bacterial physiology: oxygen tolerance,
 Gram stain, substrate use and fermentation, enzyme activities, growth temperature,
@@ -69,7 +99,9 @@ disease markers and cross-dataset comparison Nucleic Acids Res. 2022.
 - Jin et al. mBodyMap: a curated database for microbes across human body and their
 associations with health and diseases. Nucleic Acids Res. 2022.
 - Geistlinger et al. BugSigDB captures patterns of differential abundance across a broad
-range of host-associated microbial signatures. Nature Biotech. 2023. 
+range of host-associated microbial signatures. Nature Biotech. 2023.
+- Valles-Colomer et al. The neuroactive potential of the human gut microbiota in quality
+of life and depression. Nature Microbiology. 2019.
 
 ### Installation
 ```r
@@ -77,6 +109,8 @@ if (!requireNamespace("BiocManager", quietly = TRUE))
     install.packages("BiocManager")
 BiocManager::install("TaxSEA")
 
+# The development version, with the rebuilt BacDive sets:
+# BiocManager::install("TaxSEA", version = "devel")
 ```
 
 
@@ -90,7 +124,11 @@ blong.sets <- get_taxon_sets(taxon="Bifidobacterium_longum")
 
 # Run TaxSEA with test data provided
 data(TaxSEA_test_data)
+# bugsigdb = TRUE is optional and downloads BugSigDB at run time
 taxsea_results <- TaxSEA(taxon_ranks=TaxSEA_test_data, bugsigdb = TRUE)
+
+#Every set tested, all sources together
+all.df <- taxsea_results$All_databases
 
 #Enrichments among metabolite producers from gutMgene and MiMeDB
 metabolites.df <- taxsea_results$Metabolite_producers
@@ -132,6 +170,26 @@ taxsea_results <- TaxSEA(input_taxa=test_ORA_input)
 disease.df <- taxsea_results$Health_associations
 
 ```
+
+
+#### Quick start (mode 4, single sample scores)
+```r
+library(TaxSEA)
+
+# counts: taxa as rows, samples as columns (counts or CPM, not proportions)
+scores <- ssTaxSEA(counts)
+
+# a matrix of taxon sets (rows) x samples (columns)
+dim(scores)
+
+# correlate a set with a phenotype, or model it however suits your design
+cor.test(scores["BacDive_Oxygen_facultative_anaerobe", ], calprotectin,
+         method = "spearman")
+```
+
+See the [single sample enrichment](https://feargalr.github.io/TaxSEA/articles/single-sample-enrichment.html)
+guide for what the score means and how to compare scores properly.
+
 
 #### Input
 
@@ -222,16 +280,25 @@ Bacteroides_thetaiotaomicron           Blautia_sp_CAG_257          Ruminococcus 
 
 
 #### Output
-The output is a list of three data frames providing enrichment results for metabolite producers, 
-health/disease associations, and published signatures from BugSigDB.
-Each dataframe has 5 columns
+The output is a list of data frames, one per group of sources, plus `All_databases`
+holding every set tested:
+
+- `All_databases` - every taxon set tested
+- `Metabolite_producers` - gutMGene and MiMeDB
+- `Health_associations` - GMRepoV2 and mBodyMap
+- `BacDive_bacterial_physiology` - measured physiology from BacDive
+- `Gut_Brain_Modules_VallesColomer2019` - gut-brain modules
+- `BugSigDB` - published signatures, empty unless `bugsigdb = TRUE`
+
+Each data frame has 6 columns
 
 - taxonSetName - The name of the taxon set tested
-- median_rank - This is simply the median rank across 
+- median_rank_of_set_members - This is simply the median rank across
 all detected members in the set. This allows you to see
 the direction of change
-- P value - Kolmogorov-Smirnov test P value.
-- FDR - P value adjusted for multiple testing. 
+- PValue - Kolmogorov-Smirnov test P value.
+- Test_statistic - The KS test statistic (in ORA mode this column is an odds ratio)
+- FDR - P value adjusted for multiple testing.
 - TaxonSet - Returns list of taxa in the set to show what is driving the signal
 
 
@@ -423,7 +490,7 @@ for an example with fast gene set enrichment analysis (fgsea).
 
 ```r
 library(fgsea) #This package is installable via Bioconductor
-data(TaxSEA_DB)
+data(TaxSEA_db)
 #Convert input names to NCBI taxon ids
 names(TaxSEA_test_data) = get_ncbi_taxon_ids(names(TaxSEA_test_data))
 TaxSEA_test_data = TaxSEA_test_data[!is.na(names(TaxSEA_test_data))]
