@@ -21,7 +21,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">TaxSEA</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.5.7</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.5.8</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -258,11 +258,51 @@ does affect the scores, so report the value you used.</p>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">p1</span><span class="op">[</span><span class="st">"elevated_set"</span>, <span class="op">]</span> <span class="op">-</span> <span class="va">scores</span><span class="op">[</span><span class="st">"elevated_set"</span>, <span class="op">]</span>, <span class="fl">3</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Sample_1 Sample_2 Sample_3 Sample_4 Sample_5 Sample_6 Sample_7 Sample_8 </span></span>
 <span><span class="co">#&gt;   -0.002   -0.008   -0.002    0.007   -0.032   -0.037   -0.037   -0.027</span></span></code></pre></div>
-<p><strong>Supply counts, not proportions.</strong> Adding a pseudocount
-of 0.5 to values that sum to 1 would overwhelm the data completely, so
-<code><a href="../reference/ssTaxSEA.html">ssTaxSEA()</a></code> refuses input whose columns sum to 1. If you
-only have relative abundances, rescale them to a count-like scale
-first.</p>
+<p><strong>Relative abundances need
+<code>scale = "proportion"</code>.</strong> Adding a pseudocount of 0.5
+to proportions or percentages would overwhelm the data, so by default
+<code><a href="../reference/ssTaxSEA.html">ssTaxSEA()</a></code> refuses them. With
+<code>scale = "proportion"</code> each sample is divided by its total
+and the pseudocount (default 1e-6) is a proportion, so counts,
+proportions and percentages such as MetaPhlAn output all give the same
+scores:</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">pct</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sweep.html" class="external-link">sweep</a></span><span class="op">(</span><span class="va">counts</span>, <span class="fl">2</span>, <span class="fu"><a href="https://rdrr.io/pkg/MatrixGenerics/man/rowSums.html" class="external-link">colSums</a></span><span class="op">(</span><span class="va">counts</span><span class="op">)</span>, <span class="st">"/"</span><span class="op">)</span> <span class="op">*</span> <span class="fl">100</span></span>
+<span><span class="va">from_pct</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ssTaxSEA.html">ssTaxSEA</a></span><span class="op">(</span><span class="va">pct</span>, custom_db <span class="op">=</span> <span class="va">my_sets</span>, min_set_size <span class="op">=</span> <span class="fl">3</span>,</span>
+<span>                     scale <span class="op">=</span> <span class="st">"proportion"</span><span class="op">)</span></span>
+<span><span class="va">from_counts</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ssTaxSEA.html">ssTaxSEA</a></span><span class="op">(</span><span class="va">counts</span>, custom_db <span class="op">=</span> <span class="va">my_sets</span>, min_set_size <span class="op">=</span> <span class="fl">3</span>,</span>
+<span>                        scale <span class="op">=</span> <span class="st">"proportion"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/all.equal.html" class="external-link">all.equal</a></span><span class="op">(</span><span class="va">from_pct</span>, <span class="va">from_counts</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] TRUE</span></span></code></pre></div>
+<p><strong>When richness changes, consider
+<code>reference = "top_k"</code>.</strong> The standard CLR centers each
+sample on the mean of every taxon, zeros included. If many rare taxa
+disappear, as after antibiotics or chemotherapy, that reference falls
+and every surviving taxon’s score rises together, even though nothing
+changed among the survivors. Adjusting for richness in a downstream
+model does not undo this. <code>reference = "top_k"</code> centers each
+sample on its most abundant detected taxa (20 by default) instead, which
+losing rare taxa does not move. Rare taxa are still scored; they just no
+longer shift everyone else’s score.</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Remove the rarest half of the detected taxa from one sample</span></span>
+<span><span class="va">depleted</span> <span class="op">&lt;-</span> <span class="va">counts</span></span>
+<span><span class="va">rare</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/order.html" class="external-link">order</a></span><span class="op">(</span><span class="va">depleted</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_len</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">depleted</span><span class="op">)</span> <span class="op">/</span> <span class="fl">2</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="va">depleted</span><span class="op">[</span><span class="va">rare</span>, <span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">0</span></span>
+<span></span>
+<span><span class="va">survivors</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>survivors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">counts</span><span class="op">)</span><span class="op">[</span><span class="op">-</span><span class="va">rare</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="va">before</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ssTaxSEA.html">ssTaxSEA</a></span><span class="op">(</span><span class="va">counts</span>, custom_db <span class="op">=</span> <span class="va">survivors</span>, min_set_size <span class="op">=</span> <span class="fl">3</span>,</span>
+<span>                   reference <span class="op">=</span> <span class="st">"top_k"</span>, top_k <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
+<span><span class="va">after</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ssTaxSEA.html">ssTaxSEA</a></span><span class="op">(</span><span class="va">depleted</span>, custom_db <span class="op">=</span> <span class="va">survivors</span>, min_set_size <span class="op">=</span> <span class="fl">3</span>,</span>
+<span>                  reference <span class="op">=</span> <span class="st">"top_k"</span>, top_k <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># The survivors' score is unchanged with the top-k reference...</span></span>
+<span><span class="va">after</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span> <span class="op">-</span> <span class="va">before</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span></span>
+<span><span class="co">#&gt; [1] 0</span></span>
+<span><span class="co"># ...but rises with the standard CLR</span></span>
+<span><span class="fu"><a href="../reference/ssTaxSEA.html">ssTaxSEA</a></span><span class="op">(</span><span class="va">depleted</span>, custom_db <span class="op">=</span> <span class="va">survivors</span>, min_set_size <span class="op">=</span> <span class="fl">3</span><span class="op">)</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span> <span class="op">-</span></span>
+<span>  <span class="fu"><a href="../reference/ssTaxSEA.html">ssTaxSEA</a></span><span class="op">(</span><span class="va">counts</span>, custom_db <span class="op">=</span> <span class="va">survivors</span>, min_set_size <span class="op">=</span> <span class="fl">3</span><span class="op">)</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span></span>
+<span><span class="co">#&gt; [1] 1.42996</span></span></code></pre></div>
 <p><strong>BugSigDB is excluded.</strong> <code><a href="../reference/ssTaxSEA.html">ssTaxSEA()</a></code> uses
 the built-in TaxSEA database (GMRepoV2, MiMeDB, gutMGene, mBodyMap,
 BacDive) but does not load BugSigDB. This keeps the function fast and
@@ -328,7 +368,7 @@ first)</li>
 <li>Clustering or ordination to identify patient subgroups</li>
 <li>Regression or survival analysis using scores as predictors</li>
 </ul>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html" class="external-link">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; R version 4.6.1 (2026-06-24)</span></span>
 <span><span class="co">#&gt; Platform: x86_64-pc-linux-gnu</span></span>
@@ -357,17 +397,17 @@ first)</li>
 <span><span class="co">#&gt;  [5] IRanges_2.46.0              S4Vectors_0.50.3           </span></span>
 <span><span class="co">#&gt;  [7] BiocGenerics_0.58.1         generics_0.1.4             </span></span>
 <span><span class="co">#&gt;  [9] MatrixGenerics_1.24.0       matrixStats_1.5.0          </span></span>
-<span><span class="co">#&gt; [11] TaxSEA_1.5.7               </span></span>
+<span><span class="co">#&gt; [11] TaxSEA_1.5.8               </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; loaded via a namespace (and not attached):</span></span>
 <span><span class="co">#&gt;  [1] Matrix_1.7-5        jsonlite_2.0.0      compiler_4.6.1     </span></span>
 <span><span class="co">#&gt;  [4] jquerylib_0.1.4     systemfonts_1.3.2   textshaping_1.0.5  </span></span>
 <span><span class="co">#&gt;  [7] yaml_2.3.12         fastmap_1.2.0       lattice_0.22-9     </span></span>
-<span><span class="co">#&gt; [10] R6_2.6.1            XVector_0.52.0      S4Arrays_1.12.0    </span></span>
+<span><span class="co">#&gt; [10] R6_2.6.1            XVector_0.52.0      S4Arrays_1.12.1    </span></span>
 <span><span class="co">#&gt; [13] knitr_1.52          DelayedArray_0.38.2 desc_1.4.3         </span></span>
 <span><span class="co">#&gt; [16] bslib_0.12.0        rlang_1.3.0         cachem_1.1.0       </span></span>
-<span><span class="co">#&gt; [19] xfun_0.61           fs_2.1.0            sass_0.4.10        </span></span>
-<span><span class="co">#&gt; [22] otel_0.2.0          SparseArray_1.12.2  cli_3.6.6          </span></span>
+<span><span class="co">#&gt; [19] xfun_0.62           fs_2.1.0            sass_0.4.10        </span></span>
+<span><span class="co">#&gt; [22] otel_0.2.0          SparseArray_1.12.3  cli_3.6.6          </span></span>
 <span><span class="co">#&gt; [25] pkgdown_2.2.1       digest_0.6.39       grid_4.6.1         </span></span>
 <span><span class="co">#&gt; [28] lifecycle_1.0.5     evaluate_1.0.5      ragg_1.5.2         </span></span>
 <span><span class="co">#&gt; [31] abind_1.4-8         rmarkdown_2.32      tools_4.6.1        </span></span>

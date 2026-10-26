@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">TaxSEA</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.5.7</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.5.8</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -42,6 +42,22 @@
       <small>Source: <a href="https://github.com/feargalr/taxsea/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.5.8" id="taxsea-158">TaxSEA 1.5.8<a class="anchor" aria-label="anchor" href="#taxsea-158"></a></h2>
+<div class="section level3">
+<h3 id="new-features-1-5-8">New features<a class="anchor" aria-label="anchor" href="#new-features-1-5-8"></a></h3>
+<ul><li>
+<code><a href="../reference/ssTaxSEA.html">ssTaxSEA()</a></code> gains a reference that rare taxa cannot move. <code>reference = "top_k"</code> centers each sample on its <code>top_k</code> (default 20) most abundant detected taxa instead of on every taxon in the table. With the standard CLR, losing many rare taxa (after antibiotics or chemotherapy, for example) lowers the reference and raises the score of every surviving taxon, so hundreds of sets can increase together with no change among the survivors. The top-k reference is unchanged by losing rare taxa or by adding or removing rare and empty rows, and rare taxa are still scored. A sample with fewer than <code>top_k</code> detected taxa uses all of them, so zeros never enter the reference.</li>
+<li>
+<code><a href="../reference/ssTaxSEA.html">ssTaxSEA()</a></code> gains <code>scale = "proportion"</code>, which divides each sample by its total and applies <code>pseudocount</code> as a proportion (default 1e-6). Counts, proportions and percentages such as MetaPhlAn output all give the same result, and the pseudocount is the same proportion in every sample whatever its depth.</li>
+<li>The default is unchanged (<code>scale = "counts"</code>, <code>reference = "all"</code>, pseudocount 0.5), so existing results are reproduced exactly.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="bug-fixes-1-5-8">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-1-5-8"></a></h3>
+<ul><li>
+<code><a href="../reference/ssTaxSEA.html">ssTaxSEA()</a></code> now refuses percentages and other relative abundances on the count scale, as it already did for proportions. Previously a MetaPhlAn table in percent passed the check (its columns sum to 100, not 1), and the pseudocount of 0.5, half a percent, swamped every taxon rarer than that. Use <code>scale = "proportion"</code> for such tables.</li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.5.7" id="taxsea-157">TaxSEA 1.5.7<a class="anchor" aria-label="anchor" href="#taxsea-157"></a></h2>
 <div class="section level3">

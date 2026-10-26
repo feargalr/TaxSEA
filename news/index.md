@@ -1,5 +1,38 @@
 # Changelog
 
+## TaxSEA 1.5.8
+
+### New features
+
+- [`ssTaxSEA()`](https://feargalr.github.io/TaxSEA/reference/ssTaxSEA.md)
+  gains a reference that rare taxa cannot move. `reference = "top_k"`
+  centers each sample on its `top_k` (default 20) most abundant detected
+  taxa instead of on every taxon in the table. With the standard CLR,
+  losing many rare taxa (after antibiotics or chemotherapy, for example)
+  lowers the reference and raises the score of every surviving taxon, so
+  hundreds of sets can increase together with no change among the
+  survivors. The top-k reference is unchanged by losing rare taxa or by
+  adding or removing rare and empty rows, and rare taxa are still
+  scored. A sample with fewer than `top_k` detected taxa uses all of
+  them, so zeros never enter the reference.
+- [`ssTaxSEA()`](https://feargalr.github.io/TaxSEA/reference/ssTaxSEA.md)
+  gains `scale = "proportion"`, which divides each sample by its total
+  and applies `pseudocount` as a proportion (default 1e-6). Counts,
+  proportions and percentages such as MetaPhlAn output all give the same
+  result, and the pseudocount is the same proportion in every sample
+  whatever its depth.
+- The default is unchanged (`scale = "counts"`, `reference = "all"`,
+  pseudocount 0.5), so existing results are reproduced exactly.
+
+### Bug fixes
+
+- [`ssTaxSEA()`](https://feargalr.github.io/TaxSEA/reference/ssTaxSEA.md)
+  now refuses percentages and other relative abundances on the count
+  scale, as it already did for proportions. Previously a MetaPhlAn table
+  in percent passed the check (its columns sum to 100, not 1), and the
+  pseudocount of 0.5, half a percent, swamped every taxon rarer than
+  that. Use `scale = "proportion"` for such tables.
+
 ## TaxSEA 1.5.7
 
 ### Documentation

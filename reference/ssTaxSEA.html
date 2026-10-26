@@ -9,7 +9,7 @@ centered log-ratio (CLR) of the set's members within that sample."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">TaxSEA</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.5.7</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.5.8</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -58,7 +58,10 @@ centered log-ratio (CLR) of the set's members within that sample.</p>
 <span>  min_set_size <span class="op">=</span> <span class="fl">5</span>,</span>
 <span>  max_set_size <span class="op">=</span> <span class="fl">300</span>,</span>
 <span>  custom_db <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  pseudocount <span class="op">=</span> <span class="fl">0.5</span></span>
+<span>  pseudocount <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  scale <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"counts"</span>, <span class="st">"proportion"</span><span class="op">)</span>,</span>
+<span>  reference <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"all"</span>, <span class="st">"top_k"</span><span class="op">)</span>,</span>
+<span>  top_k <span class="op">=</span> <span class="fl">20</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -97,9 +100,33 @@ BugSigDB).</p></dd>
 
 
 <dt id="arg-pseudocount">pseudocount<a class="anchor" aria-label="anchor" href="#arg-pseudocount"></a></dt>
-<dd><p>Numeric value added to every count before the
-log transform, to handle zeros. Default is 0.5. This choice
-affects the scores, so report it alongside your results.</p></dd>
+<dd><p>Numeric value added to every value before the
+log transform, to handle zeros. It is on the scale set by
+<code>scale</code>: if NULL (default), 0.5 for <code>scale = "counts"</code>
+and 1e-6 for <code>scale = "proportion"</code>. This choice affects the
+scores, so report it alongside your results.</p></dd>
+
+
+<dt id="arg-scale">scale<a class="anchor" aria-label="anchor" href="#arg-scale"></a></dt>
+<dd><p>Either <code>"counts"</code> (default) or <code>"proportion"</code>.
+With <code>"counts"</code> the input is used as supplied and must be
+counts or another count-like measure. With <code>"proportion"</code>
+each sample is first divided by its total, so counts, proportions
+and percentages (for example MetaPhlAn output) are all accepted,
+and <code>pseudocount</code> is a proportion. See Details.</p></dd>
+
+
+<dt id="arg-reference">reference<a class="anchor" aria-label="anchor" href="#arg-reference"></a></dt>
+<dd><p>Either <code>"all"</code> (default) or <code>"top_k"</code>.
+What each sample's log values are centered on: the mean over all
+taxa (the standard CLR), or the mean over that sample's
+<code>top_k</code> most abundant detected taxa. See Details.</p></dd>
+
+
+<dt id="arg-top-k">top_k<a class="anchor" aria-label="anchor" href="#arg-top-k"></a></dt>
+<dd><p>Number of most abundant detected taxa used as the
+reference when <code>reference = "top_k"</code>. Default is 20. A sample
+with fewer detected taxa uses all of its detected taxa.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -107,7 +134,8 @@ affects the scores, so report it alongside your results.</p></dd>
     <p>A numeric matrix of scores with taxon sets as rows and
   samples as columns. Higher values indicate that the set's members
   are more abundant in that sample, relative to the average taxon
-  in that same sample.</p>
+  in that same sample (or, with <code>reference = "top_k"</code>, relative
+  to that sample's most abundant taxa).</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
@@ -122,6 +150,37 @@ CLR divides by depend on the sets being tested, which manufactures
 apparent signal in sets that have none.</p>
 <p>Because the score is a within-sample quantity, <code>ssTaxSEA</code> does
 not need a cohort and is well defined for a single sample.</p>
+    </div>
+    <div class="section level2">
+    <h2 id="choosing-a-reference">Choosing a reference<a class="anchor" aria-label="anchor" href="#choosing-a-reference"></a></h2>
+
+
+<p>The standard CLR (<code>reference = "all"</code>) centers each sample on
+the mean log value of every taxon in the table, zeros included. That
+reference moves with richness: when many rare taxa drop out, as after
+antibiotics or chemotherapy, the reference falls and every surviving
+taxon's score rises, even if its abundance relative to the other
+survivors has not changed. Many taxon sets share the same surviving
+members, so hundreds of scores can rise together. Adjusting for
+richness in a downstream model does not remove this. The reference
+also depends on which rows are in the table, so filtering taxa
+differently changes every score.</p>
+<p><code>reference = "top_k"</code> centers each sample on the mean log value
+of its <code>top_k</code> most abundant detected taxa. Rare taxa are still
+scored and still count towards their sets; they just no longer move
+everyone else's score. Losing rare taxa, or adding or removing rare
+and all-zero rows, leaves the reference unchanged. Zeros never enter
+the reference: a sample with fewer than <code>top_k</code> detected taxa
+uses all of them. The score then reads as abundance relative to the
+sample's dominant taxa.</p>
+<p>A pseudocount set from each sample's own data would move with the
+rare tail in the same way, which is why <code>pseudocount</code> is a fixed
+value. On the count scale a pseudocount of 0.5 reads is a different
+proportion in samples of different depth; <code>scale = "proportion"</code>
+with a small fixed pseudocount avoids that. The default of 1e-6 is
+near the detection limit of deep shotgun profiles; raise it if your
+smallest detected proportions are larger. For relative abundance
+input, such as MetaPhlAn percentages, use <code>scale = "proportion"</code>.</p>
     </div>
     <div class="section level2">
     <h2 id="interpreting-the-scores">Interpreting the scores<a class="anchor" aria-label="anchor" href="#interpreting-the-scores"></a></h2>
@@ -178,6 +237,18 @@ or a linear model on one row of the returned matrix).</p>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">rowMeans</a></span><span class="op">(</span><span class="va">scores</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">rowMeans</a></span><span class="op">(</span><span class="va">scores</span><span class="op">[</span>, <span class="fl">5</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> elevated_set  control_set </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   -1.1948884    0.3033688 </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># A reference that is not moved by changes in rare taxa, for</span></span></span>
+<span class="r-in"><span><span class="co"># relative abundance input</span></span></span>
+<span class="r-in"><span><span class="va">pct</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sweep.html" class="external-link">sweep</a></span><span class="op">(</span><span class="va">counts</span>, <span class="fl">2</span>, <span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">colSums</a></span><span class="op">(</span><span class="va">counts</span><span class="op">)</span>, <span class="st">"/"</span><span class="op">)</span> <span class="op">*</span> <span class="fl">100</span></span></span>
+<span class="r-in"><span><span class="fu">ssTaxSEA</span><span class="op">(</span><span class="va">pct</span>, custom_db <span class="op">=</span> <span class="va">sets</span>, min_set_size <span class="op">=</span> <span class="fl">3</span>,</span></span>
+<span class="r-in"><span>         scale <span class="op">=</span> <span class="st">"proportion"</span>, reference <span class="op">=</span> <span class="st">"top_k"</span>, top_k <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                Sample_1    Sample_2   Sample_3   Sample_4   Sample_5   Sample_6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> elevated_set -0.2824106 -0.09203292 -0.2866433 -0.5232409  0.4322547  0.5063751</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> control_set  -0.3933116 -0.28047262 -0.3170458 -0.3956802 -1.0473972 -1.2533668</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                Sample_7   Sample_8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> elevated_set  0.4450376  0.3641358</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> control_set  -1.4454834 -0.8702312</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

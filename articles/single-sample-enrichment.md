@@ -217,11 +217,57 @@ round(p1["elevated_set", ] - scores["elevated_set", ], 3)
 #>   -0.002   -0.008   -0.002    0.007   -0.032   -0.037   -0.037   -0.027
 ```
 
-**Supply counts, not proportions.** Adding a pseudocount of 0.5 to
-values that sum to 1 would overwhelm the data completely, so
+**Relative abundances need `scale = "proportion"`.** Adding a
+pseudocount of 0.5 to proportions or percentages would overwhelm the
+data, so by default
 [`ssTaxSEA()`](https://feargalr.github.io/TaxSEA/reference/ssTaxSEA.md)
-refuses input whose columns sum to 1. If you only have relative
-abundances, rescale them to a count-like scale first.
+refuses them. With `scale = "proportion"` each sample is divided by its
+total and the pseudocount (default 1e-6) is a proportion, so counts,
+proportions and percentages such as MetaPhlAn output all give the same
+scores:
+
+``` r
+
+pct <- sweep(counts, 2, colSums(counts), "/") * 100
+from_pct <- ssTaxSEA(pct, custom_db = my_sets, min_set_size = 3,
+                     scale = "proportion")
+from_counts <- ssTaxSEA(counts, custom_db = my_sets, min_set_size = 3,
+                        scale = "proportion")
+all.equal(from_pct, from_counts)
+#> [1] TRUE
+```
+
+**When richness changes, consider `reference = "top_k"`.** The standard
+CLR centers each sample on the mean of every taxon, zeros included. If
+many rare taxa disappear, as after antibiotics or chemotherapy, that
+reference falls and every surviving taxon’s score rises together, even
+though nothing changed among the survivors. Adjusting for richness in a
+downstream model does not undo this. `reference = "top_k"` centers each
+sample on its most abundant detected taxa (20 by default) instead, which
+losing rare taxa does not move. Rare taxa are still scored; they just no
+longer shift everyone else’s score.
+
+``` r
+
+# Remove the rarest half of the detected taxa from one sample
+depleted <- counts
+rare <- order(depleted[, 1])[seq_len(nrow(depleted) / 2)]
+depleted[rare, 1] <- 0
+
+survivors <- list(survivors = rownames(counts)[-rare])
+before <- ssTaxSEA(counts, custom_db = survivors, min_set_size = 3,
+                   reference = "top_k", top_k = 10)
+after <- ssTaxSEA(depleted, custom_db = survivors, min_set_size = 3,
+                  reference = "top_k", top_k = 10)
+
+# The survivors' score is unchanged with the top-k reference...
+after[, 1] - before[, 1]
+#> [1] 0
+# ...but rises with the standard CLR
+ssTaxSEA(depleted, custom_db = survivors, min_set_size = 3)[, 1] -
+  ssTaxSEA(counts, custom_db = survivors, min_set_size = 3)[, 1]
+#> [1] 1.42996
+```
 
 **BugSigDB is excluded.**
 [`ssTaxSEA()`](https://feargalr.github.io/TaxSEA/reference/ssTaxSEA.md)
@@ -285,17 +331,17 @@ sessionInfo()
 #>  [5] IRanges_2.46.0              S4Vectors_0.50.3           
 #>  [7] BiocGenerics_0.58.1         generics_0.1.4             
 #>  [9] MatrixGenerics_1.24.0       matrixStats_1.5.0          
-#> [11] TaxSEA_1.5.7               
+#> [11] TaxSEA_1.5.8               
 #> 
 #> loaded via a namespace (and not attached):
 #>  [1] Matrix_1.7-5        jsonlite_2.0.0      compiler_4.6.1     
 #>  [4] jquerylib_0.1.4     systemfonts_1.3.2   textshaping_1.0.5  
 #>  [7] yaml_2.3.12         fastmap_1.2.0       lattice_0.22-9     
-#> [10] R6_2.6.1            XVector_0.52.0      S4Arrays_1.12.0    
+#> [10] R6_2.6.1            XVector_0.52.0      S4Arrays_1.12.1    
 #> [13] knitr_1.52          DelayedArray_0.38.2 desc_1.4.3         
 #> [16] bslib_0.12.0        rlang_1.3.0         cachem_1.1.0       
-#> [19] xfun_0.61           fs_2.1.0            sass_0.4.10        
-#> [22] otel_0.2.0          SparseArray_1.12.2  cli_3.6.6          
+#> [19] xfun_0.62           fs_2.1.0            sass_0.4.10        
+#> [22] otel_0.2.0          SparseArray_1.12.3  cli_3.6.6          
 #> [25] pkgdown_2.2.1       digest_0.6.39       grid_4.6.1         
 #> [28] lifecycle_1.0.5     evaluate_1.0.5      ragg_1.5.2         
 #> [31] abind_1.4-8         rmarkdown_2.32      tools_4.6.1        
