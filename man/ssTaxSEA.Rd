@@ -10,7 +10,10 @@ ssTaxSEA(
   min_set_size = 5,
   max_set_size = 300,
   custom_db = NULL,
-  pseudocount = 0.5
+  pseudocount = NULL,
+  scale = c("counts", "proportion"),
+  reference = c("all", "top_k"),
+  top_k = 20
 )
 }
 \arguments{
@@ -34,15 +37,34 @@ Default is 300.}
 (default), the built-in TaxSEA database is used (excluding
 BugSigDB).}
 
-\item{pseudocount}{Numeric value added to every count before the
-log transform, to handle zeros. Default is 0.5. This choice
-affects the scores, so report it alongside your results.}
+\item{pseudocount}{Numeric value added to every value before the
+log transform, to handle zeros. It is on the scale set by
+\code{scale}: if NULL (default), 0.5 for \code{scale = "counts"}
+and 1e-6 for \code{scale = "proportion"}. This choice affects the
+scores, so report it alongside your results.}
+
+\item{scale}{Either \code{"counts"} (default) or \code{"proportion"}.
+With \code{"counts"} the input is used as supplied and must be
+counts or another count-like measure. With \code{"proportion"}
+each sample is first divided by its total, so counts, proportions
+and percentages (for example MetaPhlAn output) are all accepted,
+and \code{pseudocount} is a proportion. See Details.}
+
+\item{reference}{Either \code{"all"} (default) or \code{"top_k"}.
+What each sample's log values are centered on: the mean over all
+taxa (the standard CLR), or the mean over that sample's
+\code{top_k} most abundant detected taxa. See Details.}
+
+\item{top_k}{Number of most abundant detected taxa used as the
+reference when \code{reference = "top_k"}. Default is 20. A sample
+with fewer detected taxa uses all of its detected taxa.}
 }
 \value{
 A numeric matrix of scores with taxon sets as rows and
   samples as columns. Higher values indicate that the set's members
   are more abundant in that sample, relative to the average taxon
-  in that same sample.
+  in that same sample (or, with \code{reference = "top_k"}, relative
+  to that sample's most abundant taxa).
 }
 \description{
 Computes a per-sample score for each taxon set as the mean
@@ -64,6 +86,38 @@ apparent signal in sets that have none.
 Because the score is a within-sample quantity, \code{ssTaxSEA} does
 not need a cohort and is well defined for a single sample.
 }
+\section{Choosing a reference}{
+
+The standard CLR (\code{reference = "all"}) centers each sample on
+the mean log value of every taxon in the table, zeros included. That
+reference moves with richness: when many rare taxa drop out, as after
+antibiotics or chemotherapy, the reference falls and every surviving
+taxon's score rises, even if its abundance relative to the other
+survivors has not changed. Many taxon sets share the same surviving
+members, so hundreds of scores can rise together. Adjusting for
+richness in a downstream model does not remove this. The reference
+also depends on which rows are in the table, so filtering taxa
+differently changes every score.
+
+\code{reference = "top_k"} centers each sample on the mean log value
+of its \code{top_k} most abundant detected taxa. Rare taxa are still
+scored and still count towards their sets; they just no longer move
+everyone else's score. Losing rare taxa, or adding or removing rare
+and all-zero rows, leaves the reference unchanged. Zeros never enter
+the reference: a sample with fewer than \code{top_k} detected taxa
+uses all of them. The score then reads as abundance relative to the
+sample's dominant taxa.
+
+A pseudocount set from each sample's own data would move with the
+rare tail in the same way, which is why \code{pseudocount} is a fixed
+value. On the count scale a pseudocount of 0.5 reads is a different
+proportion in samples of different depth; \code{scale = "proportion"}
+with a small fixed pseudocount avoids that. The default of 1e-6 is
+near the detection limit of deep shotgun profiles; raise it if your
+smallest detected proportions are larger. For relative abundance
+input, such as MetaPhlAn percentages, use \code{scale = "proportion"}.
+}
+
 \section{Interpreting the scores}{
 
 Scores are comparable \strong{across samples within a taxon set}:
@@ -105,6 +159,12 @@ round(scores, 2)
 
 # The planted signal shows up as higher scores in samples 5-8
 rowMeans(scores[, 1:4]) - rowMeans(scores[, 5:8])
+
+# A reference that is not moved by changes in rare taxa, for
+# relative abundance input
+pct <- sweep(counts, 2, colSums(counts), "/") * 100
+ssTaxSEA(pct, custom_db = sets, min_set_size = 3,
+         scale = "proportion", reference = "top_k", top_k = 10)
 
 }
 \seealso{

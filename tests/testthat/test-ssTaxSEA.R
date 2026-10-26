@@ -159,6 +159,135 @@ test_that("counts scaled to a count-like total are accepted", {
   expect_identical(dim(res), c(2L, 4L))
 })
 
+test_that("percentages are rejected on the count scale", {
+  pct <- sweep(toy_counts(), 2, colSums(toy_counts()), FUN = "/") * 100
+  expect_error(ssTaxSEA(pct, custom_db = toy_sets, min_set_size = 2),
+               "percentages")
+
+  # MetaPhlAn species rows without UNCLASSIFIED sum to less than 100
+  expect_error(ssTaxSEA(pct * 0.85, custom_db = toy_sets, min_set_size = 2),
+               "percentages")
+
+  # MetaPhlAn rounding can leave columns summing to just over 100
+  rounded <- pct
+  rounded[1, ] <- rounded[1, ] + 1e-5
+  expect_error(ssTaxSEA(rounded, custom_db = toy_sets, min_set_size = 2),
+               "percentages")
+})
+
+test_that("small integer count tables are not mistaken for percentages", {
+  m <- toy_counts()
+  m[] <- pmin(m, 20)
+  expect_true(all(colSums(m) <= 100))
+  expect_silent(ssTaxSEA(m, custom_db = toy_sets, min_set_size = 2))
+})
+
+## Proportion scale ------------------------------------------------------
+
+test_that("proportion scale gives the same scores for counts, proportions and percentages", {
+  m <- toy_counts()
+  props <- sweep(m, 2, colSums(m), FUN = "/")
+
+  from_counts <- ssTaxSEA(m, custom_db = toy_sets, min_set_size = 2,
+                          scale = "proportion")
+  from_props <- ssTaxSEA(props, custom_db = toy_sets, min_set_size = 2,
+                         scale = "proportion")
+  from_pct <- ssTaxSEA(props * 100, custom_db = toy_sets, min_set_size = 2,
+                       scale = "proportion")
+
+  expect_equal(from_props, from_counts)
+  expect_equal(from_pct, from_counts)
+
+  # Default pseudocount on this scale is 1e-6
+  log_p <- log(props + 1e-6)
+  clr <- sweep(log_p, 2, colMeans(log_p), FUN = "-")
+  expect_equal(from_counts["A", ], colMeans(clr[c("t1", "t2"), ]))
+})
+
+test_that("a count-sized pseudocount on the proportion scale warns", {
+  expect_warning(ssTaxSEA(toy_counts(), custom_db = toy_sets,
+                          min_set_size = 2, scale = "proportion",
+                          pseudocount = 0.5),
+                 "dominate")
+})
+
+## Top-k reference -------------------------------------------------------
+
+test_that("top_k reference centers on the most abundant detected taxa", {
+  m <- toy_counts()
+  res <- ssTaxSEA(m, custom_db = toy_sets, min_set_size = 2,
+                  reference = "top_k", top_k = 2)
+
+  log_m <- log(m + 0.5)
+  ref <- apply(log_m, 2, function(x) mean(sort(x, decreasing = TRUE)[1:2]))
+  clr <- sweep(log_m, 2, ref, FUN = "-")
+  expect_equal(res["A", ], colMeans(clr[c("t1", "t2"), ]))
+  expect_equal(res["B", ], colMeans(clr[c("t3", "t4"), ]))
+})
+
+test_that("top_k scores of surviving taxa do not move when rare taxa are lost", {
+  # The motivating case: rare taxa drop out (antibiotics, chemotherapy)
+  # while the survivors are unchanged. The all-taxa reference falls and
+  # inflates every survivor's score; the top_k reference does not.
+  set.seed(3)
+  before <- sort(rpois(80, exp(rnorm(80, 3, 1.5))) + 1, decreasing = TRUE)
+  after <- before
+  after[41:80] <- 0
+  m <- cbind(before = before, after = after)
+  rownames(m) <- paste0("t", seq_len(80))
+  sets <- list(survivors = paste0("t", 21:40))
+
+  topk <- ssTaxSEA(m, custom_db = sets, reference = "top_k", top_k = 20)
+  all_taxa <- ssTaxSEA(m, custom_db = sets)
+
+  expect_equal(topk[, "after"], topk[, "before"])
+  expect_gt(all_taxa[, "after"] - all_taxa[, "before"], 0.5)
+})
+
+test_that("top_k scores do not depend on extra rare or empty rows", {
+  m <- toy_counts()
+  padded <- rbind(m, matrix(c(0, 1, 0, 0,
+                              0, 0, 0, 0), nrow = 2, byrow = TRUE,
+                            dimnames = list(c("rare", "empty"), NULL)))
+
+  topk <- ssTaxSEA(m, custom_db = toy_sets, min_set_size = 2,
+                   reference = "top_k", top_k = 2)
+  topk_padded <- ssTaxSEA(padded, custom_db = toy_sets, min_set_size = 2,
+                          reference = "top_k", top_k = 2)
+  expect_equal(topk_padded, topk)
+
+  all_taxa <- ssTaxSEA(m, custom_db = toy_sets, min_set_size = 2)
+  all_padded <- ssTaxSEA(padded, custom_db = toy_sets, min_set_size = 2)
+  expect_false(isTRUE(all.equal(all_padded, all_taxa)))
+})
+
+test_that("top_k is capped at the number of detected taxa", {
+  m <- toy_counts()
+  m[c("t2", "t3"), "s1"] <- 0
+
+  expect_message(
+    res <- ssTaxSEA(m, custom_db = toy_sets, min_set_size = 2,
+                    reference = "top_k", top_k = 3),
+    "1 of 4 samples"
+  )
+
+  # s1 has two detected taxa, so its reference is their mean, not one
+  # that includes a zero
+  log_s1 <- log(m[, "s1"] + 0.5)
+  ref_s1 <- mean(log_s1[c("t1", "t4")])
+  expect_equal(res["A", "s1"], mean(log_s1[c("t1", "t2")] - ref_s1))
+})
+
+test_that("top_k is validated", {
+  m <- toy_counts()
+  expect_error(ssTaxSEA(m, custom_db = toy_sets, reference = "top_k",
+                        top_k = 0), "top_k")
+  expect_error(ssTaxSEA(m, custom_db = toy_sets, reference = "top_k",
+                        top_k = 2.5), "top_k")
+  expect_error(ssTaxSEA(m, custom_db = toy_sets, reference = "median"),
+               "should be one of")
+})
+
 ## Set filtering ---------------------------------------------------------
 
 test_that("sets outside the size bounds are dropped", {

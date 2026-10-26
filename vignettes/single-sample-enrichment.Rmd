@@ -174,10 +174,48 @@ p1 <- ssTaxSEA(counts, custom_db = my_sets, min_set_size = 3, pseudocount = 1)
 round(p1["elevated_set", ] - scores["elevated_set", ], 3)
 ```
 
-**Supply counts, not proportions.** Adding a pseudocount of 0.5 to values that
-sum to 1 would overwhelm the data completely, so `ssTaxSEA()` refuses input whose
-columns sum to 1. If you only have relative abundances, rescale them to a
-count-like scale first.
+**Relative abundances need `scale = "proportion"`.** Adding a pseudocount of
+0.5 to proportions or percentages would overwhelm the data, so by default
+`ssTaxSEA()` refuses them. With `scale = "proportion"` each sample is divided by
+its total and the pseudocount (default 1e-6) is a proportion, so counts,
+proportions and percentages such as MetaPhlAn output all give the same scores:
+
+```{r proportion}
+pct <- sweep(counts, 2, colSums(counts), "/") * 100
+from_pct <- ssTaxSEA(pct, custom_db = my_sets, min_set_size = 3,
+                     scale = "proportion")
+from_counts <- ssTaxSEA(counts, custom_db = my_sets, min_set_size = 3,
+                        scale = "proportion")
+all.equal(from_pct, from_counts)
+```
+
+**When richness changes, consider `reference = "top_k"`.** The standard CLR
+centers each sample on the mean of every taxon, zeros included. If many rare
+taxa disappear, as after antibiotics or chemotherapy, that reference falls and
+every surviving taxon's score rises together, even though nothing changed
+among the survivors. Adjusting for richness in a downstream model does not
+undo this. `reference = "top_k"` centers each sample on its most abundant
+detected taxa (20 by default) instead, which losing rare taxa does not move.
+Rare taxa are still scored; they just no longer shift everyone else's score.
+
+```{r top_k}
+# Remove the rarest half of the detected taxa from one sample
+depleted <- counts
+rare <- order(depleted[, 1])[seq_len(nrow(depleted) / 2)]
+depleted[rare, 1] <- 0
+
+survivors <- list(survivors = rownames(counts)[-rare])
+before <- ssTaxSEA(counts, custom_db = survivors, min_set_size = 3,
+                   reference = "top_k", top_k = 10)
+after <- ssTaxSEA(depleted, custom_db = survivors, min_set_size = 3,
+                  reference = "top_k", top_k = 10)
+
+# The survivors' score is unchanged with the top-k reference...
+after[, 1] - before[, 1]
+# ...but rises with the standard CLR
+ssTaxSEA(depleted, custom_db = survivors, min_set_size = 3)[, 1] -
+  ssTaxSEA(counts, custom_db = survivors, min_set_size = 3)[, 1]
+```
 
 **BugSigDB is excluded.** `ssTaxSEA()` uses the built-in TaxSEA database
 (GMRepoV2, MiMeDB, gutMGene, mBodyMap, BacDive) but does not load BugSigDB. This
